@@ -1,0 +1,17 @@
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Picture extends Model
+{
+    protected $fillable = ['path'];
+    /**
+     * Get all of the owning videoable models.
+     */
+     public function imageable()
+     {
+         return $this->morphTo();
+     }
+}

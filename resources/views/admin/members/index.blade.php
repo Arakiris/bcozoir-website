@@ -50,19 +50,19 @@
                                 <tr>
                                     <td class="addNewScore"><a href="{{ route('admin.membres.edit', $member->id) }}"><i class="fa fa-edit"></i></a></td>
                                     <td>{{ $member->last_name }} - {{ $member->first_name }}</td>
-                                    <td>{{ $member->category->name }}</td>
+                                    <td>{{ $member->category->title }}</td>
                                     <td>{{ $member->sex }}</td>
-                                    <td>{{ $member->birth_date }}</td>
+                                    <td>{{ $member->birth_date->format('m/d/Y') }}</td>
                                     <td>{{ $member->is_licensee }}</td>
                                     <td>{{ $member->id_licensee }}</td>
                                     <td>{{ $member->handicap }}</td>
                                     <td>{{ $member->bonus }}</td>
                                     <td class="addNewScore">
-                                        <a href="{{ route('admin.scores.index', $member->id) }}" class="adminMemberPicture__links">
+                                        {{--  <a href="{{ route('admin.scores.index', $member->id) }}" class="adminMemberPicture__links">
                                             <i class="glyphicon glyphicon-list-alt"></i>
-                                        </a>
+                                        </a>  --}}
                                         <a href="{{ route('admin.scores.create', $member->id) }}" class="adminMemberPicture__links">
-                                            <i class="fa fa-save"></i>
+                                            <i class="fa fa-edit"></i>
                                         </a>
                                     </td>
                                 </tr>

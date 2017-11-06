@@ -16,6 +16,7 @@ class CreatePodiaTable extends Migration
         Schema::create('podia', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('tournament_id')->unsigned()->index()->unique();
+            $table->dateTime('date');
             $table->timestamps();
 
             $table->foreign('tournament_id')->references('id')->on('tournaments')->onDelete('cascade');

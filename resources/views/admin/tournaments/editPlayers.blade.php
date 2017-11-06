@@ -65,6 +65,9 @@
                             </tfoot>
                         </table>
                     </form>
+                    <div>
+                        <a class="btn btn-default" href="{{ route('admin.tournois.index') }}">Retour</a>
+                    </div>
                 </div>
                 <!-- /.box-body -->
             </div>

@@ -30,7 +30,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 		<link rel="stylesheet" href="{{ asset('css/basic.min.css') }}">
 		<link rel="stylesheet" href="{{ asset('css/dropzone.min.css') }}">
 
-		<link rel="stylesheet" href="{{ asset('css/app.css') }}">
+		<link rel="stylesheet" href="{{ asset('css/admin.css') }}">
 
 		@yield('styles')
 
@@ -99,6 +99,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 	<!-- AdminLTE App -->
 	<script src="{{ asset('bower_components/AdminLTE/dist/js/app.js') }}"></script>
 	<!-- Dropzone App -->
+	<script src="{{ asset('bower_components/AdminLTE/plugins/ckeditor/ckeditor.js') }}"></script>
 	<script src="{{ asset('js/admin.js') }}"></script>
 
 	<!-- Optionally, you can add Slimscroll and FastClick plugins.
@@ -123,6 +124,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
 				"info": false,
 				"autoWidth": false
 			});
+			CKEDITOR.replace('editor', {
+                language: 'fr',
+                customConfig: "{{ asset('bower_components/AdminLTE/plugins/ckeditor/config.js') }}"
+            });
 		});
 	</script>
 	@yield('scripts')

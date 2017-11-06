@@ -32,10 +32,16 @@
                         <input type="text" id="title" name="title" class="form-control" placeholder="Veuillez entrer le titre" value="{{ $news->title }}" required>
                     </div>
 
+                    <!-- date input -->
+                    <div class="form-group">
+                        <label for="date">Date</label>
+                        <input type="date" id="date" name="date" class="form-control" min="01-01-2000" value="{{ $news->date->format('Y-m-d') }}" required>
+                    </div>
+
                     <!-- textarea -->
                     <div class="form-group">
                         <label for="body">Contenu de l'actualit&eacute;</label>
-                        <textarea id="body" name="body" class="form-control" rows="3" placeholder="Veuillez entrer le contenu de l'actualité">{{ $news->body }}</textarea>
+                        <textarea id="editor" name="body" class="form-control" rows="3" placeholder="Veuillez entrer le contenu de l'actualité">{{ $news->body }}</textarea>
                     </div>
 
                     @include('partials._form-error')

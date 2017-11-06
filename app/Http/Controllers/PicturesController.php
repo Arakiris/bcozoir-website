@@ -8,6 +8,7 @@ use App\News;
 use App\Tournament;
 use App\Podium;
 use App\Picture;
+use App\Event;
 
 class PicturesController extends Controller
 {
@@ -51,7 +52,7 @@ class PicturesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($type, $idtype)
+    public function create($type, $idtype, $title)
     {
         switch ($type) {
             case 'tournoi':
@@ -60,18 +61,18 @@ class PicturesController extends Controller
                 break;
             case 'evenement':
                 $data = Event::findOrFail($idtype);
-                $cancel = 'admin.evenement.index';
+                $cancel = 'admin.evenements.index';
                 break;
             case 'podium':
                 $data = Podium::findOrFail($idtype);
-                $cancel = 'admin.podium.index';
+                $cancel = 'admin.tournois.index';
                 break;
             default:
                 $data = News::findOrFail($idtype);
                 $cancel = 'admin.actualites.index';
         }
 
-        return view('admin.pictures.create', compact('type', 'data' , 'cancel'));
+        return view('admin.pictures.create', compact('type', 'data' , 'cancel', 'title'));
     }
 
     /**
@@ -80,10 +81,9 @@ class PicturesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store($type, $idtype, Request $request)
+    public function store($type, $idtype, $title, Request $request)
     {   
-        //\Debugbar::info($request->picture->guessClientExtension());
-        //$path = request()->file('picture')->store('public/upload/images/news/' . $idtype);
+        // \Debugbar::info($request->picture->guessClientExtension());
         $validator = Validator::make($request->all(), [
             'media' => 'required|image|max:10000'
         ]);
@@ -95,12 +95,12 @@ class PicturesController extends Controller
         $folderPath;
         switch ($type) {
             case 'tournoi':
-                $folderPath = 'public/upload/medias/tournaments/' . $idtype;
+                $folderPath = 'public/uphotload/medias/tournaments/' . $idtype;
                 $class = Tournament::findOrFail($idtype);
                 break;
             case 'evenement':
                 $folderPath = 'public/upload/medias/events/' . $idtype;
-                $class = \Illuminate\Console\Scheduling\Event::findOrFail($idtype);
+                $class = Event::findOrFail($idtype);
                 break;
             case 'podium':
                 $folderPath = 'public/upload/medias/podia/' . $idtype;
@@ -116,6 +116,9 @@ class PicturesController extends Controller
         $path = $path->store($folderPath);
         $picture = new Picture();
         $picture->path = substr($path, 6);
+        $titlepicture = str_replace('(p)', '<p>', $title);
+        $titlepicture = str_replace('(br)', '<br>', $title);
+        $picture->title = str_replace('(pbis)', '</p>', $titlepicture);
         $class->pictures()->save($picture);
     }
 

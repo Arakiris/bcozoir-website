@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Picture extends Model
 {
-    protected $fillable = ['path'];
+    protected $fillable = ['path', 'title'];
     /**
      * Get all of the owning videoable models.
      */
@@ -14,4 +14,8 @@ class Picture extends Model
      {
          return $this->morphTo();
      }
+
+     public function scopeFirstsrandompicture($query) {
+        return $query->whereIn('imageable_type', ['App\Tournament', 'App\Tournament', 'App\Event'])->inRandomOrder()->take(20);
+    }
 }

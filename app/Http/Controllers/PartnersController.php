@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 use App\Partner;
 use App\Picture;
 
+use App\Warning;
+use App\Tournament;
+use Carbon\Carbon;
+
+
 class PartnersController extends Controller
 {
      /**
@@ -16,7 +21,7 @@ class PartnersController extends Controller
      */
      public function __construct()
      {
-         $this->middleware('auth');
+         $this->middleware('auth', ['except' => ['show', 'showall']]);
      }
 
     /**
@@ -134,5 +139,15 @@ class PartnersController extends Controller
         session()->flash('notification_management_admin', 'Le partenaire a bien été supprimé');
         
         return redirect('/admin/partenaires');
+    }
+
+    public function showall() {
+        $partners = Partner::with('picture')->get();
+        $warnings = Warning::showwarning()->get();
+        $ozoirTounaments = Tournament::ozoirfuturetournament()->get();
+        $otherTournaments = Tournament::otherfuturetournament()->get();
+        $randompictures = Picture::firstsrandompicture()->get();
+
+        return view('partners', compact('partners', 'warnings', 'ozoirTounaments', 'otherTournaments', 'randompictures'));
     }
 }

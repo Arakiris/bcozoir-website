@@ -1,0 +1,70 @@
+.content {
+    background-color: #e6b8b7;
+    border: 1px solid #bfbfbf;
+    width: 60%;
+}
+
+.warning {
+    background: #c00000;
+    border: 1px solid black;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    height: 40px;
+    justify-content: center;
+    text-align: center;
+}
+
+.main-section{
+    width: 90%;
+    margin: 30px auto;
+}
+
+.main-content-title{
+    margin-top: 10px;
+    text-align: center;
+}
+
+.main-content-title h1{
+    background: #76559e; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(#9a67db, #76559e); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#9a67db, #76559e); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#9a67db, #76559e); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#9a67db, #76559e); /* Standard syntax */
+    border-radius: 10px;
+    box-shadow: inset 0px 6px 5px 0px rgba(255,255,255,0.6), 0px 6px 12px 0px rgba(0,0,0,0.6);
+    color: white;
+    display: inline-block;
+    font-size: 2rem;
+    font-weight: normal;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+    padding: 10px 60px;
+    text-align: center;
+}
+
+.content-bcozoir {
+    text-align: justify;
+    margin-top: 20px;
+}
+
+.main-content-address {
+    margin-top: 20px;
+}
+
+/* Ads carousel */ 
+.ads-carousel {
+    height: 75%;
+    margin: 30px auto;
+    width: 80%;
+}
+
+.carousel-img {
+    max-height: 100%;
+    max-width: 100%;
+}
+
+.carousel-img img {
+    display: block;
+    margin: auto;
+}

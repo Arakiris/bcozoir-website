@@ -27,8 +27,8 @@
 
                     <!-- textarea -->
                     <div class="form-group">
-                        <label for="body">Contenu de l'actualit&eacute;</label>
-                        <textarea id="body" name="body" class="form-control" rows="3" placeholder="Veuillez entrer le contenu de l'actualité"></textarea>
+                        <label for="body">Contenu de l'alerte</label>
+                        <textarea id="editor" name="body" class="form-control" rows="3" placeholder="Veuillez entrer le contenu de l'actualité"></textarea>
                     </div>
 
                     <!-- date input -->

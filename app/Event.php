@@ -25,4 +25,8 @@ class Event extends Model
     public function videos() {
         return $this->morphMany('App\Video', 'videoable');
     }
+
+    public function scopeShowevents($query) {
+        return $query->orderBy('date', 'desc');
+    }
 }

@@ -129,7 +129,7 @@
 
                         <div class="form-group">
                             <label for="report">Compte rendu</label>
-                            <textarea class="form-control" id="report" name="report" rows="3" placeholder="Entrer votre compte rendu...">{{ $tournament->report or '' }}</textarea>
+                            <textarea class="form-control" id="editor" name="report" rows="3" placeholder="Entrer votre compte rendu...">{{ $tournament->report or '' }}</textarea>
                         </div>
                     </div>
 

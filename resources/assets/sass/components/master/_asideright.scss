@@ -1,0 +1,73 @@
+.aside-right {
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+}
+
+.nextTournament {
+    height: 25%;
+    flex: 1;
+    margin: 15px auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+    width: 90%;
+}
+
+.nextTournamentTitle {
+    border: 1px solid #c0c0c0;
+    font-weight: bold;
+    margin-bottom: 8px;
+    margin-left: 10%;
+    padding: 10px;
+    text-align: center;
+    width: 70%;
+}
+
+.nextTournamentTitle h2 {
+    font-size: 1.4rem;
+    margin: 0;
+    color: #a14342;
+    text-shadow: black 1px 1px 1px !important;
+}
+
+.nextTournamentContent {
+    margin-left: 10px;
+}
+
+.nextTournamentContent h3 {
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+
+.frameRandomPicture {
+    background: #e3dac9;
+    border: 1px solid #cec4ab;
+    flex-basis: 300px;
+    margin: 0 auto;
+    width: 90%;
+}
+
+.frameRandomPictureTitle {
+    border-bottom: 2px solid #9b9281;
+    color: #919b72;
+    font-size: 1.8rem;
+    font-weight: bold;
+    padding: 10px 20px;
+}
+.randomPicture {
+    display: block;
+    max-width: 90%;
+    max-height: 200px;
+    margin: 10px auto;
+}
+
+.pictureText {
+    color: #4d486d;
+    font-weight: bold;
+    text-align: center;
+    width: 100%;
+}
+
+.pictureText {
+    line-height: 140%;
+}

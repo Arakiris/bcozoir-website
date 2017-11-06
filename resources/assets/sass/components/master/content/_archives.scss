@@ -1,0 +1,119 @@
+ul.tabs{
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+}
+ul.tabs li{
+    background: none;
+    color: #222;
+    display: inline-block;
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+ul.tabs li.current{
+    background: #dddddd;
+    color: #222;
+}
+
+.tab-content{
+    display: none;
+    background: #dddddd;
+    padding: 15px;
+}
+
+.tab-content.current{
+    display: inherit;
+}
+
+
+
+
+
+
+
+
+
+
+.archive {
+    display: table;
+    margin: 0 auto;
+    min-height: 88px;
+}
+
+.archive-row {
+    display: table-row;
+}
+
+.archive-information {
+    display: table-cell;
+    vertical-align: top;
+    background-color: #7030a0;
+    border: 2px solid #bfbfbf;
+    min-width: 200px;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 30%;
+}
+
+.archive-information h2 {
+    color: white;
+    font-size: 1.6rem;
+    margin-bottom: 5px;
+}
+
+.archive-information p {
+    color: white;
+    margin-bottom: 5px;
+}
+
+.archive-member {
+    background: #cc99ff;
+    display: table-cell;
+    vertical-align: top;
+    text-align: center;
+    border-top: 2px solid #bfbfbf;
+    border-right: 2px solid #bfbfbf;
+    border-bottom: 2px solid #bfbfbf;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 20%;
+}
+
+.archive-image {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    border-top: 2px solid #bfbfbf;
+    border-right: 2px solid #bfbfbf;
+    border-bottom: 2px solid #bfbfbf;
+    width: 88px;
+    background-color: white;
+    margin: 0 auto;
+}
+
+.archive-image img {
+    width: 88px;
+    max-height: 87px;
+}
+
+.otherClub {
+    color: #953735;
+}
+
+.league-width {
+    min-width: 450px;
+    max-width: 600px;
+}
+
+.league-information {
+    width: 40%;
+}
+
+.league-member {
+    width: 25%;
+    min-width: 135px;
+    vertical-align: middle;
+}
+

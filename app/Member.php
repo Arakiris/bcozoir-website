@@ -38,9 +38,9 @@ class Member extends Model
     /**
      * Get all the score of the member.
      */
-     public function scores()
+     public function score()
      {
-         return $this->hasMany('App\Score', 'member_id');
+         return $this->hasOne('App\Score', 'member_id');
      }
 
 
@@ -67,13 +67,12 @@ class Member extends Model
         return $this->morphMany('App\Picture', 'imageable');
     }
 
-    public function getBirthDateAttribute($value)
-    {
-        return Carbon::createFromFormat('Y-m-d H:i:s', $value)->format('d/m/Y');
-    }
-
     public function getIsLicenseeAttribute($value)
     {
         return $value ? 'Licencié' : 'Adhérent';
+    }
+
+    public function scopeLicenseemember($query) {
+        return $query->join('scores', 'members.id', '=', 'scores.member_id')->where('is_licensee', '1')->select('members.*');
     }
 }

@@ -23,11 +23,12 @@
 
             <!-- /.box-header -->
             <div class="box-body">
-                <form method="POST" action="/admin/photos/{{ $type }}/{{ $data->id }}" role="form" class="dropzone" id="myAwesomeDropzone" enctype="multipart/form-data">
+                <form method="POST" action="/admin/photos/{{ $type }}/{{ $data->id }}/{{ $title }}" role="form" class="dropzone" id="myAwesomeDropzone" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <!-- text input -->
                     <input type="hidden" id="type" name="type" class="form-control" value="{{ $type }}" required>
                     <input type="hidden" id="type" name="type" class="form-control" value="{{ $data->id }}" required>
+                    <input type="hidden" id="type" name="type" class="form-control" value="{{ $title }}" required>
 
                     <div class="fallback">
                         <input name="file" type="file" multiple />
@@ -35,7 +36,7 @@
                 </form>
                 <div class="box-footer">
                     <div class="pull-right">
-                        <a href="{{ route($cancel) }}" class="btn btn-default">Annuler</a>
+                        <a href="{{ route($cancel) }}" class="btn btn-default">Retour</a>
                     </div>
                 </div>
             </div>

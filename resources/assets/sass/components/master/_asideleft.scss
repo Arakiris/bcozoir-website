@@ -1,0 +1,100 @@
+.aside-left {
+    height: 100%;
+    width: 20%;
+}
+
+.aside-bar {
+    margin: 10px 30px 20px 30px;
+}
+
+.side-bar{
+    display:flex;
+    flex-direction: column;
+    list-style-type: none;
+}
+
+.side-bar li{
+    background: #b93835; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(#cc3d38, #a2312e); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#cc3d38, #a2312e); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#cc3d38, #a2312e); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#cc3d38, #a2312e); /* Standard syntax */
+    border-radius: 5px;
+    padding: 6px;
+    margin-top: 5px;
+    text-align: center;
+    box-shadow: 4px 4px 2px rgba(0, 0, 0, 0.2); 
+}
+
+.side-bar li a{
+    color: white;
+    display: block;
+    text-decoration: none;
+}
+
+.counter {
+    margin: 20px auto;
+    background: #b7dee8;
+    color: #002060;
+    width: 85%;
+    border: 1px solid #46aac5;
+    box-shadow: 4px 4px 2px rgba(0, 0, 0, 0.2); 
+}
+
+.counter-title {
+    text-align: center;
+    padding: 10px;
+}
+
+.counter-title title{
+    margin: 0;
+}
+
+.counter-content {
+    padding: 0 5px 15px 15px;
+}
+
+.counter-table {
+    font-size: 1.2rem;
+    border-collapse: collapse;
+}
+
+.counter-table td {
+    border: none;
+}
+
+.counter-img {
+    display: block;
+    float: left;
+    height: 18px;
+}
+
+/* Calendar */
+.container-calendar {
+    background: #c8d5b7;
+    border-radius: 5px;
+    margin: 0 25px;
+    padding-bottom: 5px;
+    width: 85%;
+    box-shadow: 4px 4px 2px rgba(0, 0, 0, 0.2); 
+}
+
+.agendaTitle {
+    background: #61852e;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    color: #c6c799;
+    font-weight: bold;
+    padding: 10px;
+    text-align: center;
+}
+
+#calendar {
+    background-color: white;
+    font-size: 10px;
+    margin: 10px;
+}
+
+.fc-event{
+    cursor: pointer;
+}

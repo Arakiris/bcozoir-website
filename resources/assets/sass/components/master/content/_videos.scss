@@ -1,0 +1,20 @@
+.videos-wrapper {
+    background: white;
+    padding-right: 5px;
+    padding-bottom: 5px;
+    margin: 15px auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+// .videos {
+//     margin: 0 auto;
+//     width: 700px;
+// }
+
+.video {
+    width: 320px;
+    height: 240px;
+    margin: 5px 0 5px 10px;
+}

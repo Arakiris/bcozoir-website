@@ -7,6 +7,12 @@ use App\Event;
 use App\Picture;
 use App\Video;
 
+use App\Advert;
+use App\Warning;
+use App\Tournament;
+use Carbon\Carbon;
+
+
 class EventsController extends Controller
 {
     /**
@@ -16,7 +22,7 @@ class EventsController extends Controller
      */
      public function __construct()
      {
-         $this->middleware('auth');
+         $this->middleware('auth', ['except' => ['show', 'showall', 'eventpictures', 'eventVideos']]);
      }
 
     /**
@@ -136,5 +142,43 @@ class EventsController extends Controller
         $event->delete();
         session()->flash('notification_management_admin', 'L\'évènement a bien été supprimé');
         return redirect('/admin/evenements');
+    }
+
+    public function showall() {
+        $events = Event::showevents()->paginate(6);
+        $ads = Advert::showad()->get();
+        $warnings = Warning::showwarning()->get();
+        $ozoirTounaments = Tournament::ozoirfuturetournament()->get();
+        $otherTournaments = Tournament::otherfuturetournament()->get();
+        $randompictures = App\Picture::firstsrandompicture()->get();
+
+        return view('events', compact('events', 'ads', 'warnings', 'ozoirTounaments', 'otherTournaments'));
+    }
+
+    public function eventpictures($id) {
+        $title = "Photos de l'évènement";
+        $event = Event::with('pictures')->findOrFail($id);
+        $pictures = $event->pictures()->paginate(30);
+        $allpictures = $event->pictures;
+        $ads = Advert::showad()->get();
+        $warnings = Warning::showwarning()->get();
+        $ozoirTounaments = Tournament::ozoirfuturetournament()->get();
+        $otherTournaments = Tournament::otherfuturetournament()->get();
+        $randompictures = App\Picture::firstsrandompicture()->get();
+
+        return view('photos', compact('title', 'event', 'allpictures','pictures', 'ads', 'warnings', 'ozoirTounaments', 'otherTournaments'));
+    }
+
+    public function eventVideos($id) {
+        $title = "Videos de l'évènement";
+        $event = Event::with('videos')->findOrFail($id);
+        $videos = $event->videos()->paginate(4);
+        $ads = Advert::showad()->get();
+        $warnings = Warning::showwarning()->get();
+        $ozoirTounaments = Tournament::ozoirfuturetournament()->get();
+        $otherTournaments = Tournament::otherfuturetournament()->get();
+        $randompictures = App\Picture::firstsrandompicture()->get();
+
+        return view('videos', compact('title', 'event','videos', 'ads', 'warnings', 'ozoirTounaments', 'otherTournaments'));
     }
 }

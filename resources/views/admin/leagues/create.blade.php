@@ -88,7 +88,7 @@
 
                     <!-- date input -->
                     <div class="form-group">
-                        <label for="place">Résultats</label>
+                        <label for="place">Résultats URL</label>
                         <input type="url" id="result" name="result" class="form-control" placeholder="Veuillez entrer l'URL des résultats" required>
                     </div>
 
@@ -98,7 +98,7 @@
                         <button type="submit" class="btn btn-primary" name="submitbutton" value="save">Enregistrer</button>
                         
                         <div class="pull-right">
-                            <a href="{{ route('admin.leagues.index') }}" class="btn btn-default">Annuler</a>
+                            <a href="{{ route('admin.ligues.index') }}" class="btn btn-default">Annuler</a>
                         </div>
                     </div>
                 </form>

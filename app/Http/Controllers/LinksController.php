@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 use App\Link;
 use App\Picture;
 
+use App\Warning;
+use App\Tournament;
+use Carbon\Carbon;
+
 class LinksController extends Controller
 {
     /**
@@ -138,5 +142,15 @@ class LinksController extends Controller
         Link::findOrFail($id)->delete();
         session()->flash('notification_management_admin', 'Le lien utile a bien été supprimé');
         return redirect('/admin/liens');
+    }
+
+    public function showall() {
+        $links = Link::with('picture')->get();
+        $warnings = Warning::showwarning()->get();
+        $ozoirTounaments = Tournament::ozoirfuturetournament()->get();
+        $otherTournaments = Tournament::otherfuturetournament()->get();
+        $randompictures = Picture::firstsrandompicture()->get();
+
+        return view('links', compact('links', 'warnings', 'ozoirTounaments', 'otherTournaments', 'randompictures'));
     }
 }

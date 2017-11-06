@@ -103,7 +103,7 @@ class VideosController extends Controller
             case 'evenement':
                 $folderPath = 'public/upload/medias/events/' . $idtype;
                 $class = Event::findOrFail($idtype);
-                $view = "/admin/events";
+                $view = "/admin/evenements";
                 break;
             case 'podium':
                 $folderPath = 'public/upload/medias/podia/' . $idtype;
@@ -113,7 +113,7 @@ class VideosController extends Controller
             default:
                 $folderPath = 'public/upload/medias/news/' . $idtype;
                 $class = News::findOrFail($idtype);
-                $view = "/admin/news";
+                $view = "/admin/actualites";
         }
 
         $path = request()->file('path_mp4')->store($folderPath);

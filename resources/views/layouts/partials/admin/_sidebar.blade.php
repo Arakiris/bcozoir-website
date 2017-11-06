@@ -81,17 +81,6 @@
 			</li>
 			<li><a href="{{ route('admin.partenaires.index') }}"><i class="fa fa-link"></i> <span>Partenaires</span></a></li>
 			<li class="treeview">
-				<a href="#"><i class="fa fa-link"></i> <span>Podiums</span>
-					<span class="pull-right-container">
-						<i class="fa fa-angle-left pull-right"></i>
-					</span>
-				</a>
-				<ul class="treeview-menu">
-					<li><a href="#">Cr&eacute;ation</a></li>
-					<li><a href="#">&Eacute;dition</a></li>
-				</ul>
-			</li>
-			<li class="treeview">
 				<a href="#"><i class="fa fa-link"></i> <span>Tournois</span>
 					<span class="pull-right-container">
 						<i class="fa fa-angle-left pull-right"></i>

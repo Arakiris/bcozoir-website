@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Warning extends Model
 {
@@ -13,5 +14,9 @@ class Warning extends Model
         'updated_at',
         'date_disappear'
     ];
+
+    public function scopeShowwarning($query) {
+        return $query->where('date_disappear', '>', Carbon::now());
+    }
 
 }

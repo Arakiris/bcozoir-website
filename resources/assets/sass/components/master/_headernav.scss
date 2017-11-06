@@ -1,0 +1,59 @@
+.header-nav {
+    flex: 1;
+    display: flex;
+    height: 50px;
+    margin-bottom: 20px;
+}
+
+.nagivation {
+    display: flex;
+    flex: 8;
+    height: 100%;
+    list-style-type: none;
+}
+
+.nagivation li {
+    background: #7755a2;
+    background: -webkit-linear-gradient(#7b58a7, #5f4480); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#7b58a7, #5f4480); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#7b58a7, #5f4480); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#7b58a7, #5f4480); /* Standard syntax */
+    border-left: 1px solid #353939;
+    border-left: 1px solid rgba(0, 0, 0, 0.2);
+    border-right: 1px solid #4d5354;
+    border-right: 1px solid rgba(255, 255, 255, 0.06);
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    float: left;
+    justify-content: center;
+    text-align: center;
+    transition: opacity 1s ease;
+}
+
+.nagivation li:hover {
+    opacity: 0.9; 
+}
+
+.nagivation li a {
+    color: white;
+    text-decoration: none;
+}
+.updatedAt {
+    background: #d4d4d4; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(#e7e7e7, #bfbfbf); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#e7e7e7, #bfbfbf); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#e7e7e7, #bfbfbf); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#e7e7e7, #bfbfbf); /* Standard syntax */
+    border: 1px solid black;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+    text-align: center;
+}

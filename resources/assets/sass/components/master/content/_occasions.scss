@@ -1,0 +1,99 @@
+.occasion {
+    margin: 0 auto;
+    min-height: 88px;
+    border-collapse: collapse;
+}
+
+.occasion, .occasion th, .occasion td {
+    border: 2px solid #bfbfbf;
+}
+
+.occasion-information {
+    vertical-align: top;
+    background-color: #7030a0;
+    border: 2px solid #bfbfbf;
+    min-width: 200px;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.occasion-information h2 {
+    color: white;
+    font-size: 1.6rem;
+    margin-bottom: 5px;
+}
+
+.occasion-information p {
+    color: white;
+    margin-bottom: 5px;
+}
+
+.occasion-member {
+    background: #cc99ff;
+    vertical-align: top;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.occasion-image {
+    vertical-align: middle;
+    text-align: center;
+    border-top: 2px solid #bfbfbf;
+    border-right: 2px solid #bfbfbf;
+    border-bottom: 2px solid #bfbfbf;
+    width: 88px;
+    background-color: white;
+    margin: 0 auto;
+}
+
+.occasion-image img {
+    width: 88px;
+    max-height: 87px;
+}
+
+.event-vertical-middle {
+    vertical-align: middle;
+}
+
+.tournament-information {
+    width: 30%;
+}
+
+.tournament-member {
+    width: 20%;
+}
+
+.otherClub {
+    color: #953735;
+}
+
+.league-width {
+    min-width: 450px;
+    max-width: 600px;
+}
+
+.league-information {
+    width: 40%;
+}
+
+.league-member {
+    width: 25%;
+}
+
+.podium-width {
+    width: 300px;
+}
+
+.podium-information {
+    width: 85%;
+}
+
+.bottom-div .bottom-podium .pagination {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+

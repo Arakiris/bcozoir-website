@@ -1,0 +1,34 @@
+.main-content-partners{
+    width: 80%;
+    margin: 0 auto;
+}
+
+.table-associate {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table.table-associate, th, td {
+    border: 2px solid #c2c2c2;
+}
+
+.logo-associate {
+    max-width: 80px;
+    max-height: 80px;
+    margin: auto;
+}
+
+.cell-logo {
+    background: #a5a5a5;
+    padding: 20px;
+    height: 80px;
+    width: 80px;
+    display: flex;
+}
+
+.text-associate {
+    background: #cc99ff;
+    text-align:  center;
+    padding: 20px;
+    font-size: 2rem;
+}

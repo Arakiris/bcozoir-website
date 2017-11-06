@@ -1,4 +1,80 @@
-@import './admin/main.scss';
+/* Normalize */
+@import "./base/normalize";
 
-// General margin
-@import "./margin.scss";
+/* General */
+@import "./base/generals";
+
+/* Margin */
+@import "./base/margin";
+
+/* Padding */
+@import "./base/padding";
+
+/* Float */
+@import "./base/float";
+
+/* Header */
+@import "./master/header";
+
+/* Header navigations */
+@import "./master/headernav";
+
+/* Main */
+@import "./master/main";
+
+/* Aside left */
+@import "./master/asideleft";
+
+/* Aside right */
+@import "./master/asideright";
+
+/* Sections */
+@import "./master/section";
+
+/* Footer */
+@import "./master/footer";
+
+
+/* Different page/section */
+
+/* version */
+@import "./master/content/version";
+
+/* general conditions */
+@import "./master/content/generalconditions";
+
+/* office */
+@import "./master/content/office";
+
+/* members */
+@import "./master/content/members";
+
+/* partners */
+@import "./master/content/partners";
+
+/* contact */
+@import "./master/content/contact";
+
+/* actualtes */
+@import "./master/content/actualites";
+
+/* events */
+@import "./master/content/occasions";
+
+/* pictures */
+@import "./master/content/photos";
+
+/* vidéos */
+@import "./master/content/videos";
+
+/* listing of tournament */
+@import "./master/content/listing";
+
+/* report of tournament */
+@import "./master/content/report";
+
+/* average listing */
+@import "./master/content/averagelisting";
+
+/* archives */
+@import "./master/content/archives";

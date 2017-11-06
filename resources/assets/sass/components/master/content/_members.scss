@@ -1,0 +1,202 @@
+.content-members {
+    width: 680px;
+    margin: 10px auto;
+    border: 12px solid transparent;
+    border-image: url(./images/border.jpg) 12 repeat;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.row-members {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.hidden {
+    display:none;
+}
+
+.member-thumbnail {
+    height: 120px;
+    width: 100px;
+    box-sizing: border-box;
+}
+
+.full-size-img {
+    height: 215px;
+    width: 180px;
+}
+
+/* Tooltip container */
+.tooltip {
+    position: relative;
+}
+
+.member-size {
+    margin: 5px;
+    height: 120px;
+    width: 100px;
+    display: inline-block;
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+    visibility: hidden;
+    background: #e3ebfe; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(#e3ebfe, #afcaff); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#e3ebfe, #afcaff); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#e3ebfe, #afcaff); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#e3ebfe, #afcaff); /* Standard syntax */
+    border: 1px solid #497dbc;
+    color: #000;
+    padding: 15px;
+    border-radius: 6px;
+    top: -45px;
+    left: 105%; 
+ 
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+}
+
+.member-information {
+    width: 400px;
+    top: -25px;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+
+.tooltip .tooltiptext::after {
+    content: " ";
+    position: absolute;
+    top: 25%;
+    right: 100%; /* To the left of the tooltip */
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent #497dbc transparent transparent;
+}
+
+.tooltip .tooltiptext img {
+    margin-right: 10px;
+}
+
+/* Pagination */
+.page {
+    width: 100%;
+    text-align: center;
+}
+
+.pagination {
+    margin: 0 auto;
+    list-style-type: none;
+}
+
+.pagination li {
+    display: inline-block;
+}
+
+
+.pagination li a, .pagination li span{
+    color: black;
+    //float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    border-radius: 3px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0 0 0 1px;
+    margin: 1px 2px;
+    padding: 5px 10px;
+    display: inline-block;
+    border-top: 1px solid #fff;
+    text-decoration: none;
+    color: #717171;
+    font-size: smaller;
+    font-family: "Helvetica Neueu", Helvetica, Arial, sans-serif;
+    text-shadow: white 0 1px 0;
+    background-color: #f5f5f5;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#f9f9f9), to(#eaeaea));
+    background-image: -webkit-linear-gradient(top, #f9f9f9, #eaeaea);
+    background-image: -moz-linear-gradient(top, #f9f9f9, #eaeaea);
+    background-image: -ms-linear-gradient(top, #f9f9f9, #eaeaea);
+    background-image: -o-linear-gradient(top, #f9f9f9, #eaeaea);
+    background-image: linear-gradient(top, #f9f9f9, #eaeaea);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#f9f9f9', EndColorStr='#eaeaea'); 
+}
+
+.pagination li.active {
+    // background-color: #4CAF50;
+    // color: white;
+}
+
+.pagination li {
+    // border: 1px solid #ddd;
+    // border-radius: 5px;
+    // margin: 0 4px;
+}
+.pagination li:first-child, .pagination li.first, .easyPaginateNav a:first-child {
+    margin-left: 0; }
+.pagination li:last-child, .pagination li.last, .easyPaginateNav a:last-child {
+    margin-right: 0; }
+.pagination a:hover, .paginate a:focus, .easyPaginateNav a:hover, .easyPaginateNav a:focus {
+    border-color: #fff;
+    background-color: #fdfdfd;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#fefefe), to(#fafafa));
+    background-image: -webkit-linear-gradient(top, #fefefe, #fafafa);
+    background-image: -moz-linear-gradient(top, #fefefe, #fafafa);
+    background-image: -ms-linear-gradient(top, #fefefe, #fafafa);
+    background-image: -o-linear-gradient(top, #fefefe, #fafafa);
+    background-image: linear-gradient(top, #fefefe, #fafafa);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#fefefe', EndColorStr='#fafafa'); }
+
+.pagination li.active span, .easyPaginateNav a.current {
+    box-shadow: rgba(0, 0, 0, 0.75) 0 0 0 0 inset;
+    border-color: #505050;
+    color: #f2f2f2;
+    text-shadow: black 0 1px 0;
+    background-color: #676767;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#5f5f5f), to(#5c5c5c));
+    background-image: -webkit-linear-gradient(top, #5f5f5f, #5c5c5c);
+    background-image: -moz-linear-gradient(top, #5f5f5f, #5c5c5c);
+    background-image: -ms-linear-gradient(top, #5f5f5f, #5c5c5c);
+    background-image: -o-linear-gradient(top, #5f5f5f, #5c5c5c);
+    background-image: linear-gradient(top, #5f5f5f, #5c5c5c);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#5f5f5f', EndColorStr='#5c5c5c'); 
+}
+
+.easyPaginateNav {
+    margin-top: 20px;
+    text-align: center;
+    vertical-align: middle;
+    height: 40px;
+    width: auto !important;
+}
+
+.easyPaginateNav a {
+    color: black;
+    //float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    border-radius: 3px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0 0 0 1px;
+    margin: 1px 2px;
+    padding: 5px 10px;
+    border-top: 1px solid #fff;
+    text-decoration: none;
+    color: #717171;
+    font-size: smaller;
+    font-family: "Helvetica Neueu", Helvetica, Arial, sans-serif;
+    text-shadow: white 0 1px 0;
+    background-color: #f5f5f5;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#f9f9f9), to(#eaeaea));
+    background-image: -webkit-linear-gradient(top, #f9f9f9, #eaeaea);
+    background-image: -moz-linear-gradient(top, #f9f9f9, #eaeaea);
+    background-image: -ms-linear-gradient(top, #f9f9f9, #eaeaea);
+    background-image: -o-linear-gradient(top, #f9f9f9, #eaeaea);
+    background-image: linear-gradient(top, #f9f9f9, #eaeaea);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#f9f9f9', EndColorStr='#eaeaea'); 
+}

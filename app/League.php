@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class League extends Model
 {
@@ -16,4 +17,17 @@ class League extends Model
      {
          return $this->belongsToMany(Member::class);
      }
+
+     public function scopeArchivesleagues($query) {
+        return $query->where('start_season', '<', Carbon::createFromDate($this->yearSeason(), 9, 1))->orderBy('start_season', 'desc');
+    }
+
+    private function yearSeason() {
+        $beginningSeason = Carbon::create(null, 9, 1);
+        $now = Carbon::now();
+        if($now->lt($beginningSeason)) {
+            return $now->subYear()->year;
+        }
+        return  $year = $now->year;
+    }
 }

@@ -53,7 +53,8 @@
                                     <td>{{ $event->place }}</td>
                                     <td>{{ date('d-m-Y', strtotime($event->date)) }}</td>
                                     <td class="addNewScore">
-                                        <a href="{{ route('admin.photos.create', ['evenement', $event->id]) }}" class="adminMemberPicture__links">
+                                        <?php setlocale(LC_TIME, 'fr'); $dateevent = strftime("%d %B %Y", strtotime($event->date->format('Y-m-d'))); ?>
+                                        <a href="{{ route('admin.photos.create', ['evenement', $event->id, '(p)' . $dateevent . '(br)' . $event->place .'(p)']) }}" class="adminMemberPicture__links">
                                             <i class="fa fa-plus-square"></i>
                                         </a>
                                         <a href="{{ route('admin.photos.index', ['evenement', $event->id]) }}" class="adminMemberPicture__links">

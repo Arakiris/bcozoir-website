@@ -6,7 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Podium extends Model
 {
-    protected $fillable = ['tournament_id'];
+    protected $fillable = ['tournament_id', 'date'];
+
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'date'
+    ];
+
 
     /**
      * Get the tournament of the podium.
@@ -21,5 +28,9 @@ class Podium extends Model
     **/
     public function pictures() {
         return $this->morphMany('App\Picture', 'imageable');
+    }
+
+    public function scopeShowpodium($query) {
+        return $query->join('tournaments', 'podia.tournament_id', '=', 'tournaments.id')->orderBy('tournaments.date', 'desc')->select('podia.*');
     }
 }

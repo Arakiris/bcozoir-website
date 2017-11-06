@@ -5,6 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\News;
 
+use App\Warning;
+use App\Tournament;
+use App\Picture;
+use Carbon\Carbon;
+
+
 class NewsController extends Controller
 {
     /**
@@ -14,7 +20,7 @@ class NewsController extends Controller
      */
      public function __construct()
      {
-         $this->middleware('auth');
+         $this->middleware('auth', ['except' => ['show', 'showall', 'actualitePhotos', 'actualiteVideos']]);
      }
      
     /**
@@ -48,7 +54,8 @@ class NewsController extends Controller
     {
         $validatedNews = request()->validate([
             'title' => 'required',
-            'body' => 'required'
+            'body' => 'required',
+            'date' => 'required|date'
         ]);
         
         News::create($validatedNews);
@@ -93,7 +100,8 @@ class NewsController extends Controller
     {
         $validatedNews = request()->validate([
             'title' => 'required',
-            'body' => 'required'
+            'body' => 'required',
+            'date' => 'required|date'
         ]);
         
         News::findOrFail($id)->update($validatedNews);
@@ -116,5 +124,40 @@ class NewsController extends Controller
         session()->flash('notification_management_admin', 'L\'actualité a bien été supprimée');
         
         return redirect('/admin/news');
+    }
+
+    public function showall() {
+        $news = News::with(['pictures', 'videos'])->get();
+        $warnings = Warning::showwarning()->get();
+        $ozoirTounaments = Tournament::ozoirfuturetournament()->get();
+        $otherTournaments = Tournament::otherfuturetournament()->get();
+        $randompictures = Picture::firstsrandompicture()->get();
+
+        return view('actualites', compact('news', 'warnings', 'ozoirTounaments', 'otherTournaments', 'randompictures'));
+    }
+
+    public function actualitePhotos($id) {
+        $title = "Photos de l'actualité";
+        $news = News::with('pictures')->findOrFail($id);
+        $pictures = $news->pictures()->paginate(30);
+        $allpictures = $news->pictures;
+        $warnings = Warning::showwarning()->get();
+        $ozoirTounaments = Tournament::ozoirfuturetournament()->get();
+        $otherTournaments = Tournament::otherfuturetournament()->get();
+        $randompictures = Picture::firstsrandompicture()->get();
+
+        return view('photos', compact('title', 'news', 'allpictures','pictures', 'warnings', 'ozoirTounaments', 'otherTournaments', 'randompictures'));
+    }
+
+    public function actualiteVideos($id) {
+        $title = "Videos de l'évènement";
+        $news = News::with('videos')->findOrFail($id);
+        $videos = $news->videos()->paginate(4);
+        $warnings = Warning::showwarning()->get();
+        $ozoirTounaments = Tournament::ozoirfuturetournament()->get();
+        $otherTournaments = Tournament::otherfuturetournament()->get();
+        $randompictures = Picture::firstsrandompicture()->get();
+
+        return view('videos', compact('title', 'news','videos', 'warnings', 'ozoirTounaments', 'otherTournaments', 'randompictures'));
     }
 }

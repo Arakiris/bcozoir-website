@@ -25,7 +25,7 @@ class AdvertsController extends Controller
      */
     public function index()
     {
-        $ads = Advert::all();
+        $ads = Advert::with('picture')->get();
         return view('admin.adverts.index', compact('ads'));
     }
 

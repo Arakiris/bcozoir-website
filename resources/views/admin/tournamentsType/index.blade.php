@@ -31,6 +31,7 @@
                     <table class="table table-bordered table-hover sortingTable2">
                         <thead>
                             <tr>
+                                <th></th>
                                 <th>Id</th>
                                 <th>Titre du type de tournois</th>
                             </tr>
@@ -40,8 +41,9 @@
                         @if($tournamentTypes)
                             @foreach($tournamentTypes as $type)
                             <tr>
+                                <td class="addNewScore"><a href="{{ route('admin.typeTournois.edit', $type->id) }}"><i class="fa fa-edit"></i></a></td>
                                 <td>{{ $type->id }}</td>
-                                <td><a href="{{ route('admin.typeTournois.edit', $type->id) }}">{{ $type->title }}</a></td>
+                                <td>{{ $type->title }}</td>
                             </tr>
                             @endforeach
                         @endif
@@ -49,6 +51,7 @@
 
                         <tfoot>
                             <tr>
+                                <th></th>
                                 <th>Id</th>
                                 <th>Titre du type de tournois</th>
                             </tr>

@@ -10,6 +10,11 @@ use App\Club;
 use App\Category;
 use App\Picture;
 
+use App\Warning;
+use App\Tournament;
+use Carbon\Carbon;
+
+
 class MembersController extends Controller
 {
     /**
@@ -19,7 +24,7 @@ class MembersController extends Controller
      */
      public function __construct()
      {
-         $this->middleware('auth');
+         $this->middleware('auth', ['except' => ['show', 'showall']]);
      }
 
     /**
@@ -109,7 +114,7 @@ class MembersController extends Controller
     {
         $clubs = Club::all();
         $categories = Category::all();
-        $member = Member::findOrFail($id);
+        $member = Member::with('category')->findOrFail($id);
         return view('admin.members.edit', compact('clubs', 'categories', 'member'));
     }
 
@@ -177,8 +182,10 @@ class MembersController extends Controller
     {
         $member = Member::findOrFail($id);
         $previousPicture = $member->picture->first();
-        unlink(storage_path('app/public' . $previousPicture->path));
-        $previousPicture->delete();
+        if(!is_null($previousPicture)){
+            unlink(storage_path('app/public' . $previousPicture->path));
+            $previousPicture->delete();
+        }
 
         if(!is_null($member->historical_path)){
             unlink(storage_path('app/public' . $member->historical_path));
@@ -188,5 +195,15 @@ class MembersController extends Controller
         
         session()->flash('notification_management_admin', 'Le lien utile a bien été supprimé');
         return redirect('/admin/membres');
+    }
+
+    public function showall() {
+        $members = Member::with(['category', 'club', 'picture', 'score'])->paginate(24);
+        $warnings = Warning::showwarning()->get();
+        $ozoirTounaments = Tournament::ozoirfuturetournament()->get();
+        $otherTournaments = Tournament::otherfuturetournament()->get();
+        $randompictures = Picture::firstsrandompicture()->get();
+
+        return view('members', compact('members', 'warnings', 'ozoirTounaments', 'otherTournaments'));
     }
 }

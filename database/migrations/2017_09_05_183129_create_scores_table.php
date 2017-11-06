@@ -17,7 +17,7 @@ class CreateScoresTable extends Migration
             $table->increments('id');
             $table->integer('member_id')->unsigned()->nullable()->index();
             $table->float('average');
-            $table->dateTime('month');
+            // $table->dateTime('month');
             $table->integer('number_lines')->default(1);
             $table->timestamps();
 

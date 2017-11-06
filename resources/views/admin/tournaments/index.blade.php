@@ -61,7 +61,8 @@
                                     <td>{{ ($tournament->is_finished) ? 'Terminé' : 'Á venir' }}</td>
                                     <td>{{ ($tournament->report) ? str_limit($tournament->report, 20, '&raquo') : 'Pas de compte rendu' }}</td>
                                     <td class="addNewScore">
-                                        <a href="{{ route('admin.photos.create', ['tournoi', $tournament->id]) }}" class="adminMemberPicture__links">
+                                        <?php setlocale(LC_TIME, 'fr'); $datetournament = strftime("%d %B %Y", strtotime($tournament->date->format('Y-m-d'))); ?>
+                                        <a href="{{ route('admin.photos.create', ['tournoi', $tournament->id, '(p)' . $datetournament . '(br)' . $tournament->place .'(p)']) }}" class="adminMemberPicture__links">
                                             <i class="fa fa-plus-square"></i>
                                         </a>
                                         <a href="{{ route('admin.photos.index', ['tournoi', $tournament->id]) }}" class="adminMemberPicture__links">
@@ -77,12 +78,16 @@
                                         </a>
                                     </td>
                                     <td class="addNewScore">
-                                        <a href="{{ route('admin.photos.create', ['podium', $tournament->podium->id]) }}" class="adminMemberPicture__links">
-                                            <i class="fa fa-plus-square"></i>
-                                        </a>
-                                        <a href="{{ route('admin.photos.index', ['podium', $tournament->podium->id]) }}" class="adminMemberPicture__links">
-                                            <i class="fa fa-pencil-square-o"></i>
-                                        </a>
+                                        @if($tournament->is_finished == 1)
+                                            <a href="{{ route('admin.photos.create', ['podium', $tournament->podium->id, '(p)' . $datetournament . '(br)' . $tournament->place .'(p)']) }}" class="adminMemberPicture__links">
+                                                <i class="fa fa-plus-square"></i>
+                                            </a>
+                                            <a href="{{ route('admin.photos.index', ['podium', $tournament->podium->id]) }}" class="adminMemberPicture__links">
+                                                <i class="fa fa-pencil-square-o"></i>
+                                            </a>
+                                        @else
+                                            Ce tournoi n'est pas fini.
+                                        @endisset
                                     </td>
                                     <td><a href="{{ route('admin.tournois.editPlayers', $tournament->id)}}" class="btn btn-default">Gérer les participants</a></td>
                                 </tr>

@@ -6,6 +6,11 @@ use Illuminate\Http\Request;
 use App\Member;
 use App\Score;
 
+use App\Warning;
+use App\Tournament;
+use App\Picture;
+use Carbon\Carbon;
+
 class ScoresController extends Controller
 {
     /**
@@ -15,7 +20,7 @@ class ScoresController extends Controller
      */
      public function __construct()
      {
-         $this->middleware('auth');
+         $this->middleware('auth', ['except' => ['show', 'showall', 'listingtable']]);
      }
 
     /**
@@ -25,7 +30,7 @@ class ScoresController extends Controller
      */
     public function index($idMember)
     {
-        $member = Member::with('scores')->findOrFail($idMember);
+        $member = Member::with('score')->findOrFail($idMember);
         return view('admin.scores.index', compact('member'));
     }
 
@@ -50,7 +55,7 @@ class ScoresController extends Controller
     {
         $validatedScore = request()->validate([
             'average' => 'required|numeric',
-            'month' => 'required|date_format:Y-m',
+            // 'month' => 'required|date_format:Y-m',
             'number_lines' => 'required|numeric'
         ]);
 
@@ -58,16 +63,29 @@ class ScoresController extends Controller
 
         $member = Member::findOrFail($idMember);
         
-        $score = new Score();
+        if(is_null($member->score)){
+            $score = new Score();
+        }
+        else {
+            $score = $member->score;
+        }
         $score->average = $validatedScore['average'];
-        $score->month = date('Y-m-d', strtotime($validatedScore['month']));
+        // $score->month = date('Y-m-d', strtotime($validatedScore['month']));
         $score->number_lines = $validatedScore['number_lines'];
 
-        $member->scores()->save($score);
+        $member->score()->save($score);
 
-        $path = request()->file('historical_path')->store('public/upload/images/members/' . $member->id . '/scores' );
+        if($file = $request->file('historical_path')){
+            if(!is_null($member->historical_path)){
+                unlink(storage_path('app/public' . $member->historical_path));
+            }
 
-        $member->historical_path = substr($path, 6);
+            $path = request()->file('historical_path')->store('public/upload/images/members/' . $member->id . '/scores' );
+
+            $member->historical_path = substr($path, 6);
+            $member->save();
+        }
+
         $member->save();
 
         session()->flash('notification_management_admin', 'Le score a bien été enregistrer');
@@ -94,8 +112,8 @@ class ScoresController extends Controller
      */
     public function edit($idMember, $id)
     {
-        $member = Member::findOrFail($idMember);
-        $score = Score::findOrFail($id);
+        $member = Member::with('score')->findOrFail($idMember);
+        $score = $member->score;
         return view('admin.scores.edit', compact('member', 'score'));
     }
 
@@ -110,7 +128,7 @@ class ScoresController extends Controller
     {
         $validatedScore = request()->validate([
             'average' => 'required|numeric',
-            'month' => 'required|date_format:Y-m',
+            // 'month' => 'required|date_format:Y-m',
             'number_lines' => 'required|numeric'
         ]);
 
@@ -121,12 +139,14 @@ class ScoresController extends Controller
         $score = Score::findOrFail($id);
 
         $score->average = $validatedScore['average'];
-        $score->month = date('Y-m-d', strtotime($validatedScore['month']));
+        // $score->month = date('Y-m-d', strtotime($validatedScore['month']));
         $score->number_lines = $validatedScore['number_lines'];
-        $member->scores()->save($score);
+        $member->score()->save($score);
 
         if($file = $request->file('historical_path')){
-            unlink(storage_path('app/public' . $member->historical_path));
+            if(is_null($member->historical_path)){
+                unlink(storage_path('app/public' . $member->historical_path));
+            }
 
             $path = request()->file('historical_path')->store('public/upload/images/members/' . $member->id . '/scores' );
 
@@ -159,5 +179,15 @@ class ScoresController extends Controller
     public function showAll(){
         $scores = Score::with('member')->get();
         return view('admin.scores.showAll', compact('scores'));
+    }
+
+    public function listingtable() {
+        $members = Member::with(['score', 'category'])->licenseemember()->paginate(20);
+        $warnings = Warning::showwarning()->get();
+        $ozoirTounaments = Tournament::ozoirfuturetournament()->get();
+        $otherTournaments = Tournament::otherfuturetournament()->get();
+        $randompictures = Picture::firstsrandompicture()->get();
+
+        return view('averagelisting', compact('members', 'warnings', 'ozoirTounaments', 'otherTournaments', 'randompictures'));
     }
 }

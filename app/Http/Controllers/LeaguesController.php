@@ -9,6 +9,12 @@ use Carbon\Carbon;
 use App\Member;
 use App\League;
 
+use App\Advert;
+use App\Warning;
+use App\Picture;
+use App\Tournament;
+
+
 class LeaguesController extends Controller
 {
     /**
@@ -18,7 +24,7 @@ class LeaguesController extends Controller
      */
      public function __construct()
      {
-         $this->middleware('auth');
+         $this->middleware('auth', ['except' => ['show', 'showall']]);
      }
 
     /**
@@ -162,5 +168,28 @@ class LeaguesController extends Controller
         $league = League::findOrFail($id);
         $league->members()->sync($request['checkBoxArray']);
         return redirect('/admin/ligues');
+    }
+
+    public function showall() {
+        $leagues = League::paginate(6);
+        $warnings = Warning::showwarning()->get();
+        $ozoirTounaments = Tournament::ozoirfuturetournament()->get();
+        $otherTournaments = Tournament::otherfuturetournament()->get();
+        $randompictures = Picture::firstsrandompicture()->get();
+
+        return view('leagues', compact('leagues', 'warnings', 'ozoirTounaments', 'otherTournaments', 'randompictures'));
+    }
+
+    public function archivesleagues() {
+        $title = "Archives des ligues BC Ozoir";
+        $leaguesByYear = League::archivesleagues()->get()->groupBy(function($val){
+            return Carbon::parse($val->start_season)->format('Y');
+        });
+        $warnings = Warning::showwarning()->get();
+        $ozoirTounaments = Tournament::ozoirfuturetournament()->get();
+        $otherTournaments = Tournament::otherfuturetournament()->get();
+        $randompictures = Picture::firstsrandompicture()->get();
+
+        return view('archivesleagues', compact('title', 'leaguesByYear', 'warnings', 'ozoirTounaments', 'otherTournaments', 'randompictures'));
     }
 }

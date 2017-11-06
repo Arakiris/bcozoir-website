@@ -1,0 +1,36 @@
+.table-averagelisting {
+    border-collapse: collapse;
+    border: 1px solid black;
+    width: 100%;
+}
+
+.table-averagelisting th, .table-averagelisting td {
+    border: 1px solid black;
+    padding: 5px;
+}
+
+.table-averagelisting th {
+    background: #7030a0;
+    color: white;
+    text-align: center;
+}
+
+.table-averagelisting tr:nth-child(even) {
+    background: #b2a1c7;
+}
+
+.table-averagelisting tr:nth-child(odd) {
+    background: #ccc0da;
+}
+
+.td-witdth5 {
+    width: 5%;
+}
+
+.td-witdth10 {
+    width: 10%;
+}
+
+.td-witdth15 {
+    width: 15%;
+}

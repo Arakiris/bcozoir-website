@@ -36,7 +36,7 @@
                         {{ method_field('PATCH') }}
                         <div class="col-sm-3">
                             <div class="form-group">
-                                <img src="{{ ($member->picture->first()) ? asset('storage/' . $member->picture->first()->path) : null }}" alt="Avatar du membre" class ="adminMemberPicture">
+                                <img src="{{ ($member->picture->first()->path) ? asset('storage' . $member->picture->first()->path) : null }}" alt="Avatar du membre" class ="adminMemberPicture">
                             </div>
                             <div class="form-group textAlignCenter">
                                 <input type="file" id="image" name="image" class="inputfile" accept="image/*">
@@ -60,7 +60,7 @@
                             <!-- date input -->
                             <div class="form-group">
                                 <label for="birth_date">Date de naissance</label>
-                                <input type="date" id="birth_date" name="birth_date" class="form-control" value="{{ \Carbon\Carbon::createFromFormat('d/m/Y', $member->birth_date)->format('Y-m-d') }}" required>
+                                <input type="date" id="birth_date" name="birth_date" class="form-control" value="{{ $member->birth_date->format('Y-m-d') }}" required>
                             </div>
 
                             <div class="col-md-6">
@@ -121,7 +121,7 @@
                                     <label>Cat&eacute;gorie</label>
                                     <select class="form-control" id="category_id" name="category_id" required>
                                         @foreach($categories as $category)
-                                            <option value="{{ $category->id }}" {{ ($member->id_category == $category->id) ? 'selected' : '' }}> {{ $category->title }}</option>
+                                            <option value="{{ $category->id }}" {{ ($member->category_id == $category->id) ? 'selected' : '' }}> {{ $category->title }}</option>
                                         @endforeach
                                     </select>
                                 </div>

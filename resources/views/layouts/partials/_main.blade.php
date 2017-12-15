@@ -9,12 +9,12 @@
                     <span>{{ $warning->body }}</span>
                 @endforeach
             </div>
-            <div class="main-section">
+            <div class="main-section warning-height-change">
         @else
-            <div class="main-section padding-top-05">
+            <div class="main-section">
         @endif
 
-            @yield('content')
+        @yield('content')
         </div>
     </section>
 

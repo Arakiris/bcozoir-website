@@ -1,0 +1,42 @@
+$dark-color : #974706;      //only footer
+$primary-color : #e6b8b7;
+$light-color : #f2dcdb;
+
+/* Entête navigation */
+$header-nav-bg-color: linear-gradient(#7b58a7, #5f4480);
+$header-nav-color: white;
+
+/* Navigation à gauche */
+$leftNavigation-btn-bg-color : linear-gradient(#cc3d38, #a2312e);
+$leftNavigation-btn-color : white;
+
+/* Contenu principal */
+$primary-background-color : $light-color;
+$content-border-color : #bfbfbf;
+
+/* Calendrier */
+$calendar-title-color : #c6c799;
+$calendar-title-bg-color : #61852e;
+$calendar-bg-color : #c8d5b7;
+
+/* Compteur */
+$counter-color : #002060;
+$counter-bg-color : #b7dee8;
+$counter-border-color : #46aac5;
+
+/* Photo aléatoire */
+$randomPicture-title-color : #919b72;
+$randomPicture-bg-color : #e3dac9;
+$randomPicture-border-color : #cec4ab;
+$randomPicture-color : #352b6a;
+
+/* table */
+$table-even-color : #b2a1c7;
+$table-odd-color : #ccc0da;
+
+
+$font-size-base : 1.4rem;
+$font-size-large : 1.6rem;
+
+
+$header-img-url : './images/header.jpg';

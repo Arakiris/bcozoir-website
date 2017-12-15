@@ -1,4 +1,5 @@
-@extends('layouts.admin') @section('content')
+@extends('layouts.admin')
+@section('content')
 
 @if(Session::has('notification_management_admin'))
     <div class="notification">
@@ -31,7 +32,7 @@
 
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <form method="POST" action="/admin/videos/{{ $type }}/{{ $data->id }}" enctype="multipart/form-data" role="form">
+                    <form method="POST" action="/administration/videos/{{ $type }}/{{ $data->id }}" enctype="multipart/form-data" role="form">
                         {{ csrf_field() }}
 
                         <input type="hidden" id="type" name="type" class="form-control" value="{{ $type }}" required>

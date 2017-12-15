@@ -1,5 +1,4 @@
 @extends('layouts.admin')
-
 @section('content')
 
 @if(Session::has('notification_management_admin'))
@@ -30,7 +29,7 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <form method="POST" action="/admin/tournois/{{$tournament->id}}/joueurs" >
+                    <form method="POST" action="/administration/tournois/{{$tournament->id}}/joueurs" >
                         {{csrf_field()}}
                         <div class="form-group">
                              <button type="submit" id="delete" class="btn btn-primary">Mettre à jour</button>

@@ -1,4 +1,5 @@
-@extends('layouts.admin') @section('content')
+@extends('layouts.admin')
+@section('content')
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <h1> Gestion des clubs du site internet </h1>
@@ -22,7 +23,7 @@
 
             <!-- /.box-header -->
             <div class="box-body">
-                <form method="POST" action="/admin/actualites/{{ $news->id }}" role="form">
+                <form method="POST" action="/administration/actualites/{{ $news->id }}" role="form">
                     {{ csrf_field() }}
                     {{ method_field('PATCH') }}
 
@@ -51,7 +52,7 @@
                     </div>
                 </form>
                 <div class="box-footer col-xs-6 pull-right">
-                    <form method="POST" action="/admin/actualites/{{ $news->id }}" role="form">
+                    <form method="POST" action="/administration/actualites/{{ $news->id }}" role="form">
                         {{ csrf_field() }}
                         {{ method_field('DELETE') }}
                         <button type="submit" class="btn btn-danger pull-right margin-right-10">Détruire</button>

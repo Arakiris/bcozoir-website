@@ -30,7 +30,7 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <form method="POST" action="/admin/videos" >
+                    <form method="POST" action="/administration/videos" >
                         {{csrf_field()}}
                         {{method_field('delete')}}
                         <div class="form-group">

@@ -13,14 +13,14 @@
 	<nav class="navbar navbar-static-top" role="navigation">
 		<!-- Sidebar toggle button-->
 		<a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-        <span class="sr-only">Toggle navigation</span>
-      </a>
+			<span class="sr-only">Toggle navigation</span>
+		</a>
 		<!-- Navbar Right Menu -->
 		<div class="navbar-custom-menu">
 			<ul class="nav navbar-nav">
 				<!-- Control Sidebar Toggle Button -->
 				<li>
-					<a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+					<a href="{{ route('logout') }}">Déconnexion&nbsp;&nbsp;&nbsp;&nbsp;<i class="glyphicon glyphicon-log-out"></i></a>
 				</li>
 			</ul>
 		</div>

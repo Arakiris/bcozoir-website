@@ -44,8 +44,8 @@
             <form action="{{ route('login') }}" method="post">
                 {{ csrf_field() }}
                 <div class="form-group has-feedback">
-                    <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="Email" required autofocus>
-                    <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                    <input id="email" type="text" class="form-control" name="email" value="{{ old('email') }}" placeholder="Nom d'utilisateur" required autofocus>
+                    <span class="glyphicon glyphicon-user form-control-feedback"></span>
                     @if ($errors->has('email'))
                         <span class="help-block">
                             <strong>{{ $errors->first('email') }}</strong>

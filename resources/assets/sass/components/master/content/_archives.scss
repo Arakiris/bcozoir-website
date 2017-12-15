@@ -26,23 +26,82 @@ ul.tabs li.current{
     display: inherit;
 }
 
-
-
-
-
-
-
-
-
-
 .archive {
     display: table;
     margin: 0 auto;
     min-height: 88px;
+    width: 100%;
+}
+
+.archive-choice-container {
+    margin-top: 80px;
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.archive-button {
+    /* text */
+	text-decoration: 		none;
+	font-size: 				2rem;
+	font-weight: 			bold;
+	text-shadow: 			rgba(255,255,255,.5) 0 1px 0;
+	-webkit-user-select: 	none;
+	-moz-user-select: 		none;
+	user-select: 			none;
+	
+	
+    /* layout */
+	padding: 				.5em .6em .4em .6em;
+	display: 				table-cell;;
+	
+	-webkit-border-radius: 	8px;
+	-moz-border-radius: 	8px;
+	border-radius: 	        8px;
+	
+    /* effects */
+	border-top: 		1px solid rgba(255,255,255,0.8);
+	border-bottom: 		1px solid rgba(0,0,0,0.1);
+	
+	background-image: 	-webkit-gradient(radial, 50% 0, 100, 50% 0, 0, from( rgba(255,255,255,0) ), to( rgba(255,255,255,0.7) )), url(https://lh4.googleusercontent.com/-Qs9-Ohgo6sk/UY11O1WoMQI/AAAAAAAACME/nUID7awcMow/s50-no/noise.png);
+	background-image: 	-moz-radial-gradient(top, ellipse cover, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0) 100%), url(https://lh4.googleusercontent.com/-Qs9-Ohgo6sk/UY11O1WoMQI/AAAAAAAACME/nUID7awcMow/s50-no/noise.png);
+	background-image: 	gradient(radial, 50% 0, 100, 50% 0, 0, from( rgba(255,255,255,0) ), to( rgba(255,255,255,0.7) )), url(https://lh4.googleusercontent.com/-Qs9-Ohgo6sk/UY11O1WoMQI/AAAAAAAACME/nUID7awcMow/s50-no/noise.png);
+
+	-webkit-transition: background .2s ease-in-out;
+	-moz-transition: 	background .2s ease-in-out;
+	transition: 		background .2s ease-in-out;
+	
+    /* color */
+	color: 				hsl(0, 0%, 40%);
+	background-color: 	hsl(0, 0%, 75%);
+	
+	-webkit-box-shadow: inset rgba(255,254,255,0.6) 0 0.5em .5em, inset rgba(0,0,0,0.15) 0 -0.2em .5em, /* inner shadow */ 
+						hsl(0, 0%, 60%) 0 .1em 3px, hsl(0, 0%, 45%) 0 .3em 1px, /* color border */
+						rgba(0,0,0,0.2) 0 .5em 5px; /* drop shadow */
+	-moz-box-shadow: 	inset rgba(255,254,255,0.6) 0 0.5em .5em, inset rgba(0,0,0,0.15) 0 -0.2em .5em, /* inner shadow */ 
+						hsl(0, 0%, 60%) 0 .1em 3px, hsl(0, 0%, 45%) 0 .3em 1px, /* color border */
+						rgba(0,0,0,0.2) 0 .5em 5px; /* drop shadow */
+	box-shadow:		 	inset rgba(255,254,255,0.6) 0 0.5em .5em, inset rgba(0,0,0,0.15) 0 -0.2em .5em, /* inner shadow */ 
+						hsl(0, 0%, 60%) 0 .1em 3px, hsl(0, 0%, 45%) 0 .5em 1px, /* color border */
+                        rgba(0,0,0,0.2) 0 .5em 5px; /* drop shadow */
+    flex: 1;
+    margin: 0 20px;
+    height: 100px;
+    display : flex;
+    align-items : center;
+}
+
+.archive-button span {
+    width: 100%;
+    text-align: center;
+}
+
+.archive-button:hover {
+	background-color: 	hsl(0, 0%, 83%);
 }
 
 .archive-row {
     display: table-row;
+    width: 100%;
 }
 
 .archive-information {
@@ -71,7 +130,7 @@ ul.tabs li.current{
 .archive-member {
     background: #cc99ff;
     display: table-cell;
-    vertical-align: top;
+    vertical-align: middle;
     text-align: center;
     border-top: 2px solid #bfbfbf;
     border-right: 2px solid #bfbfbf;
@@ -79,6 +138,10 @@ ul.tabs li.current{
     padding-top: 10px;
     padding-bottom: 10px;
     width: 20%;
+}
+
+.archive-member p {
+    margin-bottom: 5px;
 }
 
 .archive-image {
@@ -91,20 +154,29 @@ ul.tabs li.current{
     width: 88px;
     background-color: white;
     margin: 0 auto;
+    transition: all 1s ease;
+    filter: brightness(95%);
 }
 
-.archive-image img {
+.archive-image-leagues {
+    min-width: 150px;
+}
+
+.archive-image:hover {
+    filter: brightness(120%);
+}
+
+.archive-image-logo {
     width: 88px;
     max-height: 87px;
 }
 
-.otherClub {
-    color: #953735;
+.archive-image-lexer {
+    width: 100px;
 }
 
-.league-width {
-    min-width: 450px;
-    max-width: 600px;
+.otherClub {
+    color: #953735;
 }
 
 .league-information {
@@ -115,5 +187,15 @@ ul.tabs li.current{
     width: 25%;
     min-width: 135px;
     vertical-align: middle;
+}
+
+@media screen and (max-width: 1500px) { 
+    .archive-image {
+        width: 60px;
+    }
+    
+    .archive-image-logo {
+        width: 60px;
+    }
 }
 

@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Traits\CommonTrait;
+
 use Illuminate\Http\Request;
 use App\Advert;
 use App\Picture;
 
 class AdvertsController extends Controller
 {
+    use CommonTrait;
+    
     /**
      * Create a new controller instance.
      *
@@ -63,6 +67,7 @@ class AdvertsController extends Controller
 
             $ad->picture()->save($picture);
         }
+        $this->updateStatisticDate();
         session()->flash('notification_management_admin', 'L\'annonce a bien été enregistré');
 
         return redirect()->back();
@@ -121,9 +126,10 @@ class AdvertsController extends Controller
 
             $ad->picture()->save($picture);
         }
+        $this->updateStatisticDate();
         session()->flash('notification_management_admin', 'L\'annonce a bien été mise-à-jour');
 
-        return redirect('/admin/annonces');
+        return redirect('/administration/annonces');
     }
 
     /**
@@ -135,7 +141,8 @@ class AdvertsController extends Controller
     public function destroy($id)
     {
         Advert::findOrFail($id)->delete();
+        $this->updateStatisticDate();
         session()->flash('notification_management_admin', 'L\'annonce a bien été supprimée');
-        return redirect('/admin/annonces');
+        return redirect('/administration/annonces');
     }
 }

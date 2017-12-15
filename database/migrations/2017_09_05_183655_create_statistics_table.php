@@ -15,10 +15,10 @@ class CreateStatisticsTable extends Migration
     {
         Schema::create('statistics', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('today_visits')->nullable();
-            $table->integer('month_visits')->nullable();
-            $table->bigInteger('since_creation_visits')->nullable();
-            $table->dateTime('last_update')->nullable();
+            $table->integer('daily_visits')->default(0);
+            $table->integer('month_visits')->default(0);
+            $table->bigInteger('since_creation_visits')->default(0);
+            $table->dateTime('last_update')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamps();
         });
     }

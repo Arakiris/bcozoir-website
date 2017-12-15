@@ -1,7 +1,12 @@
 @extends('layouts.master')
 
 @section('content')
-    <div class="main-content-title">
+<div class="partners">
+    @if(isset($warnings) && !is_null($warnings))
+        <div class="main-content-title">
+    @else
+        <div class="main-content-title margin-top-30">
+    @endif
         <h1>Partenaires</h1>
     </div>
     <div class="main-content-partners">
@@ -18,4 +23,8 @@
             </tbody>
         </table>
     </div>
+    <div class="page">
+        {{ $partners->links() }}
+    </div>
+</div>
 @endsection

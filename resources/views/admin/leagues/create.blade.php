@@ -29,7 +29,7 @@
 
             <!-- /.box-header -->
             <div class="box-body">
-                <form method="POST" action="/admin/ligues" enctype="multipart/form-data" role="form">
+                <form method="POST" action="/administration/ligues" enctype="multipart/form-data" role="form">
                     {{ csrf_field() }}
 
                     <!-- text input -->

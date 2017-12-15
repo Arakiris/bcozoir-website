@@ -43,6 +43,7 @@
 					<li><a href="{{ route('admin.clubs.create') }}">Cr&eacute;ation</a></li>
 				</ul>
 			</li>
+			<li><a href="{{ route('admin.contacts.index') }}"><i class="fa fa-link"></i> <span>Contacts</span></a></li>
 			<li class="treeview">
 				<a href="#"><i class="fa fa-link"></i> <span>&Eacute;v&egrave;nements</span>
 					<span class="pull-right-container">

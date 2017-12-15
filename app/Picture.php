@@ -16,6 +16,6 @@ class Picture extends Model
      }
 
      public function scopeFirstsrandompicture($query) {
-        return $query->whereIn('imageable_type', ['App\Tournament', 'App\Tournament', 'App\Event'])->inRandomOrder()->take(20);
+        return $query->whereIn('imageable_type', ['App\Tournament', 'App\Tournament', 'App\Event'])->inRandomOrder()->take(10);
     }
 }

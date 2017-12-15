@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Traits\CommonTrait;
+
 use Illuminate\Http\Request;
 use App\TournamentType;
 
 class TournamentTypesController extends Controller
 {
+    use CommonTrait;
+    
     /**
      * Create a new controller instance.
      *
@@ -51,6 +55,7 @@ class TournamentTypesController extends Controller
         ]);
 
         TournamentType::create($validatedTournamentsType);
+        $this->updateStatisticDate();
 
         session()->flash('notification_management_admin', 'Le type de tournois a bien été enregistré');
 
@@ -94,10 +99,11 @@ class TournamentTypesController extends Controller
         ]);
 
         TournamentType::findOrFail($id)->update($validatedTournamentsType);
+        $this->updateStatisticDate();
 
         session()->flash('notification_management_admin', 'Le type de tournois a bien été modifié');
 
-        return redirect('/admin/typeTournois');
+        return redirect('/administration/typeTournois');
     }
 
     /**
@@ -109,9 +115,10 @@ class TournamentTypesController extends Controller
     public function destroy($id)
     {
         TournamentType::findOrFail($id)->delte();
+        $this->updateStatisticDate();
         
         session()->flash('notification_management_admin', 'Le type de tournois a bien été supprimé');
 
-        return redirect('/admin/typeTournois');
+        return redirect('/administration/typeTournois');
     }
 }

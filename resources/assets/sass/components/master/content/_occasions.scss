@@ -1,7 +1,17 @@
+.occasion-content {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
 .occasion {
     margin: 0 auto;
     min-height: 88px;
     border-collapse: collapse;
+}
+
+.occasion-futur {
+    width: 440px;
 }
 
 .occasion, .occasion th, .occasion td {
@@ -9,13 +19,17 @@
 }
 
 .occasion-information {
-    vertical-align: top;
+    vertical-align: middle;
     background-color: #7030a0;
     border: 2px solid #bfbfbf;
     min-width: 200px;
     text-align: center;
     padding-top: 10px;
     padding-bottom: 10px;
+}
+
+.occasion-link {
+    text-decoration: none;
 }
 
 .occasion-information h2 {
@@ -31,24 +45,78 @@
 
 .occasion-member {
     background: #cc99ff;
-    vertical-align: top;
+    vertical-align: middle;
     text-align: center;
     padding-top: 10px;
     padding-bottom: 10px;
 }
 
+.occasion-member p {
+    margin-bottom: 5px;
+}
+
 .occasion-image {
     vertical-align: middle;
     text-align: center;
-    border-top: 2px solid #bfbfbf;
-    border-right: 2px solid #bfbfbf;
-    border-bottom: 2px solid #bfbfbf;
     width: 88px;
     background-color: white;
     margin: 0 auto;
+    transition: all 1s ease;
+    filter: brightness(95%);
 }
 
-.occasion-image img {
+.occasion-image:hover {
+    filter: brightness(120%);
+}
+
+.occasion-image-logo {
+    width: 88px;
+    max-height: 87px;
+}
+
+/* Tooltip */
+.tooltip-occasion {
+    position: relative;
+    cursor: pointer;
+}
+
+.tooltip-occasion .tooltiptext-occasion {
+    visibility: hidden;
+    padding: 15px;
+    border-radius: 6px;
+    top: -115px;
+    left: 105%;
+ 
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 100;
+    width: 400px;
+    height: 212px;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip-occasion:hover .tooltiptext-occasion {
+    visibility: visible;
+}
+
+.tooltip-occasion .tooltiptext-occasion::after {
+    content: " ";
+    position: absolute;
+    top: 50%;
+    right: 100%; /* To the left of the tooltip */
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent #497dbc transparent transparent;
+}
+
+.tooltip-occasion .tooltiptext-occasion img {
+    margin-right: 10px;
+    height: 215px;
+}
+
+/* Event league podium */
+.occasion-event-podium-logo {
     width: 88px;
     max-height: 87px;
 }
@@ -70,12 +138,21 @@
 }
 
 .league-width {
-    min-width: 450px;
-    max-width: 600px;
+    min-width: 510px;
+    max-width: 660px;
 }
 
 .league-information {
     width: 40%;
+}
+
+.occasion-image-league {
+    width: 150px;
+    min-width: 150px;
+}
+
+.occasion-image-league-lexer {
+    width: 100px;
 }
 
 .league-member {
@@ -90,10 +167,29 @@
     width: 85%;
 }
 
-.bottom-div .bottom-podium .pagination {
+.bottom-div{
     position: absolute;
     bottom: 0;
+}
+
+.bottom-div > .pagination {
+    position: absolute;
+    top: 0;
     left: 50%;
     transform: translateX(-50%);
+}
+
+.pagination-middle {
+    text-align: center;
+}
+
+@media screen and (max-width: 1500px) { 
+    .occasion-image {
+        width: 60px;
+    }
+    
+    .occasion-image-logo  {
+        width: 60px;
+    }
 }
 

@@ -30,7 +30,7 @@
 
             <!-- /.box-header -->
             <div class="box-body">
-                <form method="POST" action="/admin/tournois/{{ $tournament->id }}" enctype="multipart/form-data" role="form">
+                <form method="POST" action="/administration/tournois/{{ $tournament->id }}" enctype="multipart/form-data" role="form">
                     {{ csrf_field() }}
                     {{ method_field('PATCH') }}
 
@@ -122,9 +122,14 @@
                     </div>
 
                     <div class="finished" {!! ($tournament->is_finished) ? 'style="display: block;"' : 'style="display: none;"' !!}>
-                        <div class="form-group">
-                            <label for="listing">Listing</label>
-                            <input type="file" id="listing" name="listing" accept="image/*">
+                        <div class="form-group after_end">
+                            <label for="lexer_url">Résultats sous Lexer</label>
+                            <input type="url" name="lexer_url" class="form-control" value="{{ $tournament->lexer_url }}" placeholder="Veuillez entrer l'URL">
+                        </div>
+
+                        <div class="form-group after_end">
+                            <label for="listing">Résultats sous forme de listing</label>
+                            <input type="file" name="listing" accept="image/*">
                         </div>
 
                         <div class="form-group">
@@ -141,7 +146,7 @@
                     </div>
                 </form>
                 <div class="box-footer col-xs-4 pull-right">
-                    <form method="POST" action="/admin/tournois/{{ $tournament->id }}" role="form">
+                    <form method="POST" action="/administration/tournois/{{ $tournament->id }}" role="form">
                         {{ csrf_field() }}
                         {{ method_field('DELETE') }}
                         <button type="submit" class="btn btn-danger pull-right margin-right-10">Détruire</button>

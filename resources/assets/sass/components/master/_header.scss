@@ -1,20 +1,19 @@
 .header{
-    flex: 4;
+    flex: 8;
     display: flex;
-    display: -webkit-flex;
-    height: 150px;
+    flex-basis: 200px;
 }
 
 .header-img {
-    background-image: url(./images/header.jpg);
+    background-image: url($header-img-url);
     background-repeat: no-repeat;
     background-size: cover;
-    flex:8;
+    flex: 16;
 }
 
 .logo {
     background-color: white;
-    flex: 1;
+    flex: 2;
     text-align: center;
 }
 
@@ -31,15 +30,7 @@
 }
 
 @media screen and (max-width: 1024px) {
-    .header-img {
-        background-size: 1024px 203px;
-    }
-
     .logo {
-        flex:2;
-    }
-
-    .updatedAt {
-        flex: 2;
+        flex: 3;
     }
 }

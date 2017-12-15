@@ -30,7 +30,7 @@
 
             <!-- /.box-header -->
             <div class="box-body">
-                <form method="POST" action="/admin/ligues/{{ $league->id }}" enctype="multipart/form-data" role="form">
+                <form method="POST" action="/administration/ligues/{{ $league->id }}" enctype="multipart/form-data" role="form">
                     {{ csrf_field() }}
                     {{ method_field('PATCH') }}
 
@@ -101,7 +101,7 @@
                     </div>
                 </form>
                 <div class="box-footer col-xs-4 pull-right">
-                    <form method="POST" action="/admin/ligues/{{ $league->id }}" role="form">
+                    <form method="POST" action="/administration/ligues/{{ $league->id }}" role="form">
                         {{ csrf_field() }}
                         {{ method_field('DELETE') }}
                         <button type="submit" class="btn btn-danger pull-right margin-right-10">Détruire</button>

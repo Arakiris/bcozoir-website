@@ -1,4 +1,5 @@
-@extends('layouts.admin') @section('content')
+@extends('layouts.admin')
+@section('content')
 
 @if(Session::has('notification_management_admin'))
     <div class="notification">

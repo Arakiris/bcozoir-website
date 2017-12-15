@@ -1,4 +1,5 @@
-@extends('layouts.admin') @section('content')
+@extends('layouts.admin')
+@section('content')
 
 <!-- Content Header (Page header) -->
 <section class="content-header">
@@ -25,7 +26,7 @@
 
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <form method="POST" action="/admin/liens/{{ $link->id }}"  enctype="multipart/form-data" role="form">
+                    <form method="POST" action="/administration/liens/{{ $link->id }}"  enctype="multipart/form-data" role="form">
                         {{ csrf_field() }}
                         {{ method_field('PATCH') }}
                         <div class="form-group">
@@ -56,7 +57,7 @@
                         </div>
                     </form>
                     <div class="box-footer col-xs-6 pull-right">
-                        <form method="POST" action="/admin/liens/{{ $link->id }}" role="form">
+                        <form method="POST" action="/administration/liens/{{ $link->id }}" role="form">
                             {{ csrf_field() }}
                             {{ method_field('DELETE') }}
                             <button type="submit" class="btn btn-danger pull-right margin-right-10">Détruire</button>

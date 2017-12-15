@@ -2,17 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Traits\CommonTrait;
+
 use Illuminate\Http\Request;
 use App\News;
 
-use App\Warning;
-use App\Tournament;
-use App\Picture;
-use Carbon\Carbon;
-
-
 class NewsController extends Controller
 {
+    use CommonTrait;
+
     /**
      * Create a new controller instance.
      *
@@ -20,7 +18,7 @@ class NewsController extends Controller
      */
      public function __construct()
      {
-         $this->middleware('auth', ['except' => ['show', 'showall', 'actualitePhotos', 'actualiteVideos']]);
+         $this->middleware('auth', ['except' => ['actualitephotos', 'actualitevideos', 'show', 'showall']]);
      }
      
     /**
@@ -59,10 +57,11 @@ class NewsController extends Controller
         ]);
         
         News::create($validatedNews);
+        $this->updateStatisticDate();
 
         session()->flash('notification_management_admin', 'La nouvelle actualité a bien été enregistré');
 
-        return redirect('/admin/actualites');
+        return redirect('/administration/actualites');
     }
 
     /**
@@ -105,10 +104,11 @@ class NewsController extends Controller
         ]);
         
         News::findOrFail($id)->update($validatedNews);
+        $this->updateStatisticDate();
 
         session()->flash('notification_management_admin', 'L\'actualité a bien été mise-à-jour');
         
-        return redirect('/admin/news');
+        return redirect('/administration/news');
     }
 
     /**
@@ -120,44 +120,33 @@ class NewsController extends Controller
     public function destroy($id)
     {
         News::findOrFail($id)->delete();
+        $this->updateStatisticDate();
         
         session()->flash('notification_management_admin', 'L\'actualité a bien été supprimée');
         
-        return redirect('/admin/news');
+        return redirect('/administration/news');
     }
 
     public function showall() {
         $news = News::with(['pictures', 'videos'])->get();
-        $warnings = Warning::showwarning()->get();
-        $ozoirTounaments = Tournament::ozoirfuturetournament()->get();
-        $otherTournaments = Tournament::otherfuturetournament()->get();
-        $randompictures = Picture::firstsrandompicture()->get();
 
-        return view('actualites', compact('news', 'warnings', 'ozoirTounaments', 'otherTournaments', 'randompictures'));
+        return view('news', compact('news'))->with($this->mainSharingFunctionality());
     }
 
     public function actualitePhotos($id) {
         $title = "Photos de l'actualité";
         $news = News::with('pictures')->findOrFail($id);
-        $pictures = $news->pictures()->paginate(30);
+        $pictures = $news->pictures()->paginate(48);
         $allpictures = $news->pictures;
-        $warnings = Warning::showwarning()->get();
-        $ozoirTounaments = Tournament::ozoirfuturetournament()->get();
-        $otherTournaments = Tournament::otherfuturetournament()->get();
-        $randompictures = Picture::firstsrandompicture()->get();
 
-        return view('photos', compact('title', 'news', 'allpictures','pictures', 'warnings', 'ozoirTounaments', 'otherTournaments', 'randompictures'));
+        return view('photos', compact('title', 'news', 'allpictures', 'pictures'))->with($this->mainSharingFunctionality());
     }
 
     public function actualiteVideos($id) {
         $title = "Videos de l'évènement";
         $news = News::with('videos')->findOrFail($id);
         $videos = $news->videos()->paginate(4);
-        $warnings = Warning::showwarning()->get();
-        $ozoirTounaments = Tournament::ozoirfuturetournament()->get();
-        $otherTournaments = Tournament::otherfuturetournament()->get();
-        $randompictures = Picture::firstsrandompicture()->get();
 
-        return view('videos', compact('title', 'news','videos', 'warnings', 'ozoirTounaments', 'otherTournaments', 'randompictures'));
+        return view('videos', compact('title', 'news', 'videos'))->with($this->mainSharingFunctionality());
     }
 }

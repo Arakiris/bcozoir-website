@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Traits\CommonTrait;
+
 use Illuminate\Http\Request;
 
 use Validator;
@@ -14,6 +16,8 @@ use App\Video;
 
 class VideosController extends Controller
 {
+    use CommonTrait;
+    
     private $pictureTypes = ['gif', 'jpg', 'jpeg', 'png', 'bmp'];
     private $videoTypes = ['mp4', 'webm'];
     /**
@@ -70,10 +74,15 @@ class VideosController extends Controller
                 $data = Podium::findOrFail($idtype);
                 $cancel = 'admin.podiums.index';
                 break;
-            default:
+            case 'actualite':
                 $data = News::findOrFail($idtype);
                 $cancel = 'admin.actualites.index';
+                break;
+            default:
+                $data = Event::findOrFail($idtype);
+                $cancel = 'admin.evenements.index';
         }
+        $this->updateStatisticDate();
 
         return view('admin.videos.create', compact('type', 'data', 'cancel'));
     }
@@ -98,22 +107,29 @@ class VideosController extends Controller
             case 'tournoi':
                 $folderPath = 'public/upload/medias/tournaments/' . $idtype;
                 $class = Tournament::findOrFail($idtype);
-                $view = "/admin/tournois";
+                $view = "/administration/tournois";
                 break;
             case 'evenement':
                 $folderPath = 'public/upload/medias/events/' . $idtype;
                 $class = Event::findOrFail($idtype);
-                $view = "/admin/evenements";
+                $view = "/administration/evenements";
                 break;
             case 'podium':
                 $folderPath = 'public/upload/medias/podia/' . $idtype;
                 $class = Podium::findOrFail($idtype);
-                $view = "/admin/tournois";
+                $view = "/administration/tournois";
                 break;
-            default:
+            case 'actualite':
                 $folderPath = 'public/upload/medias/news/' . $idtype;
                 $class = News::findOrFail($idtype);
-                $view = "/admin/actualites";
+                $class->videos = 1;
+                $view = "/administration/actualites";
+                $class->save();
+                break;
+            default:
+                $folderPath = 'public/upload/medias/events/' . $idtype;
+                $class = Event::findOrFail($idtype);
+                $view = "/administration/evenements";
         }
 
         $path = request()->file('path_mp4')->store($folderPath);
@@ -125,8 +141,6 @@ class VideosController extends Controller
 
 
         $class->videos()->save($video);
-
-        session()->flash('notification_management_admin', 'La vidéo a bien été enregistré');
 
         return redirect($view);
     }
@@ -181,6 +195,8 @@ class VideosController extends Controller
                 $video->delete();
             }
         }
+        $this->updateStatisticDate();
+
         session()->flash('notification_management_admin', 'Les videos ont bien été supprimées');
         return redirect()->back();
     }

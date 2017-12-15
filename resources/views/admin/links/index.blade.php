@@ -1,4 +1,5 @@
-@extends('layouts.admin') @section('content')
+@extends('layouts.admin')
+@section('content')
 
 @if(Session::has('notification_management_admin'))
     <div class="notification">
@@ -77,7 +78,7 @@
 
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <form method="POST" action="/admin/liens" enctype="multipart/form-data" role="form">
+                    <form method="POST" action="/administration/liens" enctype="multipart/form-data" role="form">
                         {{ csrf_field() }}
 
                         <!-- text input -->

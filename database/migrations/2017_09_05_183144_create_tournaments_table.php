@@ -25,9 +25,11 @@ class CreateTournamentsTable extends Migration
             $table->boolean('is_rules_pdf')->default(0);
             $table->string('rules_url')->nullable();
             $table->string('rules_pdf')->nullable();
+            $table->string('lexer_url')->nullable();
             $table->string('listing')->nullable();
             $table->boolean('is_finished')->default(0);
             $table->text('report')->nullable();
+            $table->string('slug')->nullable();
             $table->timestamps();
 
             $table->foreign('type_id')->references('id')->on('tournament_types');

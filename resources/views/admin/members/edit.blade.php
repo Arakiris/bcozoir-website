@@ -1,5 +1,6 @@
 
-@extends('layouts.admin') @section('content')
+@extends('layouts.admin')
+@section('content')
 
 @if(Session::has('notification_management_admin'))
     <div class="notification">
@@ -31,7 +32,7 @@
             <!-- /.box-header -->
             <div class="box-body">
                 <div class="row">
-                    <form method="POST" action="/admin/membres/{{ $member->id }}" enctype="multipart/form-data" role="form">
+                    <form method="POST" action="/administration/membres/{{ $member->id }}" enctype="multipart/form-data" role="form">
                         {{ csrf_field() }}
                         {{ method_field('PATCH') }}
                         <div class="col-sm-3">
@@ -143,7 +144,7 @@
                         </div>
                     </form>
                     <div class="box-footer col-xs-6 pull-right">
-                        <form method="POST" action="/admin/membres/{{ $member->id }}" role="form">
+                        <form method="POST" action="/administration/membres/{{ $member->id }}" role="form">
                             {{ csrf_field() }}
                             {{ method_field('DELETE') }}
                             <button type="submit" class="btn btn-danger pull-right margin-right-10">Détruire</button>

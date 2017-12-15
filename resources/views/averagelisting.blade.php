@@ -1,11 +1,15 @@
 @extends('layouts.master')
 
 @section('content')
-    <div class="main-content-title">
-        <h1>Listing <?php setlocale(LC_TIME, 'fr'); echo strftime("%B %Y"); ?></h1>
-    </div>
-    @if(isset($members) && $members->count()>0)
-        <div class="main-content-averagelisting">
+    <div class="main-content-averagelisting">
+        @if(isset($warnings) && !is_null($warnings))
+            <div class="main-content-title">
+        @else
+            <div class="main-content-title margin-top-30">
+        @endif
+            <h1>Listing <?php setlocale(LC_TIME, 'fr'); echo strftime("%B %Y"); ?></h1>
+        </div>
+        @if(isset($members) && $members->count()>0)
             <table class="table-averagelisting">
                 <thead>
                     <th class="td-witdth15">N° Licence</th>
@@ -25,31 +29,31 @@
                                 <td>{{ $member->id_licensee }}</td>
                                 <td>{{ ($member->sex == 'm') ? 'H' : 'F' }}</td>
                                 <td>{{ $member->category->title }}</td>
-                                <td class="tooltip">
+                                <td class="tooltip-averagelisting">
                                     {{ $member->last_name }}
                                     <div class="tooltiptext">
-                                        <img src="{{ ($member->picture->first()->path) ? asset('storage' . $member->picture->first()->path) : null }}" alt="Photo de {{ $member->last_name }} - {{ $member->first_name }}">
+                                        <img src="{{ ($member->historical_path) ? asset('storage' . $member->historical_path) : null }}" alt="Photo de {{ $member->last_name }} - {{ $member->first_name }}">
                                     </div>
                                 </td>
                                 <td>{{ $member->first_name }}</td>
-                                <td>{{ $member->score->number_lines }}</td>
-                                <td>{{ $member->score->average }}</td>
-                                <td>{{ floor((220 - $member->score->average)*0.7) }}</td>
-                                <td>{{ $member->bonus }}</td>
+                                <td>{{ $member->score->number_lines ? $member->score->number_lines : '' }}</td>
+                                <td>{{ $member->score->average ? $member->score->average : ''  }}</td>
+                                <td>{{ $member->score->average ? floor((220 - $member->score->average)*0.7) : '' }}</td>
+                                <td>{{ $member->bonus ? $member->bonus : '' }}</td>
                             </tr>
                         @endif
                     @endforeach
                 </tbody>
             </table>
             <div class="bottom-div">
-                <div>
+                <div class="pagination-middle">
                     {{ $members->links() }}
                 </div>
             </div>
-        </div>
-    @else
-        <div class="main-content-news">
-            <p>Il n'y a pas encore de listing d'enregistrer.</p>
-        </div>
-    @endif
+        @else
+            <div class="main-content-news">
+                <p>Il n'y a pas encore de listing d'enregistrer.</p>
+            </div>
+        @endif
+    </div>
 @endsection

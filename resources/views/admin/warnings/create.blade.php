@@ -1,4 +1,5 @@
-@extends('layouts.admin') @section('content')
+@extends('layouts.admin')
+@section('content')
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <h1> Gestion des clubs du site internet </h1>
@@ -22,7 +23,7 @@
 
             <!-- /.box-header -->
             <div class="box-body">
-                <form method="POST" action="/admin/alertes" role="form">
+                <form method="POST" action="/administration/alertes" role="form">
                     {{ csrf_field() }}
 
                     <!-- textarea -->

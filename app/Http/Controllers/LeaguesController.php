@@ -4,19 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Http\Traits\CommonTrait;
+
 use Carbon\Carbon;
 
 use App\Member;
 use App\League;
 
-use App\Advert;
-use App\Warning;
-use App\Picture;
-use App\Tournament;
-
-
 class LeaguesController extends Controller
 {
+    use CommonTrait;
+
     /**
      * Create a new controller instance.
      *
@@ -24,7 +22,7 @@ class LeaguesController extends Controller
      */
      public function __construct()
      {
-         $this->middleware('auth', ['except' => ['show', 'showall']]);
+         $this->middleware('auth', ['except' => ['show', 'showall', 'archivesleagues']]);
      }
 
     /**
@@ -72,10 +70,11 @@ class LeaguesController extends Controller
         $validatedLeague['end_season'] = Carbon::createFromDate($year + 1, 8, 31, 0, 0, 0);
 
         $ligue = League::create($validatedLeague);
+        $this->updateStatisticDate();
 
         session()->flash('notification_management_admin', 'Le ligue a bien été créé');
 
-        return redirect('/admin/ligues');
+        return redirect('/administration/ligues');
     }
 
     /**
@@ -127,10 +126,11 @@ class LeaguesController extends Controller
 
         $league = League::findOrFail($id);
         $league->update($validatedLeague);
+        $this->updateStatisticDate();
 
         session()->flash('notification_management_admin', 'Le ligue a bien été mise-à-jour');
 
-        return redirect('/admin/ligues');
+        return redirect('/administration/ligues');
     }
 
     /**
@@ -143,8 +143,11 @@ class LeaguesController extends Controller
     {
         $league = League::findOrFail($id);
         $league->delete();
+        $this->updateStatisticDate();
+
         session()->flash('notification_management_admin', 'La ligue a bien été supprimée');
-        return redirect('/admin/ligues');
+
+        return redirect('/administration/ligues');
     }
 
     public function editPlayers($id){
@@ -160,36 +163,41 @@ class LeaguesController extends Controller
         foreach($league->members as $m){
             $members[$m->id]->participate = true;
         }
-        
+
         return view('admin.leagues.editPlayers', compact('league', 'members'));
     }
 
     public function updatePlayers(Request $request, $id){
         $league = League::findOrFail($id);
         $league->members()->sync($request['checkBoxArray']);
-        return redirect('/admin/ligues');
+        $this->updateStatisticDate();
+
+        return redirect('/administration/ligues');
     }
 
     public function showall() {
-        $leagues = League::paginate(6);
-        $warnings = Warning::showwarning()->get();
-        $ozoirTounaments = Tournament::ozoirfuturetournament()->get();
-        $otherTournaments = Tournament::otherfuturetournament()->get();
-        $randompictures = Picture::firstsrandompicture()->get();
+        $yearNow = $this->yearSeason();
+        $title = 'Ligue ' . $yearNow . '-' . ($yearNow + 1);
+        $leagues = League::with('members')->presentleague()->paginate(5);
 
-        return view('leagues', compact('leagues', 'warnings', 'ozoirTounaments', 'otherTournaments', 'randompictures'));
+        return view('leagues', compact('leagues', 'title'))->with($this->mainSharingFunctionality());
     }
 
     public function archivesleagues() {
-        $title = "Archives des ligues BC Ozoir";
+        $title = "Archives ligues";
         $leaguesByYear = League::archivesleagues()->get()->groupBy(function($val){
             return Carbon::parse($val->start_season)->format('Y');
         });
-        $warnings = Warning::showwarning()->get();
-        $ozoirTounaments = Tournament::ozoirfuturetournament()->get();
-        $otherTournaments = Tournament::otherfuturetournament()->get();
-        $randompictures = Picture::firstsrandompicture()->get();
 
-        return view('archivesleagues', compact('title', 'leaguesByYear', 'warnings', 'ozoirTounaments', 'otherTournaments', 'randompictures'));
+        return view('archivesleagues', compact('title', 'leaguesByYear'))->with($this->mainSharingFunctionality());
+    }
+
+    private function yearSeason() {
+        $beginningSeason = Carbon::create(null, 9, 1);
+        $now = Carbon::now();
+        if($now->lt($beginningSeason)) {
+            return $now->subYear()->year;
+        }
+        return  $year = $now->year;
     }
 }

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Validator;
 use App\News;
 use App\Tournament;

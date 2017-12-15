@@ -1,4 +1,5 @@
-@extends('layouts.admin') @section('content')
+@extends('layouts.admin')
+@section('content')
 
 <!-- Content Header (Page header) -->
 <section class="content-header">
@@ -23,7 +24,7 @@
 
             <!-- /.box-header -->
             <div class="box-body">
-                <form method="POST" action="/admin/photos/{{ $type }}/{{ $data->id }}/{{ $title }}" role="form" class="dropzone" id="myAwesomeDropzone" enctype="multipart/form-data">
+                <form method="POST" action="/administration/photos/{{ $type }}/{{ $data->id }}/{{ $title }}" role="form" class="dropzone" id="myAwesomeDropzone" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <!-- text input -->
                     <input type="hidden" id="type" name="type" class="form-control" value="{{ $type }}" required>

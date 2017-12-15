@@ -7,9 +7,9 @@
             <li><a href="{{ route('championnats') }}">Championnats fédéraux</a></li>
             <li><a href="{{ route('ligues') }}">Ligues</a></li>
             <li><a href="{{ route('listing') }}">Moyennes listing</a></li>
-            <li><a href="{{ route('podiums') }}">Podium</a></li>
+            <li><a href="{{ route('podiums') }}">Podiums</a></li>
             <li><a href="{{ route('evenements') }}">Évènements</a></li>
-            <li><a href="{{ route('vieuxtournoisOzoir') }}">Archives Tournois</a></li>
+            <li><a href="{{ route('archiveschoix') }}">Archives tournois</a></li>
             <li><a href="{{ route('archivesligues') }}">Archives ligues</a></li>
         </ul>
     </nav>
@@ -33,22 +33,22 @@
                 </colgroup>
                 <tr>
                     <td><img class="counter-img" src="{{ asset('images/Guest-online.png') }}" alt="Image signifiant les visiteurs actuellement en ligne"></td>
-                    <td>5</td>
+                    <td>{{ $onlineguest }}</td>
                     <td>En ligne</td>
                 </tr>
                 <tr>
                     <td><img class="counter-img" src="{{ asset('images/Visitor-counter.png') }}" alt="Image signifiant le nombre de visiteurs du jour"></td>
-                    <td>12</td>
+                    <td>{{ $stat->daily_visits }}</td>
                     <td>Visites aujourd'hui</td>
                 </tr>
                 <tr>
                     <td><img class="counter-img" src="{{ asset('images/Visitor-counter.png') }}" alt="Image signifiant le nombre de visiteurs du mois"></td>
-                    <td>127</td>
+                    <td>{{ $stat->month_visits }}</td>
                     <td>Visites dernier mois</td>
                 </tr>
                 <tr>
-                    <td><img class="counter-img" src="{{ asset('images/Total-visitor-counter.png') }}" alt="Image signifiant le nombre de visiteurs dupuis la création du site"></td>
-                    <td>768</td>
+                    <td><img class="counter-img-last" src="{{ asset('images/Total-visitor-counter.png') }}" alt="Image signifiant le nombre de visiteurs dupuis la création du site"></td>
+                    <td>{{ $stat->since_creation_visits }}</td>
                     <td>Visites depuis le 27 Décembre 2017</td>
                 </tr>
             </table>

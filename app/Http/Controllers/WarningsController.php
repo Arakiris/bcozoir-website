@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Traits\CommonTrait;
+
 use Illuminate\Http\Request;
 use App\Warning;
 
 class WarningsController extends Controller
 {
+    use CommonTrait;
+    
     /**
      * Create a new controller instance.
      *
@@ -52,6 +56,7 @@ class WarningsController extends Controller
         ]);
         
         Warning::create($validatedWarning);
+        $this->updateStatisticDate();
 
         session()->flash('notification_management_admin', 'La nouvelle alerte a bien été enregistré');
 
@@ -97,10 +102,11 @@ class WarningsController extends Controller
         ]);
         
         Warning::findOrFail($id)->update($validatedWarning);
+        $this->updateStatisticDate();
 
         session()->flash('notification_management_admin', 'L\'alerte a bien été mise-à-jour');
         
-        return redirect('/admin/alertes');
+        return redirect('/administration/alertes');
     }
 
     /**
@@ -112,9 +118,10 @@ class WarningsController extends Controller
     public function destroy($id)
     {
         Warning::findOrFail($id)->delete();
+        $this->updateStatisticDate();
         
         session()->flash('notification_management_admin', 'L\'alerte a bien été supprimée');
         
-        return redirect('/admin/alertes');
+        return redirect('/administration/alertes');
     }
 }

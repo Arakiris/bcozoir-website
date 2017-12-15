@@ -73,6 +73,6 @@ class Member extends Model
     }
 
     public function scopeLicenseemember($query) {
-        return $query->join('scores', 'members.id', '=', 'scores.member_id')->where('is_licensee', '1')->select('members.*');
+        return $query->where('is_licensee', '1')->orderBy('last_name', 'DESC')->orderBy('first_name', 'DESC');
     }
 }

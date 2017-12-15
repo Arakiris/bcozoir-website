@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Traits\CommonTrait;
+
 use Illuminate\Http\Request;
 use App\Category;
 
 class CategoriesController extends Controller
 {
-
+    use CommonTrait;
+    
     /**
      * Create a new controller instance.
      *
@@ -53,6 +56,7 @@ class CategoriesController extends Controller
         ]);
 
         Category::create($validatedCategory);
+        $this->updateStatisticDate();
 
         session()->flash('notification_management_admin', 'La catégorie a bien été enregistré');
 
@@ -97,10 +101,11 @@ class CategoriesController extends Controller
         ]);
 
         Category::findOrFail($id)->update($validatedCategory);
+        $this->updateStatisticDate();
 
         session()->flash('notification_management_admin', 'La catégorie a bien été modifié');
 
-        return redirect('/admin/categories');
+        return redirect('/administration/categories');
     }
 
     /**
@@ -112,7 +117,8 @@ class CategoriesController extends Controller
     public function destroy($id)
     {
         Category::findOrFail($id)->delete();
+        $this->updateStatisticDate();
         session()->flash('notification_management_admin', 'La catégorie a bien été supprimée');
-        return redirect('/admin/categories');
+        return redirect('/administration/categories');
     }
 }

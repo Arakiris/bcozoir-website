@@ -13,12 +13,16 @@ class League extends Model
     /**
      * The leagues that belong to the member.
      */
-     public function Members()
-     {
-         return $this->belongsToMany(Member::class);
-     }
+    public function Members()
+    {
+        return $this->belongsToMany(Member::class);
+    }
 
-     public function scopeArchivesleagues($query) {
+    public function scopePresentleague($query){
+        return $query->where([['start_season', '>=', Carbon::createFromDate($this->yearSeason(), 9, 1)]])->orderBy('start_season', 'desc');
+    }
+
+    public function scopeArchivesleagues($query) {
         return $query->where('start_season', '<', Carbon::createFromDate($this->yearSeason(), 9, 1))->orderBy('start_season', 'desc');
     }
 

@@ -6,8 +6,8 @@ $factory->define(App\Member::class, function (Faker $faker) {
     return [
         'club_id' => rand (1, 10),
         'category_id' => rand (1, 9),
-        'first_name' => $faker->name,
-        'last_name' => $faker->name,
+        'first_name' => $faker->firstName,
+        'last_name' => $faker->lastName,
         'sex' => $faker->randomElement($array = array('m', 'f')),
         'birth_date' => $faker->date($format = 'Y-m-d', $max = 'now'),
         'is_licensee' => $faker->boolean($chanceOfGettingTrue = 30),
@@ -15,5 +15,6 @@ $factory->define(App\Member::class, function (Faker $faker) {
         'handicap' => rand (0, 60),
         'bonus' => rand (0, 60),
         'is_active' => $faker->boolean($chanceOfGettingTrue = 90),
+        'historical_path' => '/upload/images/tmp/' .  $faker->image('public/storage/upload/images/tmp/', 640, 480, null, false),
     ];
 });

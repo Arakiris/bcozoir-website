@@ -11,7 +11,7 @@
 
 <nav class="header-nav">
     <div class="updatedAt">
-        <span>MAJ le 30/08/2017</span>
+        <span>{{ (isset($stat->last_update)) ? 'Maj. le ' . $stat->last_update->format('d/m/Y') : 'Pas encore de MAJ' }}</span>
     </div>
     <ul class="nagivation">
         <li><a href="{{ route('welcome') }}">Accueil</a></li>

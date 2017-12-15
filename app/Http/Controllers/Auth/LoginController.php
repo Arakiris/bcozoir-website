@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -25,15 +26,24 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/admin';
+    protected $redirectTo = '/administration';
 
     /**
-     * Create a new controller instance.
+     * Get the needed authorization credentials from the request.
      *
-     * @return void
+     * @param  \Illuminate\Http\Request  $request
+     * @return array
      */
-    public function __construct()
+    protected function credentials(Request $request)
     {
-        $this->middleware('guest')->except('logout');
+        $field = filter_var($request->get($this->username()), FILTER_VALIDATE_EMAIL)
+            ? $this->username()
+            : 'username';
+
+        return [
+            $field => $request->get($this->username()),
+            'password' => $request->password,
+        ];
     }
+
 }

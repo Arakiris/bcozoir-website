@@ -2,17 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Traits\CommonTrait;
+
 use Illuminate\Http\Request;
 use App\Member;
 use App\Score;
 
-use App\Warning;
-use App\Tournament;
-use App\Picture;
-use Carbon\Carbon;
-
 class ScoresController extends Controller
 {
+    use CommonTrait;
+    
     /**
      * Create a new controller instance.
      *
@@ -20,7 +19,7 @@ class ScoresController extends Controller
      */
      public function __construct()
      {
-         $this->middleware('auth', ['except' => ['show', 'showall', 'listingtable']]);
+         $this->middleware('auth', ['except' => ['show', 'listingtable']]);
      }
 
     /**
@@ -55,7 +54,6 @@ class ScoresController extends Controller
     {
         $validatedScore = request()->validate([
             'average' => 'required|numeric',
-            // 'month' => 'required|date_format:Y-m',
             'number_lines' => 'required|numeric'
         ]);
 
@@ -70,7 +68,6 @@ class ScoresController extends Controller
             $score = $member->score;
         }
         $score->average = $validatedScore['average'];
-        // $score->month = date('Y-m-d', strtotime($validatedScore['month']));
         $score->number_lines = $validatedScore['number_lines'];
 
         $member->score()->save($score);
@@ -83,14 +80,13 @@ class ScoresController extends Controller
             $path = request()->file('historical_path')->store('public/upload/images/members/' . $member->id . '/scores' );
 
             $member->historical_path = substr($path, 6);
-            $member->save();
         }
-
         $member->save();
+        $this->updateStatisticDate();
 
         session()->flash('notification_management_admin', 'Le score a bien été enregistrer');
 
-        return redirect('/admin/membres');
+        return redirect('/administration/membres');
     }
 
     /**
@@ -128,7 +124,6 @@ class ScoresController extends Controller
     {
         $validatedScore = request()->validate([
             'average' => 'required|numeric',
-            // 'month' => 'required|date_format:Y-m',
             'number_lines' => 'required|numeric'
         ]);
 
@@ -153,6 +148,7 @@ class ScoresController extends Controller
             $member->historical_path = substr($path, 6);
             $member->save();
         }
+        $this->updateStatisticDate();
 
         session()->flash('notification_management_admin', 'Le score a bien été enregistrer');
 
@@ -168,6 +164,7 @@ class ScoresController extends Controller
     public function destroy($idMember, $id)
     {
         $score = Score::findOrFail($id)->delete();
+        $this->updateStatisticDate();
 
         session()->flash('notification_management_admin', 'Le score a bien été supprimé');
 
@@ -178,16 +175,13 @@ class ScoresController extends Controller
 
     public function showAll(){
         $scores = Score::with('member')->get();
+        
         return view('admin.scores.showAll', compact('scores'));
     }
 
     public function listingtable() {
-        $members = Member::with(['score', 'category'])->licenseemember()->paginate(20);
-        $warnings = Warning::showwarning()->get();
-        $ozoirTounaments = Tournament::ozoirfuturetournament()->get();
-        $otherTournaments = Tournament::otherfuturetournament()->get();
-        $randompictures = Picture::firstsrandompicture()->get();
+        $members = Member::with(['score', 'category'])->licenseemember()->paginate(22);
 
-        return view('averagelisting', compact('members', 'warnings', 'ozoirTounaments', 'otherTournaments', 'randompictures'));
+        return view('averagelisting', compact('members'))->with($this->mainSharingFunctionality());
     }
 }

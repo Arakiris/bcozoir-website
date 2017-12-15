@@ -44,7 +44,7 @@
             <form action="{{ route('login') }}" method="post">
                 {{ csrf_field() }}
                 <div class="form-group has-feedback">
-                    <input type="email" class="form-control" placeholder="Email">
+                    <input type="email" class="form-control" placeholder="Nom d'utilisateur">
                     <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                     @if ($errors->has('email'))
                         <span class="help-block">
@@ -53,7 +53,7 @@
                     @endif
                 </div>
                 <div class="form-group has-feedback">
-                    <input type="password" class="form-control" placeholder="Password">
+                    <input type="password" class="form-control" placeholder="Mot de passe">
                     <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                     @if ($errors->has('password'))
                         <span class="help-block">

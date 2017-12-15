@@ -3,102 +3,71 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Session;
+
+use App\Http\Traits\CommonTrait;
+
+use Validator;
 use App\Advert;
-use App\Warning;
-use App\Tournament;
-use App\Picture;
+use App\Contact;
 use Carbon\Carbon;
 
 class DashboardController extends Controller
 {
-    /**
-	 * Show the application welcome screen to the user.
-	 *
-	 * @return Response
-	 */
+    use CommonTrait;
+
 	public function index(){
         $ads = Advert::showad()->get();
-        $randompictures = Picture::firstsrandompicture()->get();
-        $warnings = Warning::showwarning()->get();
-        $ozoirTounaments = Tournament::ozoirfuturetournament()->get();
-        $otherTournaments = Tournament::otherfuturetournament()->get();
-		return view('welcome', compact('ads', 'randompictures', 'warnings', 'ozoirTounaments', 'otherTournaments'));
+		return view('welcome', compact('ads'))->with($this->mainSharingFunctionality());
 	}
 
 	public function version(){
-        $randompictures = Picture::firstsrandompicture()->get();
-        $warnings = Warning::showwarning()->get();
-        $ozoirTounaments = Tournament::ozoirfuturetournament()->get();
-        $otherTournaments = Tournament::otherfuturetournament()->get();
-		return view('version', compact('randompictures', 'warnings', 'ozoirTounaments', 'otherTournaments'));
+        return view('version')->with($this->mainSharingFunctionality());
 	}
 
 	public function generalconditions(){
-        $randompictures = Picture::firstsrandompicture()->get();
-        $warnings = Warning::showwarning()->get();
-        $ozoirTounaments = Tournament::ozoirfuturetournament()->get();
-        $otherTournaments = Tournament::otherfuturetournament()->get();
-		return view('generalconditions', compact('randompictures', 'warnings', 'ozoirTounaments', 'otherTournaments'));
+        return view('generalconditions')->with($this->mainSharingFunctionality());
 	}
 
 	public function proposal(){
-        $randompictures = Picture::firstsrandompicture()->get();
-        $warnings = Warning::showwarning()->get();
-        $ozoirTounaments = Tournament::ozoirfuturetournament()->get();
-        $otherTournaments = Tournament::otherfuturetournament()->get();
-		return view('proposal', compact('randompictures', 'warnings', 'ozoirTounaments', 'otherTournaments'));
+        return view('proposal')->with($this->mainSharingFunctionality());
 	}
 
 	public function map(){
-        $randompictures = Picture::firstsrandompicture()->get();
-        $warnings = Warning::showwarning()->get();
-        $ozoirTounaments = Tournament::ozoirfuturetournament()->get();
-        $otherTournaments = Tournament::otherfuturetournament()->get();
-		return view('map', compact('randompictures', 'warnings', 'ozoirTounaments', 'otherTournaments'));
+        return view('map')->with($this->mainSharingFunctionality());
     }
 
     public function bcozoir() {
-        $randompictures = Picture::firstsrandompicture()->get();
-        $warnings = Warning::showwarning()->get();
-        $ozoirTounaments = Tournament::ozoirfuturetournament()->get();
-        $otherTournaments = Tournament::otherfuturetournament()->get();
-		return view('bcozoir', compact('randompictures', 'warnings', 'ozoirTounaments', 'otherTournaments'));
+        return view('bcozoir')->with($this->mainSharingFunctionality());
     }
     
     public function office() {
-        $randompictures = Picture::firstsrandompicture()->get();
-        $warnings = Warning::showwarning()->get();
-        $ozoirTounaments = Tournament::ozoirfuturetournament()->get();
-        $otherTournaments = Tournament::otherfuturetournament()->get();
-		return view('office', compact('randompictures', 'warnings', 'ozoirTounaments', 'otherTournaments'));
+        return view('office')->with($this->mainSharingFunctionality());
     }
 
     public function addresses() {
-        $randompictures = Picture::firstsrandompicture()->get();
-        $warnings = Warning::showwarning()->get();
-        $ozoirTounaments = Tournament::ozoirfuturetournament()->get();
-        $otherTournaments = Tournament::otherfuturetournament()->get();
-		return view('addresses', compact('randompictures', 'warnings', 'ozoirTounaments', 'otherTournaments'));
+        return view('addresses')->with($this->mainSharingFunctionality());
     }
 
     public function contact() {
-        $randompictures = Picture::firstsrandompicture()->get();
-        $warnings = Warning::showwarning()->get();
-        $ozoirTounaments = Tournament::ozoirfuturetournament()->get();
-        $otherTournaments = Tournament::otherfuturetournament()->get();
-		return view('contact', compact('randompictures', 'warnings', 'ozoirTounaments', 'otherTournaments'));
+        return view('contact')->with($this->mainSharingFunctionality());
     }
 
     public function sendmail(request $request) {
-        $beginningSeason = Carbon::create(null, 9, 1);
-        $now = Carbon::create(2017, 7, 1);
-        if($now->lt($beginningSeason)) {
-            $year = $now->subYear()->year;
+        $validatedMail = request()->validate([
+            'subject' => 'required',
+            'civility' => ['required', Rule::in(['Monsieur', 'Madame', 'Mademoiselle'])],
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'email' => 'required|email',
+            'tel' => ['required', 'regex:/^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$/'],
+            'message' => 'required'
+        ]);
+        $contacts = Contact::where('email', '<>', '')->get();
+        foreach($contacts as $contact){
+            \Mail::to($contact->email)->send(new \App\Mail\Contact($validatedMail));
         }
-        elseif($now->gte($beginningSeason)){
-            $year = $now->year;
-        }
-        dd($year);
-        return redirect('contact');
+        return redirect()->back();
     }
 }

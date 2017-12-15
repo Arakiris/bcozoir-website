@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Traits\CommonTrait;
+
 use Illuminate\Http\Request;
 
 use Carbon\Carbon;
@@ -11,12 +13,13 @@ use App\Podium;
 use App\TournamentType;
 use App\Member;
 
-use App\Warning;
 use App\Picture;
 
 
 class TournamentsController extends Controller
 {
+    use CommonTrait;
+    
     /**
      * Create a new controller instance.
      *
@@ -24,9 +27,10 @@ class TournamentsController extends Controller
      */
      public function __construct()
      {
-         $this->middleware('auth', ['except' => ['show', 'eventcalendar', 'ozoirTournaments',
-         'privateTournaments', 'championships', 'report', 'tournamentpictures', 'tournamentvideos'
-         , 'tournamentlisting' , 'showpodiums', 'oldOzoirTournaments', 'oldPrivateTournaments', 'oldChampionships']]);
+         $this->middleware('auth', ['except' => ['showone', 'eventcalendar', 'ozoirTournaments',
+         'privateTournaments', 'championships', 'report', 'tournamentpictures', 'tournamentvideos',
+         'tournamentlisting' , 'showpodiums', 'archiveschoice', 'oldOzoirTournaments', 'oldPrivateTournaments',
+          'oldChampionships', 'podiumpictures']]);
      }
 
     /**
@@ -70,6 +74,7 @@ class TournamentsController extends Controller
             'is_rules_pdf' => 'required|boolean',
             'rules_url' => 'nullable|url',
             'place' => 'required',
+            'lexer_url' => 'nullable|url',
             'report' => ''
         ]);
 
@@ -88,25 +93,35 @@ class TournamentsController extends Controller
         $validatedTournament['start_season'] = Carbon::createFromDate($year, 9, 1, 0, 0, 0);
         $validatedTournament['end_season'] = Carbon::createFromDate($year + 1, 8, 31, 0, 0, 0);
 
-        if(isset($validatedImagePDF['is_finished'])){
+        if(isset($validatedPDF['is_finished'])){
             $validatedTournament['is_finished'] = 1;
         }
 
         $tournament = Tournament::create($validatedTournament);
 
         if(isset($validatedPDF['is_finished'])){
-            Podium::create(['tournament_id' => $tournament->id, 'date' => $tournament->date ]);
+            $podium = Podium::create(['tournament_id' => $tournament->id, 'date' => $tournament->date ]);
+            $podium->slug = str_slug($tournament->title . ' ' . $podium->id, '-');
+            $podium->save();
         }
-        
 
         if($file = $request->file('rules_pdf')){
             $path = request()->file('rules_pdf')->store('public/upload/images/tournaments/' . $tournament->id );
             $tournament->rules_pdf = substr($path, 6);
-
-            $tournament->save();
         }
 
-        return redirect('/admin/tournois');
+        if($request->hasFile('listing')){
+            $path = request()->file('listing')->store('public/upload/medias/tournaments/' . $tournament->id );
+            $tournament->listing = substr($path, 6);
+        }
+        $tournament->slug = str_slug($tournament->title . ' ' . $tournament->id, '-');
+        $tournament->save();
+
+        $this->updateStatisticDate();
+
+        session()->flash('notification_management_admin', 'Le tournoi a bien été enregistré');
+
+        return redirect('/administration/tournois');
     }
 
     /**
@@ -115,27 +130,9 @@ class TournamentsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        $title;
-        $pagination = false;
-        $tournaments = Tournament::with('type')->where('id', $id)->get();
-        switch ($tournaments->first()->type->id) {
-            case 1:
-                $title = "Tournois BC Ozoir";
-                break;
-            case 2:
-                $title = "Tournois Privés";
-                break;
-            default:
-                $title = "Championnats fédéraux";
-        }
-        $warnings = Warning::showwarning()->get();
-        $ozoirTounaments = Tournament::ozoirfuturetournament()->get();
-        $otherTournaments = Tournament::otherfuturetournament()->get();
-        $randompictures = Picture::firstsrandompicture()->get();
 
-        return view('tournaments', compact('title', 'tournaments', 'warnings', 'ozoirTounaments', 'otherTournaments', 'pagination', 'randompictures'));
     }
 
     /**
@@ -170,6 +167,7 @@ class TournamentsController extends Controller
             'is_rules_pdf' => 'required|boolean',
             'rules_url' => 'nullable|url',
             'place' => 'required',
+            'lexer_url' => 'nullable|url',
             'report' => ''
         ]);
 
@@ -194,14 +192,19 @@ class TournamentsController extends Controller
         $tournament->update($validatedTournament);
 
         if(isset($validatedImagePDF['is_finished']) ){
+
             if(!isset($tournament->podium)){
-                Podium::create(['tournament_id' => $tournament->id, 'date' => $tournament->date]);
+                $podium = Podium::create(['tournament_id' => $tournament->id, 'date' => $tournament->date]);
             }
             else {
                 $tournament->podium->date = $tournament->date;
                 $tournament->podium->save();
+                $podium = $tournament->podium;
             }
+            $podium->slug = str_slug($tournament->title . ' ' . $podium->id, '-');
+            $podium->save();
         }
+
 
         if($request->hasFile('rules_pdf')){
             if(!is_null($tournament->rules_pdf)){
@@ -218,10 +221,14 @@ class TournamentsController extends Controller
             $path = request()->file('listing')->store('public/upload/medias/tournaments/' . $tournament->id );
             $tournament->listing = substr($path, 6);
         }
+        $tournament->slug = str_slug($tournament->title . ' ' . $tournament->id, '-');
         $tournament->save();
+        $this->updateStatisticDate();
+        
+        session()->flash('notification_management_admin', 'Le tournoi a bien été modifié');
 
         if($request->submitbutton == 'save'){
-            return redirect('/admin/tournois');
+            return redirect('/administration/tournois');
         }
         else {
             $type = 'tournoi';
@@ -240,8 +247,10 @@ class TournamentsController extends Controller
     {
         $tournament = Tournament::findOrFail($id);
         $tournament->delete();
+        $this->updateStatisticDate();
+
         session()->flash('notification_management_admin', 'Le tournoi a bien été supprimé');
-        return redirect('/admin/tournois');
+        return redirect('/administration/tournois');
     }
 
     public function editPlayers($id){
@@ -264,7 +273,7 @@ class TournamentsController extends Controller
     public function updatePlayers(Request $request, $id){
         $tournament = Tournament::findOrFail($id);
         $tournament->members()->sync($request['checkBoxArray']);
-        return redirect('/admin/tournois');
+        return redirect('/administration/tournois');
     }
 
     public function eventcalendar() {
@@ -278,7 +287,7 @@ class TournamentsController extends Controller
                     'title' => $tournament->title,
                     'start' => Carbon::parse($tournament->date)->format('Y-m-d'),
                     'end' => Carbon::parse($tournament->date)->addDay()->format('Y-m-d'),
-                    'url' => route('tournois.show', $tournament->id),
+                    'url' => route('tournois.show', $tournament->slug),
                     'allDay' => true
             );
             $interator++;
@@ -286,151 +295,151 @@ class TournamentsController extends Controller
         return response()->json($calendarTournaments);
     }
 
+    public function showone($slug) {
+        $title;
+        $pagination = false;
+        $futur = false;
+        $tournaments = Tournament::with('type')->where('slug', $slug)->get();
+        switch ($tournaments->first()->type->id) {
+            case 1:
+                $title = "Tournois BC Ozoir";
+                break;
+            case 2:
+                $title = "Tournois Privés";
+                break;
+            default:
+                $title = "Championnats fédéraux";
+        }
+
+        if($tournaments->first()->date->gt(Carbon::now())){
+            $futur = true;
+        }
+
+        return view('tournaments', compact('title', 'tournaments', 'pagination', 'futur'))->with($this->mainSharingFunctionality());
+    }
+
     public function ozoirTournaments() {
         $title = "Tournois BC Ozoir";
         $pagination = true;
-        $tournaments = Tournament::ozoirtournament()->paginate(6);
-        $warnings = Warning::showwarning()->get();
-        $ozoirTounaments = Tournament::ozoirfuturetournament()->get();
-        $otherTournaments = Tournament::otherfuturetournament()->get();
-        $randompictures = Picture::firstsrandompicture()->get();
+        $tournaments = Tournament::with('members')->ozoirtournament()->paginate(5);
 
-        return view('tournaments', compact('title', 'tournaments', 'warnings', 'ozoirTounaments', 'otherTournaments', 'pagination', 'randompictures'));
+        return view('tournaments', compact('title', 'tournaments', 'pagination'))->with($this->mainSharingFunctionality());
     }
 
     public function privateTournaments() {
         $title = "Tournois Privés";
         $pagination = true;
-        $tournaments = Tournament::privatetournament()->paginate(6);
-        $warnings = Warning::showwarning()->get();
-        $ozoirTounaments = Tournament::ozoirfuturetournament()->get();
-        $otherTournaments = Tournament::otherfuturetournament()->get();
-        $randompictures = Picture::firstsrandompicture()->get();
+        $tournaments = Tournament::with('members')->privatetournament()->paginate(5);
 
-        return view('tournaments', compact('title', 'tournaments', 'warnings', 'ozoirTounaments', 'otherTournaments', 'pagination', 'randompictures'));
+        return view('tournaments', compact('title', 'tournaments', 'pagination'))->with($this->mainSharingFunctionality());
     }
 
     public function championships() {
         $title = "Championnats Fédéraux";
         $pagination = true;
-        $tournaments = Tournament::championship()->paginate(6);
-        $warnings = Warning::showwarning()->get();
-        $ozoirTounaments = Tournament::ozoirfuturetournament()->get();
-        $otherTournaments = Tournament::otherfuturetournament()->get();
-        $randompictures = Picture::firstsrandompicture()->get();
+        $tournaments = Tournament::with('members')->championship()->paginate(5);
 
-        return view('tournaments', compact('title', 'tournaments', 'warnings', 'ozoirTounaments', 'otherTournaments', 'pagination', 'randompictures'));
+        return view('tournaments', compact('title', 'tournaments', 'pagination'))->with($this->mainSharingFunctionality());
     }
 
-    public function tournamentlisting($id) {
+    public function tournamentlisting($slug) {
         $title = "Listing tournoi";
-        $tournament = Tournament::findOrFail($id);
-        $warnings = Warning::showwarning()->get();
-        $ozoirTounaments = Tournament::ozoirfuturetournament()->get();
-        $otherTournaments = Tournament::otherfuturetournament()->get();
-        $randompictures = Picture::firstsrandompicture()->get();
 
-        return view('listing', compact('title', 'tournament', 'warnings', 'ozoirTounaments', 'otherTournaments', 'randompictures'));
+        $tournament = Tournament::where('slug', $slug)->first();
+        if(!$tournament){
+            abort(404);
+        }
+
+        return view('listing', compact('title', 'tournament'))->with($this->mainSharingFunctionality());
     }
 
-    public function report($id) {
-        $title = "Résultat du tournoi";
-        $tournament = Tournament::findOrFail($id);
-        $warnings = Warning::showwarning()->get();
-        $ozoirTounaments = Tournament::ozoirfuturetournament()->get();
-        $otherTournaments = Tournament::otherfuturetournament()->get();
-        $randompictures = Picture::firstsrandompicture()->get();
+    public function report($slug) {
+        $title = "Compte-rendu";
 
-        return view('report', compact('title', 'tournament', 'warnings', 'ozoirTounaments', 'otherTournaments', 'randompictures'));
+        $tournament = Tournament::where('slug', $slug)->first();
+        if(!$tournament){
+            abort(404);
+        }
+
+        return view('report', compact('title', 'tournament'))->with($this->mainSharingFunctionality());
     }
     
-    public function tournamentpictures($id) {
+    public function tournamentpictures($slug) {
         $title = "Photos tournoi";
-        $tournament = Tournament::with('pictures')->findOrFail($id);
-        $pictures = $tournament->pictures()->paginate(30);
-        $allpictures = $tournament->pictures;
-        $warnings = Warning::showwarning()->get();
-        $ozoirTounaments = Tournament::ozoirfuturetournament()->get();
-        $otherTournaments = Tournament::otherfuturetournament()->get();
-        $randompictures = Picture::firstsrandompicture()->get();
 
-        return view('photos', compact('title', 'tournament', 'allpictures','pictures', 'warnings', 'ozoirTounaments', 'otherTournaments', 'randompictures'));
+        $tournament = Tournament::with('pictures')->where('slug', $slug)->first();
+        if(!$tournament){
+            abort(404);
+        }
+
+        $pictures = $tournament->pictures()->paginate(42);
+        $allpictures = $tournament->pictures;
+
+        return view('photos', compact('title', 'tournament', 'allpictures', 'pictures'))->with($this->mainSharingFunctionality());
     }
 
-    public function tournamentvideos($id) {
-        $title = "Videos tournoi";
-        $tournament = Tournament::with('videos')->findOrFail($id);
-        $videos = $tournament->videos()->paginate(4);
-        $warnings = Warning::showwarning()->get();
-        $ozoirTounaments = Tournament::ozoirfuturetournament()->get();
-        $otherTournaments = Tournament::otherfuturetournament()->get();
-        $randompictures = Picture::firstsrandompicture()->get();
+    public function tournamentvideos($slug) {
+        $title = "Vidéos tournoi";
+        
+        $tournament = Tournament::with('videos')->where('slug', $slug)->first();
+        if(!$tournament){
+            abort(404);
+        }
 
-        return view('videos', compact('title', 'tournament','videos', 'warnings', 'ozoirTounaments', 'otherTournaments', 'randompictures'));
+        $videos = $tournament->videos()->paginate(4);
+
+        return view('videos', compact('title', 'tournament', 'videos'))->with($this->mainSharingFunctionality());
     }
 
     public function showpodiums() {
         $podiums = Podium::with('tournament')->orderBy('date', 'desc')->paginate(6);
-        $warnings = Warning::showwarning()->get();
-        $ozoirTounaments = Tournament::ozoirfuturetournament()->get();
-        $otherTournaments = Tournament::otherfuturetournament()->get();
-        $randompictures = Picture::firstsrandompicture()->get();
 
-        return view('podiums', compact('podiums', 'warnings', 'ozoirTounaments', 'otherTournaments', 'randompictures'));
+        return view('podiums', compact('podiums'))->with($this->mainSharingFunctionality());
     }
 
-    public function podiumpictures ($id) {
+    public function podiumpictures($slug) {
         $title = "Photos podium";
-        $podium = Podium::with(['tournament', 'pictures'])->findOrFail($id);
-        $tournament = $podium->tournament;
-        $pictures = $podium->pictures()->paginate(30);
-        $allpictures = $podium->pictures;
-        $warnings = Warning::showwarning()->get();
-        $ozoirTounaments = Tournament::ozoirfuturetournament()->get();
-        $otherTournaments = Tournament::otherfuturetournament()->get();
-        $randompictures = Picture::firstsrandompicture()->get();
 
-        return view('photos', compact('title', 'tournament', 'allpictures','pictures', 'warnings', 'ozoirTounaments', 'otherTournaments', 'randompictures'));
+        $podium = Podium::with(['tournament', 'pictures'])->where('slug', $slug)->first();
+        if(!$podium){
+            abort(404);
+        }
+
+        $tournament = $podium->tournament;
+        $pictures = $podium->pictures()->paginate(42);
+        $allpictures = $podium->pictures;
+
+        return view('photos', compact('title', 'tournament', 'allpictures', 'pictures'))->with($this->mainSharingFunctionality());
+    }
+
+    public function archiveschoice() {
+        return view('archiveschoice')->with($this->mainSharingFunctionality());
     }
 
     public function oldOzoirTournaments() {
         $title = "Archives Tournois BC Ozoir";
-        $tournamentsByYear = Tournament::oldozoirtournament()->get()->groupBy(function($val){
+        $tournamentsByYear = Tournament::with('members')->oldozoirtournament()->get()->groupBy(function($val){
             return Carbon::parse($val->date)->format('Y');
         });
-        $warnings = Warning::showwarning()->get();
-        $ozoirTounaments = Tournament::ozoirfuturetournament()->get();
-        $otherTournaments = Tournament::otherfuturetournament()->get();
-        $randompictures = Picture::firstsrandompicture()->get();
 
-        return view('archivestournaments', compact('title', 'tournamentsByYear', 'warnings', 'ozoirTounaments', 'otherTournaments', 'randompictures'));
+        return view('archivestournaments', compact('title', 'tournamentsByYear'))->with($this->mainSharingFunctionality());
     }
 
     public function oldPrivateTournaments() {
         $title = "Archives Tournois Privés";
-        $tournamentsByYear = Tournament::oldprivatetournament()->get()->groupBy(function($val){
+        $tournamentsByYear = Tournament::with('members')->oldprivatetournament()->get()->groupBy(function($val){
             return Carbon::parse($val->date)->format('Y');
         });
-        $warnings = Warning::showwarning()->get();
-        $ozoirTounaments = Tournament::ozoirfuturetournament()->get();
-        $otherTournaments = Tournament::otherfuturetournament()->get();
-        $randompictures = Picture::firstsrandompicture()->get();
 
-        return view('archivestournaments', compact('title', 'tournamentsByYear', 'warnings', 'ozoirTounaments', 'otherTournaments', 'randompictures'));
+        return view('archivestournaments', compact('title', 'tournamentsByYear'))->with($this->mainSharingFunctionality());
     }
 
     public function oldChampionships() {
         $title = "Archives Championnats Fédéraux";
-        $tournamentsByYear = Tournament::oldchampionship()->get()->groupBy(function($val){
+        $tournamentsByYear = Tournament::with('members')->oldchampionship()->get()->groupBy(function($val){
             return Carbon::parse($val->date)->format('Y');
         });
-        $warnings = Warning::showwarning()->get();
-        $ozoirTounaments = Tournament::ozoirfuturetournament()->get();
-        $otherTournaments = Tournament::otherfuturetournament()->get();
-        $randompictures = Picture::firstsrandompicture()->get();
 
-        return view('archivestournaments', compact('title', 'tournamentsByYear', 'warnings', 'ozoirTounaments', 'otherTournaments', 'randompictures'));
+        return view('archivestournaments', compact('title', 'tournamentsByYear'))->with($this->mainSharingFunctionality());
     }
-
-
 }

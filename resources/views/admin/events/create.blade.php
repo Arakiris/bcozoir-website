@@ -32,7 +32,7 @@
 
             <!-- /.box-header -->
             <div class="box-body">
-                <form method="POST" action="/admin/evenements" enctype="multipart/form-data" role="form">
+                <form method="POST" action="/administration/evenements" enctype="multipart/form-data" role="form">
                     {{ csrf_field() }}
 
                     <!-- text input -->

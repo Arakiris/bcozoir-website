@@ -1,4 +1,5 @@
-@extends('layouts.admin') @section('content')
+@extends('layouts.admin')
+@section('content')
 
 @if(Session::has('notification_management_admin'))
     <div class="notification">
@@ -29,7 +30,7 @@
 
             <!-- /.box-header -->
             <div class="box-body">
-                <form method="POST" action="/admin/tournois" enctype="multipart/form-data" role="form">
+                <form method="POST" action="/administration/tournois" enctype="multipart/form-data" role="form">
                     {{ csrf_field() }}
 
                     <!-- select -->
@@ -119,8 +120,13 @@
 
                     <div class="finished">
                         <div class="form-group after_end">
-                            <label for="listing">Listing</label>
-                            <input type="file" id="listing" name="listing" accept="image/*">
+                            <label for="lexer_url">Résultats sous Lexer</label>
+                            <input type="url" name="lexer_url" class="form-control" placeholder="Veuillez entrer l'URL">
+                        </div>
+
+                        <div class="form-group after_end">
+                            <label for="listing">Résultats sous forme de listing</label>
+                            <input type="file" name="listing" accept="image/*">
                         </div>
 
                         <div class="form-group after_end">

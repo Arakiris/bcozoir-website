@@ -1,7 +1,11 @@
 @extends('layouts.master')
 
 @section('content')
-    <div class="main-content-title">
+    @if(isset($warnings) && !is_null($warnings))
+        <div class="main-content-title">
+    @else
+        <div class="main-content-title margin-top-30">
+    @endif
         <h1>Actualités</h1>
     </div>
     @if(isset($news) && $news->count()>0)
@@ -11,8 +15,13 @@
                     <h2>02/07/2017 - {{ $singlenews->title }}</h2>
                     <div>
                         <span class="minimize">{{ $singlenews->body }}</span>
-                        <a href="{{ route('actualitePhotos', $singlenews->id ) }}"><img class="news-img" src="{{ asset('images/tournament/Tournament-pictures.jpg') }}" alt="Image désignant la gallerie de photos"></a>
-                        <a href="{{ route('actualiteVideos', $singlenews->id ) }}"><img class="news-img" src="{{ asset('images/tournament/Tournament-videos.jpg') }}" alt="Image désignant la gallerie de vidéos"></a>
+                        @if($singlenews->photos == 1)
+                            <a href="{{ route('actualitePhotos', $singlenews->id ) }}"><img class="news-img" src="{{ asset('images/tournament/Tournament-pictures.png') }}" alt="Image désignant la gallerie de photos"></a>
+                        @endif
+                        
+                        @if($singlenews->videos == 1)
+                            <a href="{{ route('actualiteVideos', $singlenews->id ) }}"><img class="news-img" src="{{ asset('images/tournament/Tournament-videos.jpg') }}" alt="Image désignant la gallerie de vidéos"></a>
+                        @endif
                     </div>
                 </div>
             @endforeach

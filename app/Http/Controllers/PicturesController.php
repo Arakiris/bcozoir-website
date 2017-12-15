@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Traits\CommonTrait;
+
 use Illuminate\Http\Request;
 use Validator;
 use App\News;
@@ -12,6 +14,8 @@ use App\Event;
 
 class PicturesController extends Controller
 {
+    use CommonTrait;
+    
     private $pictureTypes = ['gif', 'jpg', 'jpeg', 'png', 'bmp', 'svg'];
     /**
      * Create a new controller instance.
@@ -67,10 +71,15 @@ class PicturesController extends Controller
                 $data = Podium::findOrFail($idtype);
                 $cancel = 'admin.tournois.index';
                 break;
-            default:
+            case 'actualite':
                 $data = News::findOrFail($idtype);
                 $cancel = 'admin.actualites.index';
+                break;
+            default:
+                $data = News::findOrFail($idtype);
+                $cancel = 'admin.evenements.index';
         }
+        $this->updateStatisticDate();
 
         return view('admin.pictures.create', compact('type', 'data' , 'cancel', 'title'));
     }
@@ -95,7 +104,7 @@ class PicturesController extends Controller
         $folderPath;
         switch ($type) {
             case 'tournoi':
-                $folderPath = 'public/uphotload/medias/tournaments/' . $idtype;
+                $folderPath = 'public/upload/medias/tournaments/' . $idtype;
                 $class = Tournament::findOrFail($idtype);
                 break;
             case 'evenement':
@@ -106,9 +115,15 @@ class PicturesController extends Controller
                 $folderPath = 'public/upload/medias/podia/' . $idtype;
                 $class = Podium::findOrFail($idtype);
                 break;
-            default:
+            case 'actualite':
                 $folderPath = 'public/upload/medias/news/' . $idtype;
                 $class = News::findOrFail($idtype);
+                $class->photos = 1;
+                $class->save();
+                break;
+            default:
+                $folderPath = 'public/upload/medias/events/' . $idtype;
+                $class = Event::findOrFail($idtype);
         }
         
         $path = request()->file('media');
@@ -117,7 +132,7 @@ class PicturesController extends Controller
         $picture = new Picture();
         $picture->path = substr($path, 6);
         $titlepicture = str_replace('(p)', '<p>', $title);
-        $titlepicture = str_replace('(br)', '<br>', $title);
+        $titlepicture = str_replace('(br)', '<br>', $titlepicture);
         $picture->title = str_replace('(pbis)', '</p>', $titlepicture);
         $class->pictures()->save($picture);
     }
@@ -172,6 +187,10 @@ class PicturesController extends Controller
                 $picture->delete();
             }
         }
+        $this->updateStatisticDate();
+
+        session()->flash('notification_management_admin', 'Les photos ont bien été supprimées');
+
         return redirect()->back();
     }
 }

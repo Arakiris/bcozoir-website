@@ -2,19 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Traits\CommonTrait;
+
 use Illuminate\Http\Request;
 use App\Event;
 use App\Picture;
 use App\Video;
 
-use App\Advert;
-use App\Warning;
-use App\Tournament;
-use Carbon\Carbon;
-
-
 class EventsController extends Controller
 {
+    use CommonTrait;
+
     /**
      * Create a new controller instance.
      *
@@ -60,13 +58,15 @@ class EventsController extends Controller
             'date' => 'required|date'
         ]);
         
-
         $event = Event::create($validatedEvent);
+        $event->slug = str_slug($event->name . ' ' . $event->id, '-');
+        $event->save();
+        $this->updateStatisticDate();
 
         session()->flash('notification_management_admin', 'L\'évènement a bien été créé');
 
         if($request->submitbutton == 'save'){
-            return redirect('/admin/evenements');
+            return redirect('/administration/evenements');
         }
         else {
             $type = 'evenement';
@@ -115,13 +115,16 @@ class EventsController extends Controller
         ]);
 
         $event = Event::findOrFail($id);
-
+        
         $event->update($validatedEvent);
+        $event->slug = str_slug($event->name . ' ' . $event->id, '-');
+        $event->save();
+        $this->updateStatisticDate();
 
         session()->flash('notification_management_admin', 'L\'évènement a bien été modifié');
 
         if($request->submitbutton == 'save'){
-            return redirect('/admin/evenements');
+            return redirect('/administration/evenements');
         }
         else {
             $type = 'evenement';
@@ -140,45 +143,42 @@ class EventsController extends Controller
     {
         $event = Event::findOrFail($id);
         $event->delete();
+        $this->updateStatisticDate();
+
         session()->flash('notification_management_admin', 'L\'évènement a bien été supprimé');
-        return redirect('/admin/evenements');
+        return redirect('/administration/evenements');
     }
 
     public function showall() {
         $events = Event::showevents()->paginate(6);
-        $ads = Advert::showad()->get();
-        $warnings = Warning::showwarning()->get();
-        $ozoirTounaments = Tournament::ozoirfuturetournament()->get();
-        $otherTournaments = Tournament::otherfuturetournament()->get();
-        $randompictures = App\Picture::firstsrandompicture()->get();
 
-        return view('events', compact('events', 'ads', 'warnings', 'ozoirTounaments', 'otherTournaments'));
+        return view('events', compact('events'))->with($this->mainSharingFunctionality());
     }
 
-    public function eventpictures($id) {
+    public function eventpictures($slug) {
         $title = "Photos de l'évènement";
-        $event = Event::with('pictures')->findOrFail($id);
-        $pictures = $event->pictures()->paginate(30);
-        $allpictures = $event->pictures;
-        $ads = Advert::showad()->get();
-        $warnings = Warning::showwarning()->get();
-        $ozoirTounaments = Tournament::ozoirfuturetournament()->get();
-        $otherTournaments = Tournament::otherfuturetournament()->get();
-        $randompictures = App\Picture::firstsrandompicture()->get();
 
-        return view('photos', compact('title', 'event', 'allpictures','pictures', 'ads', 'warnings', 'ozoirTounaments', 'otherTournaments'));
+        $event = Event::with('pictures')->where('slug', $slug)->first();
+        if(!$event){
+            abort(404);
+        }
+
+        $pictures = $event->pictures()->paginate(42);
+        $allpictures = $event->pictures;
+
+        return view('photos', compact('title', 'event', 'allpictures','pictures'))->with($this->mainSharingFunctionality());
     }
 
-    public function eventVideos($id) {
+    public function eventVideos($slug) {
         $title = "Videos de l'évènement";
-        $event = Event::with('videos')->findOrFail($id);
-        $videos = $event->videos()->paginate(4);
-        $ads = Advert::showad()->get();
-        $warnings = Warning::showwarning()->get();
-        $ozoirTounaments = Tournament::ozoirfuturetournament()->get();
-        $otherTournaments = Tournament::otherfuturetournament()->get();
-        $randompictures = App\Picture::firstsrandompicture()->get();
+        
+        $event = Event::with('videos')->where('slug', $slug)->first();
+        if(!$event){
+            abort(404);
+        }
 
-        return view('videos', compact('title', 'event','videos', 'ads', 'warnings', 'ozoirTounaments', 'otherTournaments'));
+        $videos = $event->videos()->paginate(4);
+
+        return view('videos', compact('title', 'event', 'videos'))->with($this->mainSharingFunctionality());
     }
 }

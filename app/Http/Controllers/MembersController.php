@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Traits\CommonTrait;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -10,13 +12,13 @@ use App\Club;
 use App\Category;
 use App\Picture;
 
-use App\Warning;
-use App\Tournament;
 use Carbon\Carbon;
 
 
 class MembersController extends Controller
 {
+    use CommonTrait;
+    
     /**
      * Create a new controller instance.
      *
@@ -81,16 +83,17 @@ class MembersController extends Controller
         ]);
 
         if($file = $request->file('image')){
-            $path = request()->file('image')->store('public/upload/images/members' . $member->id );
+            $path = request()->file('image')->store('public/upload/images/members/' . $member->id );
             $picture = new Picture();
             $picture->path = substr($path, 6);
 
             $member->picture()->save($picture);
         }
+        $this->updateStatisticDate();
         
         session()->flash('notification_management_admin', 'Le nouveau membre a bien été enregistré');
 
-        return redirect("/admin/membres");
+        return redirect("/administration/membres");
     }
 
     /**
@@ -161,15 +164,17 @@ class MembersController extends Controller
                 $previousPicture->delete();
             }
 
-            $path = request()->file('image')->store('public/upload/images/members' . $member->id );
+            $path = request()->file('image')->store('public/upload/images/members/' . $member->id );
             $picture = new Picture();
             $picture->path = substr($path, 6);
 
             $member->picture()->save($picture);
         }
+        $this->updateStatisticDate();
+
         session()->flash('notification_management_admin', 'Le membre a bien été édité');
 
-        return redirect('/admin/membres');
+        return redirect('/administration/membres');
     }
 
     /**
@@ -192,18 +197,15 @@ class MembersController extends Controller
         }
 
         $member->delete();
+        $this->updateStatisticDate();
         
         session()->flash('notification_management_admin', 'Le lien utile a bien été supprimé');
-        return redirect('/admin/membres');
+        return redirect('/administration/membres');
     }
 
     public function showall() {
         $members = Member::with(['category', 'club', 'picture', 'score'])->paginate(24);
-        $warnings = Warning::showwarning()->get();
-        $ozoirTounaments = Tournament::ozoirfuturetournament()->get();
-        $otherTournaments = Tournament::otherfuturetournament()->get();
-        $randompictures = Picture::firstsrandompicture()->get();
 
-        return view('members', compact('members', 'warnings', 'ozoirTounaments', 'otherTournaments'));
+        return view('members', compact('members'))->with($this->mainSharingFunctionality());
     }
 }

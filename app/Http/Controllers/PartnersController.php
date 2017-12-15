@@ -2,18 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Traits\CommonTrait;
+
 use Illuminate\Http\Request;
 
 use App\Partner;
 use App\Picture;
 
-use App\Warning;
-use App\Tournament;
-use Carbon\Carbon;
-
-
 class PartnersController extends Controller
 {
+    use CommonTrait;
+    
      /**
      * Create a new controller instance.
      *
@@ -66,6 +65,8 @@ class PartnersController extends Controller
         
                     $partner->picture()->save($picture);
                 }
+                $this->updateStatisticDate();
+
                 session()->flash('notification_management_admin', 'Le partenaire a bien été enregistré');
         
                 return redirect()->back();
@@ -121,9 +122,11 @@ class PartnersController extends Controller
 
             $partner->picture()->save($picture);
         }
+        $this->updateStatisticDate();
+
         session()->flash('notification_management_admin', 'Le partenaire a bien été mise-à-jour');
 
-        return redirect('/admin/partenaires');
+        return redirect('/administration/partenaires');
     }
 
     /**
@@ -135,19 +138,16 @@ class PartnersController extends Controller
     public function destroy($id)
     {
         Partner::findOrFail($id)->delete();
+        $this->updateStatisticDate();
 
         session()->flash('notification_management_admin', 'Le partenaire a bien été supprimé');
         
-        return redirect('/admin/partenaires');
+        return redirect('/administration/partenaires');
     }
 
     public function showall() {
-        $partners = Partner::with('picture')->get();
-        $warnings = Warning::showwarning()->get();
-        $ozoirTounaments = Tournament::ozoirfuturetournament()->get();
-        $otherTournaments = Tournament::otherfuturetournament()->get();
-        $randompictures = Picture::firstsrandompicture()->get();
+        $partners = Partner::with('picture')->paginate(5);
 
-        return view('partners', compact('partners', 'warnings', 'ozoirTounaments', 'otherTournaments', 'randompictures'));
+        return view('partners', compact('partners'))->with($this->mainSharingFunctionality());
     }
 }

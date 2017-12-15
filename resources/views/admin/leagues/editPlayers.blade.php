@@ -30,7 +30,7 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <form method="POST" action="/admin/ligue/{{$league->id}}/joueurs" >
+                    <form method="POST" action="/administration/ligue/{{$league->id}}/joueurs" >
                         {{csrf_field()}}
                         <div class="form-group">
                              <button type="submit" id="delete" class="btn btn-primary">Mettre à jour</button>

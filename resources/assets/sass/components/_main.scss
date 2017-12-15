@@ -1,14 +1,11 @@
+/* Variables */
+@import "./variables";
+
 /* Normalize */
 @import "./base/normalize";
 
 /* General */
 @import "./base/generals";
-
-/* Margin */
-@import "./base/margin";
-
-/* Padding */
-@import "./base/padding";
 
 /* Float */
 @import "./base/float";
@@ -56,7 +53,7 @@
 @import "./master/content/contact";
 
 /* actualtes */
-@import "./master/content/actualites";
+@import "./master/content/news";
 
 /* events */
 @import "./master/content/occasions";
@@ -78,3 +75,18 @@
 
 /* archives */
 @import "./master/content/archives";
+
+/* map */
+@import "./master/content/map";
+
+/* pagination */
+@import "./master/content/pagination";
+
+/* Manage errors */
+@import "./master/content/errors";
+
+/* Margin */
+@import "./base/margin";
+
+/* Padding */
+@import "./base/padding";

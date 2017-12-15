@@ -1,6 +1,12 @@
+.partners {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
 .main-content-partners{
     width: 80%;
-    margin: 0 auto;
+    margin: 25px auto 0 auto;
 }
 
 .table-associate {
@@ -32,3 +38,16 @@ table.table-associate, th, td {
     padding: 20px;
     font-size: 2rem;
 }
+
+.text-associate-link {
+    background: #cc99ff;
+    text-align:  center;
+    padding: 20px;
+    font-size: 1.6rem;
+    line-height: 1.5;
+}
+
+.text-associate a {
+    color: #0000FF;
+}
+

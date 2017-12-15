@@ -4,15 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Http\Traits\CommonTrait;
+
 use App\Link;
 use App\Picture;
 
-use App\Warning;
-use App\Tournament;
-use Carbon\Carbon;
-
 class LinksController extends Controller
 {
+    use CommonTrait;
+    
     /**
      * Create a new controller instance.
      *
@@ -20,7 +20,7 @@ class LinksController extends Controller
      */
      public function __construct()
      {
-         $this->middleware('auth');
+         $this->middleware('auth', ['except' => ['show', 'showall']]);
      }
 
     /**
@@ -68,6 +68,8 @@ class LinksController extends Controller
 
             $link->picture()->save($picture);
         }
+        $this->updateStatisticDate();
+
         session()->flash('notification_management_admin', 'Le lien utile a bien été enregistré');
 
         return redirect()->back();
@@ -126,9 +128,11 @@ class LinksController extends Controller
 
             $link->picture()->save($picture);
         }
+        $this->updateStatisticDate();
+
         session()->flash('notification_management_admin', 'Le lien utile a bien été mise-à-jour');
 
-        return redirect('/admin/liens');
+        return redirect('/administration/liens');
     }
 
     /**
@@ -140,17 +144,14 @@ class LinksController extends Controller
     public function destroy($id)
     {
         Link::findOrFail($id)->delete();
+        $this->updateStatisticDate();
         session()->flash('notification_management_admin', 'Le lien utile a bien été supprimé');
-        return redirect('/admin/liens');
+        return redirect('/administration/liens');
     }
 
     public function showall() {
-        $links = Link::with('picture')->get();
-        $warnings = Warning::showwarning()->get();
-        $ozoirTounaments = Tournament::ozoirfuturetournament()->get();
-        $otherTournaments = Tournament::otherfuturetournament()->get();
-        $randompictures = Picture::firstsrandompicture()->get();
+        $links = Link::with('picture')->paginate(5);
 
-        return view('links', compact('links', 'warnings', 'ozoirTounaments', 'otherTournaments', 'randompictures'));
+        return view('links', compact('links'))->with($this->mainSharingFunctionality());
     }
 }

@@ -5,16 +5,13 @@
 }
 
 .nextTournament {
-    height: 25%;
-    flex: 1;
-    margin: 15px auto;
-    overflow-x: hidden;
-    overflow-y: auto;
+    flex-basis: 250px;
+    height: 250px;
+    margin: 20px auto;
     width: 90%;
 }
 
 .nextTournamentTitle {
-    border: 1px solid #c0c0c0;
     font-weight: bold;
     margin-bottom: 8px;
     margin-left: 10%;
@@ -24,36 +21,49 @@
 }
 
 .nextTournamentTitle h2 {
-    font-size: 1.4rem;
+    font-size: 1.8rem;
     margin: 0;
     color: #a14342;
     text-shadow: black 1px 1px 1px !important;
+    text-decoration: none;
 }
 
 .nextTournamentContent {
     margin-left: 10px;
+    height: calc(100% - 41px);
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.nextTournamentContent p {
+    display: inline-block;
+    text-decoration: none;
 }
 
 .nextTournamentContent h3 {
     font-size: 1.4rem;
     font-weight: bold;
+    display: inline-block;
+    text-decoration: none;
 }
 
 .frameRandomPicture {
-    background: #e3dac9;
-    border: 1px solid #cec4ab;
+    background: $randomPicture-bg-color;
+    border: 1px solid $randomPicture-border-color;
     flex-basis: 300px;
     margin: 0 auto;
+    margin-top: 20px;
     width: 90%;
 }
 
 .frameRandomPictureTitle {
     border-bottom: 2px solid #9b9281;
-    color: #919b72;
+    color: $randomPicture-title-color;
     font-size: 1.8rem;
     font-weight: bold;
     padding: 10px 20px;
 }
+
 .randomPicture {
     display: block;
     max-width: 90%;
@@ -62,7 +72,7 @@
 }
 
 .pictureText {
-    color: #4d486d;
+    color: $randomPicture-color;
     font-weight: bold;
     text-align: center;
     width: 100%;
@@ -70,4 +80,8 @@
 
 .pictureText {
     line-height: 140%;
+}
+
+.lb-nav {
+    display:none !important;
 }

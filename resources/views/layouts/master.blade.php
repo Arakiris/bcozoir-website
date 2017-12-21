@@ -1,12 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {{--  <meta name="viewport" content="initial-scale=1, maximum-scale=1">  --}}
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="description" content="Site internet du club de bowling d'Ozoir" />
+    <meta name="language" content="fr-FR" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="geo.region" content="FR" />
+    <meta name="geo.placename" content="Ozoir-la-Ferri&egrave;re" />
+    <meta name="geo.position" content="48.762292;2.663712" />
+    <meta name="ICBM" content="48.762292, 2.663712" />
+
+    <meta name="description" content="Tous concernant le club de bowling d'Ozoir, informations, tournois, ligues, membres, listing, photos, vidéos, tournois future et plus" />
     <meta name="keywords" content="bowling, Ozoir" />
     @yield('keywords')
     <link rel="stylesheet" href="{{ asset('bower_components/AdminLTE/plugins/fullcalendar/fullcalendar.css') }}">
@@ -35,20 +42,20 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
     <script src="{{ asset('js/master.js') }}"></script>
     <script>
-    $(document).ready(function() {
-        $('#calendar').fullCalendar({
-            lang: 'fr',
-            header: {
-                    left:   'prev',
-                    center: 'title',
-                    right:  'next'
-                },
-            height: 250,
-            events: "{{ route('eventcalendar') }}",
-            color: 'blue',   // an option!
-            textColor: 'black', // an option!
+        $(document).ready(function() {
+            $('#calendar').fullCalendar({
+                lang: 'fr',
+                header: {
+                        left:   'prev',
+                        center: 'title',
+                        right:  'next'
+                    },
+                height: 250,
+                events: "{{ route('eventcalendar') }}",
+                color: 'blue', 
+                textColor: 'black',
+            });
         });
-    });
     </script>
     @yield('scripts')
 

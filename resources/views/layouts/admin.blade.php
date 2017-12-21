@@ -1,8 +1,3 @@
-<!DOCTYPE html>
-<!--
-This is a starter template page. Use this page to start your new project from
-scratch. This page gets rid of all links and provides the needed markup only.
--->
 <html>
 	<head>
 		<meta charset="utf-8">
@@ -23,10 +18,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
   		<link rel="stylesheet" href="{{ asset('bower_components/AdminLTE/plugins/datatables/dataTables.bootstrap.css') }}">
 		<!-- Theme style -->
 		<link rel="stylesheet" href="{{ asset('bower_components/AdminLTE/dist/css/AdminLTE.min.css') }}">
-		<!-- AdminLTE Skins. We have chosen the skin-blue for this starter
-			page. However, you can choose any other skin. Make sure you
-			apply the skin class to the body tag so the changes take effect.
-		-->
 		<link rel="stylesheet" href="{{ asset('bower_components/AdminLTE/dist/css/skins/skin-blue.min.css') }}">
 		<!-- Dropzone -->
 		<link rel="stylesheet" href="{{ asset('css/basic.min.css') }}">
@@ -35,13 +26,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 		<link rel="stylesheet" href="{{ asset('css/admin.css') }}">
 
 		@yield('styles')
-
-		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-		<!--[if lt IE 9]>
-		<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-		<![endif]-->
 	</head>
 
 	<body class="hold-transition skin-blue sidebar-mini">
@@ -85,10 +69,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 	<script src="{{ asset('bower_components/AdminLTE/plugins/ckeditor/ckeditor.js') }}"></script>
 	<script src="{{ asset('js/admin.js') }}"></script>
 
-	<!-- Optionally, you can add Slimscroll and FastClick plugins.
-		Both of these plugins are recommended to enhance the
-		user experience. Slimscroll is required when using the
-		fixed layout. -->
 	<script>
 		$(function () {
 			$('.sortingTable').DataTable({

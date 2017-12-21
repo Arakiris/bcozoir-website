@@ -37,7 +37,7 @@
                         {{ method_field('PATCH') }}
                         <div class="col-sm-3">
                             <div class="form-group">
-                                <img src="{{ ($member->picture->first()->path) ? asset('storage' . $member->picture->first()->path) : null }}" alt="Avatar du membre" class ="adminMemberPicture">
+                                <img src="{{ ($member->picture->first()) ? asset('storage' . $member->picture->first()->path) : null }}" alt="Avatar du membre" class ="adminMemberPicture">
                             </div>
                             <div class="form-group textAlignCenter">
                                 <input type="file" id="image" name="image" class="inputfile" accept="image/*">
@@ -80,18 +80,17 @@
                                     </div>
                                 </div>
                             </div>
-                            
                             <div class="col-md-6">
                                 <!-- radio -->
                                 <div class="form-group">
                                     <label for="is_licensee">Status</label>
                                     <div class="radio radiobutton">
                                         <label class="margin-right-15">
-                                            <input type="radio" name="is_licensee" id="is_licensee" value="0" {{ ($member->is_licensee == 0) ? "checked" : "" }}>
+                                            <input type="radio" name="is_licensee" id="is_licensee" value="0" {{ ($member->is_licensee == 'Adhérent') ? "checked" : "" }}>
                                             Adh&eacute;rent
                                         </label>
                                         <label>
-                                            <input type="radio" name="is_licensee" id="is_licensee" value="1" {{ ($member->is_licensee == 1) ? "checked" : "" }}>
+                                            <input type="radio" name="is_licensee" id="is_licensee" value="1" {{ ($member->is_licensee == 'Licencié') ? "checked" : "" }}>
                                             Licenci&eacute;
                                         </label>
                                     </div>

@@ -1,5 +1,9 @@
 @extends('layouts.master')
 
+@section('keywords')
+    <meta name="keywords" content="photos, {{ $title }}" />
+@endsection
+
 @section('styles')
     <link type="text/css" rel="stylesheet" href="{{ asset('css/lightgallery.min.css') }}" /> 
 @endsection

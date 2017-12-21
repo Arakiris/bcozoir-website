@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use DB;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -26,6 +27,13 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
+        $schedule->call(function() {
+            DB::table('statistics')->where('id', 1)->update(['daily_visits' => 0]);
+        })->daily()->timezone('Europe/Paris');
+
+        $schedule->call(function() {
+            DB::table('statistics')->where('id', 1)->update(['month_visits' => 0]);
+        })->monthly()->timezone('Europe/Paris');
     }
 
     /**

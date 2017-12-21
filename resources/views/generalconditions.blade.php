@@ -1,5 +1,10 @@
 @extends('layouts.master')
 
+@section('keywords')
+    <meta name="keywords" content="mentions légales" />
+@endsection
+
+
 @section('content')
     <div class="main-generalconditions-title">
         <h1>Mentions légales</h1>
@@ -43,11 +48,15 @@
         </div>
         <div class="generalconditions-sections">
             <h2>&#9755; Hébergement</h2>
-            <p>Coordonnées de l’hébergeur</p>
+            <h3>Greengeeks</h3>
+            <p>
+                5739 Kanan Rd Suite 300 <br>
+                Agoura Hills, CA 91301, États-Unis
+            </p>
         </div>
         <div class="generalconditions-sections">
             <h2>&#9755; Conception et réalisation</h2>
-            <p>Coordonnées du créateur du site</p>
+            <p>Mr. François VONGVILAY</p>
         </div>
     </div>
 

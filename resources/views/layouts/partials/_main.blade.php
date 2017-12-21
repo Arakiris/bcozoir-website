@@ -11,7 +11,7 @@
             </div>
             <div class="main-section warning-height-change">
         @else
-            <div class="main-section">
+            <div class="main-section padding-top-15">
         @endif
 
         @yield('content')

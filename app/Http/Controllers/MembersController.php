@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Traits\CommonTrait;
+use App\Http\Requests\StoreMemberRequest;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -79,7 +80,7 @@ class MembersController extends Controller
         $member = Member::create($validatedMember);
 
         request()->validate([
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg'
+            'image' => 'nullable|image'
         ]);
 
         if($file = $request->file('image')){

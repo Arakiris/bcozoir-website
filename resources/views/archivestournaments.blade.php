@@ -1,5 +1,9 @@
 @extends('layouts.master')
 
+@section('keywords')
+    <meta name="keywords" content="archives, tournois, {{ $title }}" />
+@endsection
+
 @section('content')
     @if(isset($warnings) && !is_null($warnings))
         <div class="main-content-title">
@@ -118,26 +122,5 @@
 
 @section('scripts')
     <script src="{{ asset('js/jquery.easyPaginate.js') }}"></script>
-    <script>
-        $(document).ready(function(){
-            $('ul.tabs li').click(function(){
-                var tab_id = $(this).attr('data-tab');
-
-                $('ul.tabs li').removeClass('current');
-                $('.tab-content').removeClass('current');
-
-                $(this).addClass('current');
-                $("#"+tab_id).addClass('current');
-            });
-
-            $('div.paginate').each(function(index, element){
-                $this = $('#' + $(this).attr('id'));
-                $this.easyPaginate({
-					paginateElement: 'span',
-					elementsPerPage: 5,
-					effect: 'climb'
-				});
-            });
-        });
-    </script>
+    <script src="{{ asset('js/archivespaginate.js') }}"></script>
 @endsection

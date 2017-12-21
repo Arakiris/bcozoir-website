@@ -1,5 +1,10 @@
 @extends('layouts.master')
 
+@section('keywords')
+    <meta name="keywords" content="listing" />
+@endsection
+
+
 @section('content')
     @if(isset($warnings) && !is_null($warnings))
         <div class="main-content-title">

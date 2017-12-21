@@ -1,5 +1,10 @@
 @extends('layouts.master')
 
+@section('keywords')
+    <meta name="keywords" content="membres listing" />
+@endsection
+
+
 @section('content')
     <div class="main-content-averagelisting">
         @if(isset($warnings) && !is_null($warnings))
@@ -7,7 +12,7 @@
         @else
             <div class="main-content-title margin-top-30">
         @endif
-            <h1>Listing <?php setlocale(LC_TIME, 'fr'); echo strftime("%B %Y"); ?></h1>
+            <h1>Listing <?php setlocale(LC_TIME, 'fr'); echo utf8_encode(strftime("%B %Y")); ?></h1>
         </div>
         @if(isset($members) && $members->count()>0)
             <table class="table-averagelisting">

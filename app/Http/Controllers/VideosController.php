@@ -105,29 +105,29 @@ class VideosController extends Controller
         $view;
         switch ($type) {
             case 'tournoi':
-                $folderPath = 'public/upload/medias/tournaments/' . $idtype;
+                $folderPath = 'public/upload/videos/tournaments/' . $idtype;
                 $class = Tournament::findOrFail($idtype);
                 $view = "/administration/tournois";
                 break;
             case 'evenement':
-                $folderPath = 'public/upload/medias/events/' . $idtype;
+                $folderPath = 'public/upload/videos/events/' . $idtype;
                 $class = Event::findOrFail($idtype);
                 $view = "/administration/evenements";
                 break;
             case 'podium':
-                $folderPath = 'public/upload/medias/podia/' . $idtype;
+                $folderPath = 'public/upload/videos/podia/' . $idtype;
                 $class = Podium::findOrFail($idtype);
                 $view = "/administration/tournois";
                 break;
             case 'actualite':
-                $folderPath = 'public/upload/medias/news/' . $idtype;
+                $folderPath = 'public/upload/videos/news/' . $idtype;
                 $class = News::findOrFail($idtype);
                 $class->videos = 1;
                 $view = "/administration/actualites";
                 $class->save();
                 break;
             default:
-                $folderPath = 'public/upload/medias/events/' . $idtype;
+                $folderPath = 'public/upload/videos/events/' . $idtype;
                 $class = Event::findOrFail($idtype);
                 $view = "/administration/evenements";
         }

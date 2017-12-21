@@ -1,5 +1,9 @@
 @extends('layouts.master')
 
+@section('keywords')
+    <meta name="keywords" content="videos" />
+@endsection
+
 @section('content')
     <div class="show-videos-content">
         @if(isset($warnings) && !is_null($warnings))

@@ -1140,6 +1140,7 @@ input[type=password] {
 .main-content-version {
   margin: 20px auto;
   width: 80%;
+  text-align: justify;
 }
 
 /* general conditions */
@@ -1921,7 +1922,7 @@ td {
 
 .tooltip-averagelisting .tooltiptext img {
   margin-right: 10px;
-  height: 300px;
+  width: 635px;
 }
 
 /* archives */
@@ -2263,6 +2264,10 @@ ul.tabs li.current {
 
 /* Margin */
 
+.margin-top-0 {
+  margin-top: 0;
+}
+
 .margin-top-05 {
   margin-top: 5px;
 }
@@ -2291,6 +2296,10 @@ ul.tabs li.current {
   margin-top: 50px;
 }
 
+.margin-right-0 {
+  margin-right: 0;
+}
+
 .margin-right-05 {
   margin-right: 5px;
 }
@@ -2313,6 +2322,10 @@ ul.tabs li.current {
 
 .margin-right-30 {
   margin-right: 30px;
+}
+
+.margin-bottom-0 {
+  margin-bottom: 0;
 }
 
 .margin-bottom-05 {
@@ -2339,8 +2352,8 @@ ul.tabs li.current {
   margin-bottom: 30px;
 }
 
-.margin-left-05 {
-  margin-left: 5px;
+.margin-left-0 {
+  margin-left: 0;
 }
 
 .margin-left-10 {
@@ -2361,6 +2374,10 @@ ul.tabs li.current {
 
 .margin-left-30 {
   margin-left: 30px;
+}
+
+.margin-left-160 {
+  margin-left: 160px;
 }
 
 /* Padding */

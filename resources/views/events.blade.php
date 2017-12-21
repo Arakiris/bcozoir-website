@@ -1,5 +1,10 @@
 @extends('layouts.master')
 
+@section('keywords')
+    <meta name="keywords" content="evenements, fêtes" />
+@endsection
+
+
 @section('content')
     <div class="occasion-content">
         @if(isset($warnings) && !is_null($warnings))

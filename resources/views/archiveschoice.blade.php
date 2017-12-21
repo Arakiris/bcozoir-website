@@ -1,5 +1,9 @@
 @extends('layouts.master')
 
+@section('keywords')
+    <meta name="keywords" content="archives, tournois, choix" />
+@endsection
+
 @section('content')
     @if(isset($warnings) && !is_null($warnings))
         <div class="main-content-title">

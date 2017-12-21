@@ -2,5 +2,8 @@
     "/js/app.js": "/js/app.js",
     "/css/admin.css": "/css/admin.css",
     "/css/app.css": "/css/app.css",
-    "/js/admin.js": "/js/admin.js"
+    "/js/admin.js": "/js/admin.js",
+    "/js/news.js": "/js/news.js",
+    "/js/master.js": "/js/master.js",
+    "/js/archivespaginate.js": "/js/archivespaginate.js"
 }

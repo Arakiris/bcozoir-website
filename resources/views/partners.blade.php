@@ -1,5 +1,9 @@
 @extends('layouts.master')
 
+@section('keywords')
+    <meta name="keywords" content="partenaires" />
+@endsection
+
 @section('content')
 <div class="partners">
     @if(isset($warnings) && !is_null($warnings))

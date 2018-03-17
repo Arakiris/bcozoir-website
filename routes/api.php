@@ -16,3 +16,9 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+Route::get('calendrier', 'TournamentsController@eventcalendar')->name('eventcalendar');
+
+Route::get('/archives/tabtournaments/{idtype}/{year}', 'TournamentsController@tabtournaments')->name('tabtournaments');
+Route::get('/archivestest/tabtournaments', 'TournamentsController@oldOzoirTournamentsTest')->name('test');

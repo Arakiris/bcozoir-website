@@ -63,11 +63,11 @@
                             <label for="is_accredited">Homologué ?</label>
                             <div class="radio radiobutton">
                                 <label class="margin-right-15">
-                                    <input type="radio" name="is_accredited" id="is_accredited" value="0" checked>
+                                    <input type="radio" name="is_accredited" id="is_accredited" value="1" checked>
                                     Oui
                                 </label>
                                 <label>
-                                    <input type="radio" name="is_accredited" id="is_accredited" value="1">
+                                    <input type="radio" name="is_accredited" id="is_accredited" value="0">
                                     Non
                                 </label>
                             </div>
@@ -89,7 +89,7 @@
                     <!-- date input -->
                     <div class="form-group">
                         <label for="place">Résultats URL</label>
-                        <input type="url" id="result" name="result" class="form-control" placeholder="Veuillez entrer l'URL des résultats" required>
+                        <input type="url" id="result" name="result" class="form-control" placeholder="Veuillez entrer l'URL des résultats">
                     </div>
 
                     @include('partials._form-error')

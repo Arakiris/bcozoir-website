@@ -1,20 +1,34 @@
 $(document).ready(function(){
-    $('ul.tabs li').click(function(){
-        var tab_id = $(this).attr('data-tab');
+    // $('ul.tabs li').click(function(){
+    //     var tab_id = $(this).attr('data-tab');
 
-        $('ul.tabs li').removeClass('current');
-        $('.tab-content').removeClass('current');
+    //     $('ul.tabs li').removeClass('current');
+    //     $('.tab-content').removeClass('current');
 
-        $(this).addClass('current');
-        $("#"+tab_id).addClass('current');
-    });
+    //     $(this).addClass('current');
+    //     $("#"+tab_id).addClass('current');
+    // });
 
     $('div.paginate').each(function(index, element){
-        $this = $('#' + $(this).attr('id'));
-        $this.easyPaginate({
-            paginateElement: 'span',
-            elementsPerPage: 5,
-            effect: 'climb'
+        $table = $(this).find("table").attr('id');
+        $this = $('#' + $(this).attr('id') + ' #' + $table  + ' tbody');
+        $this.paginathing({
+            perPage: 5,
+            insertAfter: '#' + $table,
+            prevText: '&lt;', 
+            nextText: '&gt;', 
+            firstText: '&laquo;', 
+            lastText: '&raquo;' 
         });
     });
+
+    // OLD
+    // $('div.paginate').each(function(index, element){
+    //     $this = $('#' + $(this).attr('id'));
+    //     $this.easyPaginate({
+    //         paginateElement: 'span',
+    //         elementsPerPage: 5,
+    //         effect: 'climb'
+    //     });
+    // });
 });

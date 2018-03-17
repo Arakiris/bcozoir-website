@@ -42,11 +42,6 @@
                         <input type="text" id="average" name="average" class="form-control" placeholder="Veuillez entrer la moyenne des scores" required>
                     </div>
 
-                    {{--  <div class="form-group">
-                        <label for="month">Choix du mois</label>
-                        <input type="month" id="month" name="month" class="form-control" required>
-                    </div>  --}}
-
                     <div class="form-group">
                         <label for="number_lines">Nombre de lignes</label>
                         <input type="number" id="number_lines" name="number_lines" class="form-control" min="0" required>

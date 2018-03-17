@@ -33,4 +33,5 @@ class Podium extends Model
     public function scopeShowpodium($query) {
         return $query->join('tournaments', 'podia.tournament_id', '=', 'tournaments.id')->orderBy('podia.date', 'desc')->select('podia.*');
     }
+
 }

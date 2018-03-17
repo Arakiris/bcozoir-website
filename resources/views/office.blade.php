@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('keywords')
-    <meta name="keywords" content="présentation, bureau" />
+    <meta name="keywords" content="presentation, bureau" />
 @endsection
 
 @section('content')

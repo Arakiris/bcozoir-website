@@ -12,14 +12,14 @@
         <div class="main-content-news">
             @foreach($news as $singlenews)
                 <div class="single-news">
-                    <h2>02/07/2017 - {{ $singlenews->title }}</h2>
+                    <h2>{{ $singlenews->date->format('d/m/Y') }} - {{ $singlenews->title }}</h2>
                     <div>
-                        <span class="minimize">{{ $singlenews->body }}</span>
-                        @if($singlenews->photos == 1)
+                        <span class="minimize">{!! $singlenews->body !!}</span>
+                        @if($singlenews->pictures()->count() > 0)
                             <a href="{{ route('actualitePhotos', $singlenews->id ) }}"><img class="news-img" src="{{ asset('images/tournament/Tournament-pictures.png') }}" alt="Image désignant la gallerie de photos"></a>
                         @endif
                         
-                        @if($singlenews->videos == 1)
+                        @if($singlenews->videos()->count() > 0)
                             <a href="{{ route('actualiteVideos', $singlenews->id ) }}"><img class="news-img" src="{{ asset('images/tournament/Tournament-videos.jpg') }}" alt="Image désignant la gallerie de vidéos"></a>
                         @endif
                     </div>

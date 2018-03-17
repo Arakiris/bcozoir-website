@@ -31,12 +31,12 @@
             <?php $i = 0; ?>
             @foreach($randompictures as $picture)
                 <div>
-                    <a href="{{ asset('storage' . $picture->path)  }}" data-lightbox="example-{{ $i }}"><img data-lazy="{{ asset('storage' . $picture->path)  }}" alt="Photo au hasard" class="randomPicture"></a>
+                    <a href="{{ asset('storage' . $picture->path)  }}" data-lightbox="randomPic-{{ $i }}"><img data-lazy="{{ asset('storage' . $picture->path)  }}" alt="Photo au hasard" class="randomPicture"></a>
                     <div class="pictureText">
                         {!! $picture->title !!}
                     </div>
                 </div>
-                 <?php $i++; ?>
+                <?php $i++; ?>
             @endforeach
         </div>
 

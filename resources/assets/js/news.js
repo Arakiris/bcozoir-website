@@ -3,7 +3,7 @@ $(document).ready(function(){
     var minimize_character_count = 150;    
 
     minimized_elements.each(function(){    
-        var t = $(this).text();        
+        var t = $(this).html();
         if(t.length < minimize_character_count ) return;
 
         $(this).html(

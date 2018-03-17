@@ -14,14 +14,19 @@ use App\Event;
 use App\Picture;
 use App\Video;
 
+/**
+ * Controller who manages videos
+ */
 class VideosController extends Controller
 {
+    /** Common methods between controller */
     use CommonTrait;
     
     private $pictureTypes = ['gif', 'jpg', 'jpeg', 'png', 'bmp'];
     private $videoTypes = ['mp4', 'webm'];
+
     /**
-     * Create a new controller instance.
+     * Create a new VideosController instance.
      *
      * @return void
      */
@@ -191,7 +196,8 @@ class VideosController extends Controller
             $videos = Video::findOrFail($request->checkBoxArray);
     
             foreach($videos as $video){
-                unlink(storage_path('app/public' . $video->path));
+                unlink(storage_path('app/public' . $video->path_mp4));
+                unlink(storage_path('app/public' . $video->path_webm));
                 $video->delete();
             }
         }

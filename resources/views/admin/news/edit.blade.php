@@ -42,7 +42,7 @@
                     <!-- textarea -->
                     <div class="form-group">
                         <label for="body">Contenu de l'actualit&eacute;</label>
-                        <textarea id="editor" name="body" class="form-control" rows="3" placeholder="Veuillez entrer le contenu de l'actualité">{{ $news->body }}</textarea>
+                        <textarea name="body" class="form-control" rows="20" placeholder="Veuillez entrer le contenu de l'actualité">{{ $news->body }}</textarea>
                     </div>
 
                     @include('partials._form-error')

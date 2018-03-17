@@ -46,7 +46,7 @@
                                     <td class="addNewScore"><a href="{{ route('admin.alertes.edit', $warning->id) }}"><i class="fa fa-edit"></i></a></td>
                                     <td>{{ $warning->id }}</td>
                                     <td>{{ $warning->body }}</td>
-                                    <td>{{ date('d-m-Y', strtotime($warning->date_disappear)) }}</td>
+                                    <td>{{ $warning->date_disappear->format('Y-m-d') }}</td>
                                 </tr>
                             @endforeach
                         @endif

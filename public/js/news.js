@@ -81,7 +81,7 @@ $(document).ready(function () {
     var minimize_character_count = 150;
 
     minimized_elements.each(function () {
-        var t = $(this).text();
+        var t = $(this).html();
         if (t.length < minimize_character_count) return;
 
         $(this).html(t.slice(0, minimize_character_count) + '<span>... </span><a href="#" class="more">Lire la suite</a>' + '<span style="display:none;">' + t.slice(minimize_character_count, t.length) + ' <a href="#" class="less">Réduire</a></span>');

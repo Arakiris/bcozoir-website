@@ -7,12 +7,16 @@ use App\Http\Traits\CommonTrait;
 use Illuminate\Http\Request;
 use App\Club;
 
+/**
+ * Controller who manages clubs
+ */
 class ClubsController extends Controller
 {
+    /** Common methods between controller */
     use CommonTrait;
     
     /**
-     * Create a new controller instance.
+     * Create a new ClubsController instance.
      *
      * @return void
      */
@@ -105,7 +109,7 @@ class ClubsController extends Controller
         Club::findOrFail($id)->update($validatedClub);
         $this->updateStatisticDate();
 
-        session()->flash('notification_management_admin', 'Le club &agrave; bien &eacute;t&eacute; mise-&agrave;-jour');
+        session()->flash('notification_management_admin', 'Le club &agrave; bien &eacute;t&eacute; modfié');
 
         return redirect('/administration/clubs');
     }
@@ -120,7 +124,7 @@ class ClubsController extends Controller
     {
         Club::findOrFail($id)->delete();
         $this->updateStatisticDate();
-        session()->flash('notification_management_admin', 'Le club a bien été supprimée');
+        session()->flash('notification_management_admin', 'Le club a bien été supprimé');
         return redirect('/administration/clubs');
     }
 }

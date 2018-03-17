@@ -12,13 +12,18 @@ use App\Podium;
 use App\Picture;
 use App\Event;
 
+/**
+ * Controller who manages pictures
+ */
 class PicturesController extends Controller
 {
+    /** Common methods between controller */
     use CommonTrait;
     
     private $pictureTypes = ['gif', 'jpg', 'jpeg', 'png', 'bmp', 'svg'];
+    
     /**
-     * Create a new controller instance.
+     * Create a new PicturesController instance.
      *
      * @return void
      */
@@ -92,11 +97,11 @@ class PicturesController extends Controller
      */
     public function store($type, $idtype, $title, Request $request)
     {   
-        // \Debugbar::info($request->picture->guessClientExtension());
+        // \Debugbar::alert($request);
+        // clock()->info($request->all());
         $validator = Validator::make($request->all(), [
-            'media' => 'required|image|max:10000'
+            'media' => 'required|image'
         ]);
-
         if ($validator->fails()) {
             return response()->json(['error' => $validator->errors()->getMessages()], 400);
         }
@@ -104,36 +109,35 @@ class PicturesController extends Controller
         $folderPath;
         switch ($type) {
             case 'tournoi':
-                $folderPath = 'public/upload/medias/tournaments/' . $idtype;
+                $folderPath = 'public/upload/images/tournaments/' . $idtype;
                 $class = Tournament::findOrFail($idtype);
                 break;
             case 'evenement':
-                $folderPath = 'public/upload/medias/events/' . $idtype;
+                $folderPath = 'public/upload/images/events/' . $idtype;
                 $class = Event::findOrFail($idtype);
                 break;
             case 'podium':
-                $folderPath = 'public/upload/medias/podia/' . $idtype;
+                $folderPath = 'public/upload/images/podia/' . $idtype;
                 $class = Podium::findOrFail($idtype);
                 break;
             case 'actualite':
-                $folderPath = 'public/upload/medias/news/' . $idtype;
+                $folderPath = 'public/upload/images/news/' . $idtype;
                 $class = News::findOrFail($idtype);
                 $class->photos = 1;
                 $class->save();
                 break;
             default:
-                $folderPath = 'public/upload/medias/events/' . $idtype;
+                $folderPath = 'public/upload/images/events/' . $idtype;
                 $class = Event::findOrFail($idtype);
         }
-        
         $path = request()->file('media');
         $extension = $path->extension();
         $path = $path->store($folderPath);
         $picture = new Picture();
         $picture->path = substr($path, 6);
-        $titlepicture = str_replace('(p)', '<p>', $title);
-        $titlepicture = str_replace('(br)', '<br>', $titlepicture);
-        $picture->title = str_replace('(pbis)', '</p>', $titlepicture);
+        $titlepicture = str_replace('61p61', '<p>', $title);
+        $titlepicture = str_replace('85br85', '<br>', $titlepicture);
+        $picture->title = str_replace('61pbis61', '</p>', $titlepicture);
         $class->pictures()->save($picture);
     }
 

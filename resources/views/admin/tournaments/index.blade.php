@@ -56,14 +56,14 @@
                                     <td>{{ $tournament->id }}</td>
                                     <td>{{ $tournament->type->title }}</td>
                                     <td>{{ $tournament->title }}</td>
-                                    <td>{{ date('d-m-Y', strtotime($tournament->date)) }}</td>
+                                    <td>{{ $tournament->date->format('Y-m-d') }}</td>
                                     <td>{{ ($tournament->is_accredited) ? 'Homologué' : 'Non homologué' }}</td>
                                     <td>{{ $tournament->place }}</td>
                                     <td>{{ ($tournament->is_finished) ? 'Terminé' : 'Á venir' }}</td>
                                     <td>{{ ($tournament->report) ? str_limit($tournament->report, 20, '&raquo') : 'Pas de compte rendu' }}</td>
                                     <td class="addNewScore">
-                                        <?php setlocale(LC_TIME, 'fr'); $datetournament = strftime("%d %B %Y", strtotime($tournament->date->format('Y-m-d'))); ?>
-                                        <a href="{{ route('admin.photos.create', ['tournoi', $tournament->id, '(p)' . $datetournament . '(br)' . $tournament->place .'(p)']) }}" class="adminMemberPicture__links">
+                                        <?php setlocale(LC_TIME, 'fr'); $datetournament = utf8_encode(strftime("%d %B %Y", strtotime($tournament->date->format('Y-m-d')))); ?>
+                                        <a href="{{ route('admin.photos.create', ['tournoi', $tournament->id, '61p61' . $datetournament . '85br85' . $tournament->place .'61pbis61']) }}" class="adminMemberPicture__links">
                                             <i class="fa fa-plus-square"></i>
                                         </a>
                                         <a href="{{ route('admin.photos.index', ['tournoi', $tournament->id]) }}" class="adminMemberPicture__links">
@@ -80,7 +80,7 @@
                                     </td>
                                     <td class="addNewScore">
                                         @if($tournament->is_finished == 1)
-                                            <a href="{{ route('admin.photos.create', ['podium', $tournament->podium->id, '(p)' . $datetournament . '(br)' . $tournament->place .'(p)']) }}" class="adminMemberPicture__links">
+                                            <a href="{{ route('admin.photos.create', ['podium', $tournament->podium->id, '61p61' . $datetournament . '85br85' . $tournament->place .'61pbis61']) }}" class="adminMemberPicture__links">
                                                 <i class="fa fa-plus-square"></i>
                                             </a>
                                             <a href="{{ route('admin.photos.index', ['podium', $tournament->podium->id]) }}" class="adminMemberPicture__links">

@@ -57,7 +57,6 @@
 
                     <div class="box-footer">
                         <button type="submit" class="btn btn-primary" name="submitbutton" value="save">Enregistrer</button>
-                        <button type="submit" class="btn btn-primary after_end" name="submitbutton" value="save-add">Enregistrer et ajouter des médias</button>
                         
                         <div class="pull-right">
                             <a href="{{ route('admin.evenements.index') }}" class="btn btn-default">Annuler</a>

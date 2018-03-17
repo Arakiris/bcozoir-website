@@ -58,7 +58,6 @@
 
                     <div class="box-footer col-xs-6">
                         <button type="submit" class="btn btn-primary" name="submitbutton" value="save">Mettre-à-jour</button>
-                        <button type="submit" class="btn btn-primary" name="submitbutton" value="save-add">MAJ et ajouter des photos</button>
                     </div>
                 </form>
                 <div class="box-footer col-xs-6 pull-right">

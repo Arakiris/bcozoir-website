@@ -44,7 +44,7 @@
                 <tr>
                     <td><img class="counter-img" src="{{ asset('images/Visitor-counter.png') }}" alt="Image signifiant le nombre de visiteurs du mois"></td>
                     <td>{{ $stat->month_visits }}</td>
-                    <td>Visites dernier mois</td>
+                    <td>Visites du dernier mois</td>
                 </tr>
                 <tr>
                     <td><img class="counter-img-last" src="{{ asset('images/Total-visitor-counter.png') }}" alt="Image signifiant le nombre de visiteurs dupuis la création du site"></td>

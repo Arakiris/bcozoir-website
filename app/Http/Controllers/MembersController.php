@@ -15,13 +15,16 @@ use App\Picture;
 
 use Carbon\Carbon;
 
-
+/**
+ * Controller who manages members
+ */
 class MembersController extends Controller
 {
+    /** Common methods between controller */
     use CommonTrait;
     
     /**
-     * Create a new controller instance.
+     * Create a new MembersController instance.
      *
      * @return void
      */
@@ -76,6 +79,10 @@ class MembersController extends Controller
             'id_licensee' => '',
             'bonus' => 'nullable|numeric'
         ]);
+
+        if(!isset($validatedMember['bonus'])){
+            $validatedMember['bonus'] = 0;
+        }
 
         $member = Member::create($validatedMember);
 
@@ -146,6 +153,10 @@ class MembersController extends Controller
             'bonus' => 'nullable|numeric'
         ]);
 
+        if(!isset($validatedMember['bonus'])){
+            $validatedMember['bonus'] = 0;
+        }
+
         $member = Member::findOrFail($id);
 
         if($validatedMember['is_licensee'] == 0){
@@ -200,12 +211,17 @@ class MembersController extends Controller
         $member->delete();
         $this->updateStatisticDate();
         
-        session()->flash('notification_management_admin', 'Le lien utile a bien été supprimé');
+        session()->flash('notification_management_admin', 'Le membre a bien été supprimé');
         return redirect('/administration/membres');
     }
 
+    /**
+     * Show all members.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function showall() {
-        $members = Member::with(['category', 'club', 'picture', 'score'])->paginate(24);
+        $members = Member::with(['category', 'club', 'picture', 'score'])->getmembers()->paginate(24);
 
         return view('members', compact('members'))->with($this->mainSharingFunctionality());
     }

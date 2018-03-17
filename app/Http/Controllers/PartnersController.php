@@ -9,12 +9,16 @@ use Illuminate\Http\Request;
 use App\Partner;
 use App\Picture;
 
+/**
+ * Controller who manages partners of club
+ */
 class PartnersController extends Controller
 {
+    /** Common methods between controller */
     use CommonTrait;
     
      /**
-     * Create a new controller instance.
+     * Create a new PartnersController instance.
      *
      * @return void
      */
@@ -109,7 +113,7 @@ class PartnersController extends Controller
         request()->validate(['image' => 'nullable|image']);
 
         $partner = Partner::findOrFail($id);
-        $partner->save($validatedPartner);
+        $partner->update($validatedPartner);
         
         if($file = $request->file('image')){
             $previousPicture = $partner->picture->first();
@@ -124,7 +128,7 @@ class PartnersController extends Controller
         }
         $this->updateStatisticDate();
 
-        session()->flash('notification_management_admin', 'Le partenaire a bien été mise-à-jour');
+        session()->flash('notification_management_admin', 'Le partenaire a bien été modifié');
 
         return redirect('/administration/partenaires');
     }
@@ -137,7 +141,14 @@ class PartnersController extends Controller
      */
     public function destroy($id)
     {
-        Partner::findOrFail($id)->delete();
+        $partner = Partner::findOrFail($id);
+
+        if($partner->picture->count()){
+            unlink(storage_path('app/public' . $partner->picture->first()->path));
+            $partner->picture->first()->delete();
+        }
+        $partner->delete();
+
         $this->updateStatisticDate();
 
         session()->flash('notification_management_admin', 'Le partenaire a bien été supprimé');
@@ -145,6 +156,11 @@ class PartnersController extends Controller
         return redirect('/administration/partenaires');
     }
 
+    /**
+     * Display all partners
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function showall() {
         $partners = Partner::with('picture')->paginate(5);
 

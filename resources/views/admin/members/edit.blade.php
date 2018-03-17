@@ -109,7 +109,7 @@
                                     <label>Club</label>
                                     <select class="form-control" id="club_id" name="club_id" required>
                                         @foreach($clubs as $club)
-                                            <option value="{{ $club->id }}" {{ ($member->id_club == $club->id) ? 'selected' : '' }}> {{ $club->name }}</option>
+                                            <option value="{{ $club->id }}" {{ ($member->club_id == $club->id) ? 'selected' : '' }}> {{ $club->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>

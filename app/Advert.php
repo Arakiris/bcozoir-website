@@ -27,7 +27,9 @@ class Advert extends Model
         // return $query->where('start_display', '>=', Carbon::now());
         return $query->where([
             ['start_display', '<=', Carbon::now()],
-            ['end_display', '>', Carbon::now()]]);
+            ['end_display', '>', Carbon::now()]]
+        )
+        ->orderBy('id','desc');
     }
     
 }

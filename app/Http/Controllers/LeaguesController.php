@@ -11,12 +11,16 @@ use Carbon\Carbon;
 use App\Member;
 use App\League;
 
+/**
+ * Controller who manages leagues
+ */
 class LeaguesController extends Controller
 {
+    /** Common methods between controller */
     use CommonTrait;
 
     /**
-     * Create a new controller instance.
+     * Create a new LeaguesController instance.
      *
      * @return void
      */
@@ -61,7 +65,7 @@ class LeaguesController extends Controller
             'is_accredited' => 'required|boolean',
             'place' => 'required',
             'team_name' => 'required',
-            'result' => 'required|url'
+            'result' => 'nullable|url'
         ]);
         
         $year = intval($validatedLeague['start_season']);
@@ -116,7 +120,7 @@ class LeaguesController extends Controller
             'is_accredited' => 'required|boolean',
             'place' => 'required',
             'team_name' => 'required',
-            'result' => 'required|url'
+            'result' => 'nullable|url'
         ]);
         
         $year = intval($validatedLeague['start_season']);
@@ -128,7 +132,7 @@ class LeaguesController extends Controller
         $league->update($validatedLeague);
         $this->updateStatisticDate();
 
-        session()->flash('notification_management_admin', 'Le ligue a bien été mise-à-jour');
+        session()->flash('notification_management_admin', 'La ligue a bien été modifiée');
 
         return redirect('/administration/ligues');
     }
@@ -150,6 +154,12 @@ class LeaguesController extends Controller
         return redirect('/administration/ligues');
     }
 
+    /**
+     * Show the list of players of the specified league.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function editPlayers($id){
         $league = League::with('members')->findOrFail($id);
         $playerLeague = $league->members()->get()->toArray();
@@ -167,6 +177,13 @@ class LeaguesController extends Controller
         return view('admin.leagues.editPlayers', compact('league', 'members'));
     }
 
+    /**
+     * Update players of the specified leagues in storage.
+     *
+     * @param Request $request
+     * @param int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function updatePlayers(Request $request, $id){
         $league = League::findOrFail($id);
         $league->members()->sync($request['checkBoxArray']);
@@ -175,23 +192,49 @@ class LeaguesController extends Controller
         return redirect('/administration/ligues');
     }
 
+    /**
+     * Show the all the leagues of this season
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function showall() {
         $yearNow = $this->yearSeason();
         $title = 'Ligue ' . $yearNow . '-' . ($yearNow + 1);
-        $leagues = League::with('members')->presentleague()->paginate(5);
+        $leagues = League::with(['members' => function($query){
+            $query->orderBy('last_name', 'asc')->orderBy('first_name', 'asc');
+        }])->presentleague()->paginate(6);
 
         return view('leagues', compact('leagues', 'title'))->with($this->mainSharingFunctionality());
     }
 
+    /**
+     * Show the all the leagues of previous season
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function archivesleagues() {
         $title = "Archives ligues";
         $leaguesByYear = League::archivesleagues()->get()->groupBy(function($val){
             return Carbon::parse($val->start_season)->format('Y');
         });
+        /*
+        $leaguesByYear = League::with(['members' => function($query){
+            $query->orderBy('last_name', 'asc')->orderBy('first_name', 'asc');
+        }])->archivesleagues()->get()->groupBy(function($val){
+            return Carbon::parse($val->start_season)->format('Y');
+        });
+        */
 
         return view('archivesleagues', compact('title', 'leaguesByYear'))->with($this->mainSharingFunctionality());
     }
 
+    /**
+     * Return the beginning of the year year of the current season
+     *
+     * @return int $year
+     */
     private function yearSeason() {
         $beginningSeason = Carbon::create(null, 9, 1);
         $now = Carbon::now();

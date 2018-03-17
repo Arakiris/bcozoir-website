@@ -21,7 +21,7 @@
                 {{ csrf_field() }}
                 <div class="message-contact information">
                     <input type="hidden" name="subject" value="Contact">
-                    <select name="civility" required>
+                    <select class="inputcivility" name="civility" required>
                         <option value="">* Civilité</option>
                         <option value="Monsieur">Mr.</option>
                         <option value="Madame">Mme</option>
@@ -30,10 +30,10 @@
                     <input type="text" name="last_name" placeholder="*Votre nom" required>
                     <input type="text" name="first_name" placeholder="*Votre prénom" required>
                     <input type="email" name="email" placeholder="*Votre e-mail" required>
-                    <input type="tel" pattern="^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$" title="Veuillez respecter le format téléphonique Français" name="tel" placeholder="*Votre téléphone" required>
+                    <input type="tel" class="inputtel" pattern="^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$" title="Veuillez respecter le format téléphonique Français" name="tel" placeholder="*Votre téléphone" required>
                 </div>
                 <div class="message-contact">
-                    <textarea name="message" class="textarea-contact" rows="14" placeholder="*Votre message..." required></textarea>
+                    <textarea name="message" class="textarea-contact" rows="14" col="1000" placeholder="*Votre message..." required></textarea>
                     <button class="envoyer right">ENVOYER</button>
                 </div>
             </form>

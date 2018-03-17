@@ -8,12 +8,16 @@ use Illuminate\Http\Request;
 use App\Member;
 use App\Score;
 
+/**
+ * Controller who manages scores of members
+ */
 class ScoresController extends Controller
 {
+    /** Common methods between controller */
     use CommonTrait;
     
     /**
-     * Create a new controller instance.
+     * Create a new ScoresController instance.
      *
      * @return void
      */
@@ -81,10 +85,11 @@ class ScoresController extends Controller
 
             $member->historical_path = substr($path, 6);
         }
+        $member->handicap = floor((220 - $score->average)*0.7);
         $member->save();
         $this->updateStatisticDate();
 
-        session()->flash('notification_management_admin', 'Le score a bien été enregistrer');
+        session()->flash('notification_management_admin', 'Le score a bien été enregistré');
 
         return redirect('/administration/membres');
     }
@@ -146,11 +151,12 @@ class ScoresController extends Controller
             $path = request()->file('historical_path')->store('public/upload/images/members/' . $member->id . '/scores' );
 
             $member->historical_path = substr($path, 6);
-            $member->save();
         }
+        $member->handicap = floor((220 - $score->average)*0.7);
+        $member->save();
         $this->updateStatisticDate();
 
-        session()->flash('notification_management_admin', 'Le score a bien été enregistrer');
+        session()->flash('notification_management_admin', 'Le score a bien été enregistré');
 
         return redirect()->route('admin.scores.index', [$member]) ;
     }
@@ -173,12 +179,22 @@ class ScoresController extends Controller
         return redirect()->route('admin.scores.index', [$member]) ;
     }
 
+    /**
+     * Display all partners
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function showAll(){
         $scores = Score::with('member')->get();
         
         return view('admin.scores.showAll', compact('scores'));
     }
 
+    /**
+     * Display the listing table page
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function listingtable() {
         $members = Member::with(['score', 'category'])->licenseemember()->paginate(22);
 

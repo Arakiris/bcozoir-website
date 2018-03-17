@@ -45,8 +45,8 @@
                             <tr>
                                 <td class="addNewScore"><a href="{{ route('admin.annonces.edit', $ad->id) }}"><i class="fa fa-edit"></i></a></td>
                                 <td><img src="{{ ($ad->picture->first()->path) ? asset('storage' . $ad->picture->first()->path) : null }}" alt="Image de l'annonce" class="adminTableImg"></td>
-                                <td>{{ date('d-m-Y', strtotime($ad->start_display)) }}</td>
-                                <td>{{ date('d-m-Y', strtotime($ad->end_display)) }}</td>
+                                <td>{{ $ad->start_display->format('Y-m-d')  }}</td>
+                                <td>{{ $ad->end_display->format('Y-m-d') }}</td>
                             </tr>
                             @endforeach
                         @endif

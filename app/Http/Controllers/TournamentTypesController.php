@@ -7,12 +7,16 @@ use App\Http\Traits\CommonTrait;
 use Illuminate\Http\Request;
 use App\TournamentType;
 
+/**
+ * Controller who manages types of tournament
+ */
 class TournamentTypesController extends Controller
 {
+    /** Common methods between controller */
     use CommonTrait;
     
     /**
-     * Create a new controller instance.
+     * Create a new TournamentTypesController instance.
      *
      * @return void
      */

@@ -3,6 +3,7 @@ ul.tabs{
     padding: 0px;
     list-style: none;
 }
+
 ul.tabs li{
     background: none;
     color: #222;
@@ -16,6 +17,10 @@ ul.tabs li.current{
     color: #222;
 }
 
+.main-content-archives {
+    margin-bottom: 20px;
+}
+
 .tab-content{
     display: none;
     background: #dddddd;
@@ -27,7 +32,6 @@ ul.tabs li.current{
 }
 
 .archive {
-    display: table;
     margin: 0 auto;
     min-height: 88px;
     width: 100%;
@@ -37,6 +41,13 @@ ul.tabs li.current{
     margin-top: 80px;
     display: flex;
     flex-wrap: nowrap;
+}
+
+.archive-table{
+    border-collapse: collapse;
+    border: 2px solid #bfbfbf;
+    width: 100%;
+    display: none;
 }
 
 .archive-button {
@@ -100,12 +111,10 @@ ul.tabs li.current{
 }
 
 .archive-row {
-    display: table-row;
     width: 100%;
 }
 
 .archive-information {
-    display: table-cell;
     vertical-align: top;
     background-color: #7030a0;
     border: 2px solid #bfbfbf;
@@ -129,7 +138,6 @@ ul.tabs li.current{
 
 .archive-member {
     background: #cc99ff;
-    display: table-cell;
     vertical-align: middle;
     text-align: center;
     border-top: 2px solid #bfbfbf;
@@ -145,7 +153,6 @@ ul.tabs li.current{
 }
 
 .archive-image {
-    display: table-cell;
     vertical-align: middle;
     text-align: center;
     border-top: 2px solid #bfbfbf;

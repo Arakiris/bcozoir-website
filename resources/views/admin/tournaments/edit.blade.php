@@ -34,14 +34,12 @@
                     {{ csrf_field() }}
                     {{ method_field('PATCH') }}
 
-                    <div class="abc"></div>
-
                     <!-- select -->
                     <div class="form-group">
                         <label>Type de Tournois</label>
                         <select class="form-control" id="type_id" name="type_id" required>
                             @foreach($tournamentTypes as $type)
-                                <option value="{{ $type->id }}" {{ ($type->id == $tournament->type_id) ? 'checked' : '' }}> {{ $type->title }}</option>
+                                <option value="{{ $type->id }}" {{ ($type->id == $tournament->type_id) ? 'selected' : '' }}> {{ $type->title }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -67,7 +65,7 @@
                     <!-- date input -->
                     <div class="form-group">
                         <label for="date">Date du tournoi</label>
-                        <input type="date" id="date" name="date" class="form-control" min="01-01-2000" value="{{ date('Y-m-d', strtotime($tournament->date)) }}" required>
+                        <input type="date" id="date" name="date" class="form-control" min="01-01-2000" value="{{ $tournament->date->format('Y-m-d') }}" required>
                     </div>
 
                     <div class="col-md-6">
@@ -76,11 +74,11 @@
                             <label for="is_accredited">Homologué ?</label>
                             <div class="radio radiobutton">
                                 <label class="margin-right-15">
-                                    <input type="radio" name="is_accredited" id="is_accredited" value="1" checked>
+                                    <input type="radio" name="is_accredited" id="is_accredited" value="1" {{ ($tournament->is_accredited == 1) ? 'checked' : '' }}>
                                     Oui
                                 </label>
                                 <label>
-                                    <input type="radio" name="is_accredited" id="is_accredited" value="0">
+                                    <input type="radio" name="is_accredited" id="is_accredited" value="0" {{ ($tournament->is_accredited == 0) ? 'checked' : '' }}>
                                     Non
                                 </label>
                             </div>
@@ -93,11 +91,11 @@
                             <label for="is_rules_pdf">Règle en PDF ou URL ?</label>
                             <div class="radio radiobutton">
                                 <label class="margin-right-15">
-                                    <input type="radio" name="is_rules_pdf" id="is_rules_pdf" value="0" {{ ($tournament->is_rules_pdf) ? '' : 'checked' }}>
+                                    <input type="radio" name="is_rules_pdf" id="is_rules_pdf" value="0" {{ ($tournament->is_rules_pdf == 0) ? 'checked' : '' }}>
                                     URL
                                 </label>
                                 <label>
-                                    <input type="radio" name="is_rules_pdf" id="is_rules_pdf" value="1" {{ ($tournament->is_rules_pdf) ? 'checked' : '' }}>
+                                    <input type="radio" name="is_rules_pdf" id="is_rules_pdf" value="1" {{ ($tournament->is_rules_pdf == 1) ? 'checked' : '' }}>
                                     PDF
                                 </label>
                             </div>
@@ -134,7 +132,7 @@
 
                         <div class="form-group">
                             <label for="report">Compte rendu</label>
-                            <textarea class="form-control" id="editor" name="report" rows="3" placeholder="Entrer votre compte rendu...">{{ $tournament->report or '' }}</textarea>
+                            <textarea class="form-control" id="editor" name="report" rows="20" placeholder="Entrer votre compte rendu...">{{ $tournament->report or '' }}</textarea>
                         </div>
                     </div>
 
@@ -142,7 +140,6 @@
 
                     <div class="box-footer col-xs-8">
                         <button type="submit" class="btn btn-primary" name="submitbutton" value="save">Mettre-à-jour</button>
-                        <button type="submit" class="btn btn-primary" name="submitbutton" value="save-add">MAJ et ajouter des photos</button>
                     </div>
                 </form>
                 <div class="box-footer col-xs-4 pull-right">

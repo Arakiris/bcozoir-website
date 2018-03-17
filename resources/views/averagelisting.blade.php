@@ -41,10 +41,10 @@
                                     </div>
                                 </td>
                                 <td>{{ $member->first_name }}</td>
-                                <td>{{ $member->score->number_lines ? $member->score->number_lines : '' }}</td>
-                                <td>{{ $member->score->average ? $member->score->average : ''  }}</td>
-                                <td>{{ $member->score->average ? floor((220 - $member->score->average)*0.7) : '' }}</td>
-                                <td>{{ $member->bonus ? $member->bonus : '' }}</td>
+                                <td>{{ $member->score->number_lines }}</td>
+                                <td>{{ $member->score->average ? intval($member->score->average) : ''  }}</td>
+                                <td>{{ $member->handicap }}</td>
+                                <td>{{ $member->bonus }}</td>
                             </tr>
                         @endif
                     @endforeach

@@ -35,7 +35,7 @@
                                         <div class="tooltip-occasion">
                                             <p class="{{ ($member->club_id != 1) ? 'otherClub' : '' }}">{{ $member->last_name }} {{ $member->first_name }}</p>
                                             <div class="tooltiptext-occasion {{ ($member->is_licensee == 'Licencié') ?  'licensee' : 'adherent' }}">
-                                                <img class="float-left full-size-img" src="{{ ($member->picture->first()->path) ? asset('storage' . $member->picture->first()->path) : null }}" alt="Photo de {{ $member->last_name }} - {{ $member->first_name }}">
+                                                <img class="float-left full-size-img" src="{{ ($member->picture->first()) ? asset('storage' . $member->picture->first()->path) : null }}" alt="Photo de {{ $member->last_name }} - {{ $member->first_name }}">
                                                 <div class="tooltipcontent">
                                                     <p>{{ $member->last_name }} {{ $member->first_name }} - {{ $member->birth_date->diffInYears(Carbon\Carbon::now()) }} ans</p>
                                                     <p>{{ $member->club->name }}</p>
@@ -57,12 +57,14 @@
 
                             @if(isset($league->result) || isset($tournament->result))
                                 <td class="occasion-image occasion-image-league">
-                                    <a href="{{ $league->result }}"><img class="occasion-image-league-lexer" src="images/tournament/Lexer.jpg" alt="Image du lien"></a>
+                                    <a href="{{ $league->result }}" target="_blank"><img class="occasion-image-league-lexer" src="images/tournament/Lexer.jpg" alt="Image du lien"></a>
                                 </td>
                             @endif
                         </tr>
                     @endforeach
                 </table>
+            </div>
+            <div class="bottom-tournament-league">
                 <div class="bottom-div">
                     <div class="pagination-middle">
                         {{ $leagues->links() }}
@@ -71,7 +73,7 @@
             </div>
         @else
             <div class="main-content-occasion">
-                <p>Il n'y a pas encore d'actualités.</p>
+                <p>Il n'y a pas encore de ligues.</p>
             </div>
         @endif
     </div>

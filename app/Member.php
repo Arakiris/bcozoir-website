@@ -72,7 +72,11 @@ class Member extends Model
         return $value ? 'Licencié' : 'Adhérent';
     }
 
+    public function scopeGetmembers($query) {
+        return $query->where('club_id', '1')->orderBy('last_name', 'ASC')->orderBy('first_name', 'ASC');
+    }
+
     public function scopeLicenseemember($query) {
-        return $query->where('is_licensee', '1')->orderBy('last_name', 'DESC')->orderBy('first_name', 'DESC');
+        return $query->where('club_id', '1')->where('is_licensee', '1')->orderBy('last_name', 'ASC')->orderBy('first_name', 'ASC');
     }
 }

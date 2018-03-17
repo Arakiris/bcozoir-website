@@ -6,7 +6,7 @@ $(document).ready(function() {
         infinite: true,
         speed: 300,
         autoplay: true,
-        autoplaySpeed: 2000
+        autoplaySpeed: 4000
     });
 
     $('.warning-carousel').addClass('carousel-initialized');
@@ -35,24 +35,25 @@ $(document).ready(function() {
 });
 
 window.addEventListener("load", function(){
-window.cookieconsent.initialise({
-"palette": {
-    "popup": {
-    "background": "#edeff5",
-    "text": "#838391"
-    },
-    "button": {
-    "background": "#4b81e8"
-    }
-},
-"theme": "classic",
-"content": {
-    "message": "Ce site utilise des cookies pour vous assurer la meilleure expérience possible sur notre site. En poursuivant votre navigation sur ce site, vous acceptez notre utilisation de cookies.",
-    "dismiss": "OK",
-    "link": "En savoir plus",
-    "href": "http://bcozoir.dev/mentions-legales"
-}
-})});
+    window.cookieconsent.initialise({
+        "palette": {
+            "popup": {
+            "background": "#edeff5",
+            "text": "#838391"
+            },
+            "button": {
+            "background": "#4b81e8"
+            }
+        },
+        "theme": "classic",
+        "content": {
+            "message": "Ce site utilise des cookies pour vous assurer la meilleure expérience possible sur notre site. En poursuivant votre navigation sur ce site, vous acceptez notre utilisation de cookies.",
+            "dismiss": "OK",
+            "link": "En savoir plus",
+            "href": "http://bcozoir.dev/mentions-legales"
+        }
+    })
+});
 
 lightbox.option({
     'showImageNumberLabel': false,

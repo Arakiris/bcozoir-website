@@ -13,8 +13,8 @@
     <meta name="geo.position" content="48.762292;2.663712" />
     <meta name="ICBM" content="48.762292, 2.663712" />
 
-    <meta name="description" content="Tous concernant le club de bowling d'Ozoir, informations, tournois, ligues, membres, listing, photos, vidéos, tournois future et plus" />
-    <meta name="keywords" content="bowling, Ozoir" />
+    <meta name="description" content="Tous concernant BC Ozoir - Bowling Club Ozoir, informations, tournois, ligues, membres, listing, photos, vidéos, tournois future et plus. BC Ozoir est affilié à la FFBSQ et est présent en divisions régionales." />
+    <meta name="keywords" content="bowling, Ozoir, bowling club, bowling ozoir, bowling 77, club, bcozoir, tournoi, amitie" />
     @yield('keywords')
     <link rel="stylesheet" href="{{ asset('bower_components/AdminLTE/plugins/fullcalendar/fullcalendar.css') }}">
     <link rel="stylesheet" href="{{ asset('slick/slick.css') }}">

@@ -6,13 +6,18 @@ use App\Http\Traits\CommonTrait;
 
 use Illuminate\Http\Request;
 use App\Contact;
+use DB;
 
+/**
+ * Controller who registers the admins who receives mails
+ */
 class ContactsController extends Controller
 {
+    /** Common methods between controller */
     use CommonTrait;
 
     /**
-     * Create a new controller instance.
+     * Create a new ContactsController instance.
      *
      * @return void
      */
@@ -56,6 +61,12 @@ class ContactsController extends Controller
             'name5' => '',
             'email5' => 'nullable|email'
         ]);
+        DB::table('contacts')->truncate();
+        for( $i=1 ; $i <=5 ; $i++){
+            $c = new Contact();
+            $c->save();
+        }
+
         for( $i=1 ; $i <=5 ; $i++){
             $contact = Contact::findOrFail($i);
             if(isset($validatedContact['name' . $i]))

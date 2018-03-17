@@ -24,7 +24,7 @@
 
             <!-- /.box-header -->
             <div class="box-body">
-                <form method="POST" action="/administration/photos/{{ $type }}/{{ $data->id }}/{{ $title }}" role="form" class="dropzone" id="myAwesomeDropzone" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('admin.photos.store', ['type' => $type, 'idtype' => $data->id, 'title' => $title]) }}" role="form" class="dropzone" id="myAwesomeDropzone" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <!-- text input -->
                     <input type="hidden" id="type" name="type" class="form-control" value="{{ $type }}" required>

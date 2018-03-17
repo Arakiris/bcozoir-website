@@ -102,5 +102,9 @@ class DatabaseSeeder extends Seeder
         factory(App\Event::class, 25)->create()->each(function($n){
             $n->pictures()->saveMany(factory(App\Picture::class, 25)->states('normal')->make());
         });
+
+        // factory(App\Tournament::class, 25)->states('passed')->create()->each(function($t){
+        //     $t->pictures()->saveMany(factory(App\Picture::class, 32)->states('normal')->make());
+        // });
     }
 }

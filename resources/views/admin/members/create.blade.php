@@ -123,7 +123,7 @@
                     <!-- text input -->
                     <div class="form-group">
                         <label for="bonus">Bonus</label>
-                        <input type="text" id="bonus" name="bonus" class="form-control" placeholder="Veuillez entrer le numéro de licence">
+                        <input type="text" id="bonus" name="bonus" class="form-control" placeholder="Veuillez entrer le bonus">
                     </div>
 
                     @include('partials._form-error')

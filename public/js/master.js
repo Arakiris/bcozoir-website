@@ -84,7 +84,7 @@ $(document).ready(function () {
         infinite: true,
         speed: 300,
         autoplay: true,
-        autoplaySpeed: 2000
+        autoplaySpeed: 4000
     });
 
     $('.warning-carousel').addClass('carousel-initialized');

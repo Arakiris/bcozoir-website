@@ -15,16 +15,16 @@
         </div>
         @if(isset($tournaments) && $tournaments->count()>0)
             <div class="main-content-occasion">
-                @if(!isset($futur))
-                    <table class="occasion">
-                @else
+                @if(isset($futur) && ($futur == 1))
                     <table class="occasion occasion-futur">
+                @else
+                    <table class="occasion">
                 @endif
                 
                     @foreach($tournaments as $tournament)
                         <tr class="occasion-row">
                             <td class="occasion-information tournament-information">
-                                @if(isset($tournament->rules_url) || isset($tournament->rules_pdf))
+                                @if((isset($tournament->rules_url) && ($tournament->is_rules_pdf == 0)) || (isset($tournament->rules_pdf) && ($tournament->is_rules_pdf == 1)))
                                     <a class="occasion-link" href="{{ $tournament->is_rules_pdf ? asset('storage' . $tournament->rules_pdf) : $tournament->rules_url }}" target="_blank">
                                         <h2><?php setlocale(LC_TIME, 'fr'); echo utf8_encode(strftime("%d-%B-%Y", $tournament->date->timestamp)); ?></h2>
                                         <p>{{ $tournament->title }}</p>
@@ -44,14 +44,14 @@
                                         <div class="tooltip-occasion">
                                             <p class="{{ ($member->club_id != 1) ? 'otherClub' : '' }}">{{ $member->last_name }} {{ $member->first_name }}</p>
                                             <div class="tooltiptext-occasion {{ ($member->is_licensee == 'Licencié') ?  'licensee' : 'adherent' }}">
-                                                <img class="float-left full-size-img" src="{{ ($member->picture->first()->path) ? asset('storage' . $member->picture->first()->path) : null }}" alt="Photo de {{ $member->last_name }} - {{ $member->first_name }}">
+                                                <img class="float-left full-size-img" src="{{ ($member->picture->first()) ? asset('storage' . $member->picture->first()->path) : null }}" alt="Photo de {{ $member->last_name }} - {{ $member->first_name }}">
                                                 <div class="tooltipcontent">
                                                     <p>{{ $member->last_name }} {{ $member->first_name }} - {{ $member->birth_date->diffInYears(Carbon\Carbon::now()) }} ans</p>
                                                     <p>{{ $member->club->name }}</p>
                                                     @if($member->is_licensee === "Licencié")
                                                         <p>Licence : {{ ($member->id_licensee) ? $member->id_licensee : '' }}</p>
                                                         <p>{{ $member->category->title }}</p>
-                                                        <p>Moyenne : {{ $member->score ? $member->score->average : "Pas d'enregistrement"  }}</p>
+                                                        <p>Moyenne : {{ ($member->score && $member->score->average) ? intval($member->score->average) : "Pas d'enregistrement" }}</p>
                                                         <p>Handicap : {{ $member->handicap }}</p>
                                                         <p>Bonus : {{ $member->bonus }}</p>
                                                     @else
@@ -85,7 +85,7 @@
 
                                 @if(isset($tournament->pictures) && $tournament->pictures->count()>0)
                                     <td class="occasion-image">
-                                        <a href="{{ route('tournoiPhotos', $tournament->slug) }}"><img class="occasion-image-logo" src="{{ asset('images/tournament/Tournament-pictures.png') }}" alt="Image de présentation afin de montrer les photos du tournois"></a>
+                                        <a href="{{ route('tournoiPhotos', $tournament->slug) }}"><img class="occasion-image-logo" src="{{ asset('images/tournament/tournament-pictures.png') }}" alt="Image de présentation afin de montrer les photos du tournois"></a>
                                     </td>
                                 @endif
 
@@ -98,7 +98,8 @@
                         </tr>
                     @endforeach
                 </table>
-
+            </div>
+            <div class="bottom-tournament-league">
                 @if($pagination)
                     <div class="bottom-div">
                         <div class="pagination-middle">

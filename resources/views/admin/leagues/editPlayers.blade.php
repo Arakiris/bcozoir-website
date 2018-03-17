@@ -35,7 +35,7 @@
                         <div class="form-group">
                              <button type="submit" id="delete" class="btn btn-primary">Mettre à jour</button>
                         </div>
-                        <table class="table table-bordered table-hover sortingTable">
+                        <table class="table table-bordered table-hover sortingTableAddPlayers">
                             <thead>
                                 <tr>
                                     <th><input type="checkbox" class="options"> Selection des participants</th>
@@ -64,6 +64,9 @@
                                 </tr>
                             </tfoot>
                         </table>
+                        <div class="form-group">
+                            <button type="submit" id="delete" class="btn btn-primary">Mettre à jour</button>
+                       </div>
                     </form>
                     <a class="btn btn-default" href="{{ route('admin.ligues.index') }}">Retour</a>
                 </div>

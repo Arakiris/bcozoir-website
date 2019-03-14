@@ -13,6 +13,6 @@
         </div>
     </div>
     <div class="main-content-report">
-        {{ ($tournament->report) ? asset('storage' . $tournament->report) : 'Les résultats n\'ont pas encore été enregistrés.' }}
+        {!! ($tournament->report) ? $tournament->report : 'Les résultats n\'ont pas encore été enregistrés.' !!}
     </div>
 @endsection

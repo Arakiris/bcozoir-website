@@ -77,6 +77,10 @@ class MembersController extends Controller
             'bonus' => 'nullable|numeric'
         ]);
 
+        if(!isset($validatedMember['bonus'])){
+            $validatedMember['bonus'] = 0;
+        }
+
         $member = Member::create($validatedMember);
 
         request()->validate([
@@ -146,6 +150,10 @@ class MembersController extends Controller
             'bonus' => 'nullable|numeric'
         ]);
 
+        if(!isset($validatedMember['bonus'])){
+            $validatedMember['bonus'] = 0;
+        }
+
         $member = Member::findOrFail($id);
 
         if($validatedMember['is_licensee'] == 0){
@@ -200,12 +208,12 @@ class MembersController extends Controller
         $member->delete();
         $this->updateStatisticDate();
         
-        session()->flash('notification_management_admin', 'Le lien utile a bien été supprimé');
+        session()->flash('notification_management_admin', 'Le membre a bien été supprimé');
         return redirect('/administration/membres');
     }
 
     public function showall() {
-        $members = Member::with(['category', 'club', 'picture', 'score'])->paginate(24);
+        $members = Member::with(['category', 'club', 'picture', 'score'])->getmembers()->paginate(24);
 
         return view('members', compact('members'))->with($this->mainSharingFunctionality());
     }

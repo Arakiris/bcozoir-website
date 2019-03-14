@@ -64,6 +64,7 @@ class DashboardController extends Controller
             'tel' => ['required', 'regex:/^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$/'],
             'message' => 'required'
         ]);
+        $validatedMail['message'] = nl2br($validatedMail['message']);
         $contacts = Contact::where('email', '<>', '')->get();
         foreach($contacts as $contact){
             \Mail::to($contact->email)->send(new \App\Mail\Contact($validatedMail));

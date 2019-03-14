@@ -53,7 +53,7 @@
                                     <td>{{ $member->last_name }} - {{ $member->first_name }}</td>
                                     <td>{{ $member->category->title }}</td>
                                     <td>{{ $member->sex }}</td>
-                                    <td>{{ $member->birth_date->format('m/d/Y') }}</td>
+                                    <td>{{ $member->birth_date->format('d/m/Y') }}</td>
                                     <td>{{ $member->is_licensee }}</td>
                                     <td>{{ $member->id_licensee }}</td>
                                     <td>{{ $member->handicap }}</td>

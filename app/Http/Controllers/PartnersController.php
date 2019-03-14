@@ -109,7 +109,7 @@ class PartnersController extends Controller
         request()->validate(['image' => 'nullable|image']);
 
         $partner = Partner::findOrFail($id);
-        $partner->save($validatedPartner);
+        $partner->update($validatedPartner);
         
         if($file = $request->file('image')){
             $previousPicture = $partner->picture->first();
@@ -124,7 +124,7 @@ class PartnersController extends Controller
         }
         $this->updateStatisticDate();
 
-        session()->flash('notification_management_admin', 'Le partenaire a bien été mise-à-jour');
+        session()->flash('notification_management_admin', 'Le partenaire a bien été modifié');
 
         return redirect('/administration/partenaires');
     }
@@ -137,7 +137,14 @@ class PartnersController extends Controller
      */
     public function destroy($id)
     {
-        Partner::findOrFail($id)->delete();
+        $partner = Partner::findOrFail($id);
+
+        if($partner->picture->count()){
+            unlink(storage_path('app/public' . $partner->picture->first()->path));
+            $partner->picture->first()->delete();
+        }
+        $partner->delete();
+
         $this->updateStatisticDate();
 
         session()->flash('notification_management_admin', 'Le partenaire a bien été supprimé');

@@ -61,7 +61,7 @@ class LeaguesController extends Controller
             'is_accredited' => 'required|boolean',
             'place' => 'required',
             'team_name' => 'required',
-            'result' => 'required|url'
+            'result' => 'nullable|url'
         ]);
         
         $year = intval($validatedLeague['start_season']);
@@ -116,7 +116,7 @@ class LeaguesController extends Controller
             'is_accredited' => 'required|boolean',
             'place' => 'required',
             'team_name' => 'required',
-            'result' => 'required|url'
+            'result' => 'nullable|url'
         ]);
         
         $year = intval($validatedLeague['start_season']);
@@ -128,7 +128,7 @@ class LeaguesController extends Controller
         $league->update($validatedLeague);
         $this->updateStatisticDate();
 
-        session()->flash('notification_management_admin', 'Le ligue a bien été mise-à-jour');
+        session()->flash('notification_management_admin', 'La ligue a bien été modifiée');
 
         return redirect('/administration/ligues');
     }
@@ -178,7 +178,9 @@ class LeaguesController extends Controller
     public function showall() {
         $yearNow = $this->yearSeason();
         $title = 'Ligue ' . $yearNow . '-' . ($yearNow + 1);
-        $leagues = League::with('members')->presentleague()->paginate(5);
+        $leagues = League::with(['members' => function($query){
+            $query->orderBy('last_name', 'asc')->orderBy('first_name', 'asc');
+        }])->presentleague()->paginate(6);
 
         return view('leagues', compact('leagues', 'title'))->with($this->mainSharingFunctionality());
     }
@@ -188,6 +190,13 @@ class LeaguesController extends Controller
         $leaguesByYear = League::archivesleagues()->get()->groupBy(function($val){
             return Carbon::parse($val->start_season)->format('Y');
         });
+        /*
+        $leaguesByYear = League::with(['members' => function($query){
+            $query->orderBy('last_name', 'asc')->orderBy('first_name', 'asc');
+        }])->archivesleagues()->get()->groupBy(function($val){
+            return Carbon::parse($val->start_season)->format('Y');
+        });
+        */
 
         return view('archivesleagues', compact('title', 'leaguesByYear'))->with($this->mainSharingFunctionality());
     }

@@ -65,14 +65,8 @@ class EventsController extends Controller
 
         session()->flash('notification_management_admin', 'L\'évènement a bien été créé');
 
-        if($request->submitbutton == 'save'){
-            return redirect('/administration/evenements');
-        }
-        else {
-            $type = 'evenement';
-            $data = $event;
-            return view('admin.medias.create', compact('type', 'data'));
-        }
+        return redirect('/administration/evenements');
+
     }
 
     /**
@@ -123,14 +117,7 @@ class EventsController extends Controller
 
         session()->flash('notification_management_admin', 'L\'évènement a bien été modifié');
 
-        if($request->submitbutton == 'save'){
-            return redirect('/administration/evenements');
-        }
-        else {
-            $type = 'evenement';
-            $data = $event;
-            return view('admin.pictures.create', compact('type', 'data'));
-        }
+        return redirect('/administration/evenements');
     }
 
     /**
@@ -142,6 +129,22 @@ class EventsController extends Controller
     public function destroy($id)
     {
         $event = Event::findOrFail($id);
+
+        if($event->pictures->count()){
+            foreach($event->pictures as $picture){
+                unlink(storage_path('app/public' . $picture->path));
+                $picture->delete();
+            }
+        }
+
+        if($event->videos->count()){
+            foreach($event->videos as $video){
+                unlink(storage_path('app/public' . $video->path_mp4));
+                unlink(storage_path('app/public' . $video->path_webm));
+                $video->delete();
+            }
+        }
+
         $event->delete();
         $this->updateStatisticDate();
 
@@ -163,14 +166,14 @@ class EventsController extends Controller
             abort(404);
         }
 
-        $pictures = $event->pictures()->paginate(42);
+        $pictures = $event->pictures()->orderBy('id', 'desc')->paginate(42);
         $allpictures = $event->pictures;
 
         return view('photos', compact('title', 'event', 'allpictures','pictures'))->with($this->mainSharingFunctionality());
     }
 
     public function eventVideos($slug) {
-        $title = "Videos de l'évènement";
+        $title = "Vidéos de l'évènement";
         
         $event = Event::with('videos')->where('slug', $slug)->first();
         if(!$event){

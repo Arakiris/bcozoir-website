@@ -81,10 +81,11 @@ class ScoresController extends Controller
 
             $member->historical_path = substr($path, 6);
         }
+        $member->handicap = floor((220 - $score->average)*0.7);
         $member->save();
         $this->updateStatisticDate();
 
-        session()->flash('notification_management_admin', 'Le score a bien été enregistrer');
+        session()->flash('notification_management_admin', 'Le score a bien été enregistré');
 
         return redirect('/administration/membres');
     }
@@ -146,11 +147,12 @@ class ScoresController extends Controller
             $path = request()->file('historical_path')->store('public/upload/images/members/' . $member->id . '/scores' );
 
             $member->historical_path = substr($path, 6);
-            $member->save();
         }
+        $member->handicap = floor((220 - $score->average)*0.7);
+        $member->save();
         $this->updateStatisticDate();
 
-        session()->flash('notification_management_admin', 'Le score a bien été enregistrer');
+        session()->flash('notification_management_admin', 'Le score a bien été enregistré');
 
         return redirect()->route('admin.scores.index', [$member]) ;
     }

@@ -27,4 +27,8 @@ class News extends Model
     public function videos() {
         return $this->morphMany('App\Video', 'videoable');
     }
+
+    public function scopeGetnews($query) {
+        return $query->orderBy('date', 'DESC');
+    }
 }

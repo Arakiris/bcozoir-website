@@ -61,14 +61,14 @@ class AdvertsController extends Controller
         $ad = Advert::create($validatedAd);
         
         if($file = $request->file('image')){
-            $path = request()->file('image')->store('public/upload/images/adverts');
+            $path = request()->file('image')->store('public/upload/images/welcome');
             $picture = new Picture();
             $picture->path = substr($path, 6);
 
             $ad->picture()->save($picture);
         }
         $this->updateStatisticDate();
-        session()->flash('notification_management_admin', 'L\'annonce a bien été enregistré');
+        session()->flash('notification_management_admin', 'L\'annonce a bien été enregistrée');
 
         return redirect()->back();
     }
@@ -110,17 +110,17 @@ class AdvertsController extends Controller
             'start_display' => 'required|date',
             'end_display' => 'required|date',
         ]);
-        request()->validate(['image' => 'required|image']);
+        request()->validate(['image' => 'nullable|image']);
 
         $ad = Advert::findOrFail($id);
-        $ad->save($validatedAd);
+        $ad->update($validatedAd);
         
         if($file = $request->file('image')){
             $previousPicture = $ad->picture->first();
             unlink(storage_path('app/public' . $previousPicture->path));
             $previousPicture->delete();
 
-            $path = request()->file('image')->store('public/upload/images/adverts');
+            $path = request()->file('image')->store('public/upload/images/welcome');
             $picture = new Picture();
             $picture->path = substr($path, 6);
 
@@ -140,7 +140,14 @@ class AdvertsController extends Controller
      */
     public function destroy($id)
     {
-        Advert::findOrFail($id)->delete();
+        $ad = Advert::findOrFail($id);
+
+        if($ad->picture->count()){
+            unlink(storage_path('app/public' . $ad->picture->first()->path));
+            $ad->picture->first()->delete();
+        }
+        $ad->delete();
+        
         $this->updateStatisticDate();
         session()->flash('notification_management_admin', 'L\'annonce a bien été supprimée');
         return redirect('/administration/annonces');

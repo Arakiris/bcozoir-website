@@ -58,7 +58,7 @@ class CategoriesController extends Controller
         Category::create($validatedCategory);
         $this->updateStatisticDate();
 
-        session()->flash('notification_management_admin', 'La catégorie a bien été enregistré');
+        session()->flash('notification_management_admin', 'La catégorie a bien été enregistrée');
 
         return redirect()->back();
     }
@@ -103,7 +103,7 @@ class CategoriesController extends Controller
         Category::findOrFail($id)->update($validatedCategory);
         $this->updateStatisticDate();
 
-        session()->flash('notification_management_admin', 'La catégorie a bien été modifié');
+        session()->flash('notification_management_admin', 'La catégorie a bien été modifiée');
 
         return redirect('/administration/categories');
     }

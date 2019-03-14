@@ -105,7 +105,7 @@ class ClubsController extends Controller
         Club::findOrFail($id)->update($validatedClub);
         $this->updateStatisticDate();
 
-        session()->flash('notification_management_admin', 'Le club &agrave; bien &eacute;t&eacute; mise-&agrave;-jour');
+        session()->flash('notification_management_admin', 'Le club &agrave; bien &eacute;t&eacute; modifié');
 
         return redirect('/administration/clubs');
     }
@@ -120,7 +120,7 @@ class ClubsController extends Controller
     {
         Club::findOrFail($id)->delete();
         $this->updateStatisticDate();
-        session()->flash('notification_management_admin', 'Le club a bien été supprimée');
+        session()->flash('notification_management_admin', 'Le club a bien été supprimé');
         return redirect('/administration/clubs');
     }
 }

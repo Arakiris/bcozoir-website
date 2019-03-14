@@ -25,7 +25,7 @@
         <div class="col-xs-12">
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">Donn&eacute;es concernant les actualit&eacute;s</h3>
+                    <h3 class="box-title">Donn&eacute;es concernant les alertes</h3>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
@@ -46,7 +46,7 @@
                                     <td class="addNewScore"><a href="{{ route('admin.alertes.edit', $warning->id) }}"><i class="fa fa-edit"></i></a></td>
                                     <td>{{ $warning->id }}</td>
                                     <td>{{ $warning->body }}</td>
-                                    <td>{{ date('d-m-Y', strtotime($warning->date_disappear)) }}</td>
+                                    <td>{{ $warning->date_disappear->format('Y-m-d') }}</td>
                                 </tr>
                             @endforeach
                         @endif

@@ -84,8 +84,6 @@ class TournamentsController extends Controller
             'rules_pdf' => 'nullable|mimes:pdf|max:10000'
         ]);
 
-        
-
         TournamentType::findOrFail($validatedTournament['type_id']);
         
         $year = intval($validatedTournament['start_season']);
@@ -187,6 +185,9 @@ class TournamentsController extends Controller
         if(isset($validatedImagePDF['is_finished'])){
             $validatedTournament['is_finished'] = 1;
         }
+        else {
+            $validatedTournament['is_finished'] = 0;
+        }
 
         $tournament = Tournament::findOrFail($id);
         $tournament->update($validatedTournament);
@@ -227,14 +228,7 @@ class TournamentsController extends Controller
         
         session()->flash('notification_management_admin', 'Le tournoi a bien été modifié');
 
-        if($request->submitbutton == 'save'){
-            return redirect('/administration/tournois');
-        }
-        else {
-            $type = 'tournoi';
-            $data = $tournament;
-            return view('admin.pictures.create', compact('type', 'data'));
-        }
+        return redirect('/administration/tournois');
     }
 
     /**
@@ -246,6 +240,31 @@ class TournamentsController extends Controller
     public function destroy($id)
     {
         $tournament = Tournament::findOrFail($id);
+        if($tournament->podium->count()) {
+            if($tournament->podium->pictures->count()) {
+                foreach($tournament->podium->pictures as $picture){
+                    unlink(storage_path('app/public' . $picture->path));
+                    $picture->delete();
+                }
+            }
+            $tournament->podium->delete();
+        }
+
+        if($tournament->pictures->count()){
+            foreach($tournament->pictures as $picture){
+                unlink(storage_path('app/public' . $picture->path));
+                $picture->delete();
+            }
+        }
+
+        if($tournament->videos->count()){
+            foreach($tournament->videos as $video){
+                unlink(storage_path('app/public' . $video->path_mp4));
+                unlink(storage_path('app/public' . $video->path_webm));
+                $video->delete();
+            }
+        }
+
         $tournament->delete();
         $this->updateStatisticDate();
 
@@ -299,7 +318,9 @@ class TournamentsController extends Controller
         $title;
         $pagination = false;
         $futur = false;
-        $tournaments = Tournament::with('type')->where('slug', $slug)->get();
+        $tournaments = Tournament::with(['type', 'members' => function($query){
+            $query->orderBy('last_name', 'asc')->orderBy('first_name', 'asc');
+        }])->where('slug', $slug)->get();
         switch ($tournaments->first()->type->id) {
             case 1:
                 $title = "Tournois BC Ozoir";
@@ -321,7 +342,9 @@ class TournamentsController extends Controller
     public function ozoirTournaments() {
         $title = "Tournois BC Ozoir";
         $pagination = true;
-        $tournaments = Tournament::with('members')->ozoirtournament()->paginate(5);
+        $tournaments = Tournament::with(['members' => function($query){
+            $query->orderBy('last_name', 'asc')->orderBy('first_name', 'asc');
+        }])->ozoirtournament()->paginate(6);
 
         return view('tournaments', compact('title', 'tournaments', 'pagination'))->with($this->mainSharingFunctionality());
     }
@@ -329,7 +352,9 @@ class TournamentsController extends Controller
     public function privateTournaments() {
         $title = "Tournois Privés";
         $pagination = true;
-        $tournaments = Tournament::with('members')->privatetournament()->paginate(5);
+        $tournaments = Tournament::with(['members' => function($query){
+            $query->orderBy('last_name', 'asc')->orderBy('first_name', 'asc');
+        }])->privatetournament()->paginate(6);
 
         return view('tournaments', compact('title', 'tournaments', 'pagination'))->with($this->mainSharingFunctionality());
     }
@@ -337,7 +362,9 @@ class TournamentsController extends Controller
     public function championships() {
         $title = "Championnats Fédéraux";
         $pagination = true;
-        $tournaments = Tournament::with('members')->championship()->paginate(5);
+        $tournaments = Tournament::with(['members' => function($query){
+            $query->orderBy('last_name', 'asc')->orderBy('first_name', 'asc');
+        }])->championship()->paginate(6);
 
         return view('tournaments', compact('title', 'tournaments', 'pagination'))->with($this->mainSharingFunctionality());
     }
@@ -372,7 +399,9 @@ class TournamentsController extends Controller
             abort(404);
         }
 
-        $pictures = $tournament->pictures()->paginate(42);
+        $pictures = $tournament
+                    ->pictures()
+                    ->paginate(42);
         $allpictures = $tournament->pictures;
 
         return view('photos', compact('title', 'tournament', 'allpictures', 'pictures'))->with($this->mainSharingFunctionality());
@@ -392,7 +421,9 @@ class TournamentsController extends Controller
     }
 
     public function showpodiums() {
-        $podiums = Podium::with('tournament')->orderBy('date', 'desc')->paginate(6);
+        $podiums = Podium::whereHas('pictures')
+                            ->with('tournament')
+                            ->orderBy('date', 'desc')->paginate(6);
 
         return view('podiums', compact('podiums'))->with($this->mainSharingFunctionality());
     }
@@ -406,8 +437,12 @@ class TournamentsController extends Controller
         }
 
         $tournament = $podium->tournament;
-        $pictures = $podium->pictures()->paginate(42);
-        $allpictures = $podium->pictures;
+        $allpictures = $podium->pictures()->orderBy('id', 'desc')->get();
+        $pictures = $podium
+                    ->pictures()
+                    ->orderBy('id', 'desc')
+                    ->paginate(42);
+
 
         return view('photos', compact('title', 'tournament', 'allpictures', 'pictures'))->with($this->mainSharingFunctionality());
     }
@@ -418,7 +453,9 @@ class TournamentsController extends Controller
 
     public function oldOzoirTournaments() {
         $title = "Archives Tournois BC Ozoir";
-        $tournamentsByYear = Tournament::with('members')->oldozoirtournament()->get()->groupBy(function($val){
+        $tournamentsByYear = Tournament::with(['members' => function($query){
+            $query->orderBy('last_name', 'asc')->orderBy('first_name', 'asc');
+        }])->oldozoirtournament()->get()->groupBy(function($val){
             return Carbon::parse($val->date)->format('Y');
         });
 
@@ -427,7 +464,9 @@ class TournamentsController extends Controller
 
     public function oldPrivateTournaments() {
         $title = "Archives Tournois Privés";
-        $tournamentsByYear = Tournament::with('members')->oldprivatetournament()->get()->groupBy(function($val){
+        $tournamentsByYear = Tournament::with(['members' => function($query){
+            $query->orderBy('last_name', 'asc')->orderBy('first_name', 'asc');
+        }])->oldprivatetournament()->get()->groupBy(function($val){
             return Carbon::parse($val->date)->format('Y');
         });
 
@@ -436,7 +475,9 @@ class TournamentsController extends Controller
 
     public function oldChampionships() {
         $title = "Archives Championnats Fédéraux";
-        $tournamentsByYear = Tournament::with('members')->oldchampionship()->get()->groupBy(function($val){
+        $tournamentsByYear = Tournament::with(['members' => function($query){
+            $query->orderBy('last_name', 'asc')->orderBy('first_name', 'asc');
+        }])->oldchampionship()->get()->groupBy(function($val){
             return Carbon::parse($val->date)->format('Y');
         });
 

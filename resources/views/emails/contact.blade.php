@@ -1,4 +1,4 @@
-
+﻿
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -16,9 +16,9 @@
             <div>
                 <p>Bonjour,</p> <br>
 
-                <p> {{ $civility }} <b>{{ $last_name }} {{ $first_name }}</b>, vous a laissé(e) un message sur le site internet BC Ozoir : </p>
+                <p> {{ $civility }} <b>{{ $last_name }} {{ $first_name }}</b>, vous a laissé(e) un message à partir du site internet BC Ozoir : </p>
 
-                <p>{{ $messages }}</p> <br>
+                <p>{!! $messages !!}</p> <br>
 
 
                 <p> 

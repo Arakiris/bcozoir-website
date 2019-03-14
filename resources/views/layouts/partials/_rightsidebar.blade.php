@@ -1,6 +1,6 @@
-<aside class="aside-right">
+﻿<aside class="aside-right">
     <div class="nextTournament">
-        <div class="nextTournamentTitle"><h2>Prochains tournois BC Ozoir</h2></div>
+        <div class="nextTournamentTitle"><h2>PROCHAINS TOURNOIS (BC Ozoir)</h2></div>
         <div class="nextTournamentContent">
         @foreach($ozoirTounaments as $tournament)
             <div>
@@ -13,7 +13,7 @@
         </div>
     </div>
     <div class="nextTournament">
-        <div class="nextTournamentTitle"><h2>Prochains autres tournois</h2></div>
+        <div class="nextTournamentTitle"><h2>PROCHAINS AUTRES TOURNOIS (privés ou fédéraux)</h2></div>
         <div class="nextTournamentContent">
         @foreach($otherTournaments as $tournament)
             <div>
@@ -26,12 +26,12 @@
         </div>
     </div>
     <div class="frameRandomPicture">
-        <div class="frameRandomPictureTitle">Photo</div>
+        <div class="frameRandomPictureTitle">Souvenirs...</div>
         <div class="pictures-carousel frameRandomPictureContent">
             <?php $i = 0; ?>
             @foreach($randompictures as $picture)
                 <div>
-                    <a href="{{ asset('storage' . $picture->path)  }}" data-lightbox="example-{{ $i }}"><img data-lazy="{{ asset('storage' . $picture->path)  }}" alt="Photo au hasard" class="randomPicture"></a>
+                    <a href="{{ asset('storage' . $picture->path)  }}" data-lightbox="randomPic-{{ $i }}"><img data-lazy="{{ asset('storage' . $picture->path)  }}" alt="Photo au hasard" class="randomPicture"></a>
                     <div class="pictureText">
                         {!! $picture->title !!}
                     </div>

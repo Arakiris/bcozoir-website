@@ -58,9 +58,9 @@ class WarningsController extends Controller
         Warning::create($validatedWarning);
         $this->updateStatisticDate();
 
-        session()->flash('notification_management_admin', 'La nouvelle alerte a bien été enregistré');
+        session()->flash('notification_management_admin', 'La nouvelle alerte a bien été enregistrée');
 
-        return redirect('/admin/alertes');
+        return redirect('/administration/alertes');
     }
 
     /**
@@ -104,7 +104,7 @@ class WarningsController extends Controller
         Warning::findOrFail($id)->update($validatedWarning);
         $this->updateStatisticDate();
 
-        session()->flash('notification_management_admin', 'L\'alerte a bien été mise-à-jour');
+        session()->flash('notification_management_admin', 'L\'alerte a bien été modifiée');
         
         return redirect('/administration/alertes');
     }

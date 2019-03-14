@@ -16,7 +16,7 @@ class Warning extends Model
     ];
 
     public function scopeShowwarning($query) {
-        return $query->where('date_disappear', '>', Carbon::now());
+        return $query->where('date_disappear', '>', Carbon::now())->orderBy('id');
     }
 
 }

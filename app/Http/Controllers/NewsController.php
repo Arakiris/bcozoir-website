@@ -59,7 +59,7 @@ class NewsController extends Controller
         News::create($validatedNews);
         $this->updateStatisticDate();
 
-        session()->flash('notification_management_admin', 'La nouvelle actualité a bien été enregistré');
+        session()->flash('notification_management_admin', 'La nouvelle actualité a bien été enregistrée');
 
         return redirect('/administration/actualites');
     }
@@ -106,9 +106,9 @@ class NewsController extends Controller
         News::findOrFail($id)->update($validatedNews);
         $this->updateStatisticDate();
 
-        session()->flash('notification_management_admin', 'L\'actualité a bien été mise-à-jour');
+        session()->flash('notification_management_admin', 'L\'actualité a bien été modifée');
         
-        return redirect('/administration/news');
+        return redirect('/administration/actualites');
     }
 
     /**
@@ -119,16 +119,36 @@ class NewsController extends Controller
      */
     public function destroy($id)
     {
-        News::findOrFail($id)->delete();
+        // $news = News::findOrFail($id);
+
+        $news = News::with(['pictures', 'videos'])->findOrFail($id);
+
+        if(count($news->pictures)){
+            foreach($news->pictures() as $picture){
+                unlink(storage_path('app/public' . $picture->path));
+                $picture->delete();
+            }
+        }
+
+        if(count($news->videos)){
+            foreach($news->videos() as $video){
+                unlink(storage_path('app/public' . $video->path_mp4));
+                unlink(storage_path('app/public' . $video->path_webm));
+                $video->delete();
+            }
+        }
+
+        $news->delete();
+
         $this->updateStatisticDate();
         
         session()->flash('notification_management_admin', 'L\'actualité a bien été supprimée');
         
-        return redirect('/administration/news');
+        return redirect('/administration/actualites');
     }
 
     public function showall() {
-        $news = News::with(['pictures', 'videos'])->get();
+        $news = News::with(['pictures', 'videos'])->getnews()->get();
 
         return view('news', compact('news'))->with($this->mainSharingFunctionality());
     }

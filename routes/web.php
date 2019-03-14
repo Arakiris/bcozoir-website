@@ -150,8 +150,6 @@ Route::get('/archives/tournois-ozoir', 'TournamentsController@oldOzoirTournament
 Route::get('/archives/tournois-prives', 'TournamentsController@oldPrivateTournaments')->name('vieuxtournoisPrives');
 Route::get('/archives/championnats', 'TournamentsController@oldChampionships')->name('vieuxchampionnats');
 
-Route::get('calendrier', 'TournamentsController@eventcalendar')->name('eventcalendar');
-
 Route::get('administration/tournois/{id}/joueurs', 'TournamentsController@editPlayers')->name('admin.tournois.editPlayers');
 Route::post('administration/tournois/{id}/joueurs', 'TournamentsController@updatePlayers')->name('admin.tournois.updatePlayers');
 

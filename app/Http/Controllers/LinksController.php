@@ -115,7 +115,7 @@ class LinksController extends Controller
         request()->validate(['image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg']);
 
         $link = Link::findOrFail($id);
-        $link->save($validatedLink);
+        $link->update($validatedLink);
         
         if($file = $request->file('image')){
             $previousPicture = $link->picture->first();
@@ -130,7 +130,7 @@ class LinksController extends Controller
         }
         $this->updateStatisticDate();
 
-        session()->flash('notification_management_admin', 'Le lien utile a bien été mise-à-jour');
+        session()->flash('notification_management_admin', 'Le lien utile a bien été modifié');
 
         return redirect('/administration/liens');
     }
@@ -143,7 +143,14 @@ class LinksController extends Controller
      */
     public function destroy($id)
     {
-        Link::findOrFail($id)->delete();
+        $link = Link::findOrFail($id);
+
+        if($link->picture->count()){
+            unlink(storage_path('app/public' . $link->picture->first()->path));
+            $link->picture->first()->delete();
+        }
+        $link->delete();
+
         $this->updateStatisticDate();
         session()->flash('notification_management_admin', 'Le lien utile a bien été supprimé');
         return redirect('/administration/liens');

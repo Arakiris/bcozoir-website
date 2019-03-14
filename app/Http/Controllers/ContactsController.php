@@ -6,6 +6,7 @@ use App\Http\Traits\CommonTrait;
 
 use Illuminate\Http\Request;
 use App\Contact;
+use DB;
 
 class ContactsController extends Controller
 {
@@ -56,6 +57,12 @@ class ContactsController extends Controller
             'name5' => '',
             'email5' => 'nullable|email'
         ]);
+        DB::table('contacts')->truncate();
+        for( $i=1 ; $i <=5 ; $i++){
+            $c = new Contact();
+            $c->save();
+        }
+
         for( $i=1 ; $i <=5 ; $i++){
             $contact = Contact::findOrFail($i);
             if(isset($validatedContact['name' . $i]))

@@ -18,7 +18,7 @@
             <h1>{{ $title }}</h1>
             @if(isset($tournament))   
                 <div class="photos-information">
-                    <div class="photos-title"> <b><?php setlocale(LC_TIME, 'fr'); echo strftime("%d-%B-%Y", $tournament->date->timestamp); ?></b> &nbsp;&nbsp; {{ $tournament->title }} </div>
+                    <div class="photos-title"> <b><?php setlocale(LC_TIME, 'fr'); echo utf8_encode(strftime("%d-%B-%Y", $tournament->date->timestamp)); ?></b> &nbsp;&nbsp; {{ $tournament->title }} </div>
                     <div class="photos-place"> {{ $tournament->place }}</div>
                 </div>
             @elseif(isset($event))
@@ -33,6 +33,12 @@
             @endif
 
         </div>
+        <div class="top-pictures">
+            <div class="links">
+                {{ $pictures->links() }}
+            </div>
+            <a id="diaporama" href="#"><img class="diaporama-img" src="{{ asset('images/tournament/Diaporama.png') }}" alt="Image représentant un diaporama"></a>
+        </div>
         <div class="main-content-photos">
             <div class="photos-wrapper">
                 <div class="photos">
@@ -41,12 +47,6 @@
                     @endforeach
                 </div>
             </div>
-        </div>
-        <div class="bottom-div">
-            <div class="links">
-                {{ $pictures->links() }}
-            </div>
-            <a id="diaporama" href="#"><img class="diaporama-img" src="{{ asset('images/tournament/Diaporama.png') }}" alt="Image représentant un diaporama"></a>
         </div>
     </div>
 @endsection

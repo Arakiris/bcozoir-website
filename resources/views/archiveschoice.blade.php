@@ -1,4 +1,4 @@
-@extends('layouts.master')
+﻿@extends('layouts.master')
 
 @section('keywords')
     <meta name="keywords" content="archives, tournois, choix" />
@@ -10,7 +10,7 @@
     @else
         <div class="main-content-title margin-top-50">
     @endif
-        <h1>Archives tournoi</h1>
+        <h1>Archives tournois</h1>
     </div>
     <div class="main-content-archives">
         <div class="archive-choice-container">

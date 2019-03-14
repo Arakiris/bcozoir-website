@@ -191,7 +191,8 @@ class VideosController extends Controller
             $videos = Video::findOrFail($request->checkBoxArray);
     
             foreach($videos as $video){
-                unlink(storage_path('app/public' . $video->path));
+                unlink(storage_path('app/public' . $video->path_mp4));
+                unlink(storage_path('app/public' . $video->path_webm));
                 $video->delete();
             }
         }

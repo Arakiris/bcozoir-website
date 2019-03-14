@@ -1,0 +1,27 @@
+.main-content-news {
+    background-color: white;
+    padding: 10px;
+    margin: 20px auto;
+    width: 80%;
+    height: 700px;
+    overflow-y: auto;
+}
+
+.single-news {
+    border-top: 2px solid #ffc875;
+    padding-top: 10px;
+    margin-bottom: 10px;
+}
+
+.single-news h2 {
+    font-size: 1.8rem;
+}
+
+.single-news p {
+    text-align: justify;
+}
+
+.news-img {
+    width: 20px;
+    vertical-align: middle;
+}

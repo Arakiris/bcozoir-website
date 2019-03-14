@@ -33,6 +33,8 @@
                         @endif
                     @endforeach
                 </table>
+            </div>
+            <div class="bottom-tournament-league">
                 <div class="bottom-div">
                     <div class="pagination-middle">
                         {{ $podiums->links() }}

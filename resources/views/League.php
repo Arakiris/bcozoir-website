@@ -20,7 +20,7 @@ class League extends Model
 
     public function scopePresentleague($query){
 
-        return $query->where('start_season', '>=', Carbon::create($this->yearSeason(), 9, 1, 0, 0, 0))->orderBy('place', 'asc')->orderBy('team_name', 'asc');
+        return $query->where('start_season', '>=', Carbon::create($this->yearSeason(), 9, 1, 0, 0, 0))->orderBy('start_season', 'desc');
     }
 
     public function scopeArchivesleagues($query) {

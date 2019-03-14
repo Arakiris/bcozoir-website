@@ -1,4 +1,4 @@
-<!-- Left side column. contains the logo and sidebar -->
+﻿<!-- Left side column. contains the logo and sidebar -->
 <aside class="main-sidebar">
 
 	<!-- sidebar: style can be found in sidebar.less -->
@@ -9,13 +9,13 @@
 			<li class="header">NAVIGATION</li>
 			<!-- Optionally, you can add icons to the links -->
 			<li class="treeview">
-				<a href="#"><i class="fa fa-link"></i> <span>Actualit&eacute;s</span>
+				<a href="#"><i class="fa fa-link"></i> <span>Informations</span>
 					<span class="pull-right-container">
 						<i class="fa fa-angle-left pull-right"></i>
 					</span>
 				</a>
 				<ul class="treeview-menu">
-					<li><a href="{{ route('admin.actualites.index') }}">Toutes les actualit&eacute;</a></li>
+					<li><a href="{{ route('admin.actualites.index') }}">Toutes les informations</a></li>
 					<li><a href="{{ route('admin.actualites.create') }}">Cr&eacute;ation</a></li>
 				</ul>
 			</li>

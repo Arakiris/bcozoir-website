@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+﻿@extends('layouts.admin')
 @section('content')
 
 @if(Session::has('notification_management_admin'))
@@ -25,7 +25,7 @@
         <div class="col-xs-12">
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">Donn&eacute;es concernant les actualit&eacute;s</h3>
+                    <h3 class="box-title">Donn&eacute;es concernant les informations</h3>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
@@ -50,8 +50,8 @@
                                     <td>{{ $singleNews->title }}</td>
                                     <td>{{ $singleNews->body }}</td>
                                     <td class="addNewScore">
-                                        <?php setlocale(LC_TIME, 'fr'); $datenews = strftime("%d %B %Y", strtotime($singleNews->created_at->format('Y-m-d'))); ?>
-                                        <a href="{{ route('admin.photos.create', ['actualite', $singleNews->id, '(p)' . $datenews . '(pbis)']) }}" class="adminMemberPicture__links">
+                                        <?php setlocale(LC_TIME, 'fr'); $datenews = utf8_encode(strftime("%d %B %Y", strtotime($singleNews->created_at->format('Y-m-d')))); ?>
+                                        <a href="{{ route('admin.photos.create', ['actualite', $singleNews->id, '61p61' . $datenews . '61pbis61']) }}" class="adminMemberPicture__links">
                                             <i class="fa fa-plus-square"></i>
                                         </a>
                                         <a href="{{ route('admin.photos.index', ['actualite', $singleNews->id]) }}" class="adminMemberPicture__links">

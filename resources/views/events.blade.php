@@ -47,7 +47,7 @@
             </div>
         @else
             <div class="main-content-occasion">
-                <p>Il n'y a pas encore de podium d'enregistrer cette saison.</p>
+                <p>Il n'y a pas encore d'évènements d'enregistrer cette saison.</p>
             </div>
         @endif
     </div>

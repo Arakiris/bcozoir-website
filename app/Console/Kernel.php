@@ -29,6 +29,7 @@ class Kernel extends ConsoleKernel
         //          ->hourly();
         $schedule->call(function() {
             DB::table('statistics')->where('id', 1)->update(['daily_visits' => 0]);
+            DB::table('guests')->truncate();
         })->daily()->timezone('Europe/Paris');
 
         $schedule->call(function() {

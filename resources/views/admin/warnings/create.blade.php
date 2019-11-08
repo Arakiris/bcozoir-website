@@ -31,6 +31,12 @@
                         <label for="body">Contenu de l'alerte</label>
                         <textarea id="editor" name="body" class="form-control" rows="3" placeholder="Veuillez entrer le contenu de l'actualité"></textarea>
                     </div>
+                    
+                    <!-- date input -->
+                    <div class="form-group">
+                        <label for="date_begin">&Agrave; partir de quelle date doit être afficher ?</label>
+                        <input type="date" id="date_begin" name="date_begin" class="form-control">
+                    </div>
 
                     <!-- date input -->
                     <div class="form-group">

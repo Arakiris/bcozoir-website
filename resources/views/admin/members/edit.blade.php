@@ -61,7 +61,7 @@
                             <!-- date input -->
                             <div class="form-group">
                                 <label for="birth_date">Date de naissance</label>
-                                <input type="date" id="birth_date" name="birth_date" class="form-control" value="{{ $member->birth_date->format('Y-m-d') }}" required>
+                                <input type="date" id="birth_date" name="birth_date" class="form-control" value="{{ (isset($member->birth_date) && $member->birth_date) ? $member->birth_date->format('Y-m-d') : '' }}">
                             </div>
 
                             <div class="col-md-6">
@@ -100,7 +100,7 @@
                             <!-- text input -->
                             <div class="form-group">
                                 <label for="id_licensee">Num&eacute;ro de licence</label>
-                                <input type="text" id="id_licensee" name="id_licensee" class="form-control" placeholder="Veuillez entrer le numéro de licence" value="{{ $member->id_licensee }}" {{ ($member->is_licensee == 0) ? "disabled" : "" }}>
+                                <input type="text" id="id_licensee" name="id_licensee" class="form-control" placeholder="Veuillez entrer le numéro de licence" value="{{ $member->id_licensee }}" {{ ($member->is_licensee == "Licencié") ? "" : "disabled" }}>
                             </div>
 
                             <!-- select -->
@@ -132,6 +132,12 @@
                             <div class="form-group">
                                 <label for="bonus">Bonus</label>
                                 <input type="text" id="bonus" name="bonus" class="form-control" placeholder="Veuillez entrer le numéro de licence" value="{{ $member->bonus }}" >
+                            </div>
+
+                            <!-- text input -->
+                            <div class="form-group">
+                                <label for="listing_url">Lien listing détaillé</label>
+                                <input type="text" id="listing_url" name="listing_url" class="form-control" placeholder="Veuillez entrer le l'URL" value="{{ $member->listing_url }}">
                             </div>
 
                             @include('partials._form-error')

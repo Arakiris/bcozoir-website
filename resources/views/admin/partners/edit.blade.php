@@ -40,8 +40,44 @@
 
                         <!-- text input -->
                         <div class="form-group">
+                            <label for="title">Nom</label>
+                            <input type="text" id="title" name="title" class="form-control" placeholder="Veuillez entrer le nom du partenaire" value="{{ isset($partner->title) ? $partner->title   : '' }}">
+                        </div>
+
+                        <!-- text input -->
+                        <div class="form-group">
                             <label for="address">Adresse</label>
-                            <input type="text" id="address" name="address" class="form-control" placeholder="Veuillez entrer l'adresse du partenaire" value="{{ $partner->address }}" required>
+                            <textarea type="text" id="address" name="address" row="3" class="ckeditor form-control" placeholder="Veuillez entrer l'adresse du partenaire">{{ isset($partner->address) ? $partner->address   : '' }}</textarea>
+                        </div>
+
+                        <!-- text input -->
+                        <div class="form-group">
+                            <label for="website">Website</label>
+                            <input type="text" id="website" name="website" class="form-control" placeholder="Veuillez entrer le site" value="{{ isset($partner->website) ? $partner->website  : '' }}">
+                        </div>
+
+                        <!-- text input -->
+                        <div class="form-group">
+                            <label for="url">Url</label>
+                            <input type="text" id="url" name="url" class="form-control" placeholder="Veuillez entrer le site" value="{{ isset($partner->url) ? $partner->url  : '' }}">
+                        </div>
+
+                        <!-- text input -->
+                        <div class="form-group">
+                            <label for="mail">Mail</label>
+                            <input type="text" id="mail" name="mail" class="form-control" placeholder="Veuillez entrer l'adresse mail du partenaire" value="{{ isset($partner->mail) ? $partner->mail  : '' }}">
+                        </div>
+
+                        <!-- text input -->
+                        <div class="form-group">
+                            <label for="phone1">Téléphone 1</label>
+                            <input type="text" id="phone1" name="phone1" class="form-control" placeholder="Veuillez entrer le téléphone du partenaire" value="{{ isset($partner->phone1) ? $partner->phone1  : '' }}">
+                        </div>
+
+                        <!-- text input -->
+                        <div class="form-group">
+                            <label for="phone2">Téléphone 2</label>
+                            <input type="tel" id="phone2" name="phone2" class="form-control" placeholder="Veuillez entrer le téléphone du partenaire" value="{{ isset($partner->phone2) ? $partner->phone2  : '' }}">
                         </div>
 
 

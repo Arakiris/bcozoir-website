@@ -1,0 +1,36 @@
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+html {
+    box-sizing: border-box;
+    font-size: 62.5%;
+}
+
+body {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: $font-size-base;
+    background-color: var(--background-color);
+}
+
+.container {
+    display: grid;
+    grid-template-rows: 25rem 29rem repeat(2, min-content) 20rem min-content min-content;
+    grid-template-columns: 1fr [sidebar-left-start] 25rem [sidebar-left-end center-start] repeat(8, [col-start] minmax(8rem, 14rem) [col-end]) [center-end sidebar-right-start] 25rem [sidebar-right-end] 1fr;
+    grid-column-gap: 2rem;
+    grid-row-gap: 3rem;
+}
+
+.main {
+    place-self: center;
+    display: grid;
+    width:100%;
+    grid-column-gap: 2.5rem;
+    padding: 2rem;
+    max-width: 190rem;
+    background-color: $primary-background-color;
+}

@@ -6,18 +6,16 @@
 
 
 @section('content')
-    @if(isset($warnings) && !is_null($warnings))
-        <div class="main-content-title">
-    @else
-        <div class="main-content-title margin-top-30">
-    @endif
-        <h1>{{ $title }}</h1>
-        <div class="photos-information">
-            <div class="photos-title"> <b>{{ $tournament->date->format('d-m-Y') }}</b> &nbsp;&nbsp; {{ $tournament->title }} </div>
-            <div class="photos-place"> {{ $tournament->place }}</div>
-        </div>
+<div class="content__title listing__main-heading main-content-title">
+    <h1 class="heading-1">{{ $title }}</h1>
+    <div class="listing__heading photos-information">
+        <div class="listing__heading-title photos-title"> <b><?php setlocale(LC_TIME, 'fr'); echo utf8_encode(strftime("%d-%B-%Y", $tournament->date->timestamp)); ?></b> &nbsp;&nbsp; {{ $tournament->title }} </div>
+        <div class="listing__heading-place photos-place"> {{ $tournament->place }}</div>
     </div>
-    <div class="main-content-listing">
-        <img class="listing-img" src="{{ ($tournament->listing) ? asset('storage' . $tournament->listing) : null }}" alt="Image du listing du tournoi">
+</div>
+<div class="listing">
+    <div class="listing__wrapper main-content-listing">
+        <img class="listing__img listing-img" src="{{ ($tournament->listing) ? asset('storage' . $tournament->listing) : null }}" alt="Image du listing du tournoi">
     </div>
+</div>
 @endsection

@@ -9,46 +9,36 @@
 @endsection
 
 @section('content')
-    <div class="show-photos-content">
-        @if(isset($warnings) && !is_null($warnings))
-            <div class="main-content-title">
-        @else
-            <div class="main-content-title margin-top-30">
+    <div class="content__title photos__main-heading">
+        <h1 class="heading-1">{{ $title }}</h1>
+        @if(isset($tournament))   
+            <div class="photos__heading">
+                <div class="photos__heading-title"> <b><?php setlocale(LC_TIME, 'fr'); echo utf8_encode(strftime("%d-%B-%Y", $tournament->date->timestamp)); ?></b> &nbsp;&nbsp; {{ $tournament->title }} </div>
+                <div class="photos__heading-place"> {{ $tournament->place }}</div>
+            </div>
+        @elseif(isset($event))
+            <div class="photos__heading">
+                <div class="photos__heading-title"> <b>{{ $event->date->format('d-m-Y') }}</b> &nbsp;&nbsp; {{ $event->name }} </div>
+                <div class="photos__heading-place"> {{ $event->place }}</div>
+            </div>
+        @elseif(isset($news))
+            <div class="photos__heading">
+                <div class="photos__heading-title"> <b>{{ $news->date->format('d-m-Y') }}</b> &nbsp;&nbsp; {{ $news->title }} </div>
+            </div>
         @endif
-            <h1>{{ $title }}</h1>
-            @if(isset($tournament))   
-                <div class="photos-information">
-                    <div class="photos-title"> <b><?php setlocale(LC_TIME, 'fr'); echo utf8_encode(strftime("%d-%B-%Y", $tournament->date->timestamp)); ?></b> &nbsp;&nbsp; {{ $tournament->title }} </div>
-                    <div class="photos-place"> {{ $tournament->place }}</div>
-                </div>
-            @elseif(isset($event))
-                <div class="photos-information">
-                    <div class="photos-title"> <b>{{ $event->date->format('d-m-Y') }}</b> &nbsp;&nbsp; {{ $event->name }} </div>
-                    <div class="photos-place"> {{ $event->place }}</div>
-                </div>
-            @elseif(isset($news))
-                <div class="photos-information">
-                    <div class="photos-title"> <b>{{ $news->date->format('d-m-Y') }}</b> &nbsp;&nbsp; {{ $news->title }} </div>
-                </div>
-            @endif
-
-        </div>
-        <div class="top-pictures">
-            <div class="links">
-                {{ $pictures->links() }}
-            </div>
-            <a id="diaporama" href="#"><img class="diaporama-img" src="{{ asset('images/tournament/Diaporama.png') }}" alt="Image représentant un diaporama"></a>
-        </div>
-        <div class="main-content-photos">
-            <div class="photos-wrapper">
-                <div class="photos">
-                    @foreach($pictures as $picture)
-                        <img class="tournament-picture" src="{{ ($picture->path) ? asset('storage' . $picture->path) : null }}" alt="Photos du tournoi" align="middle">
-                    @endforeach
-                </div>
-            </div>
+    </div>
+    <div class="photos__wrapper">
+        <div class="photos__content" id="lightgallery">
+            @foreach($pictures as $picture)
+                <a class="photos__link" href="{{ asset('storage' . $picture->path) }}">
+                    <img class="photos__pictures lazy" src="https://via.placeholder.com/180x180?text=Chargement"
+                    data-src="{{ (isset($picture->thumbnail) ? asset('storage' . $picture->thumbnail) : asset('storage' . $picture->path)) }}"
+                    alt="Photos du tournoi">
+                </a>
+            @endforeach
         </div>
     </div>
+
 @endsection
 
 @section('scripts')
@@ -57,28 +47,11 @@
     <script src="{{ asset('js/lg-autoplay.min.js') }}"></script>
     <script>
         $(function(){ 
-            $('#diaporama').on('click', function(event) {
-                event.preventDefault();
-                $(this).lightGallery({
-                    autoplay: true,
-                    pause: 2000,
-                    progressBar: true,
-                    dynamic: true,
-                    dynamicEl: [
-                        <?php $numItems = $allpictures->count(); $i=0 ?>
-                        @foreach($allpictures as $picture)
-                            {
-                                "src": "{{ asset('storage' . $picture->path) }}"
-                            @if($i == $numItems)
-                                }
-                            @else
-                                },
-                            @endif
-                            <?php $i++; ?>
-                        @endforeach
-                    ]
-                });
-            });
+            $('#lightgallery').lightGallery({
+                autoplay: true,
+                pause: 3000,
+                progressBar: true
+            }); 
         });
     </script>
 @endsection

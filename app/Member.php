@@ -10,7 +10,7 @@ class Member extends Model
     protected $fillable = [
         'club_id', 'category_id', 'first_name', 'last_name', 'sex',
         'birth_date', 'is_licensee', 'id_licensee',
-        'handicap', 'bonus', 'is_active', 'historical_path'
+        'handicap', 'bonus', 'is_active', 'historical_path', 'listing_url'
     ];
 
     protected $dates = [
@@ -22,43 +22,51 @@ class Member extends Model
     /**
      * Get the club of the member.
      */
-     public function club()
-     {
-         return $this->belongsTo('App\Club', 'club_id', 'id');
-     }
+    public function club()
+    {
+        return $this->belongsTo('App\Club', 'club_id', 'id');
+    }
 
     /**
      * Get the category of the member.
      */
-     public function category()
-     {
-         return $this->belongsTo('App\Category', 'category_id', 'id');
-     }
+    public function category()
+    {
+        return $this->belongsTo('App\Category', 'category_id', 'id');
+    }
 
     /**
      * Get all the score of the member.
      */
-     public function score()
-     {
-         return $this->hasOne('App\Score', 'member_id');
-     }
+    public function score()
+    {
+        return $this->hasOne('App\Score', 'member_id');
+    }
 
 
     /**
      * The members that belong to the league.
      */
-     public function leagues()
-     {
-         return $this->belongsToMany(League::class);
-     }
+    public function leagues()
+    {
+        return $this->belongsToMany(League::class);
+    }
 
     /**
      * The members that belong to the tournament.
      */
-     public function tournaments()
-     {
-         return $this->belongsToMany(Tournament::class);
-     }
+    public function tournaments()
+    {
+        return $this->belongsToMany(Tournament::class)->withPivot('rank', 'order_display');
+    }
+
+    /**
+     * Teams where the member is playing.
+     */
+    public function teams()
+    {
+        return $this->belongsToMany('App\Team');
+    }
 
     /**
      * Get the picture of this member.

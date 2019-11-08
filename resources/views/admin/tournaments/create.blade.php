@@ -107,6 +107,21 @@
                         <input type="url" id="rules_url" name="rules_url" class="form-control" placeholder="Veuillez entrer l'URL">
                     </div>
 
+                    <!-- radio -->
+                    <div class="form-group">
+                        <label for="formation">Formation ?</label>
+                        <div class="radio radiobutton">
+                            <label>
+                                <input type="radio" name="formation"  value="0" checked>
+                                Individuel
+                            </label>
+                            <label class="margin-right-15">
+                                <input type="radio" name="formation"  value="1">
+                                Équipe
+                            </label>
+                        </div>
+                    </div>
+
                     <div class="form-group">
                         <label for="rules_pdf">Fichier PDF</label>
                         <input type="file" id="rules_pdf" name="rules_pdf" accept="application/pdf" disabled>
@@ -135,10 +150,60 @@
                         </div>
                     </div>
 
+                    <div id="teams" style="display: none;">
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Nom de l'équipe</th>
+                                        <th>Joueurs</th>
+                                    </tr>
+                                </thead>
+    
+                                <tbody>
+
+                                </tbody>
+    
+                                <tfoot>
+                                    <tr>
+                                        <th></th>
+                                        <th>Nom de l'équipe</th>
+                                        <th>Joueurs</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+    
+                        <div id="solo">
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Joueurs</th>
+                                        <th>Classement</th>
+                                        <th>Ordre d'affichage</th>
+                                    </tr>
+                                </thead>
+    
+                                <tbody>
+
+                                </tbody>
+
+                                <tfoot>
+                                    <tr>
+                                        <th>Joueurs</th>
+                                        <th>Classement</th>
+                                        <th>Ordre d'affichage</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+
                     @include('partials._form-error')
 
                     <div class="box-footer">
                         <button type="submit" class="btn btn-primary" name="submitbutton" value="save">Enregistrer</button>
+                        <button type="submit" id="add-teams" class="btn btn-default disabled" name="submitbutton" value="saveAddTeams" disabled>Enregistrer et ajouter une équipe</button>
+                        <button type="submit" id="add-players" class="btn btn-default" name="submitbutton" value="saveManagePlayers"}>Enregistrer et ajouter des participants</button>
                         
                         <div class="pull-right">
                             <a href="{{ route('admin.tournois.index') }}" class="btn btn-default">Annuler</a>
@@ -150,4 +215,8 @@
     </div>
 </section>
 <!-- /.content -->
+@endsection
+
+@section('scripts')
+    <script src="{{ asset('js/adminformation.js') }}"></script>
 @endsection

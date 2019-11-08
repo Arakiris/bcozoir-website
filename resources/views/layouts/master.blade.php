@@ -27,37 +27,46 @@
     <title>Bowling Club - Ozoir</title>
 </head>
 <body>
-    @include('layouts.partials._header')
+    <div class="container">
+        @include('layouts.partials._header')
+        @include('layouts.partials._main')
+        @include('layouts/partials/_footer')
 
-    @include('layouts.partials._main')
-
-    @include('layouts/partials/_footer')
-
-    <script src="{{ asset('bower_components/AdminLTE/plugins/daterangepicker/moment.min.js') }}"></script>
-    <script src="{{ asset('js/app.js') }}"></script>
-    <script src="{{ asset('bower_components/AdminLTE/plugins/fullcalendar/fullcalendar.js') }}"></script>
-    <script src="{{ asset('bower_components/AdminLTE/plugins/fullcalendar/lang/fr.js') }}"></script>
-    <script src="{{ asset('slick/slick.min.js') }}"></script>
-    <script src="{{ asset('js/lightbox.min.js') }}"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
-    <script src="{{ asset('js/master.js') }}"></script>
-    <script>
-        $(document).ready(function() {
-            $('#calendar').fullCalendar({
-                lang: 'fr',
-                header: {
-                        left:   'prev',
-                        center: 'title',
-                        right:  'next'
-                    },
-                height: 250,
-                events: "{{ route('eventcalendar') }}",
-                color: 'blue', 
-                textColor: 'black',
+        <script src="{{ asset('bower_components/AdminLTE/plugins/daterangepicker/moment.min.js') }}"></script>
+        <script src="{{ asset('js/app.js') }}"></script>
+        <script src="{{ asset('bower_components/AdminLTE/plugins/fullcalendar/fullcalendar.js') }}"></script>
+        <script src="{{ asset('bower_components/AdminLTE/plugins/fullcalendar/lang/fr.js') }}"></script>
+        <script src="{{ asset('slick/slick.min.js') }}"></script>
+        <script src="{{ asset('js/lightbox.min.js') }}"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+        <script src="{{ asset('js/master.js') }}"></script>
+        <script>
+            $(document).ready(function() {
+                $('#calendar').fullCalendar({
+                    lang: 'fr',
+                    header: {
+                            left:   'prev',
+                            center: 'title',
+                            right:  'next'
+                        },
+                    height: 250,
+                    events: "{{ route('eventcalendar') }}",
+                    color: 'blue', 
+                    textColor: 'black',
+                });
             });
-        });
-    </script>
-    @yield('scripts')
 
+            document.querySelector(".aside-left-bar__dropdown-btn").addEventListener('click', event => {
+                document.querySelector(".aside-left-bar__dropdown").classList.toggle("aside-left-bar__dropdown-show");
+            });
+
+            window.addEventListener("click", event => {
+                if(!event.target.matches('.aside-left-bar__item-dropdown')){
+                    document.querySelector(".aside-left-bar__item-dropdown").classList.remove("aside-left-bar__dropdown-show");
+                }
+            });
+        </script>
+        @yield('scripts')
+    </div>
 </body>
 </html>

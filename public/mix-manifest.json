@@ -2,8 +2,12 @@
     "/js/app.js": "/js/app.js",
     "/css/admin.css": "/css/admin.css",
     "/css/app.css": "/css/app.css",
+    "/js/archivestournament.js": "/js/archivestournament.js",
+    "/js/archivesranking.js": "/js/archivesranking.js",
+    "/js/archivesleague.js": "/js/archivesleague.js",
     "/js/admin.js": "/js/admin.js",
     "/js/news.js": "/js/news.js",
     "/js/master.js": "/js/master.js",
-    "/js/archivespaginate.js": "/js/archivespaginate.js"
+    "/js/archivespaginate.js": "/js/archivespaginate.js",
+    "/js/adminformation.js": "/js/adminformation.js"
 }

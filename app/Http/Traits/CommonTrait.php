@@ -12,6 +12,7 @@ use App\Tournament;
 use App\Picture;
 use App\Contact;
 use App\Guest;
+use App\Partner;
 
 trait CommonTrait {
 
@@ -44,12 +45,16 @@ trait CommonTrait {
 
     public function mainSharingFunctionality() {
         $randompictures = Picture::firstsrandompicture()->get();
-        $warnings = Warning::showwarning()->get();
+        $warningbefore = Warning::showwarning();
+        $allwarnings = Warning::showwarningbetween()->union($warningbefore)->orderBy('id')->get();
         $ozoirTounaments = Tournament::ozoirfuturetournament()->get();
         $otherTournaments = Tournament::otherfuturetournament()->get();
+        $partnerAds = Partner::inRandomOrder()->get();
+        $year = intval($this->yearSeason());
+        $season = $year . "-" . ($year + 1);
         // $onlineguest = Guest::onlineguest();
         // $stat =  Statistic::first();
-		return array('randompictures' => $randompictures, 'warnings' => $warnings, 'ozoirTounaments' => $ozoirTounaments, 'otherTournaments' => $otherTournaments);
+		return array('randompictures' => $randompictures, 'warnings' => $allwarnings, 'ozoirTounaments' => $ozoirTounaments, 'otherTournaments' => $otherTournaments, 'partnerAds' => $partnerAds, 'season' => $season);
     }
 
     private function updateStat() {
@@ -58,6 +63,15 @@ trait CommonTrait {
         $stat->month_visits += 1;
         $stat->since_creation_visits += 1;
         $stat->save();
+    }
+
+    private function yearSeason() {
+        $beginningSeason = Carbon::create(null, 9, 1);
+        $now = Carbon::now();
+        if($now->lt($beginningSeason)) {
+            return $now->subYear()->year;
+        }
+        return  $year = $now->year;
     }
 
 }

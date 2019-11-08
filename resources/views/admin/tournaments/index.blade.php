@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+﻿@extends('layouts.admin')
 @section('content')
 
 @if(Session::has('notification_management_admin'))
@@ -26,7 +26,7 @@
         <div class="col-xs-12">
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">Données concernant les membres du club d'Ozoir</h3>
+                    <h3 class="box-title">Données concernant les tournois</h3>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
@@ -45,7 +45,6 @@
                                 <th>Photos</th>
                                 <th>Vidéos</th>
                                 <th>Podium</th>
-                                <th></th>
                             </tr>
                         </thead>
 
@@ -90,7 +89,6 @@
                                             Ce tournoi n'est pas fini.
                                         @endisset
                                     </td>
-                                    <td><a href="{{ route('admin.tournois.editPlayers', $tournament->id)}}" class="btn btn-default">Gérer les participants</a></td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -109,7 +107,6 @@
                                 <th>Photos</th>
                                 <th>Vidéos</th>
                                 <th>Podium</th>
-                                <th></th>
                             </tr>
                         </tfoot>
                     </table>
@@ -124,4 +121,8 @@
 
 </section>
 <!-- /.content -->
+@endsection
+
+@section('scripts')
+    
 @endsection

@@ -6,30 +6,29 @@
 
 
 @section('content')
-    <div class="partners">
-        @if(isset($warnings) && !is_null($warnings))
-            <div class="main-content-title">
-        @else
-            <div class="main-content-title margin-top-30">
-        @endif
-            <h1>Liens utiles</h1>
+<div class="content__title">
+    <h1 class="heading-1">Liens utiles</h1>
+</div>
+<div class="partners">
+    <div class="partners__wrapper">
+        <div class="partners__content">
+            @foreach($links as $link)
+                <div class="partners__logo">
+                    <img class="partners__logo-img" src="{{ ($link->picture->first()->path) ? asset('storage' . $link->picture->first()->path) : null }}" alt="Image du liens: {{ $link->title }}">
+                </div>
+                <div class="partners__informations">
+                    <p class="partners__paragraph">
+                        {{ $link->title }} <br> <a href="{{ $link->link }}" target="_blank">{{ $link->link }}</a>
+                    </p>
+                </div>
+            @endforeach
         </div>
-        <div class="main-content-partners">
-            <table class="table-associate">
-                <col style="width: 140px">
-                <col style="width: 100%">
-                <tbody>
-                    @foreach($links as $link)
-                        <tr>
-                            <td><div class="cell-logo"><img class="logo-associate" src="{{ ($link->picture->first()->path) ? asset('storage' . $link->picture->first()->path) : null }}" alt="Image du liens: {{ $link->title }}"></div></td>
-                            <td class="text-associate-link">{{ $link->title }}<br><a href="{{ $link->link }}" target="_blank">{{ $link->link }}</a> </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
-        <div class="page">
+    </div>
+
+    <div class="partners__bottom">
+        <div class="pagination bottom-div">
             {{ $links->links() }}
         </div>
     </div>
+</div>
 @endsection

@@ -1,0 +1,31 @@
+// General
+//@import "./general";
+
+@import "./textAlignCenter";
+
+// notifications
+@import "./notifications";
+
+// radio button for form
+@import "./radiobutton";
+
+// input type file
+@import "./inputfile";
+
+// display avatar of member in admin
+@import "./adminMemberPicture";
+
+// td new score
+@import './addNewScore';
+
+// table picture size
+@import './tablePicture';
+
+// table image size
+@import './adminTableImg';
+
+// Edit page size
+@import './adminEditImg';
+
+// Hide form input when tournament is not finish
+@import './finished';

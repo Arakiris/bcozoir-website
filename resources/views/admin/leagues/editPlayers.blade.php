@@ -35,32 +35,37 @@
                         <div class="form-group">
                              <button type="submit" id="delete" class="btn btn-primary">Mettre à jour</button>
                         </div>
-                        <table class="table table-bordered table-hover sortingTableAddPlayers">
+
+                        <div class="form-group">
+                                <label for="name">Nom du membre à ajouter</label>
+                                <input id="autocomplete-members" class="dropdown-input"/>
+                            </div>
+
+                        <table class="table table-bordered table-hover">
                             <thead>
                                 <tr>
-                                    <th><input type="checkbox" class="options"> Selection des participants</th>
                                     <th>Nom - Prénom</th>
-                                    <th>Club</th>
+                                    <th></th>
                                 </tr>
                             </thead>
 
-                            <tbody>
-                            @if($members)
-                                @foreach($members as $member)
-                                <tr>
-                                    <td><input class="checkBoxes" type="checkbox" name="checkBoxArray[]" value="{{ $member->id }}" {{ ($member->participate) ? 'checked' : '' }}></td>
-                                    <td>{{ $member->last_name }} - {{ $member->first_name }}</td>
-                                    <td>{{ $member->club->name }}</td>
-                                </tr>
-                                @endforeach
-                            @endif
+                            <tbody id="add-members">
+                                @if($league->members)
+                                    <?php $count = 0; ?>
+                                    @foreach($league->members as $member)
+                                        <tr>
+                                            <td><input type="hidden" name="members[{{ $count }}][id]" class="form-control" value="{{ $member->id }}">{{ $member->last_name }} - {{ $member->first_name }}</td>
+                                            <td> <button class="btn-delete-member" type="button">Retirer le joueur</button> </td>
+                                        </tr>
+                                        <?php $count++; ?>
+                                    @endforeach
+                                @endif
                             </tbody>
 
                             <tfoot>
                                 <tr>
-                                    <th></th>
                                     <th>Nom - Prénom</th>
-                                    <th>Club</th>
+                                    <th></th>
                                 </tr>
                             </tfoot>
                         </table>
@@ -84,19 +89,74 @@
 
 @section('scripts')
     <script>
-        $(document).ready(function(){
-            $('.options').click(function(){
-                if(this.checked){
-                    $('.checkBoxes').each(function(){
-                        this.checked = true;
-                    });
-                }
-                else {
-                    $('.checkBoxes').each(function(){
-                        this.checked = false;
-                    });
-                }
-            });
+        let inputmember = document.getElementById("autocomplete-members");
+        let addmember = document.getElementById("add-members");
+        let count = 0;
+        count = <?php echo (($league->members->count() == 0) ? "0" : $league->members->count() + 1 ); ?>;
+        let currentInput = "";
+
+        inputmember.addEventListener("keydown", (e) => {
+            if(e.keyCode == 13) {
+                e.preventDefault();
+                return false;
+            }
         });
+
+        new Awesomplete(inputmember, {
+            minChars: 0,
+            list: [
+                @if($members)
+                    @foreach($members as $member)
+                        <?php echo "{label: \"" . $member->last_name . " " . $member->first_name . "\", value: \"" . $member->id  . "\" },"; ?>
+                    @endforeach
+                @endif
+            ],
+            replace:  function(suggestion){
+                this.input.value = suggestion.label;
+            }
+        }, false);
+
+        inputmember.addEventListener("awesomplete-selectcomplete", event => {
+            renderAddingMember(event.text.value, event.text.label);
+
+            event.target.value = null;
+        }, false);
+
+        addmember.addEventListener("click", event => {
+            if(event.target && event.target.classList.contains("btn-delete-member")){
+                const member = event.target.closest(".member");
+
+                member.parentElement.removeChild(member);
+            }
+        }, false)
+
+        const renderAddingMember = (id, name) => {
+            const markup = `
+                <tr class="member">
+                    <td><input type="hidden" name="members[${count}][id]" class="form-control" value="${id}">${name}</td>
+                    <td> <button class="btn-delete-member" type="button">Retirer le joueur</button> </td>
+                </tr>
+            `;
+            
+            addmember.insertAdjacentHTML("beforeend", markup);
+            
+            count++;
+        };
+
+
+        // $(document).ready(function(){
+        //     $('.options').click(function(){
+        //         if(this.checked){
+        //             $('.checkBoxes').each(function(){
+        //                 this.checked = true;
+        //             });
+        //         }
+        //         else {
+        //             $('.checkBoxes').each(function(){
+        //                 this.checked = false;
+        //             });
+        //         }
+        //     });
+        // });
     </script>
 @endsection

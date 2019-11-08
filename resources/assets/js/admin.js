@@ -1,5 +1,7 @@
 require('./dropzoneOptions');
 
+window.awesomplete = require('awesomplete');
+
 $(function(){   
     $('.notification').delay(5000).slideUp(1000);
 

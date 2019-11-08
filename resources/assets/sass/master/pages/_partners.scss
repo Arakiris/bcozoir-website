@@ -1,0 +1,70 @@
+.partners {
+    display: grid;
+    grid-template-rows: auto 10rem;
+    margin: 0 6rem;
+    padding-bottom: 2rem;
+
+    &__wrapper {
+        margin: 0 10rem;
+    }
+
+    &__how {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        &-picture {
+            width: 15rem;
+        }
+    }
+
+    &__smallheading {
+        font-weight: 600;
+        font-size: 1.6em;
+    }
+
+    &__content {
+        width: 100%;
+        border-top: .2rem solid var(--white-color);
+        border-right: .2rem solid var(--white-color);
+        display: grid;
+        grid-template-columns: 16rem auto;
+        grid-auto-rows: minmax(15rem, auto);
+        margin-top: 5rem;
+    }
+
+    &__logo {
+        background-color: var(--grey-color);
+        border-bottom: 2px solid var(--white-color);
+        border-left: 2px solid var(--white-color);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &-img {
+            max-width: 100%;
+        }
+    }
+
+    &__informations {
+        background: var(--tertiary-color-light);
+        text-align:  center;
+        padding: 10px;
+        font-size: 1.5rem;
+        border-bottom: 2px solid var(--white-color);
+        border-left: 2px solid var(--white-color);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__paragraph {
+        margin: 0;
+    }
+
+    &__bottom {
+        align-self: end;
+        justify-self: center;
+    }
+}

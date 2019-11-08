@@ -11,103 +11,61 @@ use App\Http\Traits\CommonTrait;
 use Validator;
 use App\Advert;
 use App\Contact;
+use App\ContentInformation;
 use Carbon\Carbon;
 
-/**
- * Controller who manage different categories
- */
 class DashboardController extends Controller
 {
-    /** Common methods between controller */
     use CommonTrait;
 
-    /**
-     * Display the welcome page
-     *
-     * @return \Illuminate\Http\Response
-     */
 	public function index(){
         $ads = Advert::showad()->get();
+
 		return view('welcome', compact('ads'))->with($this->mainSharingFunctionality());
 	}
 
-    /**
-     * Display the version page
-     *
-     * @return \Illuminate\Http\Response
-     */
 	public function version(){
-        return view('version')->with($this->mainSharingFunctionality());
+        $content = ContentInformation::findOrFail(3);
+
+        return view('version', compact('content'))->with($this->mainSharingFunctionality());
 	}
 
-    /**
-     * Display the terms and conditions page
-     *
-     * @return \Illuminate\Http\Response
-     */
 	public function generalconditions(){
-        return view('generalconditions')->with($this->mainSharingFunctionality());
+        $content = ContentInformation::findOrFail(4);
+
+        return view('generalconditions', compact('content'))->with($this->mainSharingFunctionality());
 	}
 
-    /**
-     * Display the proposal page
-     *
-     * @return \Illuminate\Http\Response
-     */
 	public function proposal(){
         return view('proposal')->with($this->mainSharingFunctionality());
 	}
 
-    /**
-     * Display the location map of the club
-     *
-     * @return \Illuminate\Http\Response
-     */
 	public function map(){
         return view('map')->with($this->mainSharingFunctionality());
     }
 
-    /**
-     * Display the about page
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function bcozoir() {
-        return view('bcozoir')->with($this->mainSharingFunctionality());
+        $content = ContentInformation::findOrFail(1);
+
+        return view('bcozoir', compact('content'))->with($this->mainSharingFunctionality());
     }
     
-    /**
-     * Display the office page
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function office() {
-        return view('office')->with($this->mainSharingFunctionality());
+        $content = ContentInformation::findOrFail(6);
+
+        return view('office', compact('content'))->with($this->mainSharingFunctionality());
     }
 
-    /**
-     * Display the addresses of the partners
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function addresses() {
-        return view('addresses')->with($this->mainSharingFunctionality());
+        $content = ContentInformation::findOrFail(2);
+
+        return view('addresses', compact('content'))->with($this->mainSharingFunctionality());
     }
 
-    /**
-     * Display the contact page
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function contact() {
         return view('contact')->with($this->mainSharingFunctionality());
     }
 
-    /**
-     * Send an email and redirect to previous page
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function sendmail(request $request) {
         $validatedMail = request()->validate([
             'subject' => 'required',

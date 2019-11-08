@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Auth;
+
 class LoginController extends Controller
 {
     /*
@@ -26,7 +28,15 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/administration';
+    // protected $redirectTo = '/administration';
+
+    protected function redirectTo(){
+
+        if(Auth::user()->isAdmin()){
+            return "/administration";
+        }
+        return redirect('/');
+    }
 
     /**
      * Get the needed authorization credentials from the request.

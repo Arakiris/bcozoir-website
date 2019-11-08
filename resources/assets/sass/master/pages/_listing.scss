@@ -1,0 +1,30 @@
+.listing {
+    padding: 2rem 5rem;
+
+    &__main-heading {
+        display: grid;
+        justify-items: center;
+    }
+
+    &__heading {
+        border: 2px solid var(--grey-color-light);
+        max-width: 60%;
+
+        &-title {
+            background: var(--table-title-color);
+            color: var(--white-color);
+            padding: 0 3rem;
+            text-align: center;
+        }
+
+        &-place {
+            background: var(--table-odd-first-color); // cc99ff
+            font-style: italic;
+            text-align: center;
+        }
+    }
+
+    &__img {
+        width: 100%;
+    }
+}

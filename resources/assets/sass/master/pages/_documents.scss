@@ -1,0 +1,43 @@
+.documents {
+    margin-top: 5rem;
+    padding: 0 8rem;
+
+    &__content {
+        border: solid 1px var(--black-color);
+        display: grid;
+    }
+
+    &__type{
+        background-color: var(--table-title-color); 
+        border: solid 1px var(--quaternary-color);
+        color: var(--white-color);
+        font-weight: 600;
+        padding: .5rem .5rem .5rem 1rem;
+        letter-spacing: 1px;
+    }
+
+    &__link {
+        background-color: var(--quaternary-color-lightest);
+        border-top: solid 1px var(--white-color);
+        padding: .2rem 1.5rem .2rem 1rem;
+        color: #000;
+
+        text-decoration: none;
+        display: grid;
+        grid-template-columns: 1fr 6rem;
+        justify-content: space-between;
+        transition: all .2s;
+
+        &:hover {
+            filter: brightness(110%);
+        }
+    }
+
+    &__single-name { color: currentColor;}
+
+    &__single-type {
+        color: currentColor;
+        text-transform: uppercase;
+    }
+
+}

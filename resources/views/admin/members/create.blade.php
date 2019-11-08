@@ -52,7 +52,7 @@
                     <!-- date input -->
                     <div class="form-group">
                         <label for="birth_date">Date de naissance</label>
-                        <input type="date" id="birth_date" name="birth_date" class="form-control" required>
+                        <input type="date" id="birth_date" name="birth_date" class="form-control">
                     </div>
 
                     <div class="col-md-6">
@@ -124,6 +124,12 @@
                     <div class="form-group">
                         <label for="bonus">Bonus</label>
                         <input type="text" id="bonus" name="bonus" class="form-control" placeholder="Veuillez entrer le bonus">
+                    </div>
+
+                    <!-- text input -->
+                    <div class="form-group">
+                        <label for="listing_url">Lien listing détaillé</label>
+                        <input type="text" id="listing_url" name="listing_url" class="form-control" placeholder="Veuillez entrer le l'URL">
                     </div>
 
                     @include('partials._form-error')

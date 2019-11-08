@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+﻿@extends('layouts.admin')
 @section('content')
 
 @if(Session::has('notification_management_admin'))
@@ -25,7 +25,7 @@
         <div class="col-lg-6">
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">Données concernant les Liens utiles</h3>
+                    <h3 class="box-title">Données concernant les annonces</h3>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">

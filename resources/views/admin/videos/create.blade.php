@@ -9,7 +9,7 @@
 
 <!-- Content Header (Page header) -->
 <section class="content-header">
-    <h1> Gestion des annonces</h1>
+    <h1> Gestion des vidéos</h1>
 
     <ol class="breadcrumb">
         <li><i class="fa fa-dashboard"></i> Annonces</li>

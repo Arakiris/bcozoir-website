@@ -14,19 +14,14 @@ use App\Event;
 use App\Picture;
 use App\Video;
 
-/**
- * Controller who manages videos
- */
 class VideosController extends Controller
 {
-    /** Common methods between controller */
     use CommonTrait;
     
     private $pictureTypes = ['gif', 'jpg', 'jpeg', 'png', 'bmp'];
     private $videoTypes = ['mp4', 'webm'];
-
     /**
-     * Create a new VideosController instance.
+     * Create a new controller instance.
      *
      * @return void
      */

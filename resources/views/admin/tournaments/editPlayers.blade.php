@@ -32,43 +32,55 @@
                     <form method="POST" action="/administration/tournois/{{$tournament->id}}/joueurs" >
                         {{csrf_field()}}
                         <div class="form-group">
-                             <button type="submit" id="delete" class="btn btn-primary">Mettre à jour</button>
+                             <button type="submit" id="save" class="btn btn-primary">Mettre à jour</button>
                         </div>
-                        <table class="table table-bordered table-hover sortingTableAddPlayers">
+
+                        <div class="form-group">
+                            <label for="name">Nom du membre à ajouter</label>
+                            <input id="autocomplete-members" class="dropdown-input"/>
+                        </div>
+
+                        <table class="table table-bordered table-hover">
                             <thead>
                                 <tr>
-                                    <th><input type="checkbox" class="options"> Selection des participants</th>
                                     <th>Nom - Prénom</th>
-                                    <th>Club</th>
+                                    <th>Classement</th>
+                                    <th>Ordre d'affichage</th>
+                                    <th></th>
                                 </tr>
                             </thead>
 
-                            <tbody>
-                            @if($members)
-                                @foreach($members as $member)
-                                <tr>
-                                    <td><input class="checkBoxes" type="checkbox" name="checkBoxArray[]" value="{{ $member->id }}" {{ ($member->participate) ? 'checked' : '' }}></td>
-                                    <td>{{ $member->last_name }} - {{ $member->first_name }}</td>
-                                    <td>{{ $member->club->name }}</td>
-                                </tr>
-                                @endforeach
-                            @endif
+                            <tbody id="add-members">
+                                @if($tournament->members)
+                                    <?php $count = 0; ?>
+                                    @foreach($tournament->members as $member)
+                                        <tr class="member">
+                                            <td><input type="hidden" name="members[{{ $count }}][id]" class="form-control" value="{{ $member->id }}">{{ $member->last_name }} - {{ $member->first_name }}</td>
+                                            <td><input type="text" name="members[{{$count}}][rank]" class="form-control" placeholder="Insérer son classement si existant" value="{{ $member->pivot->rank }}"></td>
+                                            <td><input type="number" name="members[{{$count}}][order_display]" class="form-control" placeholder="Ordre d'affichage" value="{{ $member->pivot->order_display  }}"></td>
+                                            <td> <button class="btn-delete-member" type="button">Retirer le joueur</button> </td>
+                                        </tr>
+
+                                        <?php $count++; ?>
+                                    @endforeach
+                                @endif
                             </tbody>
 
                             <tfoot>
                                 <tr>
-                                    <th></th>
                                     <th>Nom - Prénom</th>
-                                    <th>Club</th>
+                                    <th>Classement</th>
+                                    <th>Ordre d'affichage</th>
+                                    <th></th>
                                 </tr>
                             </tfoot>
                         </table>
                         <div class="form-group">
-                            <button type="submit" id="delete" class="btn btn-primary">Mettre à jour</button>
+                            <button type="submit" id="save" class="btn btn-primary">Mettre à jour</button>
                        </div>
                     </form>
                     <div>
-                        <a class="btn btn-default" href="{{ route('admin.tournois.index') }}">Retour</a>
+                        <a class="btn btn-default" href="{{ route('admin.tournois.edit',  $tournament->id) }}">Retour</a>
                     </div>
                 </div>
                 <!-- /.box-body -->
@@ -85,19 +97,60 @@
 
 @section('scripts')
     <script>
-        $(document).ready(function(){
-            $('.options').click(function(){
-                if(this.checked){
-                    $('.checkBoxes').each(function(){
-                        this.checked = true;
-                    });
-                }
-                else {
-                    $('.checkBoxes').each(function(){
-                        this.checked = false;
-                    });
-                }
-            });
+        let inputmember = document.getElementById("autocomplete-members");
+        let addmember = document.getElementById("add-members");
+        let count = 0;
+        count = <?php echo (($tournament->members->count() == 0) ? "0" : $tournament->members->count() + 1 ); ?>;
+        let currentInput = "";
+
+        inputmember.addEventListener("keydown", (e) => {
+            if(e.keyCode == 13) {
+                e.preventDefault();
+                return false;
+            }
         });
+
+        new Awesomplete(inputmember, {
+            minChars: 0,
+            list: [
+                @if($members)
+                    @foreach($members as $member)
+                        <?php echo "{label: \"" . $member->last_name . " " . $member->first_name . "\", value: \"" . $member->id  . "\" },"; ?>
+                    @endforeach
+                @endif
+            ],
+            replace:  function(suggestion){
+                this.input.value = suggestion.label;
+            }
+        }, false);
+
+        inputmember.addEventListener("awesomplete-selectcomplete", event => {
+            renderAddingMember(event.text.value, event.text.label);
+
+            event.target.value = null;
+        }, false);
+
+        addmember.addEventListener("click", event => {
+            if(event.target && event.target.classList.contains("btn-delete-member")){
+                const member = event.target.closest(".member");
+
+                member.parentElement.removeChild(member);
+            }
+        }, false)
+
+        const renderAddingMember = (id, name) => {
+            const markup = `
+                <tr class="member">
+                    <td><input type="hidden" name="members[${count}][id]" class="form-control" value="${id}">${name}</td>
+                    <td><input type="text" name="members[${count}][rank]" class="form-control" placeholder="Insérer son classement si existant"></td>
+                    <td><input type="number" name="members[${count}][order_display]" class="form-control" placeholder="Ordre d'affichage"></td>
+                    <td> <button class="btn-delete-member" type="button">Retirer le joueur</button> </td>
+                </tr>
+            `;
+            
+            addmember.insertAdjacentHTML("beforeend", markup);
+            
+            count++;
+        };
     </script>
 @endsection

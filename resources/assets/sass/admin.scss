@@ -4,8 +4,45 @@
 // Variables
 @import "variables";
 
-//Admin
-@import "components/mainAdmin";
-
 // Bootstrap
 @import "~bootstrap-sass/assets/stylesheets/bootstrap";
+
+// Awesomplete
+@import "~awesomplete/awesomplete.css";
+
+
+
+//
+// CONTENT
+//
+@import "./admin/textAlignCenter";
+
+// notifications
+@import "./admin/notifications";
+
+// radio button for form
+@import "./admin/radiobutton";
+
+// input type file
+@import "./admin/inputfile";
+
+// display avatar of member in admin
+@import "./admin/adminMemberPicture";
+
+// td new score
+@import './admin/addNewScore';
+
+// table picture size
+@import './admin/tablePicture';
+
+// table image size
+@import './admin/adminTableImg';
+
+// Edit page size
+@import './admin/adminEditImg';
+
+// Hide form input when tournament is not finish
+@import './admin/finished';
+
+// General margin
+@import "./admin/base/margin.scss";

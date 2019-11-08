@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+﻿@extends('layouts.admin')
 @section('content')
 <!-- Content Header (Page header) -->
 <section class="content-header">
@@ -18,7 +18,7 @@
         <!-- general form elements disabled -->
         <div class="box box-warning">
             <div class="box-header with-border">
-                <h3 class="box-title">Cr&eacute;er une nouvelle actualit&eacute;</h3>
+                <h3 class="box-title">Editer une nouvelle information</h3>
             </div>
 
             <!-- /.box-header -->
@@ -41,8 +41,8 @@
 
                     <!-- textarea -->
                     <div class="form-group">
-                        <label for="body">Contenu de l'actualit&eacute;</label>
-                        <textarea name="body" class="form-control" rows="20" placeholder="Veuillez entrer le contenu de l'actualité">{{ $news->body }}</textarea>
+                        <label for="body">Contenu de l'information</label>
+                        <textarea name="body" class="ckeditor form-control" rows="20" placeholder="Veuillez entrer le contenu de l'information">{{ $news->body }}</textarea>
                     </div>
 
                     @include('partials._form-error')

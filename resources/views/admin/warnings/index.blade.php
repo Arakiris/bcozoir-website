@@ -25,7 +25,7 @@
         <div class="col-xs-12">
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">Donn&eacute;es concernant les actualit&eacute;s</h3>
+                    <h3 class="box-title">Donn&eacute;es concernant les alertes</h3>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
@@ -35,6 +35,7 @@
                                 <th></th>
                                 <th>Id</th>
                                 <th>Titre</th>
+                                <th>Date de début d'apparition</th>
                                 <th>Date de disparition</th>
                             </tr>
                         </thead>
@@ -46,6 +47,7 @@
                                     <td class="addNewScore"><a href="{{ route('admin.alertes.edit', $warning->id) }}"><i class="fa fa-edit"></i></a></td>
                                     <td>{{ $warning->id }}</td>
                                     <td>{{ $warning->body }}</td>
+                                    <td>{{ $warning->date_begin }}</td>
                                     <td>{{ $warning->date_disappear->format('Y-m-d') }}</td>
                                 </tr>
                             @endforeach
@@ -57,6 +59,7 @@
                                 <th></th>
                                 <th>Id</th>
                                 <th>Titre</th>
+                                <th>Date de début d'apparition</th>
                                 <th>Date de disparition</th>
                             </tr>
                         </tfoot>

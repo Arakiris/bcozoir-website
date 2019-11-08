@@ -1,0 +1,70 @@
+.form {
+    &__content {
+        display: grid;
+        grid-template-rows: repeat(3, min-content);
+        grid-gap: 2rem;
+
+        background: var(--random-pic-bg-color);
+        border: 1px solid var(--content-border-color);
+        padding: 1.5rem;
+    }
+
+    &__by-email {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 1rem;
+    }
+
+    &__email-top,
+    &__email-bottom {
+        grid-column: 1 / span 2;
+    }
+
+    &__special-p {
+        font-weight: bold;
+        color: var(--secondary-color);
+    }
+
+    &__input {
+        width: 100%;
+        padding: .5rem;
+        border: 1px solid var(--form-color);
+        margin-top: 1.5rem;
+        font-size: 1.6rem;
+
+        &-tel {
+            width: 50%;
+        }
+    }
+
+    &__textarea {
+        font-size: 1.6rem;
+        width: 100%;
+        padding: .5rem;
+        border: 1px solid var(--form-color);
+    }
+
+    &__message-right {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__button {
+        background: #dce3d6;
+        background: linear-gradient(var(--white-color), #cdd9c6);
+        margin: 1rem 2rem 1rem 0;
+        padding: .5rem 1.5rem;
+        color: var(--secondary-color);
+        font-weight: bold;
+        border-radius: .5rem;
+        border: 1px solid var(--form-color);
+        cursor: pointer;
+        align-self: end;
+    }
+
+    &__by-mail { display: flex; }
+
+    &__address { margin-left: 0.5rem; }
+
+    &__paragraph { display:inline-block; }
+}

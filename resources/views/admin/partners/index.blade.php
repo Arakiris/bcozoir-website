@@ -34,7 +34,7 @@
                             <tr>
                                 <td></td>
                                 <th>Image</th>
-                                <th>Adresse</th>
+                                <th>Description</th>
                             </tr>
                         </thead>
 
@@ -44,7 +44,26 @@
                             <tr>
                                 <td class="addNewScore"><a href="{{ route('admin.partenaires.edit', $partner->id) }}"><i class="fa fa-edit"></i></a></td>
                                 <td><img src="{{ ($partner->picture->first()) ? asset('storage' . $partner->picture->first()->path) : null }}" alt="Image du lien utile" class="adminTableImg"></td>
-                                <td>{{ $partner->address }}</td>
+                                <td>
+                                    @isset($partner->title)
+                                        <p> Nom : {{ $partner->title }} </p>
+                                    @endif
+                                    @isset($partner->address)
+                                        <p> Adresse : {{ $partner->address }} </p>
+                                    @endif
+                                    @isset($partner->url)
+                                        <p> Website : {{ $partner->url }} </p>
+                                    @endif
+                                    @isset($partner->mail)
+                                        <p> Mail : {{ $partner->mail }} </p>
+                                    @endif
+                                    @isset($partner->phone1)
+                                        <p> Téléphone1 : {{ $partner->phone1 }} </p>
+                                    @endif
+                                    @isset($partner->phone2)
+                                        <p> Téléphone2 : {{ $partner->phone2 }} </p>
+                                    @endif
+                                </td>
                             </tr>
                             @endforeach
                         @endif
@@ -54,7 +73,7 @@
                             <tr>
                                 <td></td>
                                 <th>Image</th>
-                                <th>Adresse</th>
+                                <th>Description</th>
                             </tr>
                         </tfoot>
                     </table>
@@ -80,8 +99,44 @@
 
                         <!-- text input -->
                         <div class="form-group">
+                            <label for="title">Nom</label>
+                            <input type="text" id="title" name="title" class="form-control" placeholder="Veuillez entrer le nom du partenaire">
+                        </div>
+
+                        <!-- text input -->
+                        <div class="form-group">
                             <label for="address">Adresse</label>
-                            <input type="text" id="address" name="address" class="form-control" placeholder="Veuillez entrer l'adresse du partenaire" required>
+                            <textarea type="text" id="address" name="address" row="3" class="ckeditor form-control" placeholder="Veuillez entrer l'adresse du partenaire">{{ isset($partner->address) ? $partner->address   : '' }}</textarea>
+                        </div>
+
+                        <!-- text input -->
+                        <div class="form-group">
+                            <label for="website">Website</label>
+                            <input type="text" id="website" name="website" class="form-control" placeholder="Veuillez entrer le site">
+                        </div>
+
+                        <!-- text input -->
+                        <div class="form-group">
+                            <label for="url">url</label>
+                            <input type="text" id="url" name="url" class="form-control" placeholder="Veuillez entrer le site">
+                        </div>
+
+                        <!-- text input -->
+                        <div class="form-group">
+                            <label for="mail">Mail</label>
+                            <input type="text" id="mail" name="mail" class="form-control" placeholder="Veuillez entrer l'adresse mail du partenaire">
+                        </div>
+
+                        <!-- text input -->
+                        <div class="form-group">
+                            <label for="phone1">Téléphone 1</label>
+                            <input type="text" id="phone1" name="phone1" class="form-control"  placeholder="Veuillez entrer le téléphone du partenaire">
+                        </div>
+
+                        <!-- text input -->
+                        <div class="form-group">
+                            <label for="phone2">Téléphone 2</label>
+                            <input type="text" id="phone2" name="phone2" class="form-control" placeholder="Veuillez entrer le téléphone du partenaire">
                         </div>
 
                         <div class="form-group">

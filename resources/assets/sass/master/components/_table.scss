@@ -1,0 +1,84 @@
+.table {
+    border-collapse: collapse;
+    border: 1px solid var(--black-color);
+    width: 100%;
+    align-self: start;
+    justify-self: center;
+    
+
+    &__th,
+    &__td {
+        border: 1px solid var(--black-color);
+        padding: .5rem;
+    }
+
+    &__th {
+        background: var(--table-title-color);
+        color: var(--white-color);
+        text-align: center;
+    }
+
+    & &__tr:nth-child(even) { background: var(--table-even-color); } 
+    & &__tr:nth-child(odd) { background: var(--table-odd-color); } 
+
+    & &__tr:nth-child(even) &__td:first-child { background: var(--table-even-first-color); } 
+    & &__tr:nth-child(odd) &__td:first-child { background: var(--table-odd-first-color); } 
+
+    &__width {
+        &-5 { width: 5%; }
+        &-10 { width: 10%; }
+        &-15 { width: 15%; }
+    }
+
+    &__link {
+        display: block;
+        text-decoration: none;
+        color: currentColor;
+    }
+
+    &__tooltip {
+        position: relative;
+
+        &-content {
+            visibility: hidden;
+            background: var(--white-color); 
+            background: linear-gradient(var(--white-color), var(--adherent-color)); 
+            border: 1px solid var(--tertiary-color);
+            color: #000;
+            padding: 1.5rem;
+            border-radius: .6rem;
+            top: -21rem;
+            left: 105%; 
+            
+            position: absolute;
+            z-index: 1;
+        }
+
+        &:hover &-content { visibility: visible; }
+
+        &-content::after {
+            content: " ";
+            position: absolute;
+            top: 50%;
+            right: 100%;
+            margin-top: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: transparent var(--tertiary-color) transparent transparent;
+        }
+
+        &-img {
+            margin-right: 1rem;
+            width: 63.5rem;
+            height: 41rem;
+        }
+    }
+
+    &__past-tournament {
+        background-color: var(--table-odd-color);
+    }
+
+    &__future-tournament {
+        background-color: var(--table-even-color);
+    }
+}

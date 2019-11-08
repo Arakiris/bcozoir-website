@@ -5,40 +5,32 @@
 @endsection
 
 @section('content')
-    <div class="occasion-content">
-        @if(isset($warnings) && !is_null($warnings))
-            <div class="main-content-title">
-        @else
-            <div class="main-content-title margin-top-30">
-        @endif
-            <h1>Podiums</h1>
-        </div>
+<div class="content__title">
+    <h1 class="heading-1">Podiums</h1>
+</div>
+<div class="event event__podiums">
         @if(isset($podiums) && $podiums->count()>0)
-            <div class="main-content-occasion">
-                <table class="occasion podium-width">
-                    @foreach($podiums as $podium)
-                        @if(isset($podium->pictures) && $podium->pictures->count()>0)
-                            <tr class="occasion-row">
-                                <td class="occasion-information podium-information">
-                                    <h2><?php setlocale(LC_TIME, 'fr'); echo utf8_encode(strftime("%d-%B-%Y", $podium->tournament->date->timestamp)); ?></h2>
-                                    <p>{{ $podium->tournament->title }}</p>
-                                    <p>{{ $podium->tournament->is_accredited ? 'Homologué' : 'Non homologué' }}</p>
-                                    <p>{{ $podium->tournament->place }}</p>
-                                </td>
+            <div class="event__table event__table-podiums">
+                @foreach($podiums as $podium)
+                    @if(isset($podium->pictures) && $podium->pictures->count()>0)
+                        <div class="event__single-information">
+                            <h2 class="heading-2--event-title"><?php setlocale(LC_TIME, 'fr'); echo utf8_encode(strftime("%d-%B-%Y", $podium->tournament->date->timestamp)); ?></h2>
+                            <p class="event__single-paragraphe">{{ $podium->tournament->title }}</p>
+                            <p class="event__single-paragraphe">{{ $podium->tournament->is_accredited ? 'Homologué' : 'Non homologué' }}</p>
+                            <p class="event__single-paragraphe">{{ $podium->tournament->place }}</p>
+                        </div>
 
-                                <td class="occasion-image">
-                                    <a href="{{ route('podiumPhotos', $podium->slug) }}"><img class="occasion-event-podium-logo" src="images/tournament/Tournament-pictures.png" alt="Image de présentation afin de montrer les photos du podium"></a>
-                                </td>
-                            </tr>
-                        @endif
-                    @endforeach
-                </table>
+                        <div class="event__single-image">
+                            <a class="event__single-link" href="{{ route('podiumPhotos', $podium->slug) }}">
+                                <img class="event__single-logo occasion-event-podium-logo" src="images/tournament/Tournament-pictures.png" alt="Image de présentation afin de montrer les photos du podium">
+                            </a>
+                        </div>
+                    @endif
+                @endforeach 
             </div>
-            <div class="bottom-tournament-league">
-                <div class="bottom-div">
-                    <div class="pagination-middle">
-                        {{ $podiums->links() }}
-                    </div>
+            <div class="event__bottom bottom-tournament-league">
+                <div class="paginations bottom-div">
+                    {{ $podiums->links() }}
                 </div>
             </div>
         @else

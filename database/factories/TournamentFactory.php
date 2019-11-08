@@ -18,7 +18,7 @@ $factory->define(App\Tournament::class, function (Faker $faker) {
 
 $factory->state(App\Tournament::class, 'passed', function (Faker $faker) {
     return [
-        'date' => $faker->dateTimeBetween($startDate = '-3 years', $endDate = '-1 years', $timezone = date_default_timezone_get()),
+        'date' => $faker->dateTimeBetween($startDate = '-4 years', $endDate = 'now', $timezone = date_default_timezone_get()),
         'is_finished' => 1,
         'listing' => '/upload/images/tmp/' .  $faker->image('public/storage/upload/images/tmp/', 640, 480, null, false),
         'lexer_url' => $faker->url,

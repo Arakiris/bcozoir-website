@@ -19,6 +19,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 Route::get('calendrier', 'TournamentsController@eventcalendar')->name('eventcalendar');
-
-Route::get('/archives/tabtournaments/{idtype}/{year}', 'TournamentsController@tabtournaments')->name('tabtournaments');
-Route::get('/archivestest/tabtournaments', 'TournamentsController@oldOzoirTournamentsTest')->name('test');
+Route::post('/classement-annee', 'TournamentsController@rankingYear')->name('rankingYear');
+Route::post('/bcozoir-annee', 'TournamentsController@bcOzoirYear')->name('tournamentOzoirYear');
+Route::post('/tournois-prive-annee', 'TournamentsController@privateYear')->name('tournamentsprivateYear');
+Route::post('/championnats-annee', 'TournamentsController@championshipYear')->name('championshipsYear');
+Route::post('/ligues-annee', 'LeaguesController@leaguesYear')->name('leaguesYear');

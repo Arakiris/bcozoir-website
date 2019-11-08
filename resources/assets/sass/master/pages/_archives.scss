@@ -1,0 +1,58 @@
+.archives {
+    padding: 2rem 4rem;
+
+    &__content {
+        padding: 1rem;
+        min-height: 100%;
+    }
+
+    &__tables {
+        display: grid;
+        grid-template-rows: 1fr;
+        justify-content: center;
+
+        &:first-child {
+            border-top: 2px solid var(--grey-color-light);
+        }
+    }
+
+    &__row {
+        display: grid;
+        grid-template-columns: minmax(20rem, 3fr) minmax(12rem, 2fr) repeat(5, 1fr);
+
+        &-league {
+            width: 65rem;
+            grid-template-columns: minmax(20rem, 2fr) repeat(2, minmax(12rem, 1fr)) 2fr;
+        }
+
+        &-ranking {
+            width: 75rem;
+            grid-template-columns: minmax(20rem, 1fr) minmax(35rem, 2fr) minmax(20rem, 1fr);
+        }
+    }
+
+}
+
+.loader {
+    border: 16px solid var(--white-color);
+    border-radius: 50%;
+    border-top: 16px solid var(--grey-color-dark-2);
+    width: 80px;
+    height: 80px;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+  
+  /* Safari */
+  @-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }

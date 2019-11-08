@@ -35,6 +35,13 @@
 
                     <!-- date input -->
                     <div class="form-group">
+                        <label for="date_begin">&Agrave; partir de quelle date doit être afficher ?</label>
+                        <input type="date" id="date_begin" name="date_begin" class="form-control" value="{{ isset($warning->date_begin) ? date('Y-m-d', strtotime($warning->date_begin)) : '' }}">
+                    </div>
+                    
+
+                    <!-- date input -->
+                    <div class="form-group">
                         <label for="date_disappear">&Agrave; partir de quelle date ne plus afficher le message ?</label>
                         <input type="date" id="date_disappear" name="date_disappear" class="form-control" value="{{ date('Y-m-d', strtotime($warning->date_disappear)) }}" required>
                     </div>

@@ -1,0 +1,50 @@
+.photos {
+    &__main-heading {
+        display: grid;
+        justify-items: center;
+    }
+
+    &__heading {
+        border: 2px solid var(--grey-color-light);
+        max-width: 60%;
+
+        &-title {
+            background: var(--table-title-color);
+            color: var(--white-color);
+            padding: 1rem 3rem;
+            text-align: center;
+        }
+
+        &-place {
+            background: var(--table-odd-first-color);
+            font-style: italic;
+            text-align: center;
+            padding: 1rem 1rem;
+        }
+    }
+
+    &__content {
+        background-color: var(--white-color);
+        padding: 1.5rem;
+        margin: 1rem;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+        grid-auto-rows: 18rem;
+        grid-gap: 1.5rem;
+        align-items: center;
+        justify-items: center;
+    }
+
+    &__link {
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+
+    &__pictures {
+        object-fit: cover;
+        height: 100%;
+        width: 100%;
+        display: block;
+    }
+}

@@ -1,0 +1,46 @@
+.heading-1 {
+    background: #76559e; 
+    background: linear-gradient(var(--quaternary-color), var(--quaternary-color-dark));
+    border-radius: 10px;
+    box-shadow: inset 0px .6rem .4rem 0px rgba($white-color ,0.6), 0px .6rem 1.2rem 0px var(--text-shadow-color);
+    color: var(--white-color);
+    font-size: 2rem;
+    font-weight: normal;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+    padding: 1rem 6rem;
+    text-align: center;
+    min-width: 20rem;
+
+    align-self: center;
+    justify-self: center;
+
+    text-transform: uppercase;
+}
+
+.heading-2 {
+    font-size: 1.8rem;
+    margin-bottom: 1.4rem;
+
+    &--event-title {
+        font-size: 1.6rem;
+        color: white;
+        margin-bottom: 0.5rem;
+        text-align: center;
+    }
+}
+
+.heading-3 {
+    font-size: 1.6rem;
+    margin-bottom: 1.4rem;
+    font-weight: bold;
+}
+
+.heading-4 {
+    font-size: 2rem;
+    margin-bottom: 1.4rem;
+}
+
+.smaller-text {
+    font-size: 1.2rem;
+}

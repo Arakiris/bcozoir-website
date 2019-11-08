@@ -71,6 +71,9 @@
                                 </tr>
                             </tfoot>
                         </table>
+                        <div class="form-group">
+                            <button type="submit" id="delete" class="btn btn-primary">Supprimer</button>
+                       </div>
                     </form>
                 </div>
                 <!-- /.box-body -->

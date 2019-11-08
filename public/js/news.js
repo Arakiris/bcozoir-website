@@ -60,43 +60,59 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 47);
+/******/ 	return __webpack_require__(__webpack_require__.s = 185);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 47:
+/***/ 185:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(48);
+module.exports = __webpack_require__(186);
 
 
 /***/ }),
 
-/***/ 48:
+/***/ 186:
 /***/ (function(module, exports) {
 
-$(document).ready(function () {
-    var minimized_elements = $('span.minimize');
-    var minimize_character_count = 150;
+var news = document.querySelectorAll('.news__single');
 
-    minimized_elements.each(function () {
-        var t = $(this).html();
-        if (t.length < minimize_character_count) return;
+news.forEach(function (e) {
+    var button = e.querySelector('.news__button');
+    if (e.offsetHeight > 140) {
+        button.addEventListener('click', function (event) {
+            event.preventDefault();
 
-        $(this).html(t.slice(0, minimize_character_count) + '<span>... </span><a href="#" class="more">Lire la suite</a>' + '<span style="display:none;">' + t.slice(minimize_character_count, t.length) + ' <a href="#" class="less">Réduire</a></span>');
-    });
+            var parent = void 0,
+                gparent = void 0,
+                allp = void 0;
+            var totalHeight = 0;
 
-    $('a.more', minimized_elements).click(function (event) {
-        event.preventDefault();
-        $(this).slideUp().prev().slideUp();
-        $(this).next().slideDown();
-    });
+            parent = event.target.parentNode;
+            gparent = parent.parentNode;
+            allp = gparent.querySelectorAll('p:not(.news__read-more)');
 
-    $('a.less', minimized_elements).click(function (event) {
-        event.preventDefault();
-        $(this).parent().slideUp().prev().show().prev().show();
-    });
+            allp.forEach(function (e) {
+                totalHeight += e.offsetHeight;
+            });
+            console.log(gparent.offsetHeight);
+
+            gparent.style.transitionProperty = 'height, margin, padding';
+            gparent.style.transitionDuration = '.5s';
+
+            gparent.style.height = gparent.offsetHeight + 'px';
+            gparent.offsetHeight;
+
+            gparent.style.maxHeight = 'none';
+
+            gparent.style.height = totalHeight + 'px';
+
+            parent.style.display = 'none';
+        }, false);
+    } else {
+        button.style.display = "none";
+    }
 });
 
 /***/ })

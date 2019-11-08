@@ -28,6 +28,15 @@ class ViewComposerServiceProvider extends ServiceProvider
     {
         view()->composer('layouts.master', function ($view) {
             $this->guestInformation();
+            // $view->with([
+            //     'randompictures' => Picture::firstsrandompicture()->get(),
+            //     'warnings' => Warning::showwarning()->get(),
+            //     'warnings' => Warning::where('id', 999)->get(),
+            //     'ozoirTounaments' => Tournament::ozoirfuturetournament()->get(),
+            //     'otherTournaments' => Tournament::otherfuturetournament()->get(),
+            //     'onlineguest' => Guest::onlineguest(),
+            //     'stat' => Statistic::first()
+            // ]);
             $view->with([
                 'onlineguest' => Guest::onlineguest(),
                 'stat' => Statistic::first()

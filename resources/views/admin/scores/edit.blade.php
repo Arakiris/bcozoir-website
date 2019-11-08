@@ -69,7 +69,7 @@
                         {{ csrf_field() }}
                         {{ method_field('DELETE') }}
                         <button type="submit" class="btn btn-danger pull-right margin-right-10">Détruire</button>
-                        <a href="{{ route('admin.scores.index', $member->id) }}" class="btn btn-default pull-right margin-right-10">Annuler</a>
+                        <a href="{{ route('admin.membres.index') }}" class="btn btn-default pull-right margin-right-10">Annuler</a>
                     </form>
                 </div>
             </div>

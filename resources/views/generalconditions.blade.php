@@ -6,10 +6,13 @@
 
 
 @section('content')
-    <div class="main-generalconditions-title">
-        <h1>Mentions légales</h1>
-    </div>
-    <div class="main-content-generalconditions">
+<div class="content__title occasion-content">
+    <h1 class="heading-1">Mentions légales</h1>
+</div>
+<div class="addresses">
+    @if (isset($content->description))
+        {!! $content->description !!}
+    @else
         <div class="generalconditions-sections">
             <h2>&#9755; Confidentialité</h2>
             <p>Le club BC Ozoir n'enregistre pas d'informations personnelles permettant l'identification, 
@@ -20,15 +23,15 @@
             <h2>&#9755; Cookies & statistiques</h2>
             <p>Ce site utilise Google Analytics, un service d'analyse de site internet fourni par Google Inc. (« Google »).</p>
             <p>Google Analytics utilise des cookies , qui sont des fichiers texte placés sur votre ordinateur, 
-             pour aider le site internet à analyser l'utilisation du site par ses utilisateurs. Les données générées par les cookies concernant 
-             votre utilisation du site (y compris votre adresse IP) seront transmises et stockées par Google sur des serveurs situés aux Etats-Unis. 
-             Google utilisera cette information dans le but d'évaluer votre utilisation du site, de compiler des rapports sur l'activité du site à destination 
-             de son éditeur et de fournir d'autres services relatifs à l'activité du site et à l'utilisation d'Internet. Google est susceptible de communiquer 
-             ces données à des tiers en cas d'obligation légale ou lorsque ces tiers traitent ces données pour le compte de Google, y compris notamment l'éditeur 
-             de ce site. Google ne recoupera pas votre adresse IP avec toute autre donnée détenue par Google. Vous pouvez désactiver l'utilisation de cookies en 
-             sélectionnant les paramètres appropriés de votre navigateur. Cependant, une telle désactivation pourrait empêcher l'utilisation de certaines 
-             fonctionnalités de ce site. En utilisant ce site internet, vous consentez expressément au traitement de vos données nominatives par Google dans
-              les conditions et pour les finalités décrites ci-dessus.</p>
+                pour aider le site internet à analyser l'utilisation du site par ses utilisateurs. Les données générées par les cookies concernant 
+                votre utilisation du site (y compris votre adresse IP) seront transmises et stockées par Google sur des serveurs situés aux Etats-Unis. 
+                Google utilisera cette information dans le but d'évaluer votre utilisation du site, de compiler des rapports sur l'activité du site à destination 
+                de son éditeur et de fournir d'autres services relatifs à l'activité du site et à l'utilisation d'Internet. Google est susceptible de communiquer 
+                ces données à des tiers en cas d'obligation légale ou lorsque ces tiers traitent ces données pour le compte de Google, y compris notamment l'éditeur 
+                de ce site. Google ne recoupera pas votre adresse IP avec toute autre donnée détenue par Google. Vous pouvez désactiver l'utilisation de cookies en 
+                sélectionnant les paramètres appropriés de votre navigateur. Cependant, une telle désactivation pourrait empêcher l'utilisation de certaines 
+                fonctionnalités de ce site. En utilisant ce site internet, vous consentez expressément au traitement de vos données nominatives par Google dans
+                les conditions et pour les finalités décrites ci-dessus.</p>
         </div>
         <div class="generalconditions-sections">
             <h2>&#9755; Confidentialité</h2>
@@ -58,6 +61,8 @@
             <h2>&#9755; Conception et réalisation</h2>
             <p>Mr. François VONGVILAY</p>
         </div>
-    </div>
+    @endif
+
+</div>
 
 @endsection

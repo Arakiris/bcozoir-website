@@ -13,12 +13,11 @@ Dropzone.options.myAwesomeDropzone = {
     init: function() {
         this.on("error", function(file, response) {
             console.dir(response);
-            // $(file.previewElement).find('.dz-error-message').text(response.error.picture[0]);
-            $(file.previewElement).find('.dz-error-message').text(response);
-        });
-        /*this.on("success", function(file, response) {
-            console.dir(response);
             $(file.previewElement).find('.dz-error-message').text(response.error.picture[0]);
-        });*/
+        });
+        this.on("success", function(file, response) {
+            console.dir(response);
+            // $(file.previewElement).find('.dz-error-message').text(response.error.picture[0]);
+        });
     }
 };

@@ -108,6 +108,21 @@
                         <input type="url" id="rules_url" name="rules_url" class="form-control" placeholder="Veuillez entrer l'URL" value="{{ $tournament->rules_url or '' }}" {{ ($tournament->is_rules_pdf) ? 'disabled' : '' }}>
                     </div>
 
+                    <!-- radio -->
+                    <div class="form-group">
+                        <label for="formation">Formation ?</label>
+                        <div class="radio radiobutton">
+                            <label>
+                                <input type="radio" name="formation" value="0" {{ ($tournament->formation == 0) ? 'checked' : '' }}>
+                                Individuel
+                            </label>
+                            <label class="margin-right-15">
+                                <input type="radio" name="formation" value="1" {{ ($tournament->formation == 1) ? 'checked' : '' }}>
+                                Équipe
+                            </label>
+                        </div>
+                    </div>
+
                     <div class="form-group">
                         <label for="rules_pdf">Fichier PDF</label>
                         <input type="file" id="rules_pdf" name="rules_pdf" accept="application/pdf" {{ ($tournament->is_rules_pdf) ? '' : 'disabled' }}>
@@ -134,12 +149,93 @@
                             <label for="report">Compte rendu</label>
                             <textarea class="form-control" id="editor" name="report" rows="20" placeholder="Entrer votre compte rendu...">{{ $tournament->report or '' }}</textarea>
                         </div>
+
+                        <!-- radio -->
+                        <div class="form-group">
+                            <label for="is_ranking">Podium ?</label>
+                            <div class="radio radiobutton">
+                                <label>
+                                    <input type="radio" name="is_ranking" value="0" {{ (!isset($tournament->podium) || (isset($tournament->podium) && $tournament->podium->is_ranking == 0)) ? 'checked' : '' }}>
+                                    Non
+                                </label>
+                                <label class="margin-right-15">
+                                    <input type="radio" name="is_ranking" value="1" {{ (isset($tournament->podium) && $tournament->podium->is_ranking == 1) ? 'checked' : '' }}>
+                                    Oui
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="teams" {!! ($tournament->formation == 1) ? '' : 'style="display: none;"'!!}>
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Nom de l'équipe</th>
+                                    <th>Joueurs</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                @foreach($teams as $team)
+                                    <tr>
+                                        <td class="addNewScore"><a href="{{ route('admin.teams.edit', [$tournament->id, $team->id]) }}"><i class="fa fa-edit"></i></a></td>
+                                        <td>{{ $team->name }}</td>
+                                        <td>
+                                            @foreach ($team->members as $member)
+                                                {{$member->first_name}} {{$member->last_name}} <br>
+                                            @endforeach
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+
+                            <tfoot>
+                                <tr>
+                                    <th></th>
+                                    <th>Nom de l'équipe</th>
+                                    <th>Joueurs</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+
+                    <div id="solo" {!! ($tournament->formation == 0) ? '' : 'style="display: none;"' !!}>
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Joueurs</th>
+                                    <th>Classement</th>
+                                    <th>Ordre d'affichage</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                @foreach ($tournament->members as $member)
+                                <tr>
+                                    <td> {{$member->first_name}} {{$member->last_name}}</td>
+                                    <td>{{ $member->pivot->rank }}</td>
+                                    <td>{{ $member->pivot->order_display  }}</td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>Joueurs</th>
+                                    <th>Classement</th>
+                                    <th>Ordre d'affichage</th>
+                                </tr>
+                            </tfoot>
+                        </table>
                     </div>
 
                     @include('partials._form-error')
 
                     <div class="box-footer col-xs-8">
                         <button type="submit" class="btn btn-primary" name="submitbutton" value="save">Mettre-à-jour</button>
+                        <button type="submit" id="add-teams" class="btn btn-default {{ ($tournament->formation == 1) ? '' : 'disabled' }}" name="submitbutton" value="saveAddTeams" {{ ($tournament->formation == 1) ? '' : 'disabled' }}>Ajouter une équipe</button>
+                        <button type="submit" id="add-players" class="btn btn-default {{ ($tournament->formation == 0) ? '' : 'disabled' }}" name="submitbutton" value="saveManagePlayers" {{ ($tournament->formation == 0) ? '' : 'disabled' }}>Gérer les participants</button>
+                        {{-- <a href="{{ route('admin.teams.create', $tournament->id)}}" id="add-teams"  class="btn btn-default {{ ($tournament->formation == 1) ? '' : 'disabled' }}">Ajouter une équipe</a>
+                        <a href="{{ route('admin.tournois.editPlayers', $tournament->id)}}" id="add-players" class="btn btn-default {{ ($tournament->formation == 0) ? '' : 'disabled' }}">Gérer les participants</a> --}}
                     </div>
                 </form>
                 <div class="box-footer col-xs-4 pull-right">
@@ -147,7 +243,7 @@
                         {{ csrf_field() }}
                         {{ method_field('DELETE') }}
                         <button type="submit" class="btn btn-danger pull-right margin-right-10">Détruire</button>
-                        <a href="{{ route('admin.tournois.index') }}" class="btn btn-default pull-right margin-right-10">Annuler</a>
+                        <a href="{{ route('admin.tournois.index') }}" class="btn btn-default pull-right margin-right-10">Retour à l'index des tournois</a>
                     </form>
                 </div>
             </div>
@@ -155,4 +251,8 @@
     </div>
 </section>
 <!-- /.content -->
+@endsection
+
+@section('scripts')
+    <script src="{{ asset('js/adminformation.js') }}"></script>
 @endsection

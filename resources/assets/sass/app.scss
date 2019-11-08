@@ -1,12 +1,47 @@
+@import "./master/abstracts/variables";
+@import "./master/abstracts/mixins";
+@import "./master/abstracts/functions";
 
-// Fonts
-@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
+@import "./master/base/sanitize";
+@import "./master/base/base";
+@import "./master/base/typography";
+@import "./master/base/utilities";
+@import "./master/base/animations";
+@import "./master/base/margin";
+@import "./master/base/padding";
 
-// Variables
-// @import "variables";
+@import "./master/layout/header";
+@import "./master/layout/aside-left";
+@import "./master/layout/content";
+@import "./master/layout/aside-right";
+@import "./master/layout/footer";
 
-//Admin
-@import "components/main";
+@import "./master/components/random-pic";
+@import "./master/components/pagination";
+@import "./master/components/tabs";
+@import "./master/components/form";
+@import "./master/components/table";
+
+@import "./master/pages/welcome";
+@import "./master/pages/event";
+@import "./master/pages/photos";
+@import "./master/pages/videos";
+@import "./master/pages/introduction";
+@import "./master/pages/office";
+@import "./master/pages/partners";
+@import "./master/pages/members";
+@import "./master/pages/addresses";
+@import "./master/pages/contact";
+@import "./master/pages/news";
+@import "./master/pages/average-listing";
+@import "./master/pages/documents";
+
+@import "./master/pages/listing";
+@import "./master/pages/report";
+@import "./master/pages/archives";
+@import "./master/pages/map";
+@import "./master/pages/membertournaments";
+// @import "./master/pages/choices";
 
 // Bootstrap
 // @import "~bootstrap-sass/assets/stylesheets/bootstrap";

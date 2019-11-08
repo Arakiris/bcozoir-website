@@ -1,0 +1,30 @@
+.tabs {
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+
+    &__link {
+        background: none;
+        color: var(--black-color);
+        display: inline-block;
+        padding: 1rem 1.5rem;
+        cursor: pointer;
+
+        &-current {
+            background-color: var(--grey-color-lightest);
+            color: var(--black-color);
+        }
+    }
+
+    &__content {
+        display: none;
+        background-color: var(--grey-color-lightest);
+        padding: 1.5rem;
+
+        &-current {
+            display: grid;
+            grid-template-rows: 1fr 5rem;
+            justify-content: center;
+        }
+    }
+}

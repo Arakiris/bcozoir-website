@@ -1,57 +1,90 @@
-<aside class="aside-left">
-    <nav class="aside-bar">
-        <ul class="side-bar">
-            <li><a href="{{ route('actualites') }}">Actualités</a></li>
-            <li><a href="{{ route('tournoisOzoir') }}">Tournois BC Ozoir</a></li>
-            <li><a href="{{ route('tournoisPrives') }}">Tournois privés</a></li>
-            <li><a href="{{ route('championnats') }}">Championnats fédéraux</a></li>
-            <li><a href="{{ route('ligues') }}">Ligues</a></li>
-            <li><a href="{{ route('listing') }}">Moyennes listing</a></li>
-            <li><a href="{{ route('podiums') }}">Podiums</a></li>
-            <li><a href="{{ route('evenements') }}">Évènements</a></li>
-            <li><a href="{{ route('archiveschoix') }}">Archives tournois</a></li>
-            <li><a href="{{ route('archivesligues') }}">Archives ligues</a></li>
-        </ul>
-    </nav>
-    
-    <div class="container-calendar">
-        <div class="agendaTitle"><span>Agenda</span></div>
-        <div id="calendar" class="calendar">
-        </div>
+<div class="random-pic random-pic__left partnerFrame">
+    <div class="random-pic__title partnerAdsTitle"> <a href="{{ route('becomePartner') }}" class="random-pic__title-link partner-link-become">Partenaires </a></div>
+    <div class="random-pic__content partners-carousel">
+        @foreach($partnerAds as $partner)
+            <div class="random-pic__content-left">
+                <div class="random-pic__content-single">
+                    @if (!empty($partner->url))
+                        <a class="random-pic__link-single" href="{{ $partner->url }}" target="_blank">
+                            <img data-lazy="{{ asset('storage' . $partner->picture->first()->path)  }}" alt="Photo au hasard" class="random-pic__photo-left partnerRandomPicture">
+                        </a>
+                    @else
+                        <img data-lazy="{{ asset('storage' . $partner->picture->first()->path)  }}" alt="Photo au hasard" class="random-pic__photo-left partnerRandomPicture">
+                    @endif
+                    <div class="random-pic__text-single partnerAdsText">
+                        {!! $partner->title !!}
+                    </div>
+                </div>
+            </div>
+        @endforeach
     </div>
 
-    <div class="counter">
-        <div class="counter-title">
-            <h2 class="title">Compteurs</h2>
-        </div>
-        <div class="counter-content">
-            <table class="counter-table">
-                <colgroup>
-                    <col span="1" style="width: 14%;">
-                    <col span="1" style="width: 14%;">
-                    <col span="1" style="width: 72%;">
-                </colgroup>
-                <tr>
-                    <td><img class="counter-img" src="{{ asset('images/Guest-online.png') }}" alt="Image signifiant les visiteurs actuellement en ligne"></td>
-                    <td>{{ $onlineguest }}</td>
-                    <td>En ligne</td>
-                </tr>
-                <tr>
-                    <td><img class="counter-img" src="{{ asset('images/Visitor-counter.png') }}" alt="Image signifiant le nombre de visiteurs du jour"></td>
-                    <td>{{ $stat->daily_visits }}</td>
-                    <td>Visites aujourd'hui</td>
-                </tr>
-                <tr>
-                    <td><img class="counter-img" src="{{ asset('images/Visitor-counter.png') }}" alt="Image signifiant le nombre de visiteurs du mois"></td>
-                    <td>{{ $stat->month_visits }}</td>
-                    <td>Visites du dernier mois</td>
-                </tr>
-                <tr>
-                    <td><img class="counter-img-last" src="{{ asset('images/Total-visitor-counter.png') }}" alt="Image signifiant le nombre de visiteurs dupuis la création du site"></td>
-                    <td>{{ $stat->since_creation_visits }}</td>
-                    <td>Visites depuis le 27 Décembre 2017</td>
-                </tr>
-            </table>
-        </div>
+</div>
+
+<nav class="aside-left-bar">
+    <ul class="aside-left-bar__list side-bar">
+        <li class="aside-left-bar__item"><a class="aside-left-bar__link" href="{{ route('actualites') }}">Informations</a></li>
+        <li class="aside-left-bar__item"><a class="aside-left-bar__link" href="{{ route('evenements') }}">Évènements</a></li>
+        <li class="aside-left-bar__item"><a class="aside-left-bar__link" href="{{ route('listing') }}">Moyennes listing</a></li>
+    </ul>
+    <div class="aside-left-bar__container side-bar-left-green">
+        <div class="aside-left-bar__container-title side-bar-green-title">Saison en cours {{$season}}</div>
+        
+        <ul class="aside-left-bar__list side-bar">
+            <li class="aside-left-bar__item"><a class="aside-left-bar__link" href="{{ route('ligues') }}">Ligues</a></li>
+            <li class="aside-left-bar__item"><a class="aside-left-bar__link" href="{{ route('tournoisOzoir') }}">Tournois BC Ozoir</a></li>
+            <li class="aside-left-bar__item"><a class="aside-left-bar__link" href="{{ route('tournoisPrives') }}">Tournois privés</a></li>
+            <li class="aside-left-bar__item"><a class="aside-left-bar__link" href="{{ route('championnats') }}">Championnats fédéraux</a></li>
+            <li class="aside-left-bar__item"><a class="aside-left-bar__link" href="{{ route('classementPodiums') }}">Classement podiums</a></li>
+            <li class="aside-left-bar__item"><a class="aside-left-bar__link" href="{{ route('podiums') }}">Photos podiums</a></li>
+        </ul>
     </div>
-</aside>
+    <div class="aside-left-bar__container side-bar-left-green">
+        <div class="aside-left-bar__container-title side-bar-green-title">Archivage</div>
+        <ul class="aside-left-bar__list side-bar">
+            <li class="aside-left-bar__item"><a class="aside-left-bar__link" href="{{ route('archivesligues') }}">Ligues</a></li>
+            {{-- <li class="aside-left-bar__item"><a class="aside-left-bar__link" href="{{ route('archiveschoix') }}">Tournois</a></li> --}}
+            <li class="aside-left-bar__item aside-left-bar__item-dropdown">
+                {{-- Tournois --}}
+                <div class="aside-left-bar__dropdown-btn">Tournois</div>
+                <ul class="aside-left-bar__dropdown">
+                    <li class="aside-left-bar__dropdown-item"><a class="aside-left-bar__link" href="{{ route('vieuxtournoisOzoir') }}">Tournois d'Ozoir</a></li>
+                    <li class="aside-left-bar__dropdown-item"><a class="aside-left-bar__link" href="{{ route('vieuxtournoisPrives') }}">Tournois Privés</a></li>
+                    <li class="aside-left-bar__dropdown-item"><a class="aside-left-bar__link" href="{{ route('vieuxchampionnats') }}">Championnats fédéraux</a></li>
+                </ul>
+            </li>
+            <li class="aside-left-bar__item"><a class="aside-left-bar__link" href="{{ route('archivesClassementPodiums') }}">Classements podiums</a></li>
+        </ul>
+    </div>
+    <ul class="aside-left-bar__list side-bar">
+        <li class="aside-left-bar__item"><a class="aside-left-bar__link" href="{{ route('documentsDivers') }}">Documents divers</a></li>
+    </ul>
+</nav>
+
+<div class="aside-left-calendar">
+    <div class="aside-left-calendar__title agendaTitle"><span>Agenda</span></div>
+    <div id="calendar" class="calendar">
+    </div>
+</div>
+
+<div class="aside-left-counter">
+    <div class="aside-left-counter__title counter-title">
+        <h2 class="heading-2 title">CONNEXIONS</h2>
+    </div>
+
+    <div><img class="aside-left-counter__img counter-img" src="{{ asset('images/Guest-online.png') }}" alt="Image signifiant les visiteurs actuellement en ligne"></div>
+    <div>{{ $onlineguest }}</div>
+    <div>En ligne</div>
+
+    <div><img class="aside-left-counter__img counter-img" src="{{ asset('images/Visitor-counter.png') }}" alt="Image signifiant le nombre de visiteurs du jour"></div>
+    <div>{{ $stat->daily_visits }}</div>
+    <div>Visites aujourd'hui</div>
+
+    <div><img class="aside-left-counter__img counter-img" src="{{ asset('images/Visitor-counter.png') }}" alt="Image signifiant le nombre de visiteurs du mois"></div>
+    <div>{{ $stat->month_visits }}</div>
+    <div>Visites du mois en cours</div>
+
+    <div><img class="aside-left-counter__img counter-img-last" src="{{ asset('images/Total-visitor-counter.png') }}" alt="Image signifiant le nombre de visiteurs dupuis la création du site"></div>
+    <div>{{ $stat->since_creation_visits }}</div>
+    <div>Visites depuis le 24 Janvier 2018</div>
+</div>

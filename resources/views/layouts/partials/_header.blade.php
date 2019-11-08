@@ -1,26 +1,28 @@
 <header class="header">
-    <div class="logo">
+    <div class="header__logo">
         <a href="{{ route('welcome') }}">
-            <img src="{{ asset('images/logo.jpg') }}" alt="Logo de bienvenue du site de bowling d'Ozoir" class="logo-img" >
+            <img src="{{ asset('images/logo2.jpg') }}" alt="Logo de bienvenue du site de bowling d'Ozoir" class="header__logo-img" >
         </a>
     </div>
-    <div class="header-img">
-
+    <div class="header__img">
+        <p class="header__img-date" data-text="<?php setlocale(LC_TIME, 'fr'); echo ucfirst(utf8_encode(strftime("%A %d %B %Y", \Carbon\Carbon::now()->timestamp))); ?>">
+            <?php setlocale(LC_TIME, 'fr'); echo ucfirst(utf8_encode(strftime("%A %d %B %Y", \Carbon\Carbon::now()->timestamp))); ?>
+        </p>
     </div>
-</header>
 
-<nav class="header-nav">
-    <div class="updatedAt">
+    <div class="header__updatedat">
         <span>{{ (isset($stat->last_update)) ? 'Maj. le ' . $stat->last_update->format('d/m/Y') : 'Pas encore de MAJ' }}</span>
     </div>
-    <ul class="nagivation">
-        <li><a href="{{ route('welcome') }}">Accueil</a></li>
-        <li><a href="{{ route('bcozoir') }}">BC Ozoir</a></li>
-        <li><a href="{{ route('office') }}">Bureau</a></li>
-        <li><a href="{{ route('members') }}">Membres</a></li>
-        <li><a href="{{ route('partners') }}">Partenaires</a></li>
-        <li><a href="{{ route('links') }}">Liens</a></li>
-        <li><a href="{{ route('adresses') }}">Adresses</a></li>
-        <li><a href="{{ route('contact') }}">Contact</a></li>
-    </ul>
-</nav>
+    <nav class="header-nav">
+        <ul class="header-nav__list">
+            <li class="header-nav__item"><a class="header-nav__link" href="{{ route('welcome') }}">Accueil</a></li>
+            <li class="header-nav__item"><a class="header-nav__link" href="{{ route('bcozoir') }}">BC Ozoir</a></li>
+            <li class="header-nav__item"><a class="header-nav__link" href="{{ route('office') }}">Bureau</a></li>
+            <li class="header-nav__item"><a class="header-nav__link" href="{{ route('members') }}">Membres</a></li>
+            <li class="header-nav__item"><a class="header-nav__link" href="{{ route('partners') }}">Partenaires</a></li>
+            <li class="header-nav__item"><a class="header-nav__link" href="{{ route('links') }}">Liens</a></li>
+            <li class="header-nav__item"><a class="header-nav__link" href="{{ route('adresses') }}">Adresses</a></li>
+            <li class="header-nav__item"><a class="header-nav__link" href="{{ route('contact') }}">Contact</a></li>
+        </ul>
+    </nav>
+</header> 

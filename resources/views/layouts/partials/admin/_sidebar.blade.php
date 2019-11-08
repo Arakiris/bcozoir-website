@@ -1,4 +1,4 @@
-<!-- Left side column. contains the logo and sidebar -->
+﻿<!-- Left side column. contains the logo and sidebar -->
 <aside class="main-sidebar">
 
 	<!-- sidebar: style can be found in sidebar.less -->
@@ -9,13 +9,13 @@
 			<li class="header">NAVIGATION</li>
 			<!-- Optionally, you can add icons to the links -->
 			<li class="treeview">
-				<a href="#"><i class="fa fa-link"></i> <span>Actualit&eacute;s</span>
+				<a href="#"><i class="fa fa-link"></i> <span>Informations</span>
 					<span class="pull-right-container">
 						<i class="fa fa-angle-left pull-right"></i>
 					</span>
 				</a>
 				<ul class="treeview-menu">
-					<li><a href="{{ route('admin.actualites.index') }}">Toutes les actualit&eacute;</a></li>
+					<li><a href="{{ route('admin.actualites.index') }}">Toutes les informations</a></li>
 					<li><a href="{{ route('admin.actualites.create') }}">Cr&eacute;ation</a></li>
 				</ul>
 			</li>
@@ -44,6 +44,8 @@
 				</ul>
 			</li>
 			<li><a href="{{ route('admin.contacts.index') }}"><i class="fa fa-link"></i> <span>Contacts</span></a></li>
+			<li><a href="{{ route('admin.documentTypes.index') }}"><i class="fa fa-link"></i> <span>Types de document divers</span></a></li>
+			<li><a href="{{ route('admin.documents.index') }}"><i class="fa fa-link"></i> <span>Documents divers</span></a></li>
 			<li class="treeview">
 				<a href="#"><i class="fa fa-link"></i> <span>&Eacute;v&egrave;nements</span>
 					<span class="pull-right-container">
@@ -55,6 +57,7 @@
 					<li><a href="{{ route('admin.evenements.create') }}">Cr&eacute;ation</a></li>
 				</ul>
 			</li>
+			<li><a href="{{ route('admin.contentinformation.edit') }}"><i class="fa fa-link"></i> <span>Contenu générale</span></a></li>
 			<li class="treeview">
 				<a href="#"><i class="fa fa-link"></i> <span>Membres</span>
 					<span class="pull-right-container">
@@ -64,7 +67,6 @@
 				<ul class="treeview-menu">
 					<li><a href="{{ route('admin.membres.index') }}">Tous les membres</a></li>
 					<li><a href="{{ route('admin.membres.create') }}">Cr&eacute;ation</a></li>
-					<li><a href="{{ route('admin.scores') }}">Tous les scores</a></li>
 				</ul>
 			</li>
 			<li><a href="{{ route('admin.liens.index') }}"><i class="fa fa-link"></i> <span>Liens Utiles</span></a></li>

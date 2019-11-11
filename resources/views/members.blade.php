@@ -8,6 +8,7 @@
 <div class="content__title main-content-title">
     <h1 class="heading-1">Membres (Fiche / Palmarès / Futurs tournois)</h1>
     <p class="content__paragraph">ROUGE : Licenci&eacute;s  /  BLEU : Adh&eacute;rents</p>
+    <p class="content__paragraph">Cliquer sur la photo pour consulter son palmarès et ses futurs tournois programmés</p>
 </div>
 <div class="members">
     <div class="members__content content-members">

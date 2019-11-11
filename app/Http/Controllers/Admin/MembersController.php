@@ -84,7 +84,7 @@ class MembersController extends Controller
             $storage = storage_path('app/public');
             $folderPath = '/upload/images/members/' . $member->id . '/';
 
-            savePictures($file, $folderPath, $storage, $member);
+            $this->savePictures($file, $folderPath, $storage, $member);
         }
         $this->updateStatisticDate();
         
@@ -171,7 +171,7 @@ class MembersController extends Controller
             $storage = storage_path('app/public');
             $folderPath = '/upload/images/members/' . $member->id . '/';
 
-            savePictures($file, $folderPath, $storage, $member);
+            $this->savePictures($file, $folderPath, $storage, $member);
         }
         $this->updateStatisticDate();
 
@@ -260,6 +260,6 @@ class MembersController extends Controller
         $picture->medium_size = $filename_medium;
         $picture->thumbnail = $filename_thumb;
 
-        $îtem->picture()->save($picture);
+        $item->picture()->save($picture);
     }
 }

@@ -44,16 +44,15 @@
                 margin-bottom: 0;
             }
 
-            &-single {
-                margin-bottom: .5rem;
-            }
-
             &-text {
                 display: inline-block;
                 text-decoration: none;
                 color: var(--color-black);
             }
 
+            &-single {
+                margin-bottom: .5rem;
+            }
         }
     }
 }

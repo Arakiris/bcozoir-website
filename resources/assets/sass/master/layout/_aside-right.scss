@@ -37,11 +37,15 @@
 
             &-heading {
                 font-size: 1.5rem;
-                color: var(--quaternary-color-dark);
+                color: var(--quaternary-color-old);
                 font-weight: bold;
                 display: inline-block;
                 text-decoration: none;
                 margin-bottom: 0;
+            }
+
+            &-single {
+                margin-bottom: .5rem;
             }
 
             &-text {
@@ -49,6 +53,7 @@
                 text-decoration: none;
                 color: var(--color-black);
             }
+
         }
     }
 }

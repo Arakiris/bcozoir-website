@@ -166,7 +166,8 @@ class TournamentsController extends Controller
         $pagination = true;
         $futur = false;
         $tournaments = Tournament::with(['members' => function($query){ $query->orderBy('last_name', 'asc')->orderBy('first_name', 'asc');},
-                                         'teams' => function($query){ $query->orderBy("name", 'asc');}])
+                                         'teams' => function($query){ $query->orderBy("name", 'asc');},
+                                         'teams.members' => function($query){ $query->orderBy('last_name', 'asc')->orderBy('first_name', 'asc');} ])
                                     ->ozoirtournament()->paginate(6);
 
         return view('tournaments', compact('title', 'tournaments', 'pagination', 'futur'))->with($this->mainSharingFunctionality());
@@ -180,7 +181,8 @@ class TournamentsController extends Controller
         $pagination = true;
         $futur = false;
         $tournaments = Tournament::with(['members' => function($query){ $query->orderBy('last_name', 'asc')->orderBy('first_name', 'asc');},
-                                         'teams' => function($query){ $query->orderBy("name", 'asc');}])
+                                         'teams' => function($query){ $query->orderBy("name", 'asc');},
+                                         'teams.members' => function($query){ $query->orderBy('last_name', 'asc')->orderBy('first_name', 'asc');}])
                                     ->privatetournament()->paginate(6);
 
         return view('tournaments', compact('title', 'tournaments', 'pagination', 'futur'))->with($this->mainSharingFunctionality());
@@ -194,7 +196,8 @@ class TournamentsController extends Controller
         $pagination = true;
         $futur = false;
         $tournaments = Tournament::with(['members' => function($query){ $query->orderBy('last_name', 'asc')->orderBy('first_name', 'asc');},
-                                         'teams' => function($query){ $query->orderBy("name", 'asc');}])
+                                         'teams' => function($query){ $query->orderBy("name", 'asc');},
+                                         'teams.members' => function($query){ $query->orderBy('last_name', 'asc')->orderBy('first_name', 'asc');}])
                                     ->championship()->paginate(6);
 
         return view('tournaments', compact('title', 'tournaments', 'pagination', 'futur'))->with($this->mainSharingFunctionality());
@@ -331,19 +334,6 @@ class TournamentsController extends Controller
         $type = 1;
 
         return view('archivestournaments', compact('title', 'tournaments', 'years', 'type'))->with($this->mainSharingFunctionality());
-
-        // with(['members' => function($query){ $query->orderBy('last_name', 'asc')->orderBy('first_name', 'asc');},
-        //                             'teams' => function($query){ $query->orderBy("name", 'asc');},
-        //                             'pictures', 'videos'])
-        //                         ->
-
-        // $tournamentsByYear = Tournament::with(['members' => function($query){ $query->orderBy('last_name', 'asc')->orderBy('first_name', 'asc');},
-        //                                        'teams' => function($query){ $query->orderBy("name", 'asc');}])
-        //                             ->oldozoirtournament()->get()->groupBy(function($val){
-        //                                 return Carbon::parse($val->date)->format('Y');
-        //                             });
-
-        // return view('archivestournaments', compact('title', 'tournamentsByYear'))->with($this->mainSharingFunctionality());
     }
 
     /**
@@ -371,14 +361,6 @@ class TournamentsController extends Controller
         $type = 2;
 
         return view('archivestournaments', compact('title', 'tournaments', 'years', 'type'))->with($this->mainSharingFunctionality());
-
-        // $tournamentsByYear = Tournament::with(['members' => function($query){ $query->orderBy('last_name', 'asc')->orderBy('first_name', 'asc'); },
-        //                                        'teams' => function($query){ $query->orderBy("name", 'asc');}])
-        //                                 ->oldprivatetournament()->get()->groupBy(function($val){
-        //                                     return Carbon::parse($val->date)->format('Y');
-        //                                 });
-
-        // return view('archivestournaments', compact('title', 'tournamentsByYear'))->with($this->mainSharingFunctionality());
     }
 
     /**
@@ -404,13 +386,6 @@ class TournamentsController extends Controller
         }
 
         $type = 3;
-        // $tournamentsByYear = Tournament::with(['members' => function($query){ $query->orderBy('last_name', 'asc')->orderBy('first_name', 'asc');},
-        //                                        'teams' => function($query){ $query->orderBy("name", 'asc');}])
-        //                                 ->oldchampionship()->get()->groupBy(function($val){
-        //                                     return Carbon::parse($val->date)->format('Y');
-        //                                 });
-
-        // return view('archivestournaments', compact('title', 'tournamentsByYear'))->with($this->mainSharingFunctionality());
     }
 
     /**

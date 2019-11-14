@@ -7,7 +7,14 @@
 @section('content')
 <div class="content__title">
     <h1 class="heading-1">{{ $title }}</h1>
-    <p class="content__paragraph">Cliquer sur les tournois pour avoir le r&egraveglement</p>
+    <p class="content__paragraph">
+        @if(isset($futur) && ($futur == true))
+            Cliquer sur le tournoi pour avoir le r&egraveglement
+        @else
+            Cliquer sur les tournois pour avoir le r&egraveglement
+        @endif                 
+        
+    </p>
 </div>
 <div class="event">
     @if(isset($tournaments) && $tournaments->count()>0)
@@ -39,11 +46,11 @@
                                 @foreach($tournament->members as $member)
                                     <div class="event__noteam-line">
                                         <div class="event__tooltip {{ ($member->is_licensee == 'Licencié') ?  'event__tooltip-licensee' : 'event__tooltip-adherent' }}">
-                                            <p class="event__noteam-paragraph {{ ($member->club_id != 1) ? 'otherClub' : '' }}">{{ $member->last_name }} {{ $member->first_name }}</p>
+                                            <p class="event__noteam-paragraph {{ ($member->club_id != 1) ? 'otherClub' : '' }}">{{ $member->last_name }} {{ $member->first_name }} {{ $member->first_name }}</p>
                                             <div class="event__tooltip-event {{ ($member->is_licensee == 'Licencié') ?  'event__tooltip-event-licensee' : 'event__tooltip-event-adherent' }}">
                                                 <img class="event__tooltip-img" src="{{ ($member->picture->first()) ? asset('storage' . $member->picture->first()->path) : null }}" alt="Photo de {{ $member->last_name }} - {{ $member->first_name }}">
                                                 <div class="event__tooltip-content">
-                                                    @if(isset($member->birth_date) && !empty($member->birth_date) && $member->birth_date->diffInYears(Carbon\Carbon::now()) >= 100)
+                                                    @if(isset($member->birth_date) && !empty($member->birth_date) && $member->birth_date->diffInYears(Carbon\Carbon::now()) < 100)
                                                         <p class="event__tooltiptext">{{ $member->last_name }} {{ $member->first_name }} - {{ $member->birth_date->diffInYears(Carbon\Carbon::now()) }} ans</p>
                                                     @else
                                                         <p class="event__tooltiptext">{{ $member->last_name }} {{ $member->first_name }}</p>
@@ -73,11 +80,11 @@
                                     @foreach ($team->members as $member)
                                         <div class="event__team-line">
                                             <div class="event__tooltip {{ ($member->is_licensee == 'Licencié') ?  'event__tooltip-licensee' : 'event__tooltip-adherent' }}">
-                                                <p class="event__team-paragraph {{ ($member->club_id != 1) ? 'otherClub' : '' }}">{{ $member->last_name }} {{ $member->first_name }}</p>
+                                                <p class="event__team-paragraph {{ ($member->club_id != 1) ? 'otherClub' : '' }}">{{ $member->last_name }}</p>
                                                 <div class="event__tooltip-event {{ ($member->is_licensee == 'Licencié') ?  'event__tooltip-event-licensee' : 'event__tooltip-event-adherent' }}">
                                                     <img class="event__tooltip-img" src="{{ ($member->picture->first()) ? asset('storage' . $member->picture->first()->path) : null }}" alt="Photo de {{ $member->last_name }} - {{ $member->first_name }}">
                                                     <div class="event__tooltip-content">
-                                                        @if(isset($member->birth_date) && !empty($member->birth_date) && $member->birth_date->diffInYears(Carbon\Carbon::now()) >= 100)
+                                                        @if(isset($member->birth_date) && !empty($member->birth_date) && $member->birth_date->diffInYears(Carbon\Carbon::now()) < 100)
                                                             <p class="event__tooltiptext">{{ $member->last_name }} {{ $member->first_name }} - {{ $member->birth_date->diffInYears(Carbon\Carbon::now()) }} ans</p>
                                                         @else
                                                             <p class="event__tooltiptext">{{ $member->last_name }} {{ $member->first_name }}</p>

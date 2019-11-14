@@ -51,8 +51,11 @@
                                     @isset($partner->address)
                                         <p> Adresse : {{ $partner->address }} </p>
                                     @endif
+                                    @isset($partner->website)
+                                        <p> Website : {{ $partner->website }} </p>
+                                    @endif
                                     @isset($partner->url)
-                                        <p> Website : {{ $partner->url }} </p>
+                                        <p> URL : {{ $partner->url }} </p>
                                     @endif
                                     @isset($partner->mail)
                                         <p> Mail : {{ $partner->mail }} </p>
@@ -106,7 +109,7 @@
                         <!-- text input -->
                         <div class="form-group">
                             <label for="address">Adresse</label>
-                            <textarea type="text" id="address" name="address" row="3" class="ckeditor form-control" placeholder="Veuillez entrer l'adresse du partenaire">{{ isset($partner->address) ? $partner->address   : '' }}</textarea>
+                            <textarea type="text" id="address" name="address" row="3" class="ckeditor form-control" placeholder="Veuillez entrer l'adresse du partenaire"></textarea>
                         </div>
 
                         <!-- text input -->

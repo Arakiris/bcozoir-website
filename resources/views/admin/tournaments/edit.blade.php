@@ -123,48 +123,6 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="rules_pdf">Fichier PDF</label>
-                        <input type="file" id="rules_pdf" name="rules_pdf" accept="application/pdf" {{ ($tournament->is_rules_pdf) ? '' : 'disabled' }}>
-                    </div>
-
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" id="is_finished" name="is_finished" {{ ($tournament->is_finished) ? 'checked' : '' }}> Terminé ?
-                        </label>
-                    </div>
-
-                    <div class="finished" {!! ($tournament->is_finished) ? 'style="display: block;"' : 'style="display: none;"' !!}>
-                        <div class="form-group after_end">
-                            <label for="lexer_url">Résultats sous Lexer</label>
-                            <input type="url" name="lexer_url" class="form-control" value="{{ $tournament->lexer_url }}" placeholder="Veuillez entrer l'URL">
-                        </div>
-
-                        <div class="form-group after_end">
-                            <label for="listing">Résultats sous forme de listing</label>
-                            <input type="file" name="listing" accept="image/*">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="report">Compte rendu</label>
-                            <textarea class="form-control" id="editor" name="report" rows="20" placeholder="Entrer votre compte rendu...">{{ $tournament->report or '' }}</textarea>
-                        </div>
-
-                        <!-- radio -->
-                        <div class="form-group">
-                            <label for="is_ranking">Podium ?</label>
-                            <div class="radio radiobutton">
-                                <label>
-                                    <input type="radio" name="is_ranking" value="0" {{ (!isset($tournament->podium) || (isset($tournament->podium) && $tournament->podium->is_ranking == 0)) ? 'checked' : '' }}>
-                                    Non
-                                </label>
-                                <label class="margin-right-15">
-                                    <input type="radio" name="is_ranking" value="1" {{ (isset($tournament->podium) && $tournament->podium->is_ranking == 1) ? 'checked' : '' }}>
-                                    Oui
-                                </label>
-                            </div>
-                        </div>
-                    </div>
                     <div id="teams" {!! ($tournament->formation == 1) ? '' : 'style="display: none;"'!!}>
                         <table class="table table-bordered table-hover">
                             <thead>
@@ -226,6 +184,49 @@
                                 </tr>
                             </tfoot>
                         </table>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="rules_pdf">Fichier PDF</label>
+                        <input type="file" id="rules_pdf" name="rules_pdf" accept="application/pdf" {{ ($tournament->is_rules_pdf) ? '' : 'disabled' }}>
+                    </div>
+
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" id="is_finished" name="is_finished" {{ ($tournament->is_finished) ? 'checked' : '' }}> Terminé ?
+                        </label>
+                    </div>
+
+                    <div class="finished" {!! ($tournament->is_finished) ? 'style="display: block;"' : 'style="display: none;"' !!}>
+                        <div class="form-group after_end">
+                            <label for="lexer_url">Résultats sous Lexer</label>
+                            <input type="url" name="lexer_url" class="form-control" value="{{ $tournament->lexer_url }}" placeholder="Veuillez entrer l'URL">
+                        </div>
+
+                        <div class="form-group after_end">
+                            <label for="listing">Résultats sous forme de listing</label>
+                            <input type="file" name="listing" accept="image/*">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="report">Compte rendu</label>
+                            <textarea class="form-control" id="editor" name="report" rows="20" placeholder="Entrer votre compte rendu...">{{ $tournament->report or '' }}</textarea>
+                        </div>
+
+                        <!-- radio -->
+                        <div class="form-group">
+                            <label for="is_ranking">Podium ?</label>
+                            <div class="radio radiobutton">
+                                <label>
+                                    <input type="radio" name="is_ranking" value="0" {{ (!isset($tournament->podium) || (isset($tournament->podium) && $tournament->podium->is_ranking == 0)) ? 'checked' : '' }}>
+                                    Non
+                                </label>
+                                <label class="margin-right-15">
+                                    <input type="radio" name="is_ranking" value="1" {{ (isset($tournament->podium) && $tournament->podium->is_ranking == 1) ? 'checked' : '' }}>
+                                    Oui
+                                </label>
+                            </div>
+                        </div>
                     </div>
 
                     @include('partials._form-error')

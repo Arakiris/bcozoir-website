@@ -8,6 +8,7 @@
 @section('content')
 <div class="content__title">
     <h1 class="heading-1">Listing National FFBSQ</h1>
+    <p class="content__paragraph">Cliquer sur le numéro de licence pour accéder au listing national de la fédé</p>
 </div>
 <div class="average-listing">
     @if(isset($members) && $members->count()>0)

@@ -31,7 +31,13 @@
                         <p class="partners__paragraph"> {!! $partner->address !!} </p>
                     @endif
                     @isset($partner->website)
-                        <p class="partners__paragraph"> Website : {{ $partner->website }} </p>
+                        <p class="partners__paragraph"> Website : 
+                            @isset($partner->url)
+                                <a href="{{$partner->url}}">{{ $partner->website }}</a>
+                            @else
+                                {{ $partner->website }}
+                            @endif
+                        </p>
                     @endif
                     @isset($partner->mail)
                         <p class="partners__paragraph"> Mail : {{ $partner->mail }} </p>

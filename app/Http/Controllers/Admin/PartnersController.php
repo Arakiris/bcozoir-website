@@ -46,6 +46,7 @@ class PartnersController extends Controller
         $validatedPartner = request()->validate([
             'address' => 'nullable|string',
             'title' => 'nullable|string',
+            'website' => 'nullable|url',
             'url' => 'nullable|url',
             'mail' => 'nullable|string',
             'phone1' => 'nullable|string',
@@ -105,6 +106,7 @@ class PartnersController extends Controller
         $validatedPartner = request()->validate([
             'address' => 'nullable|string',
             'title' => 'nullable|string',
+            'website' => 'nullable|url',
             'url' => 'nullable|url',
             'mail' => 'nullable|string',
             'phone1' => 'nullable|string',

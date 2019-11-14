@@ -57,7 +57,7 @@
 					<li><a href="{{ route('admin.evenements.create') }}">Cr&eacute;ation</a></li>
 				</ul>
 			</li>
-			<li><a href="{{ route('admin.contentinformation.edit') }}"><i class="fa fa-link"></i> <span>Contenu générale</span></a></li>
+			<li><a href="{{ route('admin.contentinformation.edit') }}"><i class="fa fa-link"></i> <span>Contenu général</span></a></li>
 			<li class="treeview">
 				<a href="#"><i class="fa fa-link"></i> <span>Membres</span>
 					<span class="pull-right-container">

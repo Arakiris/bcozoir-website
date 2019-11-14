@@ -98,7 +98,7 @@
                                 </tfoot>
                             </table>
                             <div class="box-footer col-xs-8">
-                                <button type="submit" class="btn btn-primary" name="submitbutton" value="save">Éditer</button>
+                                <button type="submit" class="btn btn-primary" name="submitbutton" value="save">Mettre à jour</button>
                             </div>
                         </form>
                         <div class="box-footer col-xs-4 pull-right">

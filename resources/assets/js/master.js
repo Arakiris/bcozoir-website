@@ -6,7 +6,7 @@ $(document).ready(function() {
         infinite: true,
         speed: 300,
         autoplay: true,
-        autoplaySpeed: 2000
+        autoplaySpeed: 4000
     });
 
     $('.warning-carousel').addClass('carousel-initialized');
@@ -19,7 +19,7 @@ $(document).ready(function() {
         infinite: true,
         speed: 300,
         autoplay: true,
-        autoplaySpeed: 1500
+        autoplaySpeed: 4000
     });
 
     $('.pictures-carousel').slick({

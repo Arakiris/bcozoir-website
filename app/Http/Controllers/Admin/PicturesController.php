@@ -126,7 +126,7 @@ class PicturesController extends Controller
         }
         $save_path = $storage . $folderPath;
         if (!file_exists($save_path)) {
-            mkdir($save_path, 666, true);
+            Storage::makeDirectory($save_path, 0755, true);
         }
 
         $image = request()->file('media');

@@ -35,7 +35,7 @@
 
                     <!-- date input -->
                     <div class="form-group">
-                        <label for="date_begin">&Agrave; partir de quelle date doit être afficher ?</label>
+                        <label for="date_begin">&Agrave; partir de quelle date doit-il être affiché ?</label>
                         <input type="date" id="date_begin" name="date_begin" class="form-control" value="{{ isset($warning->date_begin) ? date('Y-m-d', strtotime($warning->date_begin)) : '' }}">
                     </div>
                     

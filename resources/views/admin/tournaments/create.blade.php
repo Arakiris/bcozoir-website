@@ -121,6 +121,54 @@
                             </label>
                         </div>
                     </div>
+                    
+                    <div id="teams" style="display: none;">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Nom de l'équipe</th>
+                                    <th>Joueurs</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+                            </tbody>
+
+                            <tfoot>
+                                <tr>
+                                    <th></th>
+                                    <th>Nom de l'équipe</th>
+                                    <th>Joueurs</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+
+                    <div id="solo">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Joueurs</th>
+                                    <th>Classement</th>
+                                    <th>Ordre d'affichage</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+                            </tbody>
+
+                            <tfoot>
+                                <tr>
+                                    <th>Joueurs</th>
+                                    <th>Classement</th>
+                                    <th>Ordre d'affichage</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
 
                     <div class="form-group">
                         <label for="rules_pdf">Fichier PDF</label>
@@ -149,54 +197,6 @@
                             <textarea class="form-control" id="editor" name="report" rows="20" placeholder="Entrer votre compte rendu...">{{ $tournament->report or '' }}</textarea>
                         </div>
                     </div>
-
-                    <div id="teams" style="display: none;">
-                            <table class="table table-bordered table-hover">
-                                <thead>
-                                    <tr>
-                                        <th></th>
-                                        <th>Nom de l'équipe</th>
-                                        <th>Joueurs</th>
-                                    </tr>
-                                </thead>
-    
-                                <tbody>
-
-                                </tbody>
-    
-                                <tfoot>
-                                    <tr>
-                                        <th></th>
-                                        <th>Nom de l'équipe</th>
-                                        <th>Joueurs</th>
-                                    </tr>
-                                </tfoot>
-                            </table>
-                        </div>
-    
-                        <div id="solo">
-                            <table class="table table-bordered table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Joueurs</th>
-                                        <th>Classement</th>
-                                        <th>Ordre d'affichage</th>
-                                    </tr>
-                                </thead>
-    
-                                <tbody>
-
-                                </tbody>
-
-                                <tfoot>
-                                    <tr>
-                                        <th>Joueurs</th>
-                                        <th>Classement</th>
-                                        <th>Ordre d'affichage</th>
-                                    </tr>
-                                </tfoot>
-                            </table>
-                        </div>
 
                     @include('partials._form-error')
 

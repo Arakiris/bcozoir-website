@@ -18,6 +18,10 @@
         text-align: center;
     }
 
+    &__td--membertournament {
+        padding: .5rem;
+    }
+
     & &__tr:nth-child(even) { background: var(--table-even-color); } 
     & &__tr:nth-child(odd) { background: var(--table-odd-color); } 
 

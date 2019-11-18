@@ -137,9 +137,11 @@ class TournamentsController extends Controller
         $title;
         $pagination = false;
         $futur = false;
-        $tournaments = Tournament::with(['type', 'members' => function($query){
-            $query->orderBy('last_name', 'asc')->orderBy('first_name', 'asc');
-        }])->where('slug', $slug)->get();
+        $tournaments = Tournament::with(['type',
+                                         'members' => function($query){ $query->orderBy('last_name', 'asc')->orderBy('first_name', 'asc');},
+                                         'teams' => function($query){ $query->orderBy("name", 'asc');},
+                                         'teams.members' => function($query){ $query->orderBy('last_name', 'asc')->orderBy('first_name', 'asc');}])
+                                    ->where('slug', $slug)->get();
         switch ($tournaments->first()->type->id) {
             case 1:
                 $title = "Tournois BC Ozoir";

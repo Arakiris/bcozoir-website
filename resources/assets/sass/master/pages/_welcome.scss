@@ -1,13 +1,14 @@
 .welcome-carousel {
-    min-width:0;
-}
-.carousel-img {
-    max-height: 100%;
-    max-width: 100%;
-}
+    min-width: 0;
 
-.carousel-img img {
-    display: block;
-    margin: auto;
-    width: 100%;
+    &__img {
+        max-height: 100%;
+        max-width: 100%;
+
+        & img {
+            display: block;
+            margin: auto;
+            width: 95%;
+        }
+    }
 }

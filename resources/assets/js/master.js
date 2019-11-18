@@ -11,7 +11,7 @@ $(document).ready(function() {
 
     $('.warning-carousel').addClass('carousel-initialized');
 
-    $('.ads-carousel').slick({
+    $('.welcome-carousel').slick({
         lazyLoad: 'ondemand',
         dots: true,
         prevArrow: false,
@@ -30,7 +30,7 @@ $(document).ready(function() {
         infinite: true,
         speed: 300,
         autoplay: true,
-        autoplaySpeed: 3000
+        autoplaySpeed: 5000
     });
 
     $('.partners-carousel').slick({
@@ -41,7 +41,7 @@ $(document).ready(function() {
         infinite: true,
         speed: 300,
         autoplay: true,
-        autoplaySpeed: 3000
+        autoplaySpeed: 5000
     })
 });
 

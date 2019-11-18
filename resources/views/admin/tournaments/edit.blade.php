@@ -108,6 +108,11 @@
                         <input type="url" id="rules_url" name="rules_url" class="form-control" placeholder="Veuillez entrer l'URL" value="{{ $tournament->rules_url or '' }}" {{ ($tournament->is_rules_pdf) ? 'disabled' : '' }}>
                     </div>
 
+                    <div class="form-group">
+                        <label for="rules_pdf">Fichier PDF</label>
+                        <input type="file" id="rules_pdf" name="rules_pdf" accept="application/pdf" {{ ($tournament->is_rules_pdf) ? '' : 'disabled' }}>
+                    </div>
+
                     <!-- radio -->
                     <div class="form-group">
                         <label for="formation">Formation ?</label>
@@ -184,11 +189,6 @@
                                 </tr>
                             </tfoot>
                         </table>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="rules_pdf">Fichier PDF</label>
-                        <input type="file" id="rules_pdf" name="rules_pdf" accept="application/pdf" {{ ($tournament->is_rules_pdf) ? '' : 'disabled' }}>
                     </div>
 
                     <div class="checkbox">

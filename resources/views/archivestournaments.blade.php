@@ -48,7 +48,7 @@
                                     </div>
                                     <div class="event__single-members">
                                         @if((isset($tournament->members) && $tournament->members->count()>0) || isset($tournament->teams) && $tournament->teams->count()>0)
-                                            @if ((isset($tournament->members) && $tournament->members->count()>0))
+                                            @if ((isset($tournament->members) && $tournament->members->count()>0) && $tournament->formation == 0)
                                                 <div class="event__noteam no-team">
                                                     @foreach($tournament->members as $member)
                                                         <div class="event__noteam-line">
@@ -80,7 +80,7 @@
                                                 </div>
                                             @endif
                                             
-                                            @if ((isset($tournament->teams) && $tournament->teams->count()>0))
+                                            @if ((isset($tournament->teams) && $tournament->teams->count()>0) && $tournament->formation == 1)
                                                 @foreach($tournament->teams as $team)
                                                     <div class="event__team-title team-title"><p class="event__team-text">{{$team->name}}</p></div>
                                                     <div class="event__team-content team-members">

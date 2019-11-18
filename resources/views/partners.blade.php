@@ -33,7 +33,7 @@
                     @isset($partner->website)
                         <p class="partners__paragraph"> Website : 
                             @isset($partner->url)
-                                <a href="{{$partner->url}}">{{ $partner->website }}</a>
+                                <a href="{{$partner->url}}" target="_blank">{{ $partner->website }}</a>
                             @else
                                 {{ $partner->website }}
                             @endif

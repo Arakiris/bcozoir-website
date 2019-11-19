@@ -55,7 +55,9 @@ class DocumentsController extends Controller
         $document = $type->documents()->create($validatedDocument);
 
         if($file = $request->file('file_path')){
-            $path = request()->file('file_path')->store('public/upload/documents/' . $document->id );
+            $originalname = $file->getClientOriginalName();
+            $path = $file->storeAs('public/upload/documents', $originalname);
+            // $path = request()->file('file_path')->store('public/upload/documents');
             $document->file_path = substr($path, 6);
         }
 

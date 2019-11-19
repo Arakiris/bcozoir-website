@@ -171,7 +171,7 @@ class MembersController extends Controller
             $storage = storage_path('app/public');
             $folderPath = '/upload/images/members/' . $member->id . '/';
 
-            return $this->savePictures($file, $folderPath, $storage, $member);
+            $this->savePictures($file, $folderPath, $storage, $member);
         }
         $this->updateStatisticDate();
 
@@ -221,8 +221,6 @@ class MembersController extends Controller
         if (!file_exists($save_path)) {
             mkdir($save_path, 0755, true);
         }
-
-        return $save_path;
 
         $timestamp = Carbon::now()->timestamp . str_random(5);
         $filename = $folderPath . $timestamp . '.' . $file->extension();

@@ -77,7 +77,12 @@ class Member extends Model
 
     public function getIsLicenseeAttribute($value)
     {
-        return $value ? 'Licencié' : 'Adhérent';
+        if ($value == 0)
+            return 'Adhérent';
+        elseif ($value == 1)
+            return 'Licencié';
+        else 
+            return 'Loisir';
     }
 
     public function scopeGetmembers($query) {

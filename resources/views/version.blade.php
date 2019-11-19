@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="content__title">
-    <h1 class="heading-1">Version 1.0.0</h1>
+    <h1 class="heading-1">Version 2.0.0</h1>
 </div>
 <div class="addresses">
 

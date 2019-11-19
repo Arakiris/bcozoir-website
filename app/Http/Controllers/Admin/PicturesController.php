@@ -100,7 +100,7 @@ class PicturesController extends Controller
         switch ($type) {
             case 'tournoi':
                 // $folderPath = 'public/upload/images/tournaments/' . $idtype;
-                $folderPath = '/upload/images/tournaments/' . $idtype;
+                $folderPath = '/upload/images/tournaments/' . $idtype . '/';
                 $class = Tournament::findOrFail($idtype);
                 break;
             case 'evenement':
@@ -126,7 +126,8 @@ class PicturesController extends Controller
         }
         $save_path = $storage . $folderPath;
         if (!file_exists($save_path)) {
-            Storage::makeDirectory($save_path, 0755, true);
+            mkdir($save_path, 0755, true);
+            // Storage::makeDirectory();
         }
 
         $image = request()->file('media');

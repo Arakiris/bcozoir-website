@@ -85,6 +85,10 @@
                                     <input type="radio" name="is_licensee" id="is_licensee" value="1">
                                     Licenci&eacute;
                                 </label>
+                                <label>
+                                    <input type="radio" name="is_licensee" id="is_licensee" value="2">
+                                    Loisir
+                                </label>
                             </div>
                         </div>
                     </div>

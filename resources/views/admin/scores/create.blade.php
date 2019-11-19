@@ -62,7 +62,7 @@
                         <button type="submit" class="btn btn-primary" name="submitbutton" value="save">Enregistrer</button>
                         
                         <div class="pull-right">
-                            <a href="{{ route('admin.scores.index', $member->id) }}" class="btn btn-default">Annuler</a>
+                            <a href="{{ route('admin.membres.index', $member->id) }}" class="btn btn-default">Annuler</a>
                         </div>
                     </div>
                 </form>

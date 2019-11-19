@@ -81,7 +81,7 @@
                                     <input type="radio" name="is_licensee" id="is_licensee" value="0" checked>
                                     Adh&eacute;rent
                                 </label>
-                                <label>
+                                <label class="margin-right-15">
                                     <input type="radio" name="is_licensee" id="is_licensee" value="1">
                                     Licenci&eacute;
                                 </label>

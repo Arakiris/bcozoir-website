@@ -89,7 +89,7 @@
                                             <input type="radio" name="is_licensee" id="is_licensee" value="0" {{ ($member->is_licensee == 'Adhérent') ? "checked" : "" }}>
                                             Adh&eacute;rent
                                         </label>
-                                        <label>
+                                        <label  class="margin-right-15">
                                             <input type="radio" name="is_licensee" id="is_licensee" value="1" {{ ($member->is_licensee == 'Licencié') ? "checked" : "" }}>
                                             Licenci&eacute;
                                         </label>

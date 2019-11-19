@@ -7,11 +7,11 @@ $(function(){
 
     $('input:radio[name=is_licensee]').on('change', function() {
         var idLicensee = $("#id_licensee");
-        if($(this).val() == 0){
-            idLicensee.val('').prop("disabled", true);
+        if($(this).val() == 1){
+            idLicensee.prop("disabled", false);
         }
         else {
-            idLicensee.prop("disabled", false);
+            idLicensee.val('').prop("disabled", true);
         }
     });
 

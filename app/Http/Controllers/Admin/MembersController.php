@@ -64,7 +64,7 @@ class MembersController extends Controller
             'last_name' => 'required',
             'sex' => 'required|min:1|max:1',
             'birth_date' => 'nullable|date',
-            'is_licensee' => 'required|boolean',
+            'is_licensee' => 'required|integer',
             'id_licensee' => '',
             'bonus' => 'nullable|numeric',
             'listing_url' => 'nullable|string'
@@ -137,7 +137,7 @@ class MembersController extends Controller
             'last_name' => 'required',
             'sex' => 'required|min:1|max:1',
             'birth_date' => 'nullable|date',
-            'is_licensee' => 'required|boolean',
+            'is_licensee' => 'required|integer',
             'id_licensee' => '',
             'bonus' => 'nullable|numeric',
             'listing_url' => 'nullable|string'

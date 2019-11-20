@@ -16,7 +16,8 @@ class ClubsTableSeeder extends Seeder
         Club::insert([
             ['name' => 'Ozoir', 'address' => '4 Rue de la Tuilerie, 91160 Ballainvilliers'],
             ['name' => 'Champs-sur-Marne', 'address' => 'Champs-sur-Marne'],
-            ['name' => 'Paris', 'address' => 'Paris']
+            ['name' => 'Paris', 'address' => 'Paris'],
+            ['name' => 'YOYO', 'address' => 'TUTU']
         ]);
     }
 }

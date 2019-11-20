@@ -38,15 +38,71 @@ class DatabaseSeeder extends Seeder
         // $this->command->info('Tables seeded!');
         // Eloquent::reguard();
 
-        $this->call([
-            RolesTableSeeder::class,
-            UsersTableSeeder::class,
-            ClubsTableSeeder::class,
-            TournamentTypesTableSeeder::class,
-            ContentInformationsTableSeeder::class,
-            CategoriesTableSeeder::class,
-            StatisticsTableSeeder::class
-        ]);
+        // $this->call([
+        //     RolesTableSeeder::class,
+        //     UsersTableSeeder::class,
+        //     ClubsTableSeeder::class,
+        //     TournamentTypesTableSeeder::class,
+        //     ContentInformationsTableSeeder::class,
+        //     CategoriesTableSeeder::class,
+        //     StatisticsTableSeeder::class
+        // ]);
+
+        /**
+         * NEW
+         */
+        $faker = Faker::create();
+
+        factory(App\Member::class, 100)->create();
+        $members = Member::where('is_licensee', 1)->get();
+        foreach($members as $member){
+            $member->score()->save(factory(App\Score::class)->make());
+        }
+
+        factory(App\League::class, 50)->create();
+
+        factory(App\Tournament::class, 75)->create();
+
+        $members = Member::where('is_licensee', 1)->pluck('id')->toArray();
+        $leagues = League::all();
+        foreach($leagues as $league){
+            $number = rand(1, 10);
+            $used_members = array();
+            for($i = 0 ; $i < $number; $i++){
+                $member_id = $faker->randomElement($members);
+                while (in_array($member_id, $used_members)) {
+                    $member_id = $faker->randomElement($members);
+                }
+                $league->members()->attach($member_id);
+                array_push($used_members, $member_id);
+            }
+        }
+
+        $tournaments = Tournament::all();
+        foreach($tournaments as $tournament){
+            $number = rand(1, 10);
+            $used_members = array();
+            for($i = 0 ; $i < $number; $i++){
+                $member_id = $faker->randomElement($members);
+                while (in_array($member_id, $used_members)) {
+                    $member_id = $faker->randomElement($members);
+                }
+                $tournament->members()->attach($member_id);
+                array_push($used_members, $member_id);
+            }
+        }
+
+        $tournaments = Tournament::where('is_finished', 1)->whereNotIn('id', [1, 2, 3, 4, 5])->get();
+        
+        foreach($tournaments as $tournament){
+            $tournament->podium()->save(factory(App\Podium::class)->make());
+        }
+
+        factory(App\News::class, 5)->states('without')->create();
+
+        /**
+         * OLD
+         */
 
         // $faker = Faker::create();
         // /* 1 */

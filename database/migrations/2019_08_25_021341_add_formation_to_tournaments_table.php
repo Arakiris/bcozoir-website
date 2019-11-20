@@ -14,7 +14,7 @@ class AddFormationToTournamentsTable extends Migration
     public function up()
     {
         Schema::table('tournaments', function (Blueprint $table) {
-            $table->boolean('formation')->default(1)->after('date'); // 0 for solo and 1 for team
+            $table->boolean('formation')->default(0)->after('date'); // 0 for solo and 1 for team
         });
     }
 

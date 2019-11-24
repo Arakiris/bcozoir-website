@@ -78,7 +78,7 @@ class DatabaseSeeder extends Seeder
             }
         }
 
-        $tournaments = Tournament::all();
+        $tournaments = Tournament::whereNotIn('id', [1, 2, 3, 4, 5])->get();
         foreach($tournaments as $tournament){
             $number = rand(1, 10);
             $used_members = array();

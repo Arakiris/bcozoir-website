@@ -10,10 +10,10 @@
             <?php $i = 0; ?>
             @foreach($ads as $ad)
                 <div class="welcome-carousel__img">
-                    {{-- <img src="{{ ($ad->picture->first()) ? asset('storage' . $ad->picture->first()->path) : null }}" alt=""> --}}
-                    <a href="{{ ($ad->picture->first()) ? asset('storage' . $ad->picture->first()->path) : '#' }}" data-lightbox="welcome-{{ $i }}">
+                    <img src="{{ ($ad->picture->first()) ? asset('storage' . $ad->picture->first()->path) : null }}" alt="">
+                    {{-- <a href="{{ ($ad->picture->first()) ? asset('storage' . $ad->picture->first()->path) : '#' }}" data-lightbox="welcome-{{ $i }}">
                         <img data-lazy="{{ ($ad->picture->first()) ? asset('storage' . $ad->picture->first()->path) : null }}" alt="Photo d'accueil">
-                    </a>
+                    </a> --}}
                 </div>
                 <?php $i++; ?> 
             @endforeach

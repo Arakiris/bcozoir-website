@@ -19,7 +19,7 @@ class NewsController extends Controller
 
     public function actualitePhotos($id) {
         $title = "Photos de l'actualité";
-        $news = News::with(['pictures' => function($query) { $query->orderby('date', 'desc'); }])->findOrFail($id);
+        $news = News::with(['pictures' => function($query) { $query->orderby('created_at', 'asc'); }])->findOrFail($id);
         $pictures = $news->pictures()->paginate(48);
         $allpictures = $news->pictures;
 

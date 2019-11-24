@@ -41,7 +41,7 @@ window.createLeagueArchives = function(lenghtlast, previousYear, url, url_image,
         getDataAjax(url, id, token).then(league => {
             renderLeague(league, parent);
 
-            if(league.length > 0){
+            if(league.length > 5){
                 $(function(){
                     $('#table-' + id).paginathing({
                         perPage: 5,

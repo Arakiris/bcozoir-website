@@ -17,7 +17,7 @@
                     <th class="table__th table__witdth-5">Tournoi</th>
                     <th class="table__th table__witdth-10">BC Ozoir/Privé/Fédéral</th>
                     <th class="table__th table__witdth-15">Lieu</th>
-                    <th class="table__th table__witdth-15">Homogation</th>
+                    <th class="table__th table__witdth-15">Homologation</th>
                     <th class="table__th table__witdth-10">Podium</th>
                 </thead>
                 <tbody>

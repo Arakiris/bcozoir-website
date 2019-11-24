@@ -1296,6 +1296,7 @@ body {
 
 .aside-right-tournament__content {
   overflow-y: auto;
+  max-height: 30rem;
 }
 
 .aside-right-tournament__content-link {
@@ -1805,11 +1806,13 @@ body {
 .welcome-carousel__img {
   max-height: 100%;
   max-width: 95%;
+  width: 95%;
   margin: 0 auto;
 }
 
 .welcome-carousel__img img {
   display: block;
+  width: 100%;
 }
 
 .event {

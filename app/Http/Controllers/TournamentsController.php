@@ -239,7 +239,7 @@ class TournamentsController extends Controller
     public function tournamentpictures($slug) {
         $title = "Photos tournoi";
 
-        $tournament = Tournament::with(['pictures' => function($query) { $query->orderby('created_at', 'desc'); }])->where('slug', $slug)->first();
+        $tournament = Tournament::with(['pictures' => function($query) { $query->orderby('created_at', 'asc'); }])->where('slug', $slug)->first();
 
         if(!$tournament){
             abort(404);
@@ -286,7 +286,7 @@ class TournamentsController extends Controller
     public function podiumpictures($slug) {
         $title = "Photos podium";
 
-        $podium = Podium::with(['tournament', 'pictures' => function($query) { $query->orderby('created_at', 'desc'); }])
+        $podium = Podium::with(['tournament', 'pictures' => function($query) { $query->orderby('created_at', 'asc'); }])
                             ->where('slug', $slug)->first();
         
         if(!$podium){
@@ -388,6 +388,8 @@ class TournamentsController extends Controller
         }
 
         $type = 3;
+
+        return view('archivestournaments', compact('title', 'tournaments', 'years', 'type'))->with($this->mainSharingFunctionality());
     }
 
     /**

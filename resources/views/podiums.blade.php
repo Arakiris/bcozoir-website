@@ -22,7 +22,7 @@
 
                         <div class="event__single-image">
                             <a class="event__single-link" href="{{ route('podiumPhotos', $podium->slug) }}">
-                                <img class="event__single-logo occasion-event-podium-logo" src="images/tournament/Tournament-pictures.png" alt="Image de présentation afin de montrer les photos du podium">
+                                <img class="event__single-logo occasion-event-podium-logo" src="{{ asset('images/tournament/tournament-pictures.png') }}" alt="Image de présentation afin de montrer les photos du podium">
                             </a>
                         </div>
                     @endif

@@ -13,7 +13,7 @@
                     <h2 class="news__title">
                         {{ $singlenews->date->format('d/m/Y') }} - {{ $singlenews->title }} &nbsp;&nbsp;
                         @if($singlenews->pictures()->count() > 0)
-                            <a href="{{ route('actualitePhotos', $singlenews->id ) }}"><img class="news__img" src="{{ asset('images/tournament/Tournament-pictures.png') }}" alt="Image désignant la gallerie de photos"></a>
+                            <a href="{{ route('actualitePhotos', $singlenews->id ) }}"><img class="news__img" src="{{ asset('images/tournament/tournament-pictures.png') }}" alt="Image désignant la gallerie de photos"></a>
                         @endif
                         @if($singlenews->videos()->count() > 0)
                             <a href="{{ route('actualiteVideos', $singlenews->id ) }}"><img class="news__img" src="{{ asset('images/tournament/Tournament-videos.jpg') }}" alt="Image désignant la gallerie de vidéos"></a>

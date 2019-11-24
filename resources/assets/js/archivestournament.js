@@ -123,7 +123,7 @@ window.createTournamentArchives = function(lenghtlast, previousYear, url, url_ho
     }
 
     const renderLineTournament = (tournament, parent) => {
-        let dateString = tournament.start_season.substring(0, 10).split('-');
+        let dateString = tournament.date.substring(0, 10).split('-');
         let date = new Date(dateString[0], dateString[1], dateString[2]);
 
         let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };

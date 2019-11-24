@@ -16,7 +16,7 @@ news.forEach(e => {
             allp.forEach(e => {
                 totalHeight += e.offsetHeight;
             });
-            console.log(gparent.offsetHeight);
+            console.log(totalHeight.offsetHeight);
             
             gparent.style.transitionProperty = 'height, margin, padding';
             gparent.style.transitionDuration = '.5s';
@@ -34,6 +34,7 @@ news.forEach(e => {
         }, false);
     }
     else {
-        button.style.display = "none";
+        console.log(button.parentNode);
+        button.parentNode.style.display = "none";
     }
 });

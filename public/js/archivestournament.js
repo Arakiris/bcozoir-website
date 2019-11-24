@@ -219,7 +219,7 @@ window.createTournamentArchives = function (lenghtlast, previousYear, url, url_h
     };
 
     var renderLineTournament = function renderLineTournament(tournament, parent) {
-        var dateString = tournament.start_season.substring(0, 10).split('-');
+        var dateString = tournament.date.substring(0, 10).split('-');
         var date = new Date(dateString[0], dateString[1], dateString[2]);
 
         var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };

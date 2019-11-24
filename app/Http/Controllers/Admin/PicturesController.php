@@ -115,7 +115,7 @@ class PicturesController extends Controller
                 break;
             case 'actualite':
                 // $folderPath = 'public/upload/images/news/' . $idtype;
-                $folderPath = 'upload/images/news/' . $idtype . '/';
+                $folderPath = '/upload/images/news/' . $idtype . '/';
                 $class = News::findOrFail($idtype);
                 $class->photos = 1;
                 $class->save();

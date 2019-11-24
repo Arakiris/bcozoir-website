@@ -29,6 +29,7 @@
 
         &__content {
             overflow-y: auto;
+            max-height: 30rem;
 
             &-link {
                 text-decoration: none;

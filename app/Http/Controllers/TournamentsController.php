@@ -246,10 +246,8 @@ class TournamentsController extends Controller
         }
 
         $pictures = $tournament->pictures()->get();
-                    // ->paginate(42);
-        $allpictures = $tournament->pictures;
 
-        return view('photos', compact('title', 'tournament', 'allpictures', 'pictures'))->with($this->mainSharingFunctionality());
+        return view('photos', compact('title', 'tournament', 'pictures'))->with($this->mainSharingFunctionality());
     }
 
     /**
@@ -286,7 +284,7 @@ class TournamentsController extends Controller
     public function podiumpictures($slug) {
         $title = "Photos podium";
 
-        $podium = Podium::with(['tournament', 'pictures' => function($query) { $query->orderby('created_at', 'asc'); }])
+        $podium = Podium::with(['tournament', 'pictures'])
                             ->where('slug', $slug)->first();
         
         if(!$podium){
@@ -294,14 +292,13 @@ class TournamentsController extends Controller
         }
 
         $tournament = $podium->tournament;
-        $allpictures = $podium->pictures()->orderBy('id', 'desc')->get();
         $pictures = $podium
                     ->pictures()
-                    ->orderBy('id', 'desc')
+                    ->orderBy('id', 'asc')
                     ->get();
 
 
-        return view('photos', compact('title', 'tournament', 'allpictures', 'pictures'))->with($this->mainSharingFunctionality());
+        return view('photos', compact('title', 'tournament', 'pictures'))->with($this->mainSharingFunctionality());
     }
 
     /**

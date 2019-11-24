@@ -316,7 +316,7 @@ class TournamentsController extends Controller
      */
     public function oldOzoirTournaments() {
         $title = "Archives Tournois BC Ozoir";
-        $years = Tournament::selectRaw("YEAR(date) as year")
+        $years = Tournament::selectRaw("YEAR(start_season) as year")
                                 ->where('type_id', '=', 1)
                                 ->where('date', '<', Carbon::create($this->yearSeason(), 9, 1, 0, 0, 0))
                                 ->distinct()
@@ -343,7 +343,7 @@ class TournamentsController extends Controller
      */
     public function oldPrivateTournaments() {
         $title = "Archives Tournois Privés";
-        $years = Tournament::selectRaw("YEAR(date) as year")
+        $years = Tournament::selectRaw("YEAR(start_season) as year")
                         ->where('type_id', '=', 2)
                         ->where('date', '<', Carbon::create($this->yearSeason(), 9, 1, 0, 0, 0))
                         ->distinct()
@@ -370,7 +370,7 @@ class TournamentsController extends Controller
      */
     public function oldChampionships() {
         $title = "Archives Championnats Fédéraux";
-        $years = Tournament::selectRaw("YEAR(date) as year")
+        $years = Tournament::selectRaw("YEAR(start_season) as year")
                 ->where('type_id', '=', 3)
                 ->where('date', '<', Carbon::create($this->yearSeason(), 9, 1, 0, 0, 0))
                 ->distinct()
@@ -408,11 +408,12 @@ class TournamentsController extends Controller
      * Old ranking of podia if they exists
      */
     public function oldRankingPodia(){
-        $years = Podium::selectRaw("YEAR(date) as year")
-                            ->where('is_ranking', '=', '1')
-                            ->where('date', '<', Carbon::create($this->yearSeason(), 9, 1, 0, 0, 0))
+        $years = Podium::selectRaw("YEAR(tournaments.start_season) as year")
+                            ->join('tournaments', 'podia.tournament_id', '=', 'tournaments.id')
+                            ->where('podia.is_ranking', '=', '1')
+                            ->where('podia.date', '<', Carbon::create($this->yearSeason(), 9, 1, 0, 0, 0))
                             ->distinct()
-                            ->orderBy('date', 'desc')->get();
+                            ->orderBy('podia.date', 'desc')->get();
         
         if(!$years->isEmpty()){
             $lastYear = $years->shift()->year;

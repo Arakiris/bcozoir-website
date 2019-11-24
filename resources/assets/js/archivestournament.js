@@ -287,7 +287,7 @@ window.createTournamentArchives = function(lenghtlast, previousYear, url, url_ho
     }
 
     const rendercolumnURL = (item, url, img) => {
-        if(typeof item !== "undefined"){
+        if(typeof item !== "undefined" && item){
             return activeURL(url, img);
         }
         else {

@@ -323,7 +323,7 @@ window.createTournamentArchives = function (lenghtlast, previousYear, url, url_h
     };
 
     var rendercolumnURL = function rendercolumnURL(item, url, img) {
-        if (typeof item !== "undefined") {
+        if (typeof item !== "undefined" && item) {
             return activeURL(url, img);
         } else {
             return inactiveURL(img);

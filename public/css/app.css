@@ -3,7 +3,6 @@
   --black-color: #2d2d2d;
   --primary-color: #d62c2e;
   --primary-color-light: #dd5254;
-  --primary-color-bright: #fb0002;
   --primary-color-dark: #b02526;
   --secondary-color: #61852e;
   --secondary-color-light: #c8d5b7;
@@ -33,6 +32,10 @@
   --random-pic-bg-color: #e1d9c5;
   --content-bg-color: #f2dcdb;
   --content-border-color: #bfbfbf;
+  --date-color: #fb0002;
+  --date-shadow: 0 2px 4px #fffc31, 0 0 3px #fffc31, 0 0 3px #fffc31, 
+                    0 0 6px #f8e134, 0 0 8px #f8d21a, 0 0 10px #eb9a0d, 
+                    0 0 10px #eb9a0d, 0 0 12px #ea9506;
   --pagination-color: #3D315B;
   --pagination-color-light: #444B6E;
   --pagination-color-active: #9AB87A;
@@ -679,8 +682,8 @@ body {
 
 .container {
   display: grid;
-  grid-template-rows: 25rem 29rem repeat(2, -webkit-min-content) 20rem -webkit-min-content -webkit-min-content;
-  grid-template-rows: 25rem 29rem repeat(2, min-content) 20rem min-content min-content;
+  grid-template-rows: 25rem repeat(2, -webkit-min-content) 20rem -webkit-min-content -webkit-min-content;
+  grid-template-rows: 25rem repeat(2, min-content) 20rem min-content min-content;
   grid-template-columns: 1fr [sidebar-left-start] 25rem [sidebar-left-end center-start] repeat(8, [col-start] minmax(8rem, 14rem) [col-end]) [center-end sidebar-right-start] 25rem [sidebar-right-end] 1fr;
   grid-column-gap: 2rem;
   grid-row-gap: 3rem;
@@ -988,10 +991,10 @@ body {
 }
 
 .header__img-date {
-  color: var(--primary-color-bright);
+  color: var(--date-color);
   font-size: 2.2rem;
   font-weight: 500;
-  text-shadow: 0 2px 4px #fffc31, 0 0 3px #fffc31, 0 0 3px #fffc31, 0 0 6px #f8e134, 0 0 8px #f8d21a, 0 0 10px #eb9a0d, 0 0 10px #eb9a0d, 0 0 12px #ea9506;
+  text-shadow: var(--date-shadow);
 }
 
 .header__updatedat {

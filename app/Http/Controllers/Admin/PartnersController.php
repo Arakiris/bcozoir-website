@@ -120,8 +120,10 @@ class PartnersController extends Controller
         
         if($file = $request->file('image')){
             $previousPicture = $partner->picture->first();
-            unlink(storage_path('app/public' . $previousPicture->path));
-            $previousPicture->delete();
+            if(!is_null($previousPicture)){
+                unlink(storage_path('app/public' . $previousPicture->path));
+                $previousPicture->delete();
+            }
 
             $path = request()->file('image')->store('public/upload/images/partners');
             $picture = new Picture();

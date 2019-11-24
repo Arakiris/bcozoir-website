@@ -1,26 +1,3 @@
-<div class="random-pic random-pic__left partnerFrame">
-    <div class="random-pic__title partnerAdsTitle"> <a href="{{ route('becomePartner') }}" class="random-pic__title-link partner-link-become">Partenaires </a></div>
-    <div class="random-pic__content partners-carousel">
-        @foreach($partnerAds as $partner)
-            <div class="random-pic__content-left">
-                <div class="random-pic__content-single">
-                    @if (!empty($partner->url))
-                        <a class="random-pic__link-single" href="{{ $partner->url }}" target="_blank">
-                            <img data-lazy="{{ asset('storage' . $partner->picture->first()->path)  }}" alt="Photo au hasard" class="random-pic__photo-left partnerRandomPicture">
-                        </a>
-                    @else
-                        <img data-lazy="{{ asset('storage' . $partner->picture->first()->path)  }}" alt="Photo au hasard" class="random-pic__photo-left partnerRandomPicture">
-                    @endif
-                    <div class="random-pic__text-single partnerAdsText">
-                        {!! $partner->title !!}
-                    </div>
-                </div>
-            </div>
-        @endforeach
-    </div>
-
-</div>
-
 <nav class="aside-left-bar">
     <ul class="aside-left-bar__list side-bar">
         <li class="aside-left-bar__item"><a class="aside-left-bar__link" href="{{ route('actualites') }}">Informations</a></li>

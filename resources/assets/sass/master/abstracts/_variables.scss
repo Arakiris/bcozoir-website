@@ -11,7 +11,6 @@ $black-color: #2d2d2d;
 
     --primary-color : #d62c2e;
     --primary-color-light : #dd5254;
-    --primary-color-bright : #fb0002;
     --primary-color-dark : #b02526;
 
     --secondary-color : #61852e;
@@ -51,6 +50,11 @@ $black-color: #2d2d2d;
 
     --content-bg-color: #f2dcdb;
     --content-border-color : #bfbfbf;
+
+    --date-color : #fb0002;
+    --date-shadow : 0 2px 4px #fffc31, 0 0 3px #fffc31, 0 0 3px #fffc31, 
+                    0 0 6px #f8e134, 0 0 8px #f8d21a, 0 0 10px #eb9a0d, 
+                    0 0 10px #eb9a0d, 0 0 12px #ea9506;
 
     --pagination-color: #3D315B;
     --pagination-color-light: #444B6E;

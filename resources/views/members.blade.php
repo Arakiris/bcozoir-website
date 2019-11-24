@@ -17,7 +17,9 @@
                 <a href="{{route('membersPrize', $member->id)}}">
                     <img class="members__thumbnail lazy" 
                     src="https://via.placeholder.com/120x144?text=Chargement"
-                    data-src="{{ ($member->picture->first()) ? (isset($member->picture->first()->thumbnail) ? asset('storage' . $member->picture->first()->thumbnail) : asset('storage' . $member->picture->first()->path)) : null }}" 
+                    data-src="{{ ($member->picture->first()) ? 
+                                    (isset($member->picture->first()->thumbnail) ? asset('storage' . $member->picture->first()->thumbnail) : asset('storage' . $member->picture->first()->path))
+                                    : asset('images/blank-profile.png') }}" 
                     alt="Photo de {{ $member->last_name }} - {{ $member->first_name }}">
                 </a>
                 
@@ -30,7 +32,9 @@
                 @endif
                     <img class="members__tooltip-img lazy" 
                     src="https://via.placeholder.com/180x210?text=Chargement"
-                    data-src="{{ ($member->picture->first()) ? (isset($member->picture->first()->medium_size) ? asset('storage' . $member->picture->first()->medium_size) : asset('storage' . $member->picture->first()->path)) : null }}" 
+                    data-src="{{ ($member->picture->first()) ? 
+                                    (isset($member->picture->first()->medium_size) ? asset('storage' . $member->picture->first()->medium_size) : asset('storage' . $member->picture->first()->path))
+                                    : asset('images/blank-profile.png') }}" 
                     alt="Photo de {{ $member->last_name }} - {{ $member->first_name }}">
                     <div class="members__tooltip-content">
                         @if((isset($member->birth_date) && !empty($member->birth_date)) && $member->birth_date->diffInYears(Carbon\Carbon::now()) < 100)

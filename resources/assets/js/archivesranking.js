@@ -259,7 +259,7 @@ window.createRankingArchives = function(lenghtlast, previousYear, url, url_stora
                 <div class="event__tooltip event__tooltip-ranking ${ member.is_licensee == 'Licencié' ?  'event__tooltip-licensee' : 'event__tooltip-adherent' }">
                     <p class="event__ranking-paragraph ${ member.club_id != 1 ? 'otherClub' : ''}">${ member.last_name } ${ member.first_name }</p>
                     <div class="event__tooltip-event event__tooltip-event-ranking ${ member.is_licensee == 'Licencié' ? 'event__tooltip-event-licensee' : 'event__tooltip-event-adherent' }">
-                        <img class="event__tooltip-img" src="${member.picture.length > 0 ? storage + '/' + member.picture[0].path : ''}" alt="Photo de ${ member.last_name } - ${ member.first_name }">
+                        <img class="event__tooltip-img" src="${member.picture.length > 0 ? storage + '/' + member.picture[0].path : url_image + '/blank-profile.png' }" alt="Photo de ${ member.last_name } - ${ member.first_name }">
                         <div class="event__tooltip-content">
                             <p class="event__tooltiptext">${ member.last_name } ${ member.first_name } - ${ age ? age : '' } ans</p>
                             <p class="event__tooltiptext">${ member.club.name }</p>

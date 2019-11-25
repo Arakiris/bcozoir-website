@@ -41,23 +41,26 @@
                                 <input type="text" id="name" name="name" class="form-control" placeholder="Veuillez entrer le nom de l'équipe">
                             </div>
 
-                            <!-- text input -->
+                            <!-- radio -->
                             <div class="form-group">
-                                <label for="name">Classement</label>
-                                <input type="text" id="rank" name="rank" class="form-control" placeholder="Insérer le classement de  l'équipe si existant">
-                            </div>
-
-                            <!-- text input -->
-                            <div class="form-group">
-                                <label for="name">Ordre d'affichage</label>
-                                <input type="number" id="order_display" name="order_display" class="form-control" placeholder="Insérer l'ordre d'affichage du classement">
+                                <label for="display_rank">Afficher le classement ?</label>
+                                <div class="radio radiobutton">
+                                    <label>
+                                        <input type="radio" name="display_rank"  value="0" checked>
+                                        Non
+                                    </label>
+                                    <label class="margin-right-15">
+                                        <input type="radio" name="display_rank"  value="1">
+                                        Oui
+                                    </label>
+                                </div>
                             </div>
 
                             <div class="form-group margin-top-30">
                                 <label for="name">Nom du membre à ajouter</label>
                                 <input id="autocomplete-members" class="dropdown-input"/>
                             </div>
-    
+        
                             <table class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
@@ -142,6 +145,7 @@
             const markup = `
                 <tr class="member">
                     <td><input type="hidden" name="members[${count}][id]" class="form-control" value="${id}">${name}</td>
+                    <td><input type="text" name="members[${count}][rank]" class="form-control" placeholder="Insérer son classement si existant"></td>
                     <td> <button class="btn-delete-member" type="button">Retirer le joueur</button> </td>
                 </tr>
             `;

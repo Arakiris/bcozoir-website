@@ -29,7 +29,7 @@ class TeamsController extends Controller
     public function create($idTournament)
     {
         $tournament = Tournament::findOrFail($idTournament);
-        $members = Member::with('club')->get();
+        $members = Member::all();
 
         return view('admin.teams.create', compact('tournament', 'members'));
     }
@@ -44,22 +44,26 @@ class TeamsController extends Controller
     {
         $validatedTeam = request()->validate([
             'name' => 'nullable|string|max:255',
-            'rank' => 'nullable|string',
-            'order_display' => 'nullable|numeric',
+            'display_rank' => 'boolean',
             'members.*.id' => 'nullable|numeric',
+            'members.*.rank' => 'nullable|string'
         ]);
         
         $team = new Team;
         $team->name = $validatedTeam["name"];
-        $team->rank = $validatedTeam["rank"];
-        $team->order_display = $validatedTeam["order_display"];
+        $team->display_rank = $validatedTeam["display_rank"];
 
         $tournament = Tournament::findOrFail($id);
         $tournament->teams()->save($team);
 
         if(isset($validatedTeam["members"])){
-            $members = array_column($validatedTeam["members"], 'id');
-            $team->members()->sync($members);
+            // $members = array_column($validatedTeam["members"], 'id');
+            $memberpick;
+            foreach($validatedTeam["members"] as $member){
+                $rank = isset($member['rank']) ? $member['rank'] : "";
+                $memberpick[$member['id']] = ['rank' => $rank];
+            }
+            $team->members()->sync($memberpick);
         }
         else {
             $team->members()->detach();
@@ -89,17 +93,18 @@ class TeamsController extends Controller
     public function edit($idTournament, $idTeam)
     {
         $team = Team::with('members')->findOrFail($idTeam);
+        $members = Member::all();
         $tournament = $team->tournament;
 
-        $members = Member::with('club')->get();
-        foreach($members as &$member){
-            $member->participate = false;
-        }
-        $members = $members->keyBy('id');
+        // $members = Member::with('club')->get();
+        // foreach($members as &$member){
+        //     $member->participate = false;
+        // }
+        // $members = $members->keyBy('id');
 
-        foreach($team->members as $m){
-            $members[$m->id]->participate = true;
-        }
+        // foreach($team->members as $m){
+        //     $members[$m->id]->participate = true;
+        // }
         
         return view('admin.teams.edit', compact('team', 'tournament', 'members'));
     }
@@ -123,25 +128,37 @@ class TeamsController extends Controller
 
         $validatedTeam = request()->validate([
             'name' => 'nullable|string|max:255',
-            'rank' => 'nullable|string',
-            'order_display' => 'nullable|numeric',
+            'display_rank' => 'boolean',
             'members.*.id' => 'nullable|numeric',
+            'members.*.rank' => 'nullable|string'
         ]);
         
         $team = Team::findOrFail($idteam);
         $team->name = $validatedTeam["name"];
-        $team->rank = $validatedTeam["rank"];
-        $team->order_display = $validatedTeam["order_display"];
+        $team->display_rank = $validatedTeam["display_rank"];
 
         $team->save();
 
         if(isset($validatedTeam["members"])){
-            $members = array_column($validatedTeam["members"], 'id');
-            $team->members()->sync($members);
+            // $members = array_column($validatedTeam["members"], 'id');
+            $memberpick;
+            foreach($validatedTeam["members"] as $member){
+                $rank = isset($member['rank']) ? $member['rank'] : "";
+                $memberpick[$member['id']] = ['rank' => $rank];
+            }
+            $team->members()->sync($memberpick);
         }
         else {
             $team->members()->detach();
         }
+
+        // if(isset($validatedTeam["members"])){
+        //     $members = array_column($validatedTeam["members"], 'id');
+        //     $team->members()->sync($members);
+        // }
+        // else {
+        //     $team->members()->detach();
+        // }
 
         session()->flash('notification_management_admin', 'L\'équipe a été éditée');
         return redirect()->route('admin.tournois.edit', [$idtournament]);

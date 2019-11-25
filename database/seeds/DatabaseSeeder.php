@@ -38,15 +38,15 @@ class DatabaseSeeder extends Seeder
         // $this->command->info('Tables seeded!');
         // Eloquent::reguard();
 
-        // $this->call([
-        //     RolesTableSeeder::class,
-        //     UsersTableSeeder::class,
-        //     ClubsTableSeeder::class,
-        //     TournamentTypesTableSeeder::class,
-        //     ContentInformationsTableSeeder::class,
-        //     CategoriesTableSeeder::class,
-        //     StatisticsTableSeeder::class
-        // ]);
+        $this->call([
+            RolesTableSeeder::class,
+            UsersTableSeeder::class,
+            ClubsTableSeeder::class,
+            TournamentTypesTableSeeder::class,
+            ContentInformationsTableSeeder::class,
+            CategoriesTableSeeder::class,
+            StatisticsTableSeeder::class
+        ]);
 
         /**
          * NEW
@@ -78,7 +78,7 @@ class DatabaseSeeder extends Seeder
             }
         }
 
-        $tournaments = Tournament::whereNotIn('id', [1, 2, 3, 4, 5])->get();
+        $tournaments = Tournament::all();
         foreach($tournaments as $tournament){
             $number = rand(1, 10);
             $used_members = array();
@@ -92,7 +92,7 @@ class DatabaseSeeder extends Seeder
             }
         }
 
-        $tournaments = Tournament::where('is_finished', 1)->whereNotIn('id', [1, 2, 3, 4, 5])->get();
+        $tournaments = Tournament::where('is_finished', 1)->get();
         
         foreach($tournaments as $tournament){
             $tournament->podium()->save(factory(App\Podium::class)->make());

@@ -13,6 +13,7 @@ use App\Picture;
 use App\Contact;
 use App\Guest;
 use App\Partner;
+use App\ContentInformation;
 
 trait CommonTrait {
 
@@ -52,9 +53,14 @@ trait CommonTrait {
         $partnerAds = Partner::inRandomOrder()->get();
         $year = intval($this->yearSeason());
         $season = $year . "-" . ($year + 1);
+        $logo = ContentInformation::findOrFail(6);
+        $banner = ContentInformation::findOrFail(7);
+
         // $onlineguest = Guest::onlineguest();
         // $stat =  Statistic::first();
-		return array('randompictures' => $randompictures, 'warnings' => $allwarnings, 'ozoirTounaments' => $ozoirTounaments, 'otherTournaments' => $otherTournaments, 'partnerAds' => $partnerAds, 'season' => $season);
+        return array('randompictures' => $randompictures, 'warnings' => $allwarnings, 'ozoirTounaments' => $ozoirTounaments, 
+                    'otherTournaments' => $otherTournaments, 'partnerAds' => $partnerAds, 'season' => $season, 
+                    'logo' => $logo, 'banner' => $banner);
     }
 
     private function updateStat() {

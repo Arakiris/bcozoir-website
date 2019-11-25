@@ -1,4 +1,4 @@
-window.createRankingArchives = function(lenghtlast, previousYear, url, url_storage) {
+window.createRankingArchives = function(lenghtlast, previousYear, url, url_image, url_storage) {
     let tabs = document.querySelectorAll('ul.tabs li');
     let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
@@ -170,8 +170,7 @@ window.createRankingArchives = function(lenghtlast, previousYear, url, url_stora
             if(podium.tournament.formation == 0 && typeof podium.tournament.members !== "undefined" && podium.tournament.members.length > 0){
                 markup += `<div class="event__noteam-rank no-team">`;
                 podium.tournament.members.forEach(member => {
-                    if(member.pivot.order_display)
-                        markup += renderMemberPodiaRanking(member);
+                    markup += renderMemberPodiaRanking(member);
                 });
                 markup += `</div>`;
             }
@@ -192,15 +191,25 @@ window.createRankingArchives = function(lenghtlast, previousYear, url, url_stora
             // Render third column
             if(podium.tournament.formation == 0 && typeof podium.tournament.members !== "undefined" && podium.tournament.members.length > 0){
                 podium.tournament.members.forEach(member => {
-                    if(member.pivot.order_display && member.pivot.rank)
+                    if(member.pivot.rank)
                         markup += `<div class="event__rank-display"> ${member.pivot.rank} </div>`;
                 });
             }
 
             if(podium.tournament.formation == 1 && typeof podium.tournament.teams !== "undefined" && podium.tournament.teams.length > 0){
                 podium.tournament.teams.forEach(team => {
-                    if(team.order_display && team.rank)
-                        markup += `<div class="event__rank-display"> ${team.rank} </div>`;
+                    if(team.display_rank) {
+                        markup += `
+                            <div class="event__team-ranking-title"><p>&nbsp;</p></div>
+                            <div class="event__team-content">
+                        `;
+                        team.members.forEach(member => {
+                            markup += `<div class="event__rank-display"> ${member.pivot.rank} </div>`;
+                        });
+                        markup += `
+                            </div>
+                        `;
+                    }
                 });
             }
         }
@@ -212,7 +221,7 @@ window.createRankingArchives = function(lenghtlast, previousYear, url, url_stora
     }
 
     const renderMemberPodiaRanking = (member) => {
-        if(member.pivot.order_display){
+        if(member.pivot.rank){
             return renderMember(member);
         }
         return '';
@@ -220,11 +229,12 @@ window.createRankingArchives = function(lenghtlast, previousYear, url, url_stora
 
     const renderTeamPodiaRanking = team => {
         let markup = `
-            <div class="event__team-rank">
+            <div class="event__team-title"><p class="event__team-text">${team.name}</p></div>
+            <div class="event__team-content">
         `;
 
-        team.members.forEach((member, index) => {
-            markup += renderMember(member, 1, index);
+        team.members.forEach((member) => {
+            markup += renderMember(member);
         });
 
         markup += `
@@ -234,7 +244,7 @@ window.createRankingArchives = function(lenghtlast, previousYear, url, url_stora
         return markup;
     };
 
-    const renderMember = (member, type = 0, count = 0) => {
+    const renderMember = (member) => {
         let storage = url_storage;
         let age = null;
 
@@ -245,17 +255,9 @@ window.createRankingArchives = function(lenghtlast, previousYear, url, url_stora
                 age = null;
             }
         }
-
-        let markup = "";
-
-        if(type === 1 && count > 0) {
-            markup += `/`;
-        }
-        else if (type === 0) {
-            markup += `<div class="solo-rank">`;
-        }
-        
-        markup += `
+       
+        let markup = `
+            <div class="event__team-line">
                 <div class="event__tooltip event__tooltip-ranking ${ member.is_licensee == 'Licencié' ?  'event__tooltip-licensee' : 'event__tooltip-adherent' }">
                     <p class="event__ranking-paragraph ${ member.club_id != 1 ? 'otherClub' : ''}">${ member.last_name } ${ member.first_name }</p>
                     <div class="event__tooltip-event event__tooltip-event-ranking ${ member.is_licensee == 'Licencié' ? 'event__tooltip-event-licensee' : 'event__tooltip-event-adherent' }">
@@ -267,24 +269,21 @@ window.createRankingArchives = function(lenghtlast, previousYear, url, url_stora
 
         if(member.is_licensee === "Licencié"){
             markup += `
-                        <p class="event__tooltiptext">Licence : ${ (member.id_licensee) ? member.id_licensee : '' }</p>
-                        <p class="event__tooltiptext">${ member.category.title }</p>
-                        <p class="event__tooltiptext">Moyenne : ${ (member.score && member.score.average) ? member.score.average : "Pas d'enregistrement" }</p>
-                        <p class="event__tooltiptext">Handicap : ${ member.handicap }</p>
-                        <p class="event__tooltiptext">Bonus vétéran : ${ member.bonus }</p>
+                            <p class="event__tooltiptext">Licence : ${ (member.id_licensee) ? member.id_licensee : '' }</p>
+                            <p class="event__tooltiptext">${ member.category.title }</p>
+                            <p class="event__tooltiptext">Moyenne : ${ (member.score && member.score.average) ? member.score.average : "Pas d'enregistrement" }</p>
+                            <p class="event__tooltiptext">Handicap : ${ member.handicap }</p>
+                            <p class="event__tooltiptext">Bonus vétéran : ${ member.bonus }</p>
             `;
         }
         else {
             markup += `
-                        <p class="event__tooltiptext">${ member.is_licensee }</p>
+                            <p class="event__tooltiptext">${ member.is_licensee }</p>
             `;
         }
 
-        if(type === 0)  {
-            markup += `</div>`;
-        }
-        markup += `
-                        
+        markup += `  
+                        </div>
                     </div>
                 </div>
             </div>

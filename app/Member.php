@@ -57,7 +57,7 @@ class Member extends Model
      */
     public function tournaments()
     {
-        return $this->belongsToMany(Tournament::class)->withPivot('rank', 'order_display');
+        return $this->belongsToMany(Tournament::class)->withPivot('rank');
     }
 
     /**
@@ -65,7 +65,7 @@ class Member extends Model
      */
     public function teams()
     {
-        return $this->belongsToMany('App\Team');
+        return $this->belongsToMany(Team::class)->withPivot('rank');
     }
 
     /**

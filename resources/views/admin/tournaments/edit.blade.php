@@ -168,24 +168,21 @@
                                 <tr>
                                     <th>Joueurs</th>
                                     <th>Classement</th>
-                                    <th>Ordre d'affichage</th>
                                 </tr>
                             </thead>
 
                             <tbody>
                                 @foreach ($tournament->members as $member)
-                                <tr>
-                                    <td> {{$member->first_name}} {{$member->last_name}}</td>
-                                    <td>{{ $member->pivot->rank }}</td>
-                                    <td>{{ $member->pivot->order_display  }}</td>
-                                </tr>
+                                    <tr>
+                                        <td> {{ $member->first_name }} {{ $member->last_name }}</td>
+                                        <td>{{ $member->pivot->rank }}</td>
+                                    </tr>
                                 @endforeach
                             </tbody>
                             <tfoot>
                                 <tr>
                                     <th>Joueurs</th>
                                     <th>Classement</th>
-                                    <th>Ordre d'affichage</th>
                                 </tr>
                             </tfoot>
                         </table>
@@ -235,8 +232,6 @@
                         <button type="submit" class="btn btn-primary" name="submitbutton" value="save">Mettre-à-jour</button>
                         <button type="submit" id="add-teams" class="btn btn-default {{ ($tournament->formation == 1) ? '' : 'disabled' }}" name="submitbutton" value="saveAddTeams" {{ ($tournament->formation == 1) ? '' : 'disabled' }}>Ajouter une équipe</button>
                         <button type="submit" id="add-players" class="btn btn-default {{ ($tournament->formation == 0) ? '' : 'disabled' }}" name="submitbutton" value="saveManagePlayers" {{ ($tournament->formation == 0) ? '' : 'disabled' }}>Gérer les participants</button>
-                        {{-- <a href="{{ route('admin.teams.create', $tournament->id)}}" id="add-teams"  class="btn btn-default {{ ($tournament->formation == 1) ? '' : 'disabled' }}">Ajouter une équipe</a>
-                        <a href="{{ route('admin.tournois.editPlayers', $tournament->id)}}" id="add-players" class="btn btn-default {{ ($tournament->formation == 0) ? '' : 'disabled' }}">Gérer les participants</a> --}}
                     </div>
                 </form>
                 <div class="box-footer col-xs-4 pull-right">

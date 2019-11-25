@@ -57,6 +57,16 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="logo">Logo du club</label>
+                        <input type="file" id="logo" name="logo" accept="image/*">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="banner">Image de la bannière</label>
+                        <input type="file" id="banner" name="banner" accept="image/*">
+                    </div>
+
+                    <div class="form-group">
                         <label for="office">Image du bureau</label>
                         <input type="file" id="office" name="office" accept="image/*">
                     </div>

@@ -197,6 +197,21 @@
                             <label for="report">Compte rendu</label>
                             <textarea class="form-control" id="editor" name="report" rows="20" placeholder="Entrer votre compte rendu...">{{ $tournament->report or '' }}</textarea>
                         </div>
+
+                        <!-- radio -->
+                        <div class="form-group">
+                            <label for="is_ranking">Podium ?</label>
+                            <div class="radio radiobutton">
+                                <label>
+                                    <input type="radio" name="is_ranking" value="0" {{ (!isset($tournament->podium) || (isset($tournament->podium) && $tournament->podium->is_ranking == 0)) ? 'checked' : '' }}>
+                                    Non
+                                </label>
+                                <label class="margin-right-15">
+                                    <input type="radio" name="is_ranking" value="1" {{ (isset($tournament->podium) && $tournament->podium->is_ranking == 1) ? 'checked' : '' }}>
+                                    Oui
+                                </label>
+                            </div>
+                        </div>
                     </div>
 
                     @include('partials._form-error')

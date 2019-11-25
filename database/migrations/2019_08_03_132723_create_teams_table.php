@@ -17,9 +17,10 @@ class CreateTeamsTable extends Migration
             $table->increments('id');
             $table->string("name")->nullable();
             $table->integer("tournament_id")->unsigned()->index();
-            $table->string("rank")->nullable();
-            $table->integer("order_display")->unsigned()->nullable();
+            $table->boolean("display_rank")->default(false);
             $table->timestamps();
+            // $table->string("rank")->nullable();
+            // $table->integer("order_display")->unsigned()->nullable();
 
             $table->foreign('tournament_id')->references('id')->on('tournaments');
         });

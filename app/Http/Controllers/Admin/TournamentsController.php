@@ -70,6 +70,10 @@ class TournamentsController extends Controller
             'formation' => 'required|boolean'
         ]);
 
+        $validatedPodium = request()->validate([
+            'is_ranking' => 'required|boolean'
+        ]);
+
         $validatedPDF = request()->validate([
             'is_finished' => 'nullable',
             "listing" => 'nullable|image',
@@ -89,10 +93,15 @@ class TournamentsController extends Controller
 
         $tournament = Tournament::create($validatedTournament);
 
-        if(isset($validatedPDF['is_finished'])){
-            $podium = Podium::create(['tournament_id' => $tournament->id, 'date' => $tournament->date ]);
+        if(isset($validatedPDF['is_finished'])){          
+            // $podium = Podium::create(['tournament_id' => $tournament->id, 'date' => $tournament->date ]);
+            $podium = new Podium();
+            $podium->tournament_id = $tournament->id;
+            $podium->date = $tournament->date;
             $podium->slug = str_slug($tournament->title . ' ' . $podium->id, '-');
-            $podium->save();
+            $podium->is_ranking = $validatedPodium['is_ranking'];
+
+            $tournament->podium()->save($podium);
         }
 
         if($file = $request->file('rules_pdf')){
@@ -299,17 +308,19 @@ class TournamentsController extends Controller
      */
     public function editPlayers($id){
         $tournament = Tournament::with('members')->findOrFail($id);
-        $playerTournament = $tournament->members()->get()->toArray();
+        $members = Member::all();
 
-        $members = Member::with('club')->get();
-        foreach($members as &$member){
-            $member->participate = false;
-        }
-        $members = $members->keyBy('id');
+        // $playerTournament = $tournament->members()->get()->toArray();
 
-        foreach($tournament->members as $m){
-            $members[$m->id]->participate = true;
-        }
+        // $members = Member::with('club')->get();
+        // foreach($members as &$member){
+        //     $member->participate = false;
+        // }
+        // $members = $members->keyBy('id');
+
+        // foreach($tournament->members as $m){
+        //     $members[$m->id]->participate = true;
+        // }
         
         return view('admin.tournaments.editPlayers', compact('tournament', 'members'));
     }
@@ -317,14 +328,14 @@ class TournamentsController extends Controller
     public function updatePlayers(Request $request, $id){
         $validatedmembers = request()->validate([
             'members.*.id' => 'nullable|numeric',
-            'members.*.rank' => 'nullable|string',
-            'members.*.order_display' => 'nullable|numeric',
+            'members.*.rank' => 'nullable|string'
         ]);
 
         $tournament = Tournament::findOrFail($id);
         if(isset($validatedmembers["members"])){
+            $memberpick;
             foreach($validatedmembers["members"] as $member){
-                $memberpick[$member['id']] = ['rank' => $member['rank'], 'order_display' => $member['order_display']];
+                $memberpick[$member['id']] = ['rank' => $member['rank']];
             }
             $tournament->members()->sync($memberpick);
         }

@@ -22,6 +22,13 @@
     <link rel="stylesheet" href="{{ asset('css/lightbox.min.css') }}">
     <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    @if (isset($banner) && isset($banner->path))
+        <style>
+                #header__img--personalized {
+                    background-image: url("{{asset('storage' . $banner->path)}}");
+                }
+        </style>
+    @endif
     @yield('styles')
 
     <title>Bowling Club - Ozoir</title>

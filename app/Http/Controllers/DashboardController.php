@@ -51,7 +51,7 @@ class DashboardController extends Controller
     }
     
     public function office() {
-        $content = ContentInformation::findOrFail(6);
+        $content = ContentInformation::findOrFail(8);
 
         return view('office', compact('content'))->with($this->mainSharingFunctionality());
     }

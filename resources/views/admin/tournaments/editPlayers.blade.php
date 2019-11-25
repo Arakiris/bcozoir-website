@@ -57,7 +57,6 @@
                                         <tr class="member">
                                             <td><input type="hidden" name="members[{{ $count }}][id]" class="form-control" value="{{ $member->id }}">{{ $member->last_name }} - {{ $member->first_name }}</td>
                                             <td><input type="text" name="members[{{$count}}][rank]" class="form-control" placeholder="Insérer son classement si existant" value="{{ $member->pivot->rank }}"></td>
-                                            <td><input type="number" name="members[{{$count}}][order_display]" class="form-control" placeholder="Ordre d'affichage" value="{{ $member->pivot->order_display  }}"></td>
                                             <td> <button class="btn-delete-member" type="button">Retirer le joueur</button> </td>
                                         </tr>
 
@@ -143,10 +142,11 @@
                 <tr class="member">
                     <td><input type="hidden" name="members[${count}][id]" class="form-control" value="${id}">${name}</td>
                     <td><input type="text" name="members[${count}][rank]" class="form-control" placeholder="Insérer son classement si existant"></td>
-                    <td><input type="number" name="members[${count}][order_display]" class="form-control" placeholder="Ordre d'affichage"></td>
                     <td> <button class="btn-delete-member" type="button">Retirer le joueur</button> </td>
                 </tr>
             `;
+
+            // OLD -> <td><input type="number" name="members[${count}][order_display]" class="form-control" placeholder="Ordre d'affichage"></td> 
             
             addmember.insertAdjacentHTML("beforeend", markup);
             

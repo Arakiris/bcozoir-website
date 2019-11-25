@@ -9,11 +9,8 @@ class Tournament extends Model
 {
     protected $guarded = ['id'];
 
-    protected $dates = [
-        'created_at',
-        'updated_at',
-        'date'
-    ];
+    protected $dates = ['created_at', 'updated_at', 'start_season',
+                        'end_season', 'date'];
 
 
     /**
@@ -37,7 +34,7 @@ class Tournament extends Model
      */
      public function members()
      {
-         return $this->belongsToMany(Member::class)->withPivot('rank', 'order_display');
+         return $this->belongsToMany(Member::class)->withPivot('rank');
      }
 
     /**
@@ -106,7 +103,8 @@ class Tournament extends Model
      * All of them
      */
     public function scopePreviousseason($query, $type){
-        return $query->where([['type_id', '=', $type],  ['date', '>=', Carbon::create($this->yearSeason() - 1, 9, 1, 0, 0, 0)], ['date', '<', Carbon::create($this->yearSeason(), 9, 1, 0, 0, 0)]])->orderBy('date', 'desc');
+        return $query->where([['type_id', '=', $type],  ['start_season', '>=', Carbon::create($this->yearSeason(), 1, 1, 0, 0, 0)], ['start_season', '<', Carbon::create($this->yearSeason(), 9, 1, 0, 0, 0)]])->orderBy('date', 'desc');
+        // return $query->where([['type_id', '=', $type],  ['date', '>=', Carbon::create($this->yearSeason() - 1, 9, 1, 0, 0, 0)], ['date', '<', Carbon::create($this->yearSeason(), 9, 1, 0, 0, 0)]])->orderBy('date', 'desc');
     }
 
     public function scopeTournamentsyear($query, $type, $year) {

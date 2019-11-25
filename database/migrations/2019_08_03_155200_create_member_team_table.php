@@ -16,6 +16,7 @@ class CreateMemberTeamTable extends Migration
         Schema::create('member_team', function (Blueprint $table) {
             $table->integer('member_id')->unsigned()->index();
             $table->integer('team_id')->unsigned()->index();
+            $table->string("rank")->nullable()->default("");
 
             $table->primary(['member_id', 'team_id']);
 

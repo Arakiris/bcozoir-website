@@ -13,7 +13,7 @@
             <li class="aside-left-bar__item"><a class="aside-left-bar__link" href="{{ route('tournoisPrives') }}">Tournois privés</a></li>
             <li class="aside-left-bar__item"><a class="aside-left-bar__link" href="{{ route('championnats') }}">Championnats fédéraux</a></li>
             <li class="aside-left-bar__item"><a class="aside-left-bar__link" href="{{ route('classementPodiums') }}">Classement podiums</a></li>
-            <li class="aside-left-bar__item"><a class="aside-left-bar__link" href="{{ route('podiums') }}">Photos podiums</a></li>
+            
         </ul>
     </div>
     <div class="aside-left-bar__container side-bar-left-green">
@@ -34,6 +34,7 @@
         </ul>
     </div>
     <ul class="aside-left-bar__list side-bar">
+        <li class="aside-left-bar__item"><a class="aside-left-bar__link" href="{{ route('podiums') }}">Photos podiums</a></li>
         <li class="aside-left-bar__item"><a class="aside-left-bar__link" href="{{ route('documentsDivers') }}">Documents divers</a></li>
     </ul>
 </nav>

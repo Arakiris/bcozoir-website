@@ -32,53 +32,11 @@
                     @if((isset($podium->tournament->members) && $podium->tournament->members->count()>0) || isset($podium->tournament->teams) && $podium->tournament->teams->count()>0)
                         <div class="event__single-members event__single-members-ranking">
                             @if ($podium->tournament->formation == 0 && isset($podium->tournament->members) && $podium->tournament->members->count()>0)
-                                <div class="event__noteam-rank">
+                                <div class="event__noteam-rank no-team">
                                     @foreach($podium->tournament->members as $member)
-                                        @if (!is_null($member->pivot->order_display))
-                                            <div class="solo-rank">
+                                        @if (!is_null($member->pivot->rank))
+                                            <div class="event__team-line">
                                                 <div class="event__tooltip event__tooltip-ranking {{ ($member->is_licensee == 'Licencié') ?  'event__tooltip-licensee' : 'event__tooltip-adherent' }}">
-                                                    <p class="event__ranking-paragraph {{ ($member->club_id != 1) ? 'otherClub' : '' }}">{{ $member->last_name }} {{ $member->first_name }}</p>
-                                                    <div class="event__tooltip-event event__tooltip-event-ranking {{ ($member->is_licensee == 'Licencié') ?  'event__tooltip-event-licensee' : 'event__tooltip-event-adherent' }}">
-                                                        <img class="event__tooltip-img" src="{{ ($member->picture->first()) ? asset('storage' . $member->picture->first()->path) : asset('images/blank-profile.png') }}" alt="Photo de {{ $member->last_name }} - {{ $member->first_name }}">
-                                                        <div class="event__tooltip-content">
-                                                            @if(isset($member->birth_date) && !empty($member->birth_date) && $member->birth_date->diffInYears(Carbon\Carbon::now()) < 100)
-                                                                <p class="event__tooltiptext">{{ $member->last_name }} {{ $member->first_name }} - {{ $member->birth_date->diffInYears(Carbon\Carbon::now()) }} ans</p>
-                                                            @else
-                                                                <p class="event__tooltiptext">{{ $member->last_name }} {{ $member->first_name }}</p>
-                                                            @endif
-                                                            <p>{{ $member->club->name }}</p>
-                                                            @if($member->is_licensee === "Licencié")
-                                                                <p class="event__tooltiptext">Licence : {{ ($member->id_licensee) ? $member->id_licensee : '' }}</p>
-                                                                <p class="event__tooltiptext">{{ $member->category->title }}</p>
-                                                                <p class="event__tooltiptext">Moyenne : {{ ($member->score && $member->score->average) ? intval($member->score->average) : "Pas d'enregistrement" }}</p>
-                                                                <p class="event__tooltiptext">Handicap : {{ $member->handicap }}</p>
-                                                                <p class="event__tooltiptext">Bonus vétéran : {{ $member->bonus }}</p>
-                                                            @else
-                                                                <p class="event__tooltiptext">{{ $member->is_licensee }}</p>
-                                                            @endif
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        @endif
-                                    @endforeach
-                                </div>
-                            @endif
-
-                            @if ($podium->tournament->formation == 1 && isset($podium->tournament->teams) && $podium->tournament->teams->count()>0)
-                                <?php $j = 1 ?>
-                                @foreach($podium->tournament->teams as $team)
-                                    <div class="event__team-rank" id="team-{{$j}}">
-                                        <?php $j++ ?>
-                                        @if (!is_null($team->order_display))
-                                            <?php $i = 0 ?>
-                                            @foreach ($team->members as $member)
-                                                @if ($i == 0)
-                                                <?php $i++ ?>
-                                                @else
-                                                    /
-                                                @endif
-                                                <div class="event__tooltip event__tooltip-ranking event__tooltip-team-rank {{ ($member->is_licensee == 'Licencié') ?  'event__tooltip-licensee' : 'event__tooltip-adherent' }}">
                                                     <p class="event__ranking-paragraph {{ ($member->club_id != 1) ? 'otherClub' : '' }}">{{ $member->last_name }} {{ $member->first_name }}</p>
                                                     <div class="event__tooltip-event event__tooltip-event-ranking {{ ($member->is_licensee == 'Licencié') ?  'event__tooltip-event-licensee' : 'event__tooltip-event-adherent' }}">
                                                         <img class="event__tooltip-img" src="{{ ($member->picture->first()) ? asset('storage' . $member->picture->first()->path) : asset('images/blank-profile.png') }}" alt="Photo de {{ $member->last_name }} - {{ $member->first_name }}">
@@ -101,28 +59,68 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            @endforeach
+                                            </div>
                                         @endif
-                                    </div>
+                                    @endforeach
+                                </div>
+                            @endif
+
+                            @if ($podium->tournament->formation == 1 && isset($podium->tournament->teams) && $podium->tournament->teams->count()>0)
+                                @foreach($podium->tournament->teams as $team)
+                                    @if ($team->display_rank)
+                                        <div class="event__team-title"><p class="event__team-text">{{$team->name}}</p></div>
+                                        <div class="event__team-content">
+                                            @foreach ($team->members as $member)
+                                                <div class="event__team-line">
+                                                    <div class="event__tooltip event__tooltip-ranking {{ ($member->is_licensee == 'Licencié') ?  'event__tooltip-licensee' : 'event__tooltip-adherent' }}">
+                                                        <p class="event__ranking-paragraph {{ ($member->club_id != 1) ? 'otherClub' : '' }}">{{ $member->last_name }} {{ $member->first_name }}</p>
+                                                        <div class="event__tooltip-event event__tooltip-event-ranking {{ ($member->is_licensee == 'Licencié') ?  'event__tooltip-event-licensee' : 'event__tooltip-event-adherent' }}">
+                                                            <img class="event__tooltip-img" src="{{ ($member->picture->first()) ? asset('storage' . $member->picture->first()->path) : asset('images/blank-profile.png') }}" alt="Photo de {{ $member->last_name }} - {{ $member->first_name }}">
+                                                            <div class="event__tooltip-content">
+                                                                @if(isset($member->birth_date) && !empty($member->birth_date) && $member->birth_date->diffInYears(Carbon\Carbon::now()) < 100)
+                                                                    <p class="event__tooltiptext">{{ $member->last_name }} {{ $member->first_name }} - {{ $member->birth_date->diffInYears(Carbon\Carbon::now()) }} ans</p>
+                                                                @else
+                                                                    <p class="event__tooltiptext">{{ $member->last_name }} {{ $member->first_name }}</p>
+                                                                @endif
+                                                                <p class="event__tooltiptext">{{ $member->club->name }}</p>
+                                                                @if($member->is_licensee === "Licencié")
+                                                                    <p class="event__tooltiptext">Licence : {{ ($member->id_licensee) ? $member->id_licensee : '' }}</p>
+                                                                    <p class="event__tooltiptext">{{ $member->category->title }}</p>
+                                                                    <p class="event__tooltiptext">Moyenne : {{ ($member->score && $member->score->average) ? intval($member->score->average) : "Pas d'enregistrement" }}</p>
+                                                                    <p class="event__tooltiptext">Handicap : {{ $member->handicap }}</p>
+                                                                    <p class="event__tooltiptext">Bonus vétéran : {{ $member->bonus }}</p>
+                                                                @else
+                                                                    <p class="event__tooltiptext">{{ $member->is_licensee }}</p>
+                                                                @endif
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    @endif
                                 @endforeach
                             @endif
                         </div>
-                    
+
                         <div class="event__single-members event__single-members-ranking">
                             @if ($podium->tournament->formation == 0 && isset($podium->tournament->members) && $podium->tournament->members->count()>0)
                                 @foreach($podium->tournament->members as $member)
                                     @if (!is_null($member->pivot->rank))
-                                        <div class="event__rank-display rank-display"> {{$member->pivot->rank}} </div>
+                                        <div class="event__rank-display"> {{$member->pivot->rank}} </div>
                                     @endif
                                 @endforeach
                             @endif
 
                             @if ($podium->tournament->formation == 1 && isset($podium->tournament->teams) && $podium->tournament->teams->count()>0)
-                                <?php $i = 1 ?>
                                 @foreach($podium->tournament->teams as $team)
-                                    @if (!is_null($team->rank))
-                                        <div class="event__rank-display rank-display" id="rank-{{$i}}">{{$team->rank}}</div>
-                                        <?php $i++ ?>
+                                    @if ($team->display_rank)
+                                        <div class="event__team-ranking-title"><p>&nbsp;</p></div>
+                                        <div class="event__team-content">
+                                            @foreach ($team->members as $member)
+                                                <div class="event__rank-display">{{$member->pivot->rank}}</div>
+                                            @endforeach
+                                        </div>
                                     @endif
                                 @endforeach
                             @endif
@@ -145,19 +143,19 @@
 
 @section('scripts')
     <script>
-        let teams = document.querySelectorAll('[id^="team-"');
+        // let teams = document.querySelectorAll('[id^="team-"');
 
-        teams.forEach(team => {
-            if(team.offsetHeight > 40) {
-                let id = team.id.substr(5);
-                let rank = document.getElementById(`rank-${id}`);
-                rank.insertAdjacentHTML('beforeend', '<br><br>');
-            }
-            else if (team.offsetHeight > 60) {
-                let id = team.id.substr(5);
-                let rank = document.getElementById(`rank-${id}`);
-                rank.insertAdjacentHTML('beforeend', '<br><br><br>');
-            }
-        });
+        // teams.forEach(team => {
+        //     if(team.offsetHeight > 40) {
+        //         let id = team.id.substr(5);
+        //         let rank = document.getElementById(`rank-${id}`);
+        //         rank.insertAdjacentHTML('beforeend', '<br><br>');
+        //     }
+        //     else if (team.offsetHeight > 60) {
+        //         let id = team.id.substr(5);
+        //         let rank = document.getElementById(`rank-${id}`);
+        //         rank.insertAdjacentHTML('beforeend', '<br><br><br>');
+        //     }
+        // });
     </script>
 @endsection

@@ -53,12 +53,12 @@ class TournamentsController extends Controller
         $year = $validatedYear['id'];
 
         $rankingYear = Podium::with(['tournament',
-                                        'tournament.teams' => function($query){ $query->orderBy('order_display', 'asc');},
-                                        'tournament.teams.members',
+                                        'tournament.teams' => function($query){ $query->orderBy('name', 'asc'); },
+                                        'tournament.teams.members' => function($query){ $query->orderBy('last_name', 'asc')->orderBy('first_name', 'asc');},
                                         'tournament.teams.members.picture',
                                         'tournament.teams.members.club' => function($query){ $query->select(['id','name']); },
                                         'tournament.teams.members.category' => function($query){ $query->select(['id','title']);},
-                                        'tournament.members' => function($query){ $query->orderBy('order_display', 'asc');},
+                                        'tournament.members' => function($query){ $query->orderBy('last_name', 'asc')->orderBy('first_name', 'asc');},
                                         'tournament.members.picture',
                                         'tournament.members.club' => function($query){ $query->select(['id','name']); },
                                         'tournament.members.category' => function($query){ $query->select(['id','title']);}
@@ -315,22 +315,22 @@ class TournamentsController extends Controller
         $title = "Archives Tournois BC Ozoir";
         $years = Tournament::selectRaw("YEAR(start_season) as year")
                                 ->where('type_id', '=', 1)
-                                ->where('date', '<', Carbon::create($this->yearSeason(), 9, 1, 0, 0, 0))
+                                ->where('start_season', '<', Carbon::create($this->yearSeason(), 8, 31, 0, 0, 0))
                                 ->distinct()
                                 ->orderBy('date', 'desc')->get();
 
+        $type = 1;
+
         if(!$years->isEmpty()){
-        $lastYear = $years->shift()->year;
+            $lastYear = $years->shift()->year;
             if($lastYear == $this->yearSeason())
-                $tournaments = Tournament::previousseason(1)->get();
+                $tournaments = Tournament::previousseason($type)->get();
             else
-                $tournaments = Tournament::tournamentsyear(1 ,$lastYear)->get();
+                $tournaments = Tournament::tournamentsyear($type, $lastYear)->get();
         }
         else {
             $leagues = null;
         }
-
-        $type = 1;
 
         return view('archivestournaments', compact('title', 'tournaments', 'years', 'type'))->with($this->mainSharingFunctionality());
     }
@@ -342,22 +342,24 @@ class TournamentsController extends Controller
         $title = "Archives Tournois Privés";
         $years = Tournament::selectRaw("YEAR(start_season) as year")
                         ->where('type_id', '=', 2)
-                        ->where('date', '<', Carbon::create($this->yearSeason(), 9, 1, 0, 0, 0))
+                        ->where('start_season', '<', Carbon::create($this->yearSeason(), 9, 1, 0, 0, 0))
                         ->distinct()
                         ->orderBy('date', 'desc')->get();
+
+        $type = 2;
 
         if(!$years->isEmpty()){
         $lastYear = $years->shift()->year;
             if($lastYear == $this->yearSeason())
-                $tournaments = Tournament::previousseason(2)->get();
+                $tournaments = Tournament::previousseason($type)->get();
             else
-                $tournaments = Tournament::tournamentsyear(2 ,$lastYear)->get();
+                $tournaments = Tournament::tournamentsyear($type ,$lastYear)->get();
         }
         else {
             $leagues = null;
         }
 
-        $type = 2;
+        
 
         return view('archivestournaments', compact('title', 'tournaments', 'years', 'type'))->with($this->mainSharingFunctionality());
     }
@@ -369,22 +371,24 @@ class TournamentsController extends Controller
         $title = "Archives Championnats Fédéraux";
         $years = Tournament::selectRaw("YEAR(start_season) as year")
                 ->where('type_id', '=', 3)
-                ->where('date', '<', Carbon::create($this->yearSeason(), 9, 1, 0, 0, 0))
+                ->where('start_season', '<', Carbon::create($this->yearSeason(), 9, 1, 0, 0, 0))
                 ->distinct()
                 ->orderBy('date', 'desc')->get();
+
+        $type = 3;
 
         if(!$years->isEmpty()){
         $lastYear = $years->shift()->year;
             if($lastYear == $this->yearSeason())
-                $tournaments = Tournament::previousseason(3)->get();
+                $tournaments = Tournament::previousseason($type)->get();
             else
-                $tournaments = Tournament::tournamentsyear(3 ,$lastYear)->get();
+                $tournaments = Tournament::tournamentsyear($type ,$lastYear)->get();
         }
         else {
             $leagues = null;
         }
 
-        $type = 3;
+        
 
         return view('archivestournaments', compact('title', 'tournaments', 'years', 'type'))->with($this->mainSharingFunctionality());
     }
@@ -393,9 +397,9 @@ class TournamentsController extends Controller
      * Ranking of podia if they exists
      */
     public function rankingPodia(){
-        $podia = Podium::with(['tournament.teams' => function($query){ $query->orderBy('order_display', 'asc');},
-                               'tournament.teams.members',
-                               'tournament.members' => function($query){ $query->orderBy('order_display', 'asc');}
+        $podia = Podium::with(['tournament.teams' => function($query){ $query->orderBy('name', 'asc'); },
+                               'tournament.teams.members' => function($query){ $query->orderBy('last_name', 'asc')->orderBy('first_name', 'asc');},
+                               'tournament.members' => function($query){ $query->orderBy('last_name', 'asc')->orderBy('first_name', 'asc');}
                                ])->currentpodia()->paginate(8);
 
         return view('rankingpodia', compact('podia'))->with($this->mainSharingFunctionality());
@@ -417,17 +421,17 @@ class TournamentsController extends Controller
 
             if($lastYear == $this->yearSeason()){
                 $podia = Podium::with(['tournament',
-                                        'tournament.teams' => function($query){ $query->orderBy('order_display', 'asc');},
-                                        'tournament.teams.members',
-                                        'tournament.members' => function($query){ $query->orderBy('order_display', 'asc');}
+                                        'tournament.teams' => function($query){ $query->orderBy('name', 'asc'); },
+                                        'tournament.teams.members' => function($query){ $query->orderBy('last_name', 'asc')->orderBy('first_name', 'asc');},
+                                        'tournament.members' => function($query){ $query->orderBy('last_name', 'asc')->orderBy('first_name', 'asc');}
                                     ])->previousseason()->get();
             }
             else{
                 $podia = Podium::with(['tournament',
-                                                'tournament.teams' => function($query){ $query->orderBy('order_display', 'asc');},
-                                                'tournament.teams.members',
-                                                'tournament.members' => function($query){ $query->orderBy('order_display', 'asc');}
-                                            ])->podiayear($lastYear)->get();
+                                        'tournament.teams' => function($query){ $query->orderBy('name', 'asc'); },
+                                        'tournament.teams.members' => function($query){ $query->orderBy('last_name', 'asc')->orderBy('first_name', 'asc');},
+                                        'tournament.members' => function($query){ $query->orderBy('last_name', 'asc')->orderBy('first_name', 'asc');}
+                                    ])->podiayear($lastYear)->get();
             }
         }
         else {

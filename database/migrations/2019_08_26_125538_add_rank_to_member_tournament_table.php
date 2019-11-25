@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddRankAndOrderDisplayToMemberTournamentTable extends Migration
+class AddRankToMemberTournamentTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,7 +15,7 @@ class AddRankAndOrderDisplayToMemberTournamentTable extends Migration
     {
         Schema::table('member_tournament', function (Blueprint $table) {
             $table->string("rank")->nullable();
-            $table->integer("order_display")->unsigned()->nullable();
+            // $table->integer("order_display")->unsigned()->nullable();
         });
     }
 
@@ -28,7 +28,7 @@ class AddRankAndOrderDisplayToMemberTournamentTable extends Migration
     {
         Schema::table('member_tournament', function (Blueprint $table) {
             $table->dropColumn('rank');
-            $table->dropColumn('order_display');
+            // $table->dropColumn('order_display');
         });
     }
 }

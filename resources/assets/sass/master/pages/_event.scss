@@ -13,6 +13,10 @@
         justify-content: center;
     }
 
+    &__rank-display {
+        margin-left: 1rem;
+    }
+
 
     &__table {
         display: grid;
@@ -59,8 +63,10 @@
         }
 
         &-ranking {
+            max-width: 100rem;
+            margin: 0 auto;
             padding: 3rem 5rem;
-            grid-template-columns: minmax(15rem, 2fr) minmax(35rem, 5fr) minmax(15rem, 2fr);
+            grid-template-columns: minmax(15rem, 2fr) minmax(20rem, 4fr) minmax(15rem, 1fr);
         }
 
         &-podiums {
@@ -108,7 +114,7 @@
         &-ranking {
             display: flex;
             flex-direction: column;
-            padding: 2rem 2rem;
+            padding: 0;
             justify-content: center;
         }
     }
@@ -141,6 +147,11 @@
     &__team {
         &-title {
             background-color: var(--table-team-color);
+            margin-bottom: 0.8rem;
+            padding: 0.4rem;
+        }
+
+        &-ranking-title {
             margin-bottom: 0.8rem;
             padding: 0.4rem;
         }

@@ -19,6 +19,8 @@ class ContentInformationsTableSeeder extends Seeder
             ['name' => 'version', 'description' => ''],
             ['name' => 'mentions légales', 'description' => ''],
             ['name' => 'appel partenaires', 'description' => ''],
+            ['name' => 'logo image', 'description' => ''],
+            ['name' => 'banniere image', 'description' => ''],
             ['name' => 'bureau image', 'description' => ''],
         ]);
     }

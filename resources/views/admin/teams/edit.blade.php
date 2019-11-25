@@ -42,23 +42,26 @@
                                 <input type="text" id="name" name="name" class="form-control" placeholder="Veuillez entrer le nom de l'équipe" value="{{ $team->name }}">
                             </div>
 
-                            <!-- text input -->
+                            <!-- radio -->
                             <div class="form-group">
-                                <label for="name">Classement</label>
-                                <input type="text" id="rank" name="rank" class="form-control" placeholder="Insérer le classement de  l'équipe si existant" value="{{ $team->rank }}">
-                            </div>
-
-                            <!-- text input -->
-                            <div class="form-group">
-                                <label for="name">Ordre d'affichage</label>
-                                <input type="number" id="order_display" name="order_display" class="form-control" placeholder="Insérer l'ordre d'affichage du classement" value="{{ $team->order_display }}">
+                                <label for="display_rank">Afficher le classement ?</label>
+                                <div class="radio radiobutton">
+                                    <label>
+                                        <input type="radio" name="display_rank"  value="0" {{ ($team->display_rank == 0) ? 'checked' : '' }}>
+                                        Non
+                                    </label>
+                                    <label class="margin-right-15">
+                                        <input type="radio" name="display_rank"  value="1" {{ ($team->display_rank == 1) ? 'checked' : '' }}>
+                                        Oui
+                                    </label>
+                                </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="name">Nom du membre à ajouter</label>
                                 <input id="autocomplete-members" class="dropdown-input"/>
                             </div>
-    
+
                             <table class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
@@ -73,6 +76,7 @@
                                     @foreach($team->members as $member)
                                         <tr class="member">
                                             <td><input type="hidden" name="members[{{ $count }}][id]" class="form-control" value="{{ $member->id }}">{{ $member->last_name }} - {{ $member->first_name }}</td>
+                                            <td><input type="text" name="members[{{$count}}][rank]" class="form-control" placeholder="Insérer son classement si existant" value="{{ $member->pivot->rank }}"></td>
                                             <td> <button class="btn-delete-member" type="button">Retirer le joueur</button> </td>
                                         </tr>
     
@@ -105,8 +109,8 @@
                             <form method="POST" action="/administration/tournois/{{$tournament->id}}/equipe/{{ $team->id }}" role="form">
                                 {{ csrf_field() }}
                                 {{ method_field('DELETE') }}
-                                <a class="btn btn-default" href="{{ route('admin.tournois.edit', $tournament->id) }}">Retour</a>
                                 <button type="submit" class="btn btn-danger pull-right margin-right-10">Détruire</button>
+                                <a class="btn btn-default pull-right margin-right-10" href="{{ route('admin.tournois.edit', $tournament->id) }}">Retour</a>
                             </form>
                         </div>
                     </div>
@@ -168,6 +172,7 @@
             const markup = `
                 <tr class="member">
                     <td><input type="hidden" name="members[${count}][id]" class="form-control" value="${id}">${name}</td>
+                    <td><input type="text" name="members[${count}][rank]" class="form-control" placeholder="Insérer son classement si existant"></td>
                     <td> <button class="btn-delete-member" type="button">Retirer le joueur</button> </td>
                 </tr>
             `;

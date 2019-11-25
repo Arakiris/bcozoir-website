@@ -1,10 +1,11 @@
 <header class="header">
     <div class="header__logo">
         <a href="{{ route('welcome') }}">
-            <img src="{{ asset('images/logo2.jpg') }}" alt="Logo de bienvenue du site de bowling d'Ozoir" class="header__logo-img" >
+            <img src="{{ (isset($logo) && isset($logo->path)) ? asset('storage' . $logo->path) : asset('images/logo2.jpg') }}" 
+                alt="Logo de bienvenue du site de bowling d'Ozoir" class="header__logo-img" >
         </a>
     </div>
-    <div class="header__img">
+    <div class="header__img" id="header__img--personalized">
         <p class="header__img-date" data-text="<?php setlocale(LC_TIME, 'fr'); echo ucfirst(utf8_encode(strftime("%A %d %B %Y", \Carbon\Carbon::now()->timestamp))); ?>">
             <?php setlocale(LC_TIME, 'fr'); echo ucfirst(utf8_encode(strftime("%A %d %B %Y", \Carbon\Carbon::now()->timestamp))); ?>
         </p>

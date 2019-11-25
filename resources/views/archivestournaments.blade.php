@@ -10,7 +10,7 @@
     </div>
 
     @if(isset($tournaments))
-        <?php $previousYear = $tournaments[0]->date->format('Y'); ?>
+        <?php $previousYear = $tournaments[0]->start_season->format('Y'); ?>
         <div class="archives">
             <div class="archives__content main-content-archives">
 

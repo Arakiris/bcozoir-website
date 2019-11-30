@@ -46,23 +46,26 @@
 </div>
 
 <div class="aside-left-counter">
-    <div class="aside-left-counter__title counter-title">
-        <h2 class="heading-2 title">CONNEXIONS</h2>
+    <div class="aside-left-counter__title">
+        <h2 class="heading-2 aside-left-counter__heading">CONNEXIONS</h2>
     </div>
 
-    <div><img class="aside-left-counter__img counter-img" src="{{ asset('images/Guest-online.png') }}" alt="Image signifiant les visiteurs actuellement en ligne"></div>
-    <div>{{ $onlineguest }}</div>
-    <div>En ligne</div>
-
-    <div><img class="aside-left-counter__img counter-img" src="{{ asset('images/Visitor-counter.png') }}" alt="Image signifiant le nombre de visiteurs du jour"></div>
-    <div>{{ $stat->daily_visits }}</div>
-    <div>Visites aujourd'hui</div>
-
-    <div><img class="aside-left-counter__img counter-img" src="{{ asset('images/Visitor-counter.png') }}" alt="Image signifiant le nombre de visiteurs du mois"></div>
-    <div>{{ $stat->month_visits }}</div>
-    <div>Visites du mois en cours</div>
-
-    <div><img class="aside-left-counter__img counter-img-last" src="{{ asset('images/Total-visitor-counter.png') }}" alt="Image signifiant le nombre de visiteurs dupuis la création du site"></div>
-    <div>{{ $stat->since_creation_visits }}</div>
-    <div>Visites depuis le 24 Janvier 2018</div>
+    <div class="aside-left-counter__wrapper">
+        <div class="aside-left-counter__content">
+            <h5 class="aside-left-counter__content-title">En ligne</h5>
+            <p class="aside-left-counter__content-text">{{ $onlineguest }}</p>
+        </div>
+        <div class="aside-left-counter__content">
+            <h5 class="aside-left-counter__content-title">Aujourd'hui</h5>
+            <p class="aside-left-counter__content-text">{{ $stat->daily_visits }}</p>
+        </div>
+        <div class="aside-left-counter__content">
+            <h5 class="aside-left-counter__content-title">Mois en cours</h5>
+            <p class="aside-left-counter__content-text">{{ $stat->month_visits }}</p>
+        </div>
+        <div class="aside-left-counter__content">
+            <h5 class="aside-left-counter__content-title">24/01/18 <span class="aside-left-counter__content-title--arrow">&#10132;</span> </h5>
+            <p class="aside-left-counter__content-text">{{ $stat->since_creation_visits }}</p>
+        </div>
+    </div>
 </div>

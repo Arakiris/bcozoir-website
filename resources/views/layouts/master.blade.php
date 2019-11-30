@@ -16,6 +16,7 @@
     <meta name="description" content="Tous concernant BC Ozoir - Bowling Club Ozoir, informations, tournois, ligues, membres, listing, photos, vidéos, tournois future et plus. BC Ozoir est affilié à la FFBSQ et est présent en divisions régionales." />
     <meta name="keywords" content="bowling, Ozoir, bowling club, bowling ozoir, bowling 77, club, bcozoir, tournoi, amitie" />
     @yield('keywords')
+    <link href="https://fonts.googleapis.com/css?family=Muli:400,400i,600,700,700i&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('bower_components/AdminLTE/plugins/fullcalendar/fullcalendar.css') }}">
     <link rel="stylesheet" href="{{ asset('slick/slick.css') }}">
     <link rel="stylesheet" href="{{ asset('slick/slick-theme.css') }}">

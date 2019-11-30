@@ -103,7 +103,7 @@ class Tournament extends Model
      * All of them
      */
     public function scopePreviousseason($query, $type){
-        return $query->where([['type_id', '=', $type],  ['start_season', '>=', Carbon::create($this->yearSeason(), 1, 1, 0, 0, 0)], ['start_season', '<', Carbon::create($this->yearSeason(), 9, 1, 0, 0, 0)]])->orderBy('date', 'desc');
+        return $query->where([['type_id', '=', $type],  ['start_season', '>=', Carbon::create($this->yearSeason(), 8, 1, 0, 0, 0)], ['start_season', '<', Carbon::create($this->yearSeason(), 9, 1, 0, 0, 0)]])->orderBy('date', 'desc');
         // return $query->where([['type_id', '=', $type],  ['date', '>=', Carbon::create($this->yearSeason() - 1, 9, 1, 0, 0, 0)], ['date', '<', Carbon::create($this->yearSeason(), 9, 1, 0, 0, 0)]])->orderBy('date', 'desc');
     }
 
@@ -115,7 +115,7 @@ class Tournament extends Model
         else
             $endDate = Carbon::create(intval($year), 10, 1, 0, 0, 0);
 
-        return $query->where([['type_id', '=', $type], ['start_season', '>=', Carbon::create($year, 1, 1, 0, 0, 0)], ['start_season', '<', $endDate]])->orderBy('date', 'desc');
+        return $query->where([['type_id', '=', $type], ['start_season', '>=', Carbon::create($year, 8, 1, 0, 0, 0)], ['start_season', '<', $endDate]])->orderBy('date', 'desc');
     }
 
     private function yearSeason() {

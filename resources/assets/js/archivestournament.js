@@ -40,7 +40,6 @@ window.createTournamentArchives = function(lenghtlast, previousYear, url, url_ho
         renderLoader(parent);
 
         getDataAjax(url, id, token).then(tournaments => {
-            console.log(tournaments);
             renderTournament(tournaments, parent);
 
             if(tournaments.length > 5){
@@ -124,10 +123,9 @@ window.createTournamentArchives = function(lenghtlast, previousYear, url, url_ho
 
     const renderLineTournament = (tournament, parent) => {
         let dateString = tournament.date.substring(0, 10).split('-');
-        let date = new Date(dateString[0], dateString[1], dateString[2]);
+        let date = new Date(dateString[0], parseInt(dateString[1]) - 1, dateString[2]);
 
         let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-
         let dateFormat = date.toLocaleString('fr-FR', options);
         dateFormat = dateFormat.charAt(0).toUpperCase() + dateFormat.slice(1);
 

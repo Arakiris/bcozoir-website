@@ -120,7 +120,7 @@ window.createRankingArchives = function(lenghtlast, previousYear, url, url_image
 
     const renderLineRanking = (podium, parent) => {
         let dateString = podium.date.substring(0, 10).split('-');
-        let date = new Date(dateString[0], dateString[1], dateString[2]);
+        let date = new Date(dateString[0], parseInt(dateString[1]) - 1, dateString[2]);
 
         let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
 

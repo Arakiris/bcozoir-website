@@ -4,7 +4,7 @@ use Faker\Generator as Faker;
 use Carbon\Carbon;
 
 $factory->define(App\Tournament::class, function (Faker $faker) {
-    $year = rand(2017, 2019);
+    $year = rand(2015, 2019);
     $beginningSeason = Carbon::create($year, 9, 1);
     $endSeason = Carbon::create($year + 1, 9, 1);
     $date = $faker->dateTimeBetween($beginningSeason, $endSeason, $timezone = date_default_timezone_get());

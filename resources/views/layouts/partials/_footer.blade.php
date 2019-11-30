@@ -7,6 +7,6 @@
     </ul>
 
     <p class="copyright">
-        &copy; Copyright 2017-2019 BC Ozoir. Tous droits réservés.
+        &copy; Copyright 2017-2020 BC Ozoir. Tous droits réservés.
     </p>
 </footer>

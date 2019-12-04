@@ -32,7 +32,7 @@ class LeaguesController extends Controller
         $title = 'Ligue ' . $yearNow . '-' . ($yearNow + 1);
         $leagues = League::with(['members' => function($query){
             $query->orderBy('last_name', 'asc')->orderBy('first_name', 'asc');
-        }])->presentleague()->paginate(2);
+        }])->presentleague()->paginate(6);
 
         return view('leagues', compact('leagues', 'title'))->with($this->mainSharingFunctionality());
     }

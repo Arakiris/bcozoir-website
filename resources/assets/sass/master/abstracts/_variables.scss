@@ -56,9 +56,13 @@ $black-color: #2d2d2d;
                     0 0 6px #f8e134, 0 0 8px #f8d21a, 0 0 10px #eb9a0d, 
                     0 0 10px #eb9a0d, 0 0 12px #ea9506;
 
-    --pagination-color: #3D315B;
-    --pagination-color-light: #444B6E;
-    --pagination-color-active: #9AB87A;
+    --counter-bg-color: var(--grey-color);
+    --counter-rectangle-bg-color: var(--grey-color-darkest);
+
+    --pagination-color: #717171;
+    --pagination-border-color: #505050; // #3D315B
+    --pagination-bg-color: #f5f5f5; // #444B6E
+    --pagination-bg-color-active: #676767; // #9AB87A
 
     --table-title-color: #7030a0;
     --table-team-color: #9055c1;

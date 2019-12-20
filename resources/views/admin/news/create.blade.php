@@ -40,7 +40,7 @@
                     <!-- textarea -->
                     <div class="form-group">
                         <label for="body">Contenu de l'information</label>
-                        <textarea name="body" class="ckeditor form-control" rows="20" placeholder="Veuillez entrer le contenu de l'information"></textarea>
+                        <textarea name="body"class="ckeditor form-control" rows="20" placeholder="Veuillez entrer le contenu de l'information"></textarea>
                     </div>
                     
                     @include('partials._form-error')
@@ -58,4 +58,8 @@
     </div>
 </section>
 <!-- /.content -->
+@endsection
+
+@section('scripts')
+
 @endsection

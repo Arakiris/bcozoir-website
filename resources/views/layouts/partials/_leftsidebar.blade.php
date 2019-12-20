@@ -9,11 +9,18 @@
         
         <ul class="aside-left-bar__list side-bar">
             <li class="aside-left-bar__item"><a class="aside-left-bar__link" href="{{ route('ligues') }}">Ligues</a></li>
-            <li class="aside-left-bar__item"><a class="aside-left-bar__link" href="{{ route('tournoisOzoir') }}">Tournois BC Ozoir</a></li>
+            <li class="aside-left-bar__item aside-left-bar__item-dropdown">
+                <div class="aside-left-bar__dropdown-btn">Tournois</div>
+                <ul class="aside-left-bar__dropdown">
+                    <li class="aside-left-bar__dropdown-item"><a class="aside-left-bar__link" href="{{ route('tournoisOzoir') }}">Tournois d'Ozoir</a></li>
+                    <li class="aside-left-bar__dropdown-item"><a class="aside-left-bar__link" href="{{ route('tournoisPrives') }}">Tournois Privés</a></li>
+                    <li class="aside-left-bar__dropdown-item"><a class="aside-left-bar__link" href="{{ route('championnats') }}">Championnats fédéraux</a></li>
+                </ul>
+            </li>
+            {{-- <li class="aside-left-bar__item"><a class="aside-left-bar__link" href="{{ route('tournoisOzoir') }}">Tournois BC Ozoir</a></li>
             <li class="aside-left-bar__item"><a class="aside-left-bar__link" href="{{ route('tournoisPrives') }}">Tournois privés</a></li>
-            <li class="aside-left-bar__item"><a class="aside-left-bar__link" href="{{ route('championnats') }}">Championnats fédéraux</a></li>
-            <li class="aside-left-bar__item"><a class="aside-left-bar__link" href="{{ route('classementPodiums') }}">Classement podiums</a></li>
-            
+            <li class="aside-left-bar__item"><a class="aside-left-bar__link" href="{{ route('championnats') }}">Championnats fédéraux</a></li> --}}
+            <li class="aside-left-bar__item"><a class="aside-left-bar__link" href="{{ route('classementPodiums') }}">Classement podiums</a></li> 
         </ul>
     </div>
     <div class="aside-left-bar__container side-bar-left-green">
@@ -22,7 +29,6 @@
             <li class="aside-left-bar__item"><a class="aside-left-bar__link" href="{{ route('archivesligues') }}">Ligues</a></li>
             {{-- <li class="aside-left-bar__item"><a class="aside-left-bar__link" href="{{ route('archiveschoix') }}">Tournois</a></li> --}}
             <li class="aside-left-bar__item aside-left-bar__item-dropdown">
-                {{-- Tournois --}}
                 <div class="aside-left-bar__dropdown-btn">Tournois</div>
                 <ul class="aside-left-bar__dropdown">
                     <li class="aside-left-bar__dropdown-item"><a class="aside-left-bar__link" href="{{ route('vieuxtournoisOzoir') }}">Tournois d'Ozoir</a></li>

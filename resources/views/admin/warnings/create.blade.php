@@ -29,7 +29,7 @@
                     <!-- textarea -->
                     <div class="form-group">
                         <label for="body">Contenu de l'alerte</label>
-                        <textarea id="editor" name="body" class="form-control" rows="3" placeholder="Veuillez entrer le contenu de l'actualité"></textarea>
+                        <textarea name="body" class="ckeditor form-control" rows="3" placeholder="Veuillez entrer le contenu de l'actualité"></textarea>
                     </div>
                     
                     <!-- date input -->
@@ -59,4 +59,8 @@
     </div>
 </section>
 <!-- /.content -->
+@endsection
+
+@section('scripts')
+
 @endsection

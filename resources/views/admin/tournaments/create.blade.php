@@ -195,7 +195,7 @@
 
                         <div class="form-group after_end">
                             <label for="report">Compte rendu</label>
-                            <textarea class="form-control" id="editor" name="report" rows="20" placeholder="Entrer votre compte rendu...">{{ $tournament->report or '' }}</textarea>
+                            <textarea class="ckeditor form-control" name="report" rows="20" placeholder="Entrer votre compte rendu...">{{ $tournament->report or '' }}</textarea>
                         </div>
 
                         <!-- radio -->

@@ -72,12 +72,14 @@
 	<script>
 		$(function () {
 			$('.sortingTable').DataTable({
+        		stateSave: true,
 				"pageLength": 100,
 				"language": {
 					url : '{{ asset('bower_components/AdminLTE/plugins/datatables/i18n/French.json') }}'
 				}
 			});
 			$('.sortingTable2').DataTable({
+        		stateSave: true,
 				"pageLength": 100,
 				"language": {
 					url : '{{ asset('bower_components/AdminLTE/plugins/datatables/i18n/French.json') }}'
@@ -97,12 +99,6 @@
 				"paging": false,
 				"lengthChange": false,
 				"searching": false
-			});
-		});
-		$(function () {
-			CKEDITOR.replace('editor', {
-                language: 'fr',
-                customConfig: "{{ asset('bower_components/AdminLTE/plugins/ckeditor/config.js') }}"
 			});
 		});
 	</script>

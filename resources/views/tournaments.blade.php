@@ -8,7 +8,7 @@
 <div class="content__title">
     <h1 class="heading-1">{{ $title }}</h1>
     <p class="content__paragraph">
-        @if(isset($futur) && ($futur == true))
+        @if((isset($futur) && ($futur == true)) || (isset($tournaments) && $tournaments->count() == 1))
             Cliquer sur le tournoi pour avoir le r&egraveglement
         @else
             Cliquer sur les tournois pour avoir le r&egraveglement

@@ -12,14 +12,11 @@
             <li class="aside-left-bar__item aside-left-bar__item-dropdown">
                 <div class="aside-left-bar__dropdown-btn">Tournois</div>
                 <ul class="aside-left-bar__dropdown">
-                    <li class="aside-left-bar__dropdown-item"><a class="aside-left-bar__link" href="{{ route('tournoisOzoir') }}">Tournois d'Ozoir</a></li>
+                    <li class="aside-left-bar__dropdown-item"><a class="aside-left-bar__link" href="{{ route('tournoisOzoir') }}">Tournois BC Ozoir</a></li>
                     <li class="aside-left-bar__dropdown-item"><a class="aside-left-bar__link" href="{{ route('tournoisPrives') }}">Tournois Privés</a></li>
                     <li class="aside-left-bar__dropdown-item"><a class="aside-left-bar__link" href="{{ route('championnats') }}">Championnats fédéraux</a></li>
                 </ul>
             </li>
-            {{-- <li class="aside-left-bar__item"><a class="aside-left-bar__link" href="{{ route('tournoisOzoir') }}">Tournois BC Ozoir</a></li>
-            <li class="aside-left-bar__item"><a class="aside-left-bar__link" href="{{ route('tournoisPrives') }}">Tournois privés</a></li>
-            <li class="aside-left-bar__item"><a class="aside-left-bar__link" href="{{ route('championnats') }}">Championnats fédéraux</a></li> --}}
             <li class="aside-left-bar__item"><a class="aside-left-bar__link" href="{{ route('classementPodiums') }}">Classement podiums</a></li> 
         </ul>
     </div>
@@ -31,12 +28,12 @@
             <li class="aside-left-bar__item aside-left-bar__item-dropdown">
                 <div class="aside-left-bar__dropdown-btn">Tournois</div>
                 <ul class="aside-left-bar__dropdown">
-                    <li class="aside-left-bar__dropdown-item"><a class="aside-left-bar__link" href="{{ route('vieuxtournoisOzoir') }}">Tournois d'Ozoir</a></li>
+                    <li class="aside-left-bar__dropdown-item"><a class="aside-left-bar__link" href="{{ route('vieuxtournoisOzoir') }}">Tournois BC Ozoir</a></li>
                     <li class="aside-left-bar__dropdown-item"><a class="aside-left-bar__link" href="{{ route('vieuxtournoisPrives') }}">Tournois Privés</a></li>
                     <li class="aside-left-bar__dropdown-item"><a class="aside-left-bar__link" href="{{ route('vieuxchampionnats') }}">Championnats fédéraux</a></li>
                 </ul>
             </li>
-            <li class="aside-left-bar__item"><a class="aside-left-bar__link" href="{{ route('archivesClassementPodiums') }}">Classements podiums</a></li>
+            <li class="aside-left-bar__item"><a class="aside-left-bar__link" href="{{ route('archivesClassementPodiums') }}">Classement podiums</a></li>
         </ul>
     </div>
     <ul class="aside-left-bar__list side-bar">

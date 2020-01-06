@@ -129,6 +129,8 @@
                                             @foreach($podium->tournament->members as $member)
                                                 @if (!is_null($member->pivot->rank))
                                                     <div class="event__rank-display"> {{$member->pivot->rank}} </div>
+                                                @else
+                                                    <div class="event__rank-display"> &nbsp; </div>
                                                 @endif
                                             @endforeach
                                         @endif

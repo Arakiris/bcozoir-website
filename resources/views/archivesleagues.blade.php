@@ -7,6 +7,9 @@
 @section('content')
     <div class="content__title main-content-title">
         <h1 class="heading-1">{{ $title }}</h1>
+        <p class="content__paragraph">
+            Cliquer sur la ligue pour avoir le r&egraveglement 
+        </p>
     </div>
 
     @if(isset($leagues))

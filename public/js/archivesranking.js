@@ -169,6 +169,7 @@ window.createRankingArchives = function (lenghtlast, previousYear, url, url_imag
     function getDataRanking(id, token, parent, url) {
         renderLoader(parent);
         getDataAjax(url, id, token).then(function (podia) {
+            console.log(podia);
             renderRanking(podia, parent);
 
             if (podia.length > 5) {

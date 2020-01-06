@@ -78,7 +78,7 @@ class Podium extends Model
         if($year == $now->year)
             $endDate = $now;
         else
-            $endDate = Carbon::create($year, 12, 31, 0, 0, 0);
+            $endDate = Carbon::create(intval($year) + 1, 8, 31, 0, 0, 0);
 
         return $query->where([['is_ranking', '=', '1'], ['date', '>=', Carbon::create($year, 1, 1, 0, 0, 0)], ['date', '<=', $endDate]])->orderBy('date', 'desc');
     }

@@ -58,7 +58,7 @@ class ScoresController extends Controller
             'number_lines' => 'required|numeric'
         ]);
 
-        $validatedHistoricalPath = request()->validate(['historical_path' => 'required|image']);
+        $validatedHistoricalPath = request()->validate(['historical_path' => 'nullable|image']);
 
         $member = Member::findOrFail($idMember);
         

@@ -2,7 +2,7 @@
 @section('content')
 <!-- Content Header (Page header) -->
 <section class="content-header">
-    <h1> Gestion des scores du site internet </h1>
+    <h1> Gestion de la moyenne du listing FFBSQ </h1>
 
     <ol class="breadcrumb">
         <li><i class="fa fa-dashboard"></i>Membres</li>
@@ -19,7 +19,7 @@
         <!-- general form elements disabled -->
         <div class="box box-warning">
             <div class="box-header with-border">
-                <h3 class="box-title">Cr&eacute;er un nouveau score</h3>
+                <h3 class="box-title">Cr&eacute;er une nouvelle moyenne</h3>
             </div>
 
             <!-- /.box-header -->
@@ -39,7 +39,7 @@
                     
                     <div class="form-group margin-top-05">
                         <label for="average">Moyenne</label>
-                        <input type="text" id="average" name="average" class="form-control" placeholder="Veuillez entrer la moyenne des scores" value="{{ $score->average }}" required>
+                        <input type="text" id="average" name="average" class="form-control" placeholder="Veuillez entrer la moyenne des scores" value="{{ intval($score->average) }}" required>
                     </div>
 
                     <div class="form-group">
@@ -48,7 +48,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="historical_path">Historique</label>
+                        <label for="historical_path">Divers</label>
                         <input type="file" id="historical_path" name="historical_path" accept="image/*">
                     </div>
                     @include('partials._form-error')

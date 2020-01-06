@@ -60,11 +60,11 @@
             backface-visibility: hidden;
             overflow: hidden;
 
-            & > &-item {
+            &-item {
                 padding-left: 2rem;
             }
 
-            & > &-show {
+            &-show {
                 visibility: visible;
                 opacity: 1;
                 height: 10.5rem;

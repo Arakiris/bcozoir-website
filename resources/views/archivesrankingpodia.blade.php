@@ -9,7 +9,7 @@
         <h1 class="heading-1">Archives classement podiums</h1>
     </div>
 
-    @if(isset($podia))
+    @if(isset($podia) && !empty($podia) && $podia->count() > 0)
         <?php $previousYear = $podia[0]->date->format('Y'); ?>
         <div class="archives main-content-archives">
             <ul class="tabs"> 

@@ -40,9 +40,11 @@
                             <td class="table__td">{{ $member->category->title }}</td>
                             <td class="table__td table__tooltip">
                                 {{ $member->last_name }}
-                                <div class="table__tooltip-content">
-                                    <img class="table__tooltip-img" src="{{ ($member->historical_path) ? asset('storage' . $member->historical_path) : null }}" alt="Photo de {{ $member->last_name }} - {{ $member->first_name }}">
-                                </div>
+                                @if (isset($member->historical_path))
+                                    <div class="table__tooltip-content">
+                                        <img class="table__tooltip-img" src="{{ ($member->historical_path) ? asset('storage' . $member->historical_path) : null }}" alt="Photo de {{ $member->last_name }} - {{ $member->first_name }}">
+                                    </div>
+                                @endif
                             </td>
                             <td class="table__td">{{ $member->first_name }}</td>
                             <td class="table__td">{{ $member->score->number_lines }}</td>

@@ -59,9 +59,6 @@
                                     <td>{{ $member->handicap }}</td>
                                     <td>{{ $member->bonus }}</td>
                                     <td class="addNewScore">
-                                        {{--  <a href="{{ route('admin.scores.index', $member->id) }}" class="adminMemberPicture__links">
-                                            <i class="glyphicon glyphicon-list-alt"></i>
-                                        </a>  --}}
                                         <a href="{{ route('admin.scores.create', $member->id) }}" class="adminMemberPicture__links">
                                             <i class="fa fa-edit"></i>
                                         </a>

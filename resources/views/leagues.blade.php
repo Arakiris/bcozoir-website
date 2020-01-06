@@ -9,11 +9,7 @@
 <div class="content__title occasion-content">
     <h1 class="heading-1">{{ $title }}</h1>
     <p class="content__paragraph">
-        @if(isset($leagues) && $leagues->count() == 1)
-            Cliquer sur la ligue pour avoir le r&egraveglement
-        @else
-            Cliquer sur les ligues pour avoir le r&egraveglement
-        @endif  
+        Cliquer sur la ligue pour avoir le r&egraveglement 
     </p>
 </div>
 <div class="event event__league">

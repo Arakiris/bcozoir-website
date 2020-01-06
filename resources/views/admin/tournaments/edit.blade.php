@@ -129,7 +129,7 @@
                     </div>
 
                     <div id="teams" {!! ($tournament->formation == 1) ? '' : 'style="display: none;"'!!}>
-                        <table class="table table-bordered table-hover">
+                        <table class="table table-bordered table-hover sortingTable">
                             <thead>
                                 <tr>
                                     <th></th>
@@ -163,7 +163,7 @@
                     </div>
 
                     <div id="solo" {!! ($tournament->formation == 0) ? '' : 'style="display: none;"' !!}>
-                        <table class="table table-bordered table-hover">
+                        <table class="table table-bordered table-hover sortingTable">
                             <thead>
                                 <tr>
                                     <th>Joueurs</th>

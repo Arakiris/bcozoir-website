@@ -20,7 +20,7 @@ class MembersController extends Controller
     use CommonTrait;
 
     public function showall() {
-        $members = Member::with(['category', 'club', 'picture', 'score'])->getmembers()->paginate(24);
+        $members = Member::with(['category', 'club', 'picture', 'score'])->getmembers()->get();
 
         return view('members', compact('members'))->with($this->mainSharingFunctionality());
     }
@@ -40,7 +40,7 @@ class MembersController extends Controller
                                     ->join('members', 'member_team.member_id', '=', 'members.id')
                                     ->where('members.id', '=', $id)
                                     ->whereDate('tournaments.date', '>', $yearsBefore)
-                                    ->select('tournaments.*', 'members.id as memberID', 'members.first_name', 'members.last_name', 'teams.rank')
+                                    ->select('tournaments.*', 'members.id as memberID', 'members.first_name', 'members.last_name', 'member_team.rank')
                                     ->union($tournaments1)
                                     ->orderBy('date', 'asc')
                                     ->get();

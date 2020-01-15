@@ -170,7 +170,10 @@ window.createRankingArchives = function(lenghtlast, previousYear, url, url_image
             `;
 
             if(podium.tournament.formation == 0 && typeof podium.tournament.members !== "undefined" && podium.tournament.members.length > 0){
-                markup += `<div class="event__noteam-rank no-team">`;
+                markup += `
+                    <div class="event__team-title"><p class="event__team-text">Individuel</p></div>
+                    <div class="event__noteam-rank no-team">
+                `;
                 podium.tournament.members.forEach(member => {
                     markup += renderMemberPodiaRanking(member);
                 });
@@ -192,6 +195,7 @@ window.createRankingArchives = function(lenghtlast, previousYear, url, url_image
             
             // Render third column
             if(podium.tournament.formation == 0 && typeof podium.tournament.members !== "undefined" && podium.tournament.members.length > 0){
+                markup += `<div class="event__team-title"><p class="event__team-text">Classement podiums</p></div>`;
                 podium.tournament.members.forEach(member => {
                     if(member.pivot.rank)
                         markup += `<div class="event__rank-display"> ${member.pivot.rank} </div>`;
@@ -202,7 +206,7 @@ window.createRankingArchives = function(lenghtlast, previousYear, url, url_image
                 podium.tournament.teams.forEach(team => {
                     if(team.display_rank) {
                         markup += `
-                            <div class="event__team-ranking-title"><p>&nbsp;</p></div>
+                            <div class="event__team-title"><p class="event__team-text">Classement podiums</p></div>
                             <div class="event__team-content">
                         `;
                         team.members.forEach(member => {

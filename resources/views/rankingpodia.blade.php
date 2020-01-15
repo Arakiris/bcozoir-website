@@ -34,8 +34,6 @@
                             @if ($podium->tournament->formation == 0 && isset($podium->tournament->members) && $podium->tournament->members->count()>0)
                                 <div class="event__team-title"><p class="event__team-text">Individuel</p></div>
                                 <div class="event__noteam-rank no-team">
-                                    
-
                                     @foreach($podium->tournament->members as $member)
                                         @if (!is_null($member->pivot->rank))
                                             <div class="event__team-line">

@@ -137,7 +137,6 @@ class ScoresController extends Controller
         $score = Score::findOrFail($id);
 
         $score->average = $validatedScore['average'];
-        // $score->month = date('Y-m-d', strtotime($validatedScore['month']));
         $score->number_lines = $validatedScore['number_lines'];
         $member->score()->save($score);
 

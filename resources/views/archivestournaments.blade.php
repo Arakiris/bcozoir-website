@@ -16,8 +16,6 @@
         <?php $previousYear = $tournaments[0]->start_season->format('Y'); ?>
         <div class="archives">
             <div class="archives__content main-content-archives">
-
-
                 <ul class="tabs">
                     <li class="tabs__link tabs__link-current" data-tab="tab-{{ $previousYear }}">{{ $previousYear }}</li>
 
@@ -31,7 +29,6 @@
                 <div id="tab-{{ $previousYear }}" class="tabs__content tabs__content-current">
                     <div class="archives__content archives__paginate" id="paginate-{{ $previousYear }}">
                         <div class="archives__tables" id="table-{{ $previousYear }}">
-
                             @foreach($tournaments as $tournament)
                                 <div class="archives__row">
                                     <div class="event__single-information">
@@ -194,7 +191,7 @@
                         </div>
                     </div>
 
-                    <div class="event__bottom bottom-tournament-league">
+                    <div class="event__bottom archives__pagination_hide">
                         <div class="pagination bottom-div" id="pag-{{ $previousYear }}">
                         </div>
                     </div>
@@ -220,7 +217,6 @@
 @section('scripts')
     <script src="{{ asset('js/paginathing.min.js') }}"></script>
     <script src="{{ asset('js/archivestournament.js') }}"></script>
-    {{-- <script src="{{ asset('js/archivespaginate.js') }}"></script> --}}
 
     <script>
         let lenghtlast = {!! isset($tournaments) ? json_encode($tournaments->count(), JSON_HEX_TAG)  : json_encode('0', JSON_HEX_TAG) !!};
@@ -245,7 +241,6 @@
         let url_image = {!! json_encode(asset('images'), JSON_HEX_TAG) !!};
         let url_home = {!! json_encode(url('/'), JSON_HEX_TAG) !!};
         let url_storage = {!! json_encode(asset('storage'), JSON_HEX_TAG) !!};
-
 
         createTournamentArchives(lenghtlast, previousYear, url, url_home, url_image, url_storage);
     </script>

@@ -102,7 +102,7 @@
             @endforeach
         </div>
     @else
-        <div class="archives main-content-archives">
+        <div class="archives archives__pagination_hide">
             <p class="inexistent">Il n'y a pas encore de ligue archivé.</p>
         </div>
     @endif
@@ -111,6 +111,7 @@
 @section('scripts')
     <script src="{{ asset('js/paginathing.min.js') }}"></script>
     <script src="{{ asset('js/archivesleague.js') }}"></script>
+    
     <script>
         let lenghtlast = {!! isset($leagues) ? json_encode($leagues->count(), JSON_HEX_TAG)  : json_encode('0', JSON_HEX_TAG) !!};
         let previousYear = {!! isset($previousYear) ? json_encode($previousYear, JSON_HEX_TAG) : json_encode(null, JSON_HEX_TAG) !!};

@@ -3,7 +3,9 @@ window.createLeagueArchives = function(lenghtlast, previousYear, url, url_image,
     let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
     if(previousYear !== null) {
+        let bottom_pag = document.querySelector('.event__bottom');
         if(lenghtlast && lenghtlast > 5){
+            bottom_pag.classList.remove('archives__pagination_hide');
             $(function(){
                 $('#table-' + previousYear).paginathing({
                     perPage: 5,
@@ -116,6 +118,15 @@ window.createLeagueArchives = function(lenghtlast, previousYear, url, url_image,
         `;
 
         parent.insertAdjacentHTML("afterbegin", markup2);
+
+        let markup3 = `
+        <div class="event__bottom ${league.length > 5 ? 'archives__pagination_hide' : '' }">
+            <div class="pagination bottom-div" id="pag-${dateString[0]}">
+            </div>
+        </div>
+        `;
+
+        parent.insertAdjacentHTML("beforeend", markup3);
     }
 
     const renderLineLeague = (league, parent) => {

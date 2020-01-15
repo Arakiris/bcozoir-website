@@ -125,3 +125,27 @@ document.addEventListener("DOMContentLoaded", function(){
         window.addEventListener("orientationchange", lazyLoad);
     }
 });
+
+let alldropdown = document.querySelectorAll(".aside-left-bar__dropdown-btn");
+let itemsdropdown = document.querySelectorAll(".aside-left-bar__dropdown");
+
+alldropdown.forEach((item) => {
+    item.addEventListener('click', event => {
+        event.target.parentElement.querySelector(".aside-left-bar__dropdown").classList.toggle("aside-left-bar__dropdown-show");
+        itemsdropdown.forEach((e) => {
+            let elementToCheck = e.parentElement;
+            if(!elementToCheck.isSameNode(event.target.parentElement))
+                e.classList.remove("aside-left-bar__dropdown-show");
+        });
+        
+    });
+
+});
+
+window.addEventListener("click", event => {
+    if(!event.target.matches('.aside-left-bar__item-dropdown') && !event.target.matches('.aside-left-bar__dropdown-btn')){
+        itemsdropdown.forEach((item) => {
+            item.classList.remove("aside-left-bar__dropdown-show");
+        });
+    }
+});

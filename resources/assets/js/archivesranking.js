@@ -3,7 +3,9 @@ window.createRankingArchives = function(lenghtlast, previousYear, url, url_image
     let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
     if(previousYear !== null) {
+        let bottom_pag = document.querySelector('.event__bottom');
         if(lenghtlast && lenghtlast > 5){
+            bottom_pag.classList.remove('archives__pagination_hide');
             $(function(){
                 $('#table-' + previousYear).paginathing({
                     perPage: 5,
@@ -39,7 +41,6 @@ window.createRankingArchives = function(lenghtlast, previousYear, url, url_image
     function getDataRanking(id, token, parent, url) {
         renderLoader(parent);
         getDataAjax(url, id, token).then(podia => {
-            console.log(podia);
             renderRanking(podia, parent);
 
             if(podia.length > 5){
@@ -93,7 +94,7 @@ window.createRankingArchives = function(lenghtlast, previousYear, url, url_image
     };
 
     const renderRanking = (podia, parent) => {
-        let dateString = podia[0].date.substring(0, 10).split('-');
+        let dateString = podia[0].tournament.start_season.substring(0, 10).split('-');
 
         let markup = `
             <div class="archives__tables archives__tables-ranking" id="table-${dateString[0]}"> 
@@ -110,7 +111,7 @@ window.createRankingArchives = function(lenghtlast, previousYear, url, url_image
         parent.insertAdjacentHTML("afterbegin", markup);
 
         let markup2 = `
-            <div class="event__bottom bottom-tournament-league">
+            <div class="event__bottom ${podia.length > 5 ? 'archives__pagination_hide' : '' }">
                 <div class="pagination bottom-div" id="pag-${dateString[0]}">
                 </div>
             </div>
@@ -213,6 +214,9 @@ window.createRankingArchives = function(lenghtlast, previousYear, url, url_image
                     }
                 });
             }
+            markup += `
+                </div>
+            `;
         }
         markup += `
             </div>

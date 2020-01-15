@@ -99,22 +99,18 @@ class PicturesController extends Controller
         $folderPath;
         switch ($type) {
             case 'tournoi':
-                // $folderPath = 'public/upload/images/tournaments/' . $idtype;
                 $folderPath = '/upload/images/tournaments/' . $idtype . '/';
                 $class = Tournament::findOrFail($idtype);
                 break;
             case 'evenement':
-                // $folderPath = 'public/upload/images/events/' . $idtype;
                 $folderPath = '/upload/images/events/' . $idtype . '/';
                 $class = Event::findOrFail($idtype);
                 break;
             case 'podium':
-                // $folderPath = 'public/upload/images/podia/' . $idtype;
                 $folderPath = '/upload/images/podia/' . $idtype . '/';
                 $class = Podium::findOrFail($idtype);
                 break;
             case 'actualite':
-                // $folderPath = 'public/upload/images/news/' . $idtype;
                 $folderPath = '/upload/images/news/' . $idtype . '/';
                 $class = News::findOrFail($idtype);
                 $class->photos = 1;

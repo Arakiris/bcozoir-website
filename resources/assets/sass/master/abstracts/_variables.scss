@@ -1,6 +1,6 @@
 $dark-color : #974706;      //only footer - 974706
-$primary-color : #e6b8b7; // e6b8b7
-$light-color : #f2dcdb; // f2dcdb
+$primary-color : #e6b8b7; 
+$light-color : #f2dcdb; 
 
 $white-color: #f7f7f7;
 $black-color: #2d2d2d;
@@ -36,7 +36,7 @@ $black-color: #2d2d2d;
     --grey-color-dark-2: #5e5e5e;
     --grey-color-darkest: #333333;
 
-    --form-color: var(--secondary-color-light); //828c62
+    --form-color: var(--secondary-color-light); 
 
     --background-color: #f7f7f7;
 
@@ -82,7 +82,7 @@ $black-color: #2d2d2d;
 
 
 // /* Entête navigation */
-$header-nav-bg-color: linear-gradient(#7b58a7, #5f4480); // linear-gradient(#7b58a7, #5f4480)
+$header-nav-bg-color: linear-gradient(#7b58a7, #5f4480); 
 $header-nav-color: white;
 
 /* Contenu principal */
@@ -90,11 +90,11 @@ $primary-background-color : $light-color;
 $content-border-color : #bfbfbf;
 
 // /* Navigation à gauche */
-$leftNavigation-btn-bg-color : linear-gradient(#cc3d38, #a2312e); // linear-gradient(#cc3d38, #a2312e)
+$leftNavigation-btn-bg-color : linear-gradient(#cc3d38, #a2312e); 
 $leftNavigation-btn-color : white;
 
-$font-size-base : 1.4rem; // 1.4rem
-$font-size-large : 1.6rem; // 1.6rem
+$font-size-base : 1.4rem;
+$font-size-large : 1.6rem;
 
 
 $header-img-url : './images/header2.jpg';

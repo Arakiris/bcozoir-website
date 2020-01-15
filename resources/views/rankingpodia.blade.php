@@ -32,7 +32,10 @@
                     @if((isset($podium->tournament->members) && $podium->tournament->members->count()>0) || isset($podium->tournament->teams) && $podium->tournament->teams->count()>0)
                         <div class="event__single-members event__single-members-ranking">
                             @if ($podium->tournament->formation == 0 && isset($podium->tournament->members) && $podium->tournament->members->count()>0)
+                                <div class="event__team-title"><p class="event__team-text">Individuel</p></div>
                                 <div class="event__noteam-rank no-team">
+                                    
+
                                     @foreach($podium->tournament->members as $member)
                                         @if (!is_null($member->pivot->rank))
                                             <div class="event__team-line">
@@ -105,6 +108,7 @@
 
                         <div class="event__single-members event__single-members-ranking">
                             @if ($podium->tournament->formation == 0 && isset($podium->tournament->members) && $podium->tournament->members->count()>0)
+                                <div class="event__team-title"><p class="event__team-text">Classement podiums</p></div>
                                 @foreach($podium->tournament->members as $member)
                                     @if (!is_null($member->pivot->rank))
                                         <div class="event__rank-display"> {{$member->pivot->rank}} </div>
@@ -115,7 +119,7 @@
                             @if ($podium->tournament->formation == 1 && isset($podium->tournament->teams) && $podium->tournament->teams->count()>0)
                                 @foreach($podium->tournament->teams as $team)
                                     @if ($team->display_rank)
-                                        <div class="event__team-ranking-title"><p>&nbsp;</p></div>
+                                        <div class="event__team-title"><p class="event__team-text">Classement podiums</p></div>
                                         <div class="event__team-content">
                                             @foreach ($team->members as $member)
                                                 <div class="event__rank-display">{{$member->pivot->rank}} &nbsp; </div>
@@ -139,23 +143,4 @@
             </div>
         @endif
     </div>
-@endsection
-
-@section('scripts')
-    <script>
-        // let teams = document.querySelectorAll('[id^="team-"');
-
-        // teams.forEach(team => {
-        //     if(team.offsetHeight > 40) {
-        //         let id = team.id.substr(5);
-        //         let rank = document.getElementById(`rank-${id}`);
-        //         rank.insertAdjacentHTML('beforeend', '<br><br>');
-        //     }
-        //     else if (team.offsetHeight > 60) {
-        //         let id = team.id.substr(5);
-        //         let rank = document.getElementById(`rank-${id}`);
-        //         rank.insertAdjacentHTML('beforeend', '<br><br><br>');
-        //     }
-        // });
-    </script>
 @endsection

@@ -120,7 +120,6 @@ class TournamentsController extends Controller
 
         session()->flash('notification_management_admin', 'Le tournoi a bien été enregistré');
 
-        // return redirect('/administration/tournois');
         switch($request->submitbutton){
             case 'save':
                 return redirect('/administration/tournois'); 

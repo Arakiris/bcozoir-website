@@ -57,7 +57,6 @@ class TeamsController extends Controller
         $tournament->teams()->save($team);
 
         if(isset($validatedTeam["members"])){
-            // $members = array_column($validatedTeam["members"], 'id');
             $memberpick;
             foreach($validatedTeam["members"] as $member){
                 $rank = isset($member['rank']) ? $member['rank'] : "";

@@ -46,10 +46,6 @@
                                     @endif
                                 </div>
 
-
-
-
-                                    
                                 @if((isset($podium->tournament->members) && $podium->tournament->members->count()>0) || isset($podium->tournament->teams) && $podium->tournament->teams->count()>0)
                                     <div class="event__single-members event__single-members-ranking">
                                         @if ($podium->tournament->formation == 0 && isset($podium->tournament->members) && $podium->tournament->members->count()>0)
@@ -148,14 +144,11 @@
                                     </div>
                                 @endif
 
-
-
-
                             </div>
                         @endforeach
                     </div>
                 </div>
-                <div class="event__bottom bottom-tournament-league">
+                <div class="event__bottom archives__pagination_hide">
                     <div class="pagination bottom-div" id="pag-{{ $previousYear }}">
                     </div>
                 </div>
@@ -177,7 +170,7 @@
 @section('scripts')
     <script src="{{ asset('js/paginathing.min.js') }}"></script>
     <script src="{{ asset('js/archivesranking.js') }}"></script>
-    {{-- <script src="{{ asset('js/archivespaginate.js') }}"></script> --}}
+
     <script>
         let lenghtlast = {!! isset($podia) ? json_encode($podia->count(), JSON_HEX_TAG)  : json_encode('0', JSON_HEX_TAG) !!};
         let previousYear = {!! isset($previousYear) ? json_encode($previousYear, JSON_HEX_TAG) : json_encode(null, JSON_HEX_TAG) !!};

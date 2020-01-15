@@ -20,10 +20,12 @@
         display: none;
         background-color: var(--grey-color-lightest);
         padding: 1.5rem;
+        width: 100%;
 
         &-current {
             display: grid;
-            grid-template-rows: 1fr 5rem;
+            grid-template-rows: 1fr;
+            grid-auto-rows: 5rem;
             justify-content: center;
         }
     }

@@ -4,12 +4,11 @@
     &__content {
         padding: 1rem;
         min-height: 100%;
+        width: 100%;
     }
 
     &__tables {
-        display: grid;
-        grid-template-rows: 1fr;
-        justify-content: center;
+        width: 100%;
 
         &:first-child {
             border-top: 2px solid var(--grey-color-light);
@@ -26,9 +25,13 @@
         }
 
         &-ranking {
-            width: 75rem;
-            grid-template-columns: minmax(20rem, 1fr) minmax(35rem, 2fr) minmax(20rem, 1fr);
+            width: 100%;
+            grid-template-columns: minmax(10rem, 1fr) minmax(18rem, 2fr) minmax(10rem, 1fr);
         }
+    }
+
+    & &__pagination_hide {
+        display: none;
     }
 
 }

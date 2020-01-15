@@ -52,9 +52,6 @@ class ContentInformationController extends Controller
             'banner'=> 'nullable|image',
             'office'=> 'nullable|image'
         ]);
-        
-
-        // ContentInformation::where('id', 5)->update(['description' => $validatedInformation['appel_partenaires']]);
 
         ContentInformation::UpdateOrCreate(["id" => 1, "name" => "presentation"], ['description' => $validatedInformation['presentation']]);
         ContentInformation::UpdateOrCreate(["id" => 2, "name" => "adresses"], ['description' => $validatedInformation['adresses']]);
@@ -68,17 +65,6 @@ class ContentInformationController extends Controller
             $this->saveImage($file, 7, "banniere image");
         if($file = $request->file('office'))
             $this->saveImage($file, 8, "bureau image");
-
-        // if($file = $request->file('office')){
-        //     $bureau = ContentInformation::find(6);
-
-        //     if(isset($bureau) && isset($bureau->path)){
-        //         unlink(storage_path('app/public' . $bureau->path));
-        //     }
-        //     $path = $file->store('public/upload/images');
-        //     $filepath = substr($path, 6);
-        //     ContentInformation::UpdateOrCreate(["id" => 6, "name" => "bureau image"], ['path' => $filepath]);
-        // }
 
         return redirect()->route('admin.contentinformation.edit');
     }

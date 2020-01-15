@@ -71,27 +71,18 @@
                                 </thead>
     
                                 <tbody id="add-members">
-                                @if($team->members)
-                                    <?php $count = 0; ?>
-                                    @foreach($team->members as $member)
-                                        <tr class="member">
-                                            <td><input type="hidden" name="members[{{ $count }}][id]" class="form-control" value="{{ $member->id }}">{{ $member->last_name }} - {{ $member->first_name }}</td>
-                                            <td><input type="text" name="members[{{$count}}][rank]" class="form-control" placeholder="Insérer son classement si existant" value="{{ $member->pivot->rank }}"></td>
-                                            <td> <button class="btn-delete-member" type="button">Retirer le joueur</button> </td>
-                                        </tr>
-    
-                                        <?php $count++; ?>
-                                    @endforeach
-                                @endif
-                                {{-- @if($members)
-                                    @foreach($members as $member)
-                                    <tr>
-                                        <td><input class="checkBoxes" type="checkbox" name="checkBoxArray[]" value="{{ $member->id }}" {{ ($member->participate) ? 'checked' : '' }}></td>
-                                        <td>{{ $member->last_name }} - {{ $member->first_name }}</td>
-                                        <td>{{ $member->ranking }}</td>
-                                    </tr>
-                                    @endforeach
-                                @endif --}}
+                                    @if($team->members)
+                                        <?php $count = 0; ?>
+                                        @foreach($team->members as $member)
+                                            <tr class="member">
+                                                <td><input type="hidden" name="members[{{ $count }}][id]" class="form-control" value="{{ $member->id }}">{{ $member->last_name }} - {{ $member->first_name }}</td>
+                                                <td><input type="text" name="members[{{$count}}][rank]" class="form-control" placeholder="Insérer son classement si existant" value="{{ $member->pivot->rank }}"></td>
+                                                <td> <button class="btn-delete-member" type="button">Retirer le joueur</button> </td>
+                                            </tr>
+        
+                                            <?php $count++; ?>
+                                        @endforeach
+                                    @endif
                                 </tbody>
     
                                 <tfoot>

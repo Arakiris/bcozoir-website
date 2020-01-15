@@ -59,21 +59,6 @@ class LeaguesController extends Controller
         $title = "Archives ligues";
 
         return view('archivesleagues', compact('title', 'leagues', 'years'))->with($this->mainSharingFunctionality());
-
-        // $title = "Archives ligues";
-        // $leaguesByYear = League::archivesleagues()->get()->groupBy(function($val){
-        //     return Carbon::parse($val->start_season)->format('Y');
-        // });
-
-        // /*
-        // $leaguesByYear = League::with(['members' => function($query){
-        //     $query->orderBy('last_name', 'asc')->orderBy('first_name', 'asc');
-        // }])->archivesleagues()->get()->groupBy(function($val){
-        //     return Carbon::parse($val->start_season)->format('Y');
-        // });
-        // */
-
-        // return view('archivesleagues', compact('title', 'leaguesByYear'))->with($this->mainSharingFunctionality());
     }
 
     private function yearSeason() {

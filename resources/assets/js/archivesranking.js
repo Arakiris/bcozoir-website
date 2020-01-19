@@ -195,11 +195,15 @@ window.createRankingArchives = function(lenghtlast, previousYear, url, url_image
             
             // Render third column
             if(podium.tournament.formation == 0 && typeof podium.tournament.members !== "undefined" && podium.tournament.members.length > 0){
-                markup += `<div class="event__team-title"><p class="event__team-text">Classement podiums</p></div>`;
+                markup += `
+                    <div class="event__team-title"><p class="event__team-text">Classement podiums</p></div>
+                    <div class="event__team-content">
+                `;
                 podium.tournament.members.forEach(member => {
                     if(member.pivot.rank)
                         markup += `<div class="event__rank-display"> ${member.pivot.rank} </div>`;
                 });
+                markup += `</div>`;
             }
 
             if(podium.tournament.formation == 1 && typeof podium.tournament.teams !== "undefined" && podium.tournament.teams.length > 0){

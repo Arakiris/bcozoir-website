@@ -124,11 +124,13 @@
                                     <div class="event__single-members event__single-members-ranking">
                                         @if ($podium->tournament->formation == 0 && isset($podium->tournament->members) && $podium->tournament->members->count()>0)
                                             <div class="event__team-title"><p class="event__team-text">Classement podiums</p></div>
-                                            @foreach($podium->tournament->members as $member)
-                                                @if (!is_null($member->pivot->rank))
-                                                    <div class="event__rank-display"> {{$member->pivot->rank}} </div>
-                                                @endif
-                                            @endforeach
+                                            <div class="event__team-content">
+                                                @foreach($podium->tournament->members as $member)
+                                                    @if (!is_null($member->pivot->rank))
+                                                        <div class="event__rank-display"> {{$member->pivot->rank}} </div>
+                                                    @endif
+                                                @endforeach
+                                            </div>
                                         @endif
             
                                         @if ($podium->tournament->formation == 1 && isset($podium->tournament->teams) && $podium->tournament->teams->count()>0)

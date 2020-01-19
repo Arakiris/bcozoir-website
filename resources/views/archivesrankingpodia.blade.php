@@ -22,7 +22,7 @@
                 @endif
             </ul>
 
-            <div id="tab-{{ $previousYear }}" class="tabs__content tabs__content-current">
+            <div id="tab-{{ $previousYear }}" class="tabs__content tabs__content-current--ranking">
                 <div class="archives__content archives__content-ranking archives__paginate" id="paginate-{{ $previousYear }}">
                     <div class="archives__tables archives__tables-ranking" id="table-{{ $previousYear }}">
 

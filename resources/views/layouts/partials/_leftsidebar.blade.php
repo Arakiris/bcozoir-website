@@ -14,7 +14,7 @@
                 <ul class="aside-left-bar__dropdown">
                     <li class="aside-left-bar__dropdown-item"><a class="aside-left-bar__link" href="{{ route('tournoisOzoir') }}">Tournois BC Ozoir</a></li>
                     <li class="aside-left-bar__dropdown-item"><a class="aside-left-bar__link" href="{{ route('tournoisPrives') }}">Tournois Privés</a></li>
-                    <li class="aside-left-bar__dropdown-item"><a class="aside-left-bar__link" href="{{ route('championnats') }}">Championnats fédéraux</a></li>
+                        <li class="aside-left-bar__dropdown-item"><a class="aside-left-bar__link" href="{{ route('championnats') }}">Championnats fédéraux</a></li>
                 </ul>
             </li>
             <li class="aside-left-bar__item"><a class="aside-left-bar__link" href="{{ route('classementPodiums') }}">Classement podiums</a></li> 

@@ -14,7 +14,7 @@
         <div class="partners__content">
             @foreach($links as $link)
                 <div class="partners__logo">
-                    <img class="partners__logo-img" src="{{ ($link->picture->first()->path) ? asset('storage' . $link->picture->first()->path) : null }}" alt="Image du liens: {{ $link->title }}">
+                    <img class="partners__logo-img" src="{{ ($link->picture->first()) ? asset('storage' . $link->picture->first()->path) : null }}" alt="Image du liens: {{ $link->title }}">
                 </div>
                 <div class="partners__informations">
                     <p class="partners__paragraph">

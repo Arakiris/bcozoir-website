@@ -37,10 +37,10 @@
                     <div class="random-pic__content-single">
                         @if (!empty($partner->url))
                             <a class="random-pic__link-single" href="{{ $partner->url }}" target="_blank">
-                                <img data-lazy="{{ isset($partner->picture->first()) ? asset('storage' . $partner->picture->first()->path) : asset('images/default_img.jpg') }}" alt="Photo au hasard" class="random-pic__photo-left partnerRandomPicture">
+                                <img data-lazy="{{ ($partner->picture->first()) ? asset('storage' . $partner->picture->first()->path) : asset('images/default_img.jpg') }}" alt="Photo au hasard" class="random-pic__photo-left partnerRandomPicture">
                             </a>
                         @else
-                            <img data-lazy="{{ isset($partner->picture->first()) ? asset('storage' . $partner->picture->first()->path) : asset('images/default_img.jpg')  }}" alt="Photo au hasard" class="random-pic__photo-left partnerRandomPicture">
+                            <img data-lazy="{{ ($partner->picture->first()) ? asset('storage' . $partner->picture->first()->path) : asset('images/default_img.jpg')  }}" alt="Photo au hasard" class="random-pic__photo-left partnerRandomPicture">
                         @endif
                         <div class="random-pic__text-single partnerAdsText">
                             {!! $partner->title !!}

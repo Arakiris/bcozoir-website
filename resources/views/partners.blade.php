@@ -21,7 +21,7 @@
         <div class="partners__content">
             @foreach($partners as $partner)
                 <div class="partners__logo">
-                    <img class="partners__logo-img" src="{{ ($partner->picture->first()->path) ? asset('storage' . $partner->picture->first()->path) : null }}" alt="Logo du partenaire">
+                    <img class="partners__logo-img" src="{{ ($partner->picture->first()) ? asset('storage' . $partner->picture->first()->path) : null }}" alt="Logo du partenaire">
                 </div>
                 <div class="partners__informations">
                     @isset($partner->title)

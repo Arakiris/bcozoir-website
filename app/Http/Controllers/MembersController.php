@@ -22,7 +22,7 @@ class MembersController extends Controller
     public function showall() {
         $members = Member::with(['category', 'club', 'picture', 'score'])->getmembers()->get();
 
-        return view('members', compact('members'))->with($this->mainSharingFunctionality());
+        return view('members', compact('members'));
     }
 
     public function tournamentAndPrize($id){
@@ -45,6 +45,6 @@ class MembersController extends Controller
                                     ->orderBy('date', 'asc')
                                     ->get();
 
-        return view('membertournaments', compact('member', 'tournaments'))->with($this->mainSharingFunctionality());
+        return view('membertournaments', compact('member', 'tournaments'));
     } 
 }

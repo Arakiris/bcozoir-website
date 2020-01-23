@@ -50,21 +50,33 @@ class ContentInformationController extends Controller
             'appel_partenaires' => 'string|nullable',
             'logo'=> 'nullable|image',
             'banner'=> 'nullable|image',
-            'office'=> 'nullable|image'
+            'office'=> 'nullable|image',
+            'music'=> 'nullable|mimes:mp3,mp4,mpga,wav',
+            'volume' => 'required|numeric||between:0,1',
+            'fb_image' => 'nullable|image',
+            'fb_url' => 'url|nullable',
         ]);
 
-        ContentInformation::UpdateOrCreate(["id" => 1, "name" => "presentation"], ['description' => $validatedInformation['presentation']]);
-        ContentInformation::UpdateOrCreate(["id" => 2, "name" => "adresses"], ['description' => $validatedInformation['adresses']]);
-        ContentInformation::UpdateOrCreate(["id" => 3, "name" => "version"], ['description' => $validatedInformation['version']]);
-        ContentInformation::UpdateOrCreate(["id" => 4, "name" => "mentions légales"], ['description' => $validatedInformation['mentions_legales']]);
-        ContentInformation::UpdateOrCreate(["id" => 5, "name" => "appel partenaires"], ['description' => $validatedInformation['appel_partenaires']]);
+        ContentInformation::UpdateOrCreate(["name" => "presentation"], ['description' => $validatedInformation['presentation']]);
+        ContentInformation::UpdateOrCreate(["name" => "adresses"], ['description' => $validatedInformation['adresses']]);
+        ContentInformation::UpdateOrCreate(["name" => "version"], ['description' => $validatedInformation['version']]);
+        ContentInformation::UpdateOrCreate([ "name" => "mentions légales"], ['description' => $validatedInformation['mentions_legales']]);
+        ContentInformation::UpdateOrCreate(["name" => "appel partenaires"], ['description' => $validatedInformation['appel_partenaires']]);
 
         if($file = $request->file('logo'))
-            $this->saveImage($file, 6, "logo image");
+            $this->saveImage($file, "logo image");
         if($file = $request->file('banner'))
-            $this->saveImage($file, 7, "banniere image");
+            $this->saveImage($file, "banniere image");
         if($file = $request->file('office'))
-            $this->saveImage($file, 8, "bureau image");
+            $this->saveImage($file, "bureau image");
+
+        if($file = $request->file('music'))
+            $this->saveImage($file, "musique de fond");
+        ContentInformation::UpdateOrCreate(["name" => "volume musique"], ['description' => $validatedInformation['volume']]);
+
+        if($file = $request->file('fb_image'))
+            $this->saveImage($file, "facebook image");
+        ContentInformation::UpdateOrCreate(["name" => "facebook url"], ['description' => $validatedInformation['fb_url']]);
 
         return redirect()->route('admin.contentinformation.edit');
     }
@@ -78,7 +90,7 @@ class ContentInformationController extends Controller
 
         $path = $file->store('public/upload/images/content_information');
         $filepath = substr($path, 6);
-        ContentInformation::UpdateOrCreate(["id" => $id, "name" => $name], ['path' => $filepath]);
+        ContentInformation::UpdateOrCreate(["name" => $name], ['path' => $filepath]);
     }
 
 }

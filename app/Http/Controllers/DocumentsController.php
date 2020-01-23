@@ -16,6 +16,6 @@ class DocumentsController extends Controller
     public function showall(){
         $types = DocumentType::with('documents')->get();
 
-        return view('variousdocuments', compact('types'))->with($this->mainSharingFunctionality());
+        return view('variousdocuments', compact('types'));
     }
 }

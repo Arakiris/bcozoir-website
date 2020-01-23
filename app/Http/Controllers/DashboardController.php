@@ -21,49 +21,49 @@ class DashboardController extends Controller
 	public function index(){
         $ads = Advert::showad()->get();
 
-		return view('welcome', compact('ads'))->with($this->mainSharingFunctionality());
+		return view('welcome', compact('ads'));
 	}
 
 	public function version(){
-        $content = ContentInformation::findOrFail(3);
+        $content = ContentInformation::where('name', 'version')->first();
 
-        return view('version', compact('content'))->with($this->mainSharingFunctionality());
+        return view('version', compact('content'));
 	}
 
 	public function generalconditions(){
-        $content = ContentInformation::findOrFail(4);
+        $content = ContentInformation::where('name', 'mentions légales')->first();
 
-        return view('generalconditions', compact('content'))->with($this->mainSharingFunctionality());
+        return view('generalconditions', compact('content'));
 	}
 
 	public function proposal(){
-        return view('proposal')->with($this->mainSharingFunctionality());
+        return view('proposal');
 	}
 
 	public function map(){
-        return view('map')->with($this->mainSharingFunctionality());
+        return view('map');
     }
 
     public function bcozoir() {
-        $content = ContentInformation::findOrFail(1);
+        $content = ContentInformation::where('name', 'presentation')->first();
 
-        return view('bcozoir', compact('content'))->with($this->mainSharingFunctionality());
+        return view('bcozoir', compact('content'));
     }
     
     public function office() {
-        $content = ContentInformation::findOrFail(8);
+        $content = ContentInformation::where('name', 'bureau image')->first();
 
-        return view('office', compact('content'))->with($this->mainSharingFunctionality());
+        return view('office', compact('content'));
     }
 
     public function addresses() {
-        $content = ContentInformation::findOrFail(2);
+        $content = ContentInformation::where('name', 'adresses')->first();
 
-        return view('addresses', compact('content'))->with($this->mainSharingFunctionality());
+        return view('addresses', compact('content'));
     }
 
     public function contact() {
-        return view('contact')->with($this->mainSharingFunctionality());
+        return view('contact');
     }
 
     public function sendmail(request $request) {

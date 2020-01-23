@@ -16,6 +16,6 @@ class LinksController extends Controller
     public function showall() {
         $links = Link::with('picture')->paginate(8);
 
-        return view('links', compact('links'))->with($this->mainSharingFunctionality());
+        return view('links', compact('links'));
     }
 }

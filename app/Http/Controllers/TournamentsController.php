@@ -159,7 +159,7 @@ class TournamentsController extends Controller
             $futur = true;
         }
 
-        return view('tournaments', compact('title', 'tournaments', 'pagination', 'futur'))->with($this->mainSharingFunctionality());
+        return view('tournaments', compact('title', 'tournaments', 'pagination', 'futur'));
     }
 
     /**
@@ -174,7 +174,7 @@ class TournamentsController extends Controller
                                          'teams.members' => function($query){ $query->orderBy('last_name', 'asc')->orderBy('first_name', 'asc');} ])
                                     ->ozoirtournament()->paginate(6);
 
-        return view('tournaments', compact('title', 'tournaments', 'pagination', 'futur'))->with($this->mainSharingFunctionality());
+        return view('tournaments', compact('title', 'tournaments', 'pagination', 'futur'));
     }
 
     /**
@@ -189,7 +189,7 @@ class TournamentsController extends Controller
                                          'teams.members' => function($query){ $query->orderBy('last_name', 'asc')->orderBy('first_name', 'asc');}])
                                     ->privatetournament()->paginate(6);
 
-        return view('tournaments', compact('title', 'tournaments', 'pagination', 'futur'))->with($this->mainSharingFunctionality());
+        return view('tournaments', compact('title', 'tournaments', 'pagination', 'futur'));
     }
 
     /**
@@ -204,7 +204,7 @@ class TournamentsController extends Controller
                                          'teams.members' => function($query){ $query->orderBy('last_name', 'asc')->orderBy('first_name', 'asc');}])
                                     ->championship()->paginate(6);
 
-        return view('tournaments', compact('title', 'tournaments', 'pagination', 'futur'))->with($this->mainSharingFunctionality());
+        return view('tournaments', compact('title', 'tournaments', 'pagination', 'futur'));
     }
 
     /**
@@ -218,7 +218,7 @@ class TournamentsController extends Controller
             abort(404);
         }
 
-        return view('listing', compact('title', 'tournament'))->with($this->mainSharingFunctionality());
+        return view('listing', compact('title', 'tournament'));
     }
 
     /**
@@ -232,7 +232,7 @@ class TournamentsController extends Controller
             abort(404);
         }
 
-        return view('report', compact('title', 'tournament'))->with($this->mainSharingFunctionality());
+        return view('report', compact('title', 'tournament'));
     }
     
     /**
@@ -249,7 +249,7 @@ class TournamentsController extends Controller
 
         $pictures = $tournament->pictures()->get();
 
-        return view('photos', compact('title', 'tournament', 'pictures'))->with($this->mainSharingFunctionality());
+        return view('photos', compact('title', 'tournament', 'pictures'));
     }
 
     /**
@@ -266,7 +266,7 @@ class TournamentsController extends Controller
         // $videos = $tournament->videos()->paginate(4);
         $videos = $tournament->videos()->get();
 
-        return view('videos', compact('title', 'tournament', 'videos'))->with($this->mainSharingFunctionality());
+        return view('videos', compact('title', 'tournament', 'videos'));
     }
 
     /**
@@ -277,7 +277,7 @@ class TournamentsController extends Controller
                             ->with('tournament')
                             ->orderBy('date', 'desc')->paginate(6);
 
-        return view('podiums', compact('podiums'))->with($this->mainSharingFunctionality());
+        return view('podiums', compact('podiums'));
     }
 
     /**
@@ -300,14 +300,14 @@ class TournamentsController extends Controller
                     ->get();
 
 
-        return view('photos', compact('title', 'tournament', 'pictures'))->with($this->mainSharingFunctionality());
+        return view('photos', compact('title', 'tournament', 'pictures'));
     }
 
     /**
      * Choose archives
      */
     public function archiveschoice() {
-        return view('archiveschoice')->with($this->mainSharingFunctionality());
+        return view('archiveschoice');
     }
 
     /**
@@ -334,7 +334,7 @@ class TournamentsController extends Controller
             $leagues = null;
         }
 
-        return view('archivestournaments', compact('title', 'tournaments', 'years', 'type'))->with($this->mainSharingFunctionality());
+        return view('archivestournaments', compact('title', 'tournaments', 'years', 'type'));
     }
 
     /**
@@ -363,7 +363,7 @@ class TournamentsController extends Controller
 
         
 
-        return view('archivestournaments', compact('title', 'tournaments', 'years', 'type'))->with($this->mainSharingFunctionality());
+        return view('archivestournaments', compact('title', 'tournaments', 'years', 'type'));
     }
 
     /**
@@ -392,7 +392,7 @@ class TournamentsController extends Controller
 
         
 
-        return view('archivestournaments', compact('title', 'tournaments', 'years', 'type'))->with($this->mainSharingFunctionality());
+        return view('archivestournaments', compact('title', 'tournaments', 'years', 'type'));
     }
 
     /**
@@ -404,7 +404,7 @@ class TournamentsController extends Controller
                                'tournament.members' => function($query){ $query->orderBy('last_name', 'asc')->orderBy('first_name', 'asc');}
                                ])->currentpodia()->paginate(8);
 
-        return view('rankingpodia', compact('podia'))->with($this->mainSharingFunctionality());
+        return view('rankingpodia', compact('podia'));
     }
 
     /**
@@ -440,7 +440,7 @@ class TournamentsController extends Controller
             $podia = null;
         }
 
-        return view('archivesrankingpodia', compact('podia', 'years'))->with($this->mainSharingFunctionality());
+        return view('archivesrankingpodia', compact('podia', 'years'));
     }
 
     private function yearSeason() {

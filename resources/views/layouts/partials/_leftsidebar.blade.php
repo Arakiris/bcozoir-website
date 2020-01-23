@@ -72,3 +72,9 @@
         </div>
     </div>
 </div>
+
+<div class="aside-left-fb">
+    <a href="{{ isset($fb_link->description) ? $fb_link->description : 'https://www.facebook.com/BC-OZOIR-1550418735236885/' }}" class="aside-left-fb__link" target="_blank">
+        <img src="{{ isset($fb_img->path) ? asset('storage' . $fb_img->path) : asset('images/fb-img.png') }}" alt="Image de facebook" class="aside-left-fb__img">
+    </a>
+</div>

@@ -14,7 +14,7 @@ class NewsController extends Controller
     public function showall() {
         $news = News::with(['pictures', 'videos'])->getnews()->get();
 
-        return view('news', compact('news'))->with($this->mainSharingFunctionality());
+        return view('news', compact('news'));
     }
 
     public function actualitePhotos($id) {
@@ -23,7 +23,7 @@ class NewsController extends Controller
         $pictures = $news->pictures()->paginate(48);
         $allpictures = $news->pictures;
 
-        return view('photos', compact('title', 'news', 'allpictures', 'pictures'))->with($this->mainSharingFunctionality());
+        return view('photos', compact('title', 'news', 'allpictures', 'pictures'));
     }
 
     public function actualiteVideos($id) {
@@ -31,6 +31,6 @@ class NewsController extends Controller
         $news = News::with('videos')->findOrFail($id);
         $videos = $news->videos()->paginate(4);
 
-        return view('videos', compact('title', 'news', 'videos'))->with($this->mainSharingFunctionality());
+        return view('videos', compact('title', 'news', 'videos'));
     }
 }

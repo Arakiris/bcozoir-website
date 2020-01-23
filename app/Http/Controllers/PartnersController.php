@@ -17,12 +17,12 @@ class PartnersController extends Controller
     public function showall() {
         $partners = Partner::with('picture')->paginate(8);
 
-        return view('partners', compact('partners'))->with($this->mainSharingFunctionality());
+        return view('partners', compact('partners'));
     }
 
     public function becomePartner(){
-        $contentInformation = ContentInformation::findOrFail(5);
+        $contentInformation = ContentInformation::where('name', 'appel partenaires')->first();
 
-        return view('becomepartner', compact('contentInformation'))->with($this->mainSharingFunctionality());
+        return view('becomepartner', compact('contentInformation'));
     }
 }

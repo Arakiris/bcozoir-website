@@ -15,6 +15,6 @@ class ScoresController extends Controller
     public function listingtable() {
         $members = Member::with(['score', 'category'])->licenseemember()->paginate(100);
 
-        return view('averagelisting', compact('members'))->with($this->mainSharingFunctionality());
+        return view('averagelisting', compact('members'));
     }
 }

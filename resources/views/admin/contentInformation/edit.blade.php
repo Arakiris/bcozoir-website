@@ -71,6 +71,26 @@
                         <input type="file" id="office" name="office" accept="image/*">
                     </div>
                     
+                    <div class="form-group">
+                        <label for="music">Musique</label>
+                        <input type="file" id="music" name="music" accept="audio/*">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="music">Volume de la musique</label>
+                        <input type="range" id="volume" name="volume"  min="0" max="1" step="0.01">
+                        <span class="volume__value"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fb_image">Facebook image</label>
+                        <input type="file" id="fb_image" name="fb_image" accept="image/*">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fb_url">Facebook url</label>
+                        <input type="text" id="fb_url" name="fb_url" class="form-control" placeholder="Veuillez entrer le nom" value="{{ isset($contentInformation->get(11)->description) ? $contentInformation->get(11)->description : '' }}">
+                    </div>
 
                     @include('partials._form-error')
 

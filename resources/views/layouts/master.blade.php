@@ -25,9 +25,9 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     @if (isset($banner) && isset($banner->path))
         <style>
-                #header__img--personalized {
-                    background-image: url("{{asset('storage' . $banner->path)}}");
-                }
+            #header__img--personalized {
+                background-image: url("{{asset('storage' . $banner->path)}}");
+            }
         </style>
     @endif
     @yield('styles')
@@ -35,6 +35,12 @@
     <title>Bowling Club - Ozoir</title>
 </head>
 <body>
+    <div id="player">
+        <audio id="audio" controls autoplay hidden>
+            <source src="{{ isset($music_link->path) ? asset('storage' . $$music_link->path) : asset('music/music.mp3') }}" type="audio/mpeg">
+        </audio>
+    </div>
+
     <div class="container">
         @include('layouts.partials._header')
         @include('layouts.partials._main')
@@ -63,6 +69,9 @@
                     textColor: 'black',
                 });
             });
+
+            let volume = {!! isset($music_volume->description) ? json_encode($music_volume->description, JSON_HEX_TAG)  : json_encode('0', JSON_HEX_TAG) !!};
+            document.getElementById("audio").volume = volume;
         </script>
         @yield('scripts')
     </div>

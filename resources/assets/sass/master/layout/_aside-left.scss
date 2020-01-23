@@ -150,6 +150,14 @@
             }
         }
     }
+
+    &-fb {
+        grid-column: sidebar-left-start / sidebar-left-end;
+
+        &__img {
+            width: 100%;
+        }
+    }
 }
 
 #calendar {

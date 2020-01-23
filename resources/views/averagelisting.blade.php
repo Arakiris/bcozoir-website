@@ -14,15 +14,15 @@
     @if(isset($members) && $members->count()>0)
         <table class="table">
             <thead>
-                <th class="table__th table__witdth-15">N° Licence</th>
-                <th class="table__th table__witdth-5">Sexe</th>
-                <th class="table__th table__witdth-10">Catégorie</th>
-                <th class="table__th table__witdth-15">Nom</th>
-                <th class="table__th table__witdth-15">Prénom</th>
-                <th class="table__th table__witdth-10">Nb lignes</th>
-                <th class="table__th table__witdth-10">Moyenne</th>
-                <th class="table__th table__witdth-10">Handicap</th>
-                <th class="table__th table__witdth-10">Bonus vétéran</th>
+                <th class="table__th table__width-15">N° Licence</th>
+                <th class="table__th table__width-5">Sexe</th>
+                <th class="table__th table__width-10">Catégorie</th>
+                <th class="table__th table__width-15">Nom</th>
+                <th class="table__th table__width-15">Prénom</th>
+                <th class="table__th table__width-10">Nb lignes</th>
+                <th class="table__th table__width-10">Moyenne</th>
+                <th class="table__th table__width-10">Handicap</th>
+                <th class="table__th table__width-10">Bonus vétéran</th>
             </thead>
             <tbody>
                 @foreach($members as $member)

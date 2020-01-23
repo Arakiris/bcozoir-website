@@ -16,7 +16,7 @@ class EventsController extends Controller
     public function showall() {
         $events = Event::showevents()->paginate(6);
 
-        return view('events', compact('events'))->with($this->mainSharingFunctionality());
+        return view('events', compact('events'));
     }
 
     public function eventpictures($slug) {
@@ -30,7 +30,7 @@ class EventsController extends Controller
         $pictures = $event->pictures()->orderBy('id', 'desc')->paginate(42);
         $allpictures = $event->pictures;
 
-        return view('photos', compact('title', 'event', 'allpictures','pictures'))->with($this->mainSharingFunctionality());
+        return view('photos', compact('title', 'event', 'allpictures','pictures'));
     }
 
     public function eventVideos($slug) {
@@ -43,6 +43,6 @@ class EventsController extends Controller
 
         $videos = $event->videos()->paginate(4);
 
-        return view('videos', compact('title', 'event', 'videos'))->with($this->mainSharingFunctionality());
+        return view('videos', compact('title', 'event', 'videos'));
     }
 }

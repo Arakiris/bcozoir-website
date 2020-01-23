@@ -44,25 +44,6 @@ trait CommonTrait {
         $stat->save();
     }
 
-    public function mainSharingFunctionality() {
-        $randompictures = Picture::firstsrandompicture()->get();
-        $warningbefore = Warning::showwarning();
-        $allwarnings = Warning::showwarningbetween()->union($warningbefore)->orderBy('id')->get();
-        $ozoirTounaments = Tournament::ozoirfuturetournament()->get();
-        $otherTournaments = Tournament::otherfuturetournament()->get();
-        $partnerAds = Partner::inRandomOrder()->get();
-        $year = intval($this->yearSeason());
-        $season = $year . "-" . ($year + 1);
-        $logo = ContentInformation::findOrFail(6);
-        $banner = ContentInformation::findOrFail(7);
-
-        // $onlineguest = Guest::onlineguest();
-        // $stat =  Statistic::first();
-        return array('randompictures' => $randompictures, 'warnings' => $allwarnings, 'ozoirTounaments' => $ozoirTounaments, 
-                    'otherTournaments' => $otherTournaments, 'partnerAds' => $partnerAds, 'season' => $season, 
-                    'logo' => $logo, 'banner' => $banner);
-    }
-
     private function updateStat() {
         $stat = Statistic::first();
         $stat->daily_visits += 1;

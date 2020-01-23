@@ -15,6 +15,9 @@ use App\Picture;
 use App\Contact;
 use App\Guest;
 
+use App\Partner;
+use App\ContentInformation;
+
 class ViewComposerServiceProvider extends ServiceProvider
 {
     use CommonTrait;
@@ -28,30 +31,27 @@ class ViewComposerServiceProvider extends ServiceProvider
     {
         view()->composer('layouts.master', function ($view) {
             $this->guestInformation();
-            // $view->with([
-            //     'randompictures' => Picture::firstsrandompicture()->get(),
-            //     'warnings' => Warning::showwarning()->get(),
-            //     'warnings' => Warning::where('id', 999)->get(),
-            //     'ozoirTounaments' => Tournament::ozoirfuturetournament()->get(),
-            //     'otherTournaments' => Tournament::otherfuturetournament()->get(),
-            //     'onlineguest' => Guest::onlineguest(),
-            //     'stat' => Statistic::first()
-            // ]);
-            $view->with([
-                'onlineguest' => Guest::onlineguest(),
-                'stat' => Statistic::first()
-            ]);
-        });
+            $warningbefore = Warning::showwarning();
+            $allwarnings = Warning::showwarningbetween()->union($warningbefore)->orderBy('id')->get();
+            $year = intval($this->yearSeason());
+            $season = $year . "-" . ($year + 1);
+            
 
-        view()->composer('errors::404', function ($view) {
-            $this->guestInformation();
             $view->with([
-                'randompictures' => Picture::firstsrandompicture()->get(),
-                'warnings' => Warning::showwarning()->get(),
-                'ozoirTounaments' => Tournament::ozoirfuturetournament()->get(),
-                'otherTournaments' => Tournament::otherfuturetournament()->get(),
                 'onlineguest' => Guest::onlineguest(),
-                'stat' => Statistic::first()
+                'stat' => Statistic::first(),
+                'randompictures' => Picture::firstsrandompicture()->get(), 
+                'warnings' => $allwarnings, 
+                'ozoirTounaments' => Tournament::ozoirfuturetournament()->get(), 
+                'otherTournaments' => Tournament::otherfuturetournament()->get(), 
+                'partnerAds' => Partner::inRandomOrder()->get(), 
+                'season' => $season, 
+                'logo' => ContentInformation::where('name', 'logo image')->first(),
+                'banner' => ContentInformation::where('name', 'banniere image')->first(),
+                'music_link' => ContentInformation::where('name', 'musique de fond')->first(),
+                'music_volume' => ContentInformation::where('name', 'volume musique')->first(),
+                'fb_img' => ContentInformation::where('name', 'facebook image')->first(),
+                'fb_link' => ContentInformation::where('name', 'facebook url')->first()
             ]);
         });
     }

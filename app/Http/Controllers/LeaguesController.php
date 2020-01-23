@@ -34,7 +34,7 @@ class LeaguesController extends Controller
             $query->orderBy('last_name', 'asc')->orderBy('first_name', 'asc');
         }])->presentleague()->paginate(6);
 
-        return view('leagues', compact('leagues', 'title'))->with($this->mainSharingFunctionality());
+        return view('leagues', compact('leagues', 'title'));
     }
 
 
@@ -58,7 +58,7 @@ class LeaguesController extends Controller
 
         $title = "Archives ligues";
 
-        return view('archivesleagues', compact('title', 'leagues', 'years'))->with($this->mainSharingFunctionality());
+        return view('archivesleagues', compact('title', 'leagues', 'years'));
     }
 
     private function yearSeason() {

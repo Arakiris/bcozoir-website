@@ -13,12 +13,12 @@
         @if(isset($tournaments) && !empty($tournaments))
             <table class="table">
                 <thead>
-                    <th class="table__th table__witdth-15">Date</th>
-                    <th class="table__th table__witdth-5">Tournoi</th>
-                    <th class="table__th table__witdth-10">BC Ozoir/Privé/Fédéral</th>
-                    <th class="table__th table__witdth-15">Lieu</th>
-                    <th class="table__th table__witdth-15">Homologation</th>
-                    <th class="table__th table__witdth-10">Podium</th>
+                    <th class="table__th table__width-15">Date</th>
+                    <th class="table__th table__width-40">Tournoi</th>
+                    <th class="table__th table__width-10">BC Ozoir/Privé/Fédéral</th>
+                    <th class="table__th table__width-15">Lieu</th>
+                    <th class="table__th table__width-10">Homologation</th>
+                    <th class="table__th table__width-10">Podium</th>
                 </thead>
                 <tbody>
                     <?php $now = \Carbon\Carbon::now(); ?>

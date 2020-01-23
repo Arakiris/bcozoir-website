@@ -110,8 +110,11 @@ class LinksController extends Controller
         
         if($file = $request->file('image')){
             $previousPicture = $link->picture->first();
-            unlink(storage_path('app/public' . $previousPicture->path));
-            $previousPicture->delete();
+
+            if($previousPicture = $link->picture->first()){
+                unlink(storage_path('app/public' . $previousPicture->path));
+                $previousPicture->delete();
+            }
 
             $path = request()->file('image')->store('public/upload/images/links');
             $picture = new Picture();

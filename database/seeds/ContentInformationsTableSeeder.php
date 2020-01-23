@@ -22,6 +22,10 @@ class ContentInformationsTableSeeder extends Seeder
             ['name' => 'logo image', 'description' => ''],
             ['name' => 'banniere image', 'description' => ''],
             ['name' => 'bureau image', 'description' => ''],
+            ['name' => 'musique de fond', 'description' => ''],
+            ['name' => 'volume musique', 'description' => ''],
+            ['name' => 'facebook image', 'description' => ''],
+            ['name' => 'facebook url', 'description' => ''],
         ]);
     }
 }

@@ -36,7 +36,7 @@
 </head>
 <body>
     <div id="player">
-        <audio id="audio" controls autoplay hidden>
+        <audio id="audio" autoplay loop hidden>
             <source src="{{ isset($music_link->path) ? asset('storage' . $$music_link->path) : asset('music/music.mp3') }}" type="audio/mpeg">
         </audio>
     </div>

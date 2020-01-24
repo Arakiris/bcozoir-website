@@ -81,7 +81,7 @@ class ContentInformationController extends Controller
         return redirect()->route('admin.contentinformation.edit');
     }
 
-    private function saveImage($file, $id, $name){
+    private function saveImage($file, $name){
         $item = ContentInformation::find($id);
 
         if(isset($item) && isset($item->path)){

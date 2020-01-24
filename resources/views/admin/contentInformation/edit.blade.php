@@ -23,37 +23,40 @@
 
             <!-- /.box-header -->
             <div class="box-body">
+
+                {{$contentInformation["appel partenaires"]->description}}
+
                 <form method="POST" action="/administration/contentInformation" enctype="multipart/form-data" role="form">
                     {{ csrf_field() }}
                     {{ method_field('PATCH') }}
                     <!-- textarea -->
                     <div class="form-group">
                         <label for="presentation">Présentation :</label>
-                        <textarea name="presentation" class="ckeditor form-control" rows="3" placeholder="Veuillez entrer la description de la présentation">{{ isset($contentInformation->get(0)->description) ? $contentInformation->get(0)->description : '' }}</textarea>
+                        <textarea name="presentation" class="ckeditor form-control" rows="3" placeholder="Veuillez entrer la description de la présentation">{{ isset($contentInformation["presentation"]->description) ? $contentInformation["presentation"]->description : '' }}</textarea>
                     </div>
 
                     <!-- textarea -->
                     <div class="form-group">
                         <label for="adresses">Adresses :</label>
-                        <textarea name="adresses" class="ckeditor form-control" rows="3" placeholder="Veuillez entrer les adresses">{{ isset($contentInformation->get(1)->description) ? $contentInformation->get(1)->description : '' }}</textarea>
+                        <textarea name="adresses" class="ckeditor form-control" rows="3" placeholder="Veuillez entrer les adresses">{{ isset($contentInformation["adresses"]->description) ? $contentInformation["adresses"]->description : '' }}</textarea>
                     </div>
 
                     <!-- textarea -->
                     <div class="form-group">
                         <label for="version">Version :</label>
-                        <textarea name="version" class="ckeditor form-control" rows="3" placeholder="Veuillez entrer la description de la partie version" >{{ isset($contentInformation->get(2)->description) ? $contentInformation->get(2)->description : '' }}</textarea>
+                        <textarea name="version" class="ckeditor form-control" rows="3" placeholder="Veuillez entrer la description de la partie version" >{{ isset($contentInformation["version"]->description) ? $contentInformation["version"]->description : '' }}</textarea>
                     </div>
 
                     <!-- textarea -->
                     <div class="form-group">
                         <label for="mentions_legales">Mentions légales :</label>
-                        <textarea name="mentions_legales" class="ckeditor form-control" rows="3" placeholder="Veuillez entrer la description des mentions légales">{{ isset($contentInformation->get(3)->description) ? $contentInformation->get(3)->description : '' }}</textarea>
+                        <textarea name="mentions_legales" class="ckeditor form-control" rows="3" placeholder="Veuillez entrer la description des mentions légales">{{ isset($contentInformation["mentions légales"]->description) ? $contentInformation["mentions légales"]->description : '' }}</textarea>
                     </div>
 
                     <!-- textarea -->
                     <div class="form-group">
                         <label for="appel_partenaires">Appel partenaire :</label>
-                        <textarea name="appel_partenaires" class="ckeditor form-control" rows="3" placeholder="Veuillez entrer la description aux appels aux partenaires">{{ isset($contentInformation->get(4)->description) ? $contentInformation->get(4)->description : '' }}</textarea>
+                        <textarea name="appel_partenaires" class="ckeditor form-control" rows="3" placeholder="Veuillez entrer la description aux appels aux partenaires">{{ isset($contentInformation["appel partenaires"]->description) ? $contentInformation["appel partenaires"]->description : '' }}</textarea>
                     </div>
 
                     <div class="form-group">
@@ -77,9 +80,8 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="music">Volume de la musique</label>
-                        <input type="range" id="volume" name="volume"  min="0" max="1" step="0.01">
-                        <span class="volume__value"></span>
+                        <label for="music">Volume de la musique</label> <span id="volume__value">{{ isset($contentInformation["volume musique"]->description) ? number_format(floatval($contentInformation["volume musique"]->description) * 100, 0) : '0' }} %</span>
+                        <input type="range" id="volume" name="volume"  min="0" max="1" step="0.01" value="{{ isset($contentInformation["volume musique"]->description) ? $contentInformation["volume musique"]->description : '0' }}">
                     </div>
 
                     <div class="form-group">
@@ -89,7 +91,7 @@
 
                     <div class="form-group">
                         <label for="fb_url">Facebook url</label>
-                        <input type="text" id="fb_url" name="fb_url" class="form-control" placeholder="Veuillez entrer le nom" value="{{ isset($contentInformation->get(11)->description) ? $contentInformation->get(11)->description : '' }}">
+                        <input type="text" id="fb_url" name="fb_url" class="form-control" placeholder="Veuillez entrer le nom" value="{{ isset($contentInformation["facebook url"]->description) ? $contentInformation["facebook url"]->description : '' }}">
                     </div>
 
                     @include('partials._form-error')
@@ -103,4 +105,16 @@
     </div>
 </section>
 <!-- /.content -->
+@endsection
+
+@section('scripts')
+    <script>
+        let inputVolume = document.querySelector('#volume');
+        let displayVolume = document.querySelector('#volume__value');
+
+        inputVolume.addEventListener('change', event => {
+            let volume = event.target.value;
+            displayVolume.innerHTML = Math.round(volume * 100) + "%";
+        });
+    </script>
 @endsection

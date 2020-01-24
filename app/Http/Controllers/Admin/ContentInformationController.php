@@ -28,7 +28,7 @@ class ContentInformationController extends Controller
      */
     public function edit()
     {
-        $contentInformation = ContentInformation::all();
+        $contentInformation = ContentInformation::all()->keyBy('name');
 
         return view('admin.contentInformation.edit', compact('contentInformation'));
     }
@@ -82,7 +82,7 @@ class ContentInformationController extends Controller
     }
 
     private function saveImage($file, $name){
-        $item = ContentInformation::find($id);
+        $item = ContentInformation::where('name', $name)->first();
 
         if(isset($item) && isset($item->path)){
             unlink(storage_path('app/public' . $item->path));

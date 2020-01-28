@@ -14,11 +14,11 @@
             <table class="table">
                 <thead>
                     <th class="table__th table__width-15">Date</th>
-                    <th class="table__th table__width-40">Tournoi</th>
-                    <th class="table__th table__width-10">BC Ozoir/Privé/Fédéral</th>
+                    <th class="table__th table__width-30">Tournoi</th>
+                    <th class="table__th table__width-10">Type</th>
                     <th class="table__th table__width-15">Lieu</th>
-                    <th class="table__th table__width-10">Homologation</th>
-                    <th class="table__th table__width-10">Podium</th>
+                    <th class="table__th table__width-5">Homol.</th>
+                    <th class="table__th table__width-25">Classement podiums</th>
                 </thead>
                 <tbody>
                     <?php $now = \Carbon\Carbon::now(); ?>
@@ -28,7 +28,7 @@
                             <td class="table__td--membertournament">{{$tournament->title}}</td>
                             <td class="table__td--membertournament">
                                 @if ($tournament->type_id == 1)
-                                    Ozoir
+                                    BC Ozoir
                                 @elseif($tournament->type_id == 2)
                                     Privé
                                 @elseif($tournament->type_id == 3)

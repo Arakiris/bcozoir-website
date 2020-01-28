@@ -17,8 +17,8 @@
                     <th class="table__th table__width-30">Tournoi</th>
                     <th class="table__th table__width-10">Type</th>
                     <th class="table__th table__width-15">Lieu</th>
-                    <th class="table__th table__width-5">Homol.</th>
-                    <th class="table__th table__width-25">Classement podiums</th>
+                    <th class="table__th table__width-10">Homol.</th>
+                    <th class="table__th table__width-20">Classement podiums</th>
                 </thead>
                 <tbody>
                     <?php $now = \Carbon\Carbon::now(); ?>

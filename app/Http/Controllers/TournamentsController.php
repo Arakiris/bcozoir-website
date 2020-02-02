@@ -172,7 +172,7 @@ class TournamentsController extends Controller
         $tournaments = Tournament::with(['members' => function($query){ $query->orderBy('last_name', 'asc')->orderBy('first_name', 'asc');},
                                          'teams' => function($query){ $query->orderBy("name", 'asc');},
                                          'teams.members' => function($query){ $query->orderBy('last_name', 'asc')->orderBy('first_name', 'asc');} ])
-                                    ->ozoirtournament()->paginate(6);
+                                    ->ozoirtournament()->paginate(1);
 
         return view('tournaments', compact('title', 'tournaments', 'pagination', 'futur'));
     }

@@ -31,7 +31,6 @@
                             <img class="event__single-logo occasion-image-logo" src="{{ asset('images/tournament/tournament-pictures.png') }}" alt="Image de présentation afin de montrer les photos de l'évènement">
                         </div>
                     </div>
-
                 @endif
 
                 @if(isset($event->videos) && $event->videos->count()>0)
@@ -48,10 +47,10 @@
                     </div>
                 @endif
             @endforeach
-            <div class="event__bottom bottom-tournament-league">
-                <div class="paginations bottom-div">
-                    {{ $events->links() }}
-                </div>
+        </div>
+        <div class="event__bottom bottom-tournament-league">
+            <div class="paginations bottom-div">
+                {{ $events->links() }}
             </div>
         </div>
     @else

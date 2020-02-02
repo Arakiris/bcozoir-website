@@ -25,7 +25,7 @@
                 @endif
             </ul>
 
-            <div id="tab-{{ $previousYear }}" class="tabs__content tabs__content-current">
+            <div id="tab-{{ $previousYear }}" class="tabs__content tabs__content-current tabs__content-current--ranking">
                 <div class="archives__content archives__content-league archives__paginate" id="paginate-{{ $previousYear }}">
                     <div class="archives__tables archives__tables-league" id="table-{{ $previousYear }}">
                         @foreach($leagues as $league)

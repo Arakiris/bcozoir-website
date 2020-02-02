@@ -49,7 +49,7 @@
                 @endif
             @endforeach
             <div class="event__bottom bottom-tournament-league">
-                <div class="pagination bottom-div">
+                <div class="paginations bottom-div">
                     {{ $events->links() }}
                 </div>
             </div>

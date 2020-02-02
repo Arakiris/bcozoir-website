@@ -52,8 +52,7 @@
         }
 
         &-league {
-            width: 65rem;
-            grid-template-columns: minmax(20rem, 2fr) repeat(2, minmax(12rem, 1fr)) 2fr;
+            grid-template-columns: minmax(20rem,3fr) repeat(2,minmax(12rem,2fr)) minmax(10rem, 15rem);
         }
 
         &-occasion {

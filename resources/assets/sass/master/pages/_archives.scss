@@ -20,7 +20,7 @@
         grid-template-columns: minmax(20rem, 3fr) minmax(12rem, 2fr) repeat(5, 1fr);
 
         &-league {
-            width: 65rem;
+            width: 100%;
             grid-template-columns: minmax(20rem, 2fr) repeat(2, minmax(12rem, 1fr)) 2fr;
         }
 

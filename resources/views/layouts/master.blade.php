@@ -35,12 +35,6 @@
     <title>Bowling Club - Ozoir</title>
 </head>
 <body>
-    <div id="player">
-        <audio id="audio" autoplay loop hidden>
-            <source src="{{ isset($music_link->path) ? asset('storage' . $music_link->path) : asset('music/music.mp3') }}" type="audio/mpeg">
-        </audio>
-    </div>
-
     <div class="container">
         @include('layouts.partials._header')
         @include('layouts.partials._main')

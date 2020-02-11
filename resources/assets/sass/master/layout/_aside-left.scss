@@ -71,8 +71,10 @@
                 padding: .2rem;
             }
         }
+    }
 
-
+    &-player {
+        grid-column: sidebar-left-start / sidebar-left-end;
     }
 
     &-calendar {

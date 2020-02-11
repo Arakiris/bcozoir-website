@@ -14,7 +14,7 @@ class EventsController extends Controller
     use CommonTrait;
 
     public function showall() {
-        $events = Event::showevents()->paginate(6);
+        $events = Event::showevents()->paginate(12);
 
         return view('events', compact('events'));
     }

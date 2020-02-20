@@ -23,9 +23,6 @@
 
             <!-- /.box-header -->
             <div class="box-body">
-
-                {{$contentInformation["appel partenaires"]->description}}
-
                 <form method="POST" action="/administration/contentInformation" enctype="multipart/form-data" role="form">
                     {{ csrf_field() }}
                     {{ method_field('PATCH') }}

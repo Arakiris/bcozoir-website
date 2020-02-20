@@ -75,6 +75,10 @@
 
     &-player {
         grid-column: sidebar-left-start / sidebar-left-end;
+
+        &__audio {
+            width: 100%;
+        }
     }
 
     &-calendar {

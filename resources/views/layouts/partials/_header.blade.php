@@ -2,7 +2,7 @@
     <div class="header__logo">
         <a href="{{ route('welcome') }}">
             <img src="{{ (isset($logo) && isset($logo->path)) ? asset('storage' . $logo->path) : asset('images/logo2.jpg') }}" 
-                alt="Logo de bienvenue du site de bowling d'Ozoir" class="header__logo-img" >
+                alt="Logo du site de bowling d'Ozoir" class="header__logo-img" >
         </a>
     </div>
     <div class="header__img" id="header__img--personalized">

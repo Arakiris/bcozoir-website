@@ -42,7 +42,7 @@ class MembersController extends Controller
                                     ->whereDate('tournaments.date', '>', $yearsBefore)
                                     ->select('tournaments.*', 'members.id as memberID', 'members.first_name', 'members.last_name', 'member_team.rank')
                                     ->union($tournaments1)
-                                    ->orderBy('date', 'asc')
+                                    ->orderBy('date', 'desc')
                                     ->get();
 
         return view('membertournaments', compact('member', 'tournaments'));

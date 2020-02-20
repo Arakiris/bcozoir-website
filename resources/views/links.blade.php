@@ -23,10 +23,10 @@
                 </div>
             @endforeach
         </div>
-    </div>
+    </div> 
 
-    <div class="partners__bottom">
-        <div class="pagination bottom-div">
+    <div class="event__bottom bottom-tournament-league">
+        <div class="paginations bottom-div">
             {{ $links->links() }}
         </div>
     </div>

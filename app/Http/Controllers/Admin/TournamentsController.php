@@ -308,18 +308,6 @@ class TournamentsController extends Controller
     public function editPlayers($id){
         $tournament = Tournament::with('members')->findOrFail($id);
         $members = Member::all();
-
-        // $playerTournament = $tournament->members()->get()->toArray();
-
-        // $members = Member::with('club')->get();
-        // foreach($members as &$member){
-        //     $member->participate = false;
-        // }
-        // $members = $members->keyBy('id');
-
-        // foreach($tournament->members as $m){
-        //     $members[$m->id]->participate = true;
-        // }
         
         return view('admin.tournaments.editPlayers', compact('tournament', 'members'));
     }
@@ -342,10 +330,9 @@ class TournamentsController extends Controller
             $tournament->members()->detach();
         }
 
-        // $tournament = Tournament::findOrFail($id);
-        // $tournament->members()->sync($request['checkBoxArray']);
-
-        // return redirect('/administration/tournois');
+        $team = Team::where('tournament_id', '=', $id);
+        $team->members()->detach();
+        
         session()->flash('notification_management_admin', 'Les membres ont bien été ajoutés au tournoi');
         return redirect()->route('admin.tournois.edit', [$id]);
     }

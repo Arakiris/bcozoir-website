@@ -43,7 +43,7 @@
 </nav>
 
 <div class="aside-left-player">
-    <audio id="audio" controls loop >
+    <audio class="aside-left-player__audio" id="audio" controls loop >
         <source src="{{ isset($music_link->path) ? asset('storage' . $music_link->path) : asset('music/music.mp3') }}" type="audio/mpeg">
             <p>Votre navigateur ne prend pas en charge l'audio HTML.</p>
     </audio>

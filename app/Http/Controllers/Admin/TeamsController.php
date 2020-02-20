@@ -68,6 +68,8 @@ class TeamsController extends Controller
             $team->members()->detach();
         }
 
+        $tournament->members()->detach();
+
         session()->flash('notification_management_admin', 'L\'équipe a été créée');
         return redirect()->route('admin.tournois.edit', [$id]);
     }
@@ -94,16 +96,6 @@ class TeamsController extends Controller
         $team = Team::with('members')->findOrFail($idTeam);
         $members = Member::all();
         $tournament = $team->tournament;
-
-        // $members = Member::with('club')->get();
-        // foreach($members as &$member){
-        //     $member->participate = false;
-        // }
-        // $members = $members->keyBy('id');
-
-        // foreach($team->members as $m){
-        //     $members[$m->id]->participate = true;
-        // }
         
         return view('admin.teams.edit', compact('team', 'tournament', 'members'));
     }
@@ -117,14 +109,6 @@ class TeamsController extends Controller
      */
     public function update(Request $request, $idtournament, $idteam)
     {
-        // $validatedTeam = request()->validate([
-        //     'name' => 'required|string|max:255'
-        // ]);
-        // $team = Team::findOrFail($idteam);
-        // $team->name = $validatedTeam['name'];
-        // $team->save();
-        // $team->members()->sync($request['checkBoxArray']);
-
         $validatedTeam = request()->validate([
             'name' => 'nullable|string|max:255',
             'display_rank' => 'boolean',
@@ -139,7 +123,6 @@ class TeamsController extends Controller
         $team->save();
 
         if(isset($validatedTeam["members"])){
-            // $members = array_column($validatedTeam["members"], 'id');
             $memberpick;
             foreach($validatedTeam["members"] as $member){
                 $rank = isset($member['rank']) ? $member['rank'] : "";
@@ -151,13 +134,8 @@ class TeamsController extends Controller
             $team->members()->detach();
         }
 
-        // if(isset($validatedTeam["members"])){
-        //     $members = array_column($validatedTeam["members"], 'id');
-        //     $team->members()->sync($members);
-        // }
-        // else {
-        //     $team->members()->detach();
-        // }
+        $tournament = Tournament::findOrFail($idtournament);
+        $tournament->members()->detach();
 
         session()->flash('notification_management_admin', 'L\'équipe a été éditée');
         return redirect()->route('admin.tournois.edit', [$idtournament]);

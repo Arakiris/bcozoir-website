@@ -233,15 +233,15 @@
 
         &-event {
             visibility: hidden;
-            padding: 15px;
-            border-radius: 6px;
+            padding: 1.5rem;
+            border-radius: 0.6rem;
             top: -115px;
             left: 115%;
 
             /* Position the tooltip text  */
             position: absolute;
             z-index: 2;
-            width: 40rem;
+            width: 48rem;
             height: 24rem;
 
             display: grid;

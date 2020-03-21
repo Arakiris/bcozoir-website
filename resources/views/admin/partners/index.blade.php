@@ -19,7 +19,6 @@
 
 <!-- Main content -->
 <section class="content">
-
     <!-- Your Page Content Here -->
     <div class="row">
         <div class="col-lg-6">
@@ -29,6 +28,7 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
+                    {{ old('website', 'abc')}}
                     <table class="table table-bordered table-hover sortingTable2">
                         <thead>
                             <tr>
@@ -103,43 +103,43 @@
                         <!-- text input -->
                         <div class="form-group">
                             <label for="title">Nom</label>
-                            <input type="text" id="title" name="title" class="form-control" placeholder="Veuillez entrer le nom du partenaire">
+                            <textarea type="text" id="title" name="title" row="3" class="ckeditor form-control" placeholder="Veuillez entrer le nom du partenaire" required>{{ old('title', '') }}</textarea>
                         </div>
 
                         <!-- text input -->
                         <div class="form-group">
                             <label for="address">Adresse</label>
-                            <textarea type="text" id="address" name="address" row="3" class="ckeditor form-control" placeholder="Veuillez entrer l'adresse du partenaire"></textarea>
+                            <textarea type="text" id="address" name="address" row="3" class="ckeditor form-control" placeholder="Veuillez entrer l'adresse du partenaire">{{ old('address', '') }}</textarea>
                         </div>
 
                         <!-- text input -->
                         <div class="form-group">
                             <label for="website">Website</label>
-                            <input type="text" id="website" name="website" class="form-control" placeholder="Veuillez entrer le site">
+                            <input type="text" id="website" name="website" class="form-control" placeholder="Veuillez entrer le site" value="{{ old('website', '') }}">
                         </div>
 
                         <!-- text input -->
                         <div class="form-group">
                             <label for="url">url</label>
-                            <input type="text" id="url" name="url" class="form-control" placeholder="Veuillez entrer le site">
+                            <input type="text" id="url" name="url" class="form-control" placeholder="Veuillez entrer le site" value="{{ old('url', '') }}">
                         </div>
 
                         <!-- text input -->
                         <div class="form-group">
                             <label for="mail">Mail</label>
-                            <input type="text" id="mail" name="mail" class="form-control" placeholder="Veuillez entrer l'adresse mail du partenaire">
+                            <input type="text" id="mail" name="mail" class="form-control" placeholder="Veuillez entrer l'adresse mail du partenaire" value="{{ old('mail', '') }}">
                         </div>
 
                         <!-- text input -->
                         <div class="form-group">
                             <label for="phone1">Téléphone 1</label>
-                            <input type="text" id="phone1" name="phone1" class="form-control"  placeholder="Veuillez entrer le téléphone du partenaire">
+                            <input type="tel" id="phone1" name="phone1" class="form-control"  placeholder="Veuillez entrer le téléphone du partenaire" value="{{ old('phone1', '') }}">
                         </div>
 
                         <!-- text input -->
                         <div class="form-group">
                             <label for="phone2">Téléphone 2</label>
-                            <input type="text" id="phone2" name="phone2" class="form-control" placeholder="Veuillez entrer le téléphone du partenaire">
+                            <input type="tel" id="phone2" name="phone2" class="form-control" placeholder="Veuillez entrer le téléphone du partenaire" value="{{ old('phone2', '') }}">
                         </div>
 
                         <div class="form-group">

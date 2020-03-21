@@ -25,7 +25,7 @@
                 </div>
                 <div class="partners__informations">
                     @isset($partner->title)
-                        <p class="partners__paragraph"> {{ $partner->title }} </p>
+                        <p class="partners__paragraph"> {!! $partner->title !!} </p>
                     @endif
                     @isset($partner->address)
                         <p class="partners__paragraph"> {!! $partner->address !!} </p>

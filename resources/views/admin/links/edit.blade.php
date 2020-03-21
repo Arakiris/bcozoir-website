@@ -41,12 +41,12 @@
                         <!-- text input -->
                         <div class="form-group">
                             <label for="title">Titre</label>
-                            <input type="text" id="title" name="title" class="form-control" placeholder="Veuillez entrer le titre du lien utile" value="{{ $link->title }}" required>
+                            <textarea type="text" id="title" name="title" row="3" class="ckeditor form-control" placeholder="Veuillez entrer le titre du lien utile" required>{{ old('title', $link->title) }}</textarea>
                         </div>
 
                         <div class="form-group">
                             <label for="link">Adresse Internet</label>
-                            <input type="text" id="link" name="link" class="form-control" placeholder="Veuillez entrer l'url du lien utile" value="{{ $link->link }}" required>
+                            <input type="text" id="link" name="link" class="form-control" placeholder="Veuillez entrer l'url du lien utile" value="{{ old('link', $link->link) }}" required>
                         </div>
 
 

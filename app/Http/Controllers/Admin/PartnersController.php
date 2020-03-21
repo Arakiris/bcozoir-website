@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Traits\CommonTrait;
 
+use Validator;
 use Illuminate\Http\Request;
 
 use App\Http\Controllers\Controller;
@@ -43,17 +44,18 @@ class PartnersController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedPartner = request()->validate([
-            'address' => 'nullable|string',
-            'title' => 'nullable|string',
-            'website' => 'nullable|string',
-            'url' => 'nullable|url',
-            'mail' => 'nullable|string',
-            'phone1' => 'nullable|string',
-            'phone1' => 'nullable|string',
-            ]);
-        
-        request()->validate(['image' => 'required|image']);
+        $validated = request()->validate([
+            'address' => 'bail|nullable|string',
+            'title' => 'bail|nullable|string',
+            'website' => 'bail|nullable|string',
+            'url' => 'bail|nullable|url',
+            'mail' => 'bail|nullable|string',
+            'phone1' => 'bail|nullable|string',
+            'phone1' => 'bail|nullable|string',
+            'image' => 'bail|required|image'
+        ]);
+
+        $validatedPartner = array_except($validated, ['image']);
 
         $partner = Partner::create($validatedPartner);
         
@@ -103,17 +105,18 @@ class PartnersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validatedPartner = request()->validate([
-            'address' => 'nullable|string',
-            'title' => 'nullable|string',
-            'website' => 'nullable|string',
-            'url' => 'nullable|url',
-            'mail' => 'nullable|string',
-            'phone1' => 'nullable|string',
-            'phone1' => 'nullable|string',
-            ]);
+        $validated = request()->validate([
+            'address' => 'bail|nullable|string',
+            'title' => 'bail|nullable|string',
+            'website' => 'bail|nullable|string',
+            'url' => 'bail|nullable|url',
+            'mail' => 'bail|nullable|string',
+            'phone1' => 'bail|nullable|string',
+            'phone1' => 'bail|nullable|string',
+            'image' => 'bail|required|image'
+        ]);
 
-        request()->validate(['image' => 'nullable|image']);
+        $validatedPartner = array_except($validated, ['image']);
 
         $partner = Partner::findOrFail($id);
         $partner->update($validatedPartner);

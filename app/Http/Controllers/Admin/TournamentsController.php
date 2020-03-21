@@ -330,8 +330,10 @@ class TournamentsController extends Controller
             $tournament->members()->detach();
         }
 
-        $team = Team::where('tournament_id', '=', $id);
-        $team->members()->detach();
+        $team = Team::where('tournament_id', '=', $id)->first();
+        if($team) {
+            $team->members()->detach();
+        }
         
         session()->flash('notification_management_admin', 'Les membres ont bien été ajoutés au tournoi');
         return redirect()->route('admin.tournois.edit', [$id]);

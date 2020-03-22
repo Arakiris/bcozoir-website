@@ -33,7 +33,7 @@
                             {{ method_field('PATCH') }}
                             
                             <div class="form-group">
-                                 <button type="submit" id="save" class="btn btn-primary">Éditer</button>
+                                 <button type="submit" id="save" class="btn btn-primary">Mettre à jour</button>
                             </div>
 
                             <!-- text input -->

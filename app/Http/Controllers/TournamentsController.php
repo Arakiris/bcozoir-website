@@ -67,6 +67,20 @@ class TournamentsController extends Controller
         return $rankingYear->toJson();
     }
 
+    private function tournamentYear($type, $year) {
+        return Tournament::with(['members' => function($query){ $query->orderBy('last_name', 'asc')->orderBy('first_name', 'asc');},
+                                'members.picture',
+                                'members.club' => function($query){ $query->select(['id','name']); },
+                                'members.category' => function($query){ $query->select(['id','title']);},
+                                'teams' => function($query){ $query->orderBy("name", 'asc');},
+                                'teams.members' => function($query){ $query->orderBy('last_name', 'asc')->orderBy('first_name', 'asc');},
+                                'teams.members.picture',
+                                'teams.members.club' => function($query){ $query->select(['id','name']); },
+                                'teams.members.category' => function($query){ $query->select(['id','title']);},
+                                ])
+                            ->tournamentsyear($type, $year)->get();
+    }
+
     /**
      * Api for javascript bc oczoir tournament by selecting year
      */
@@ -74,19 +88,7 @@ class TournamentsController extends Controller
         $validatedYear = $request->validate(['id' => 'required|numeric']);
         $year = $validatedYear['id'];
 
-        $TournamentsYear = Tournament::with(['members' => function($query){ $query->orderBy('last_name', 'asc')->orderBy('first_name', 'asc');},
-                                             'members.picture',
-                                             'members.club' => function($query){ $query->select(['id','name']); },
-                                             'members.category' => function($query){ $query->select(['id','title']);},
-                                             'teams' => function($query){ $query->orderBy("name", 'asc');},
-                                             'teams.members' => function($query){ $query->orderBy('last_name', 'asc')->orderBy('first_name', 'asc');},
-                                             'teams.members.picture',
-                                             'teams.members.club' => function($query){ $query->select(['id','name']); },
-                                             'teams.members.category' => function($query){ $query->select(['id','title']);},
-                                             ])
-                                        ->tournamentsyear(1, $year)->get();
-
-        return $TournamentsYear->toJson();
+        return $this->tournamentYear(1, $year)->toJson();
     }
 
     /**
@@ -108,7 +110,7 @@ class TournamentsController extends Controller
                                              ])
                                         ->tournamentsyear(2, $year)->get();
 
-        return $TournamentsYear->toJson();
+        return $this->tournamentYear(2, $year)->toJson();
     }
 
         /**
@@ -117,19 +119,8 @@ class TournamentsController extends Controller
     public function championshipYear(Request $request){
         $validatedYear = $request->validate(['id' => 'required|numeric']);
         $year = $validatedYear['id'];
-
-        $TournamentsYear = Tournament::with(['members' => function($query){ $query->orderBy('last_name', 'asc')->orderBy('first_name', 'asc');},
-                                             'members.picture',
-                                             'members.club' => function($query){ $query->select(['id','name']); },
-                                             'members.category' => function($query){ $query->select(['id','title']);},
-                                             'teams' => function($query){ $query->orderBy("name", 'asc');},
-                                             'teams.members.picture',
-                                             'teams.members.club' => function($query){ $query->select(['id','name']); },
-                                             'teams.members.category' => function($query){ $query->select(['id','title']);},
-                                             ])
-                                        ->tournamentsyear(3, $year)->get();
-
-        return $TournamentsYear->toJson();
+        
+        return $this->tournamentYear(3, $year)->toJson();
     }
 
     /**
@@ -310,29 +301,54 @@ class TournamentsController extends Controller
         return view('archiveschoice');
     }
 
+    private function oldTournaments($type) {
+        $years = Tournament::selectRaw("YEAR(start_season) as year")
+                                ->where('type_id', '=', $type)
+                                ->where('start_season', '<', Carbon::create($this->yearSeason(), 9, 1, 0, 0, 0))
+                                ->distinct()
+                                ->orderBy('date', 'desc')->get();
+
+        if(!$years->isEmpty()){
+            $lastYear = $years->shift()->year;
+            if($lastYear == $this->yearSeason())
+                return array(Tournament::with(['members' => function($query){ $query->orderBy('last_name', 'asc')->orderBy('first_name', 'asc');},
+                                                'members.picture',
+                                                'members.club' => function($query){ $query->select(['id','name']); },
+                                                'members.category' => function($query){ $query->select(['id','title']);},
+                                                'teams' => function($query){ $query->orderBy("name", 'asc');},
+                                                'teams.members' => function($query){ $query->orderBy('last_name', 'asc')->orderBy('first_name', 'asc');},
+                                                'teams.members.picture',
+                                                'teams.members.club' => function($query){ $query->select(['id','name']); },
+                                                'teams.members.category' => function($query){ $query->select(['id','title']);},
+                                                ])
+                                        ->previousseason($type)->get(), $years);
+            else
+            return array(Tournament::with(['members' => function($query){ $query->orderBy('last_name', 'asc')->orderBy('first_name', 'asc');},
+                                            'members.picture',
+                                            'members.club' => function($query){ $query->select(['id','name']); },
+                                            'members.category' => function($query){ $query->select(['id','title']);},
+                                            'teams' => function($query){ $query->orderBy("name", 'asc');},
+                                            'teams.members' => function($query){ $query->orderBy('last_name', 'asc')->orderBy('first_name', 'asc');},
+                                            'teams.members.picture',
+                                            'teams.members.club' => function($query){ $query->select(['id','name']); },
+                                            'teams.members.category' => function($query){ $query->select(['id','title']);},
+                                            ])
+                                    ->tournamentsyear($type, $lastYear)->get(), $years);
+        }
+
+        return array(null, $years);
+    }
+
     /**
      * Old tournament from Ozoir
      */
     public function oldOzoirTournaments() {
         $title = "Archives Tournois BC Ozoir";
-        $years = Tournament::selectRaw("YEAR(start_season) as year")
-                                ->where('type_id', '=', 1)
-                                ->where('start_season', '<', Carbon::create($this->yearSeason(), 8, 31, 0, 0, 0))
-                                ->distinct()
-                                ->orderBy('date', 'desc')->get();
-
         $type = 1;
 
-        if(!$years->isEmpty()){
-            $lastYear = $years->shift()->year;
-            if($lastYear == $this->yearSeason())
-                $tournaments = Tournament::previousseason($type)->get();
-            else
-                $tournaments = Tournament::tournamentsyear($type, $lastYear)->get();
-        }
-        else {
-            $leagues = null;
-        }
+        $result = $this->oldTournaments($type);
+        $tournaments = $result[0];
+        $years = $result[1];
 
         return view('archivestournaments', compact('title', 'tournaments', 'years', 'type'));
     }
@@ -342,26 +358,11 @@ class TournamentsController extends Controller
      */
     public function oldPrivateTournaments() {
         $title = "Archives Tournois Privés";
-        $years = Tournament::selectRaw("YEAR(start_season) as year")
-                        ->where('type_id', '=', 2)
-                        ->where('start_season', '<', Carbon::create($this->yearSeason(), 9, 1, 0, 0, 0))
-                        ->distinct()
-                        ->orderBy('date', 'desc')->get();
-
         $type = 2;
 
-        if(!$years->isEmpty()){
-        $lastYear = $years->shift()->year;
-            if($lastYear == $this->yearSeason())
-                $tournaments = Tournament::previousseason($type)->get();
-            else
-                $tournaments = Tournament::tournamentsyear($type ,$lastYear)->get();
-        }
-        else {
-            $leagues = null;
-        }
-
-        
+        $result = $this->oldTournaments($type);
+        $tournaments = $result[0];
+        $years = $result[1];
 
         return view('archivestournaments', compact('title', 'tournaments', 'years', 'type'));
     }
@@ -371,26 +372,11 @@ class TournamentsController extends Controller
      */
     public function oldChampionships() {
         $title = "Archives Championnats Fédéraux";
-        $years = Tournament::selectRaw("YEAR(start_season) as year")
-                ->where('type_id', '=', 3)
-                ->where('start_season', '<', Carbon::create($this->yearSeason(), 9, 1, 0, 0, 0))
-                ->distinct()
-                ->orderBy('date', 'desc')->get();
-
         $type = 3;
 
-        if(!$years->isEmpty()){
-        $lastYear = $years->shift()->year;
-            if($lastYear == $this->yearSeason())
-                $tournaments = Tournament::previousseason($type)->get();
-            else
-                $tournaments = Tournament::tournamentsyear($type ,$lastYear)->get();
-        }
-        else {
-            $leagues = null;
-        }
-
-        
+        $result = $this->oldTournaments($type);
+        $tournaments = $result[0];
+        $years = $result[1];
 
         return view('archivestournaments', compact('title', 'tournaments', 'years', 'type'));
     }

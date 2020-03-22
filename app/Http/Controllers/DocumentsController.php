@@ -14,7 +14,9 @@ class DocumentsController extends Controller
     use CommonTrait;
 
     public function showall(){
-        $types = DocumentType::with('documents')->get();
+        $types = DocumentType::with(['documents' => function($query) { $query->orderBy('name', 'asc');}])
+                                ->orderBy('name', 'asc')
+                                ->get();
 
         return view('variousdocuments', compact('types'));
     }

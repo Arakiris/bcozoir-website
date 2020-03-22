@@ -200,8 +200,7 @@ window.createRankingArchives = function(lenghtlast, previousYear, url, url_image
                     <div class="event__team-content">
                 `;
                 podium.tournament.members.forEach(member => {
-                    if(member.pivot.rank)
-                        markup += `<div class="event__rank-display"> ${member.pivot.rank} </div>`;
+                    markup += `<div class="event__rank-display"> ${member.pivot.rank ? member.pivot.rank : '&nbsp;' } </div>`;
                 });
                 markup += `</div>`;
             }
@@ -234,10 +233,7 @@ window.createRankingArchives = function(lenghtlast, previousYear, url, url_image
     }
 
     const renderMemberPodiaRanking = (member) => {
-        if(member.pivot.rank){
-            return renderMember(member);
-        }
-        return '';
+        return renderMember(member);
     };
 
     const renderTeamPodiaRanking = team => {

@@ -52,7 +52,7 @@ class PartnersController extends Controller
             'mail' => 'bail|nullable|string',
             'phone1' => 'bail|nullable|string',
             'phone1' => 'bail|nullable|string',
-            'image' => 'bail|required|image'
+            'image' => 'required|image'
         ]);
 
         $validatedPartner = array_except($validated, ['image']);
@@ -113,7 +113,7 @@ class PartnersController extends Controller
             'mail' => 'bail|nullable|string',
             'phone1' => 'bail|nullable|string',
             'phone1' => 'bail|nullable|string',
-            'image' => 'bail|required|image'
+            'image' => 'required|image'
         ]);
 
         $validatedPartner = array_except($validated, ['image']);

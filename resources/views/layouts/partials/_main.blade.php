@@ -3,7 +3,7 @@
     @if(isset($warnings) && $warnings->count()>0)
         <div class="content__warning warning-carousel warning">
             @foreach($warnings as $warning)
-                <span>{{ strip_tags($warning->body) }}</span>
+                <span>{!! $warning->body !!}</span>
             @endforeach
         </div>
         <div class="content__main content__with-warning main-section">

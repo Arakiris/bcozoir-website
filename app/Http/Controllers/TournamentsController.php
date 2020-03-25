@@ -266,7 +266,7 @@ class TournamentsController extends Controller
     public function showpodiums() {
         $podiums = Podium::whereHas('pictures')
                             ->with('tournament')
-                            ->orderBy('date', 'desc')->paginate(6);
+                            ->orderBy('date', 'desc')->paginate(10);
 
         return view('podiums', compact('podiums'));
     }

@@ -6,16 +6,6 @@ window.createRankingArchives = function(lenghtlast, previousYear, url, url_image
         let bottom_pag = document.querySelector('.event__bottom');
         if(lenghtlast && lenghtlast > 5){
             bottom_pag.classList.remove('archives__pagination_hide');
-            $(function(){
-                $('#table-' + previousYear).paginathing({
-                    perPage: 5,
-                    insertAfter: '#pag-' + previousYear,
-                    prevText: '&lt;',
-                    nextText: '&gt;',
-                    firstText: '&laquo;',
-                    lastText: '&raquo;'
-                });
-            });
         }
 
         for (let i = 0; i < tabs.length; i++){
@@ -42,19 +32,6 @@ window.createRankingArchives = function(lenghtlast, previousYear, url, url_image
         renderLoader(parent);
         getDataAjax(url, id, token).then(podia => {
             renderRanking(podia, parent);
-
-            if(podia.length > 5){
-                $(function(){
-                    $('#table-' + id).paginathing({
-                        perPage: 5,
-                        insertAfter: '#pag-' + id,
-                        prevText: '&lt;',
-                        nextText: '&gt;',
-                        firstText: '&laquo;',
-                        lastText: '&raquo;'
-                    });
-                });
-            }
 
             clearLoader(parent);
         });

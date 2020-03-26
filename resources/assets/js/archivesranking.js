@@ -174,10 +174,10 @@ window.createRankingArchives = function(lenghtlast, previousYear, url, url_image
             if(podium.tournament.formation == 0 && typeof podium.tournament.members !== "undefined" && podium.tournament.members.length > 0){
                 markup += `
                     <div class="event__team-title"><p class="event__team-text">Classement podiums</p></div>
-                    <div class="event__team-content">
+                    <div class="event__team-content-js">
                 `;
                 podium.tournament.members.forEach(member => {
-                    markup += `<div class="event__rank-display"> ${ member.pivot.rank ? member.pivot.rank : '<span class="invisible"> none </span>' } </div>`;
+                    markup += `<div class="event__rank-display"> ${ member.pivot.rank ? member.pivot.rank : '&nbsp;' } </div>`;
                 });
                 markup += `</div>`;
             }
@@ -187,10 +187,10 @@ window.createRankingArchives = function(lenghtlast, previousYear, url, url_image
                     if(team.display_rank) {
                         markup += `
                             <div class="event__team-title"><p class="event__team-text">Classement podiums</p></div>
-                            <div class="event__team-content">
+                            <div class="event__team-content-js">
                         `;
                         team.members.forEach(member => {
-                            markup += `<div class="event__rank-display"> ${member.pivot.rank} </div>`;
+                            markup += `<div class="event__rank-display"> ${ member.pivot.rank ? member.pivot.rank : '&nbsp;' } </div>`;
                         });
                         markup += `
                             </div>

@@ -10,7 +10,7 @@
     </div>
 
     @if(isset($podia) && !empty($podia) && $podia->count() > 0)
-        <?php $previousYear = $podia[0]->date->format('Y'); ?>
+        <?php $previousYear = $lastYear; ?>
         <div class="archives main-content-archives">
             <ul class="tabs"> 
                 <li class="tabs__link tabs__link-current" data-tab="tab-{{ $previousYear }}">{{ $previousYear }}</li>

@@ -416,7 +416,7 @@ class TournamentsController extends Controller
             $podia = null;
         }
 
-        return view('archivesrankingpodia', compact('podia', 'years'));
+        return view('archivesrankingpodia', compact('podia', 'years', 'lastYear'));
     }
 
     private function yearSeason() {

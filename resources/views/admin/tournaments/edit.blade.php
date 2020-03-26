@@ -129,8 +129,8 @@
                     </div>
 
                     <div class="form-group">
-                        <button type="submit" id="add-teams" class="btn btn-default {{ ($tournament->formation == 1) ? '' : 'disabled' }}" name="submitbutton" value="saveAddTeams" {{ ($tournament->formation == 1) ? '' : 'disabled' }}>Ajouter une équipe</button>
                         <button type="submit" id="add-players" class="btn btn-default {{ ($tournament->formation == 0) ? '' : 'disabled' }}" name="submitbutton" value="saveManagePlayers" {{ ($tournament->formation == 0) ? '' : 'disabled' }}>Gérer les participants</button>
+                        <button type="submit" id="add-teams" class="btn btn-default {{ ($tournament->formation == 1) ? '' : 'disabled' }}" name="submitbutton" value="saveAddTeams" {{ ($tournament->formation == 1) ? '' : 'disabled' }}>Ajouter une équipe</button>
                     </div>
 
                     <div id="teams" {!! ($tournament->formation == 1) ? '' : 'style="display: none;"'!!}>

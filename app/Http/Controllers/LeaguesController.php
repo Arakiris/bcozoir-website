@@ -47,10 +47,13 @@ class LeaguesController extends Controller
         if(!$years->isEmpty()){
             $lastYear = $years->shift()->year;
 
-            if($lastYear == $this->yearSeason())
+            if($lastYear == $this->yearSeason()) {
                 $leagues = League::previousseason()->get();
+                $lastYear--;
+            }
             else
                 $leagues = League::leaguesyear($lastYear)->get();
+            
         }
         else {
             $leagues = null;
@@ -58,7 +61,7 @@ class LeaguesController extends Controller
 
         $title = "Archives ligues";
 
-        return view('archivesleagues', compact('title', 'leagues', 'years'));
+        return view('archivesleagues', compact('title', 'leagues', 'years', 'lastYear'));
     }
 
     private function yearSeason() {

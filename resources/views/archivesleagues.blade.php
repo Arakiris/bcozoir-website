@@ -13,7 +13,7 @@
     </div>
 
     @if(isset($leagues))
-        <?php $previousYear = $leagues[0]->start_season->format('Y'); ?>
+        <?php $previousYear = $lastYear; ?>
         <div class="archives">
             <ul class="tabs">
                 <li class="tabs__link tabs__link-current" data-tab="tab-{{ $previousYear }}">{{ $previousYear }}</li>

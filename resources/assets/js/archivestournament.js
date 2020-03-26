@@ -167,19 +167,18 @@ window.createTournamentArchives = function(lenghtlast, previousYear, url, url_ho
 
 
         // Render the  rest
-        markup += rendercolumnURL(tournament.lexer_url, tournament.lexer_url, `${url_image}/tournament/Lexer.jpg`);
-        markup += rendercolumnURL(tournament.listing, `${url_home}/tournoi/${tournament.slug}/listing`, `${url_image}/tournament/Listing.jpg`);
-        markup += rendercolumnURL(tournament.report, `${url_home}/tournoi/${tournament.slug}/resultat`, `${url_image}/tournament/Report.jpg`);
+        markup += rendercolumnURL(tournament.lexer_url, tournament.lexer_url, `${url_image}/tournament/Lexer.jpg`, true);
+        markup += rendercolumnURL(tournament.listing, `${url_home}/tournoi/${tournament.slug}/listing`, `${url_image}/tournament/Listing.jpg`, false);
+        markup += rendercolumnURL(tournament.report, `${url_home}/tournoi/${tournament.slug}/resultat`, `${url_image}/tournament/Report.jpg`, false);
 
-        if(typeof tournament.pictures !== "undefined" && tournament.pictures > 0){
-            markup += activeURL(`${url_home}/tournoi/${tournament.slug}/photos`, `${url_image}/tournament/tournament-pictures.png`);
-            
-        }
+        if(typeof tournament.pictures_count !== "undefined" && tournament.pictures_count > 0)
+            markup += activeURL(`${url_home}/tournoi/${tournament.slug}/photos`, `${url_image}/tournament/tournament-pictures.png`, false);
+
         else 
             markup += inactiveURL(`${url_image}/tournament/tournament-pictures.png`);
 
-        if(typeof tournament.videos !== "undefined" && tournament.videos > 0)
-            markup += activeURL(`${url_home}/tournoi/${tournament.slug}/videos`, `${url_image}/tournament/Tournament-videos.jpg`);
+        if(typeof tournament.videos_count !== "undefined" && tournament.videos_count > 0)
+            markup += activeURL(`${url_home}/tournoi/${tournament.slug}/videos`, `${url_image}/tournament/Tournament-videos.jpg`, false);
         else 
             markup += inactiveURL(`${url_image}/tournament/Tournament-videos.jpg`);
 
@@ -264,19 +263,20 @@ window.createTournamentArchives = function(lenghtlast, previousYear, url, url_ho
         return markup;
     }
 
-    const rendercolumnURL = (item, url, img) => {
+    const rendercolumnURL = (item, url, img, target) => {
         if(typeof item !== "undefined" && item){
-            return activeURL(url, img);
+            return activeURL(url, img, target);
         }
         else {
             return inactiveURL(img);
         }
     }
 
-    const activeURL = (url, img) => {
+    const activeURL = (url, img, target) => {
+        console.log('target ' + target);
         return `
             <div class="event__single-image">
-                <a class="event__single-link" href="${ url }" target="_blank">
+                <a class="event__single-link" href="${ url }" ${ (target === true) ? 'target="_blank"' : ''}>
                     <img class="event__single-logo occasion-image-league-lexero" src="${ img }" alt="Image du lien">
                 </a>
             </div>

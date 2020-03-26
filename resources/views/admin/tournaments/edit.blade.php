@@ -128,6 +128,11 @@
                         </div>
                     </div>
 
+                    <div class="form-group">
+                        <button type="submit" id="add-teams" class="btn btn-default {{ ($tournament->formation == 1) ? '' : 'disabled' }}" name="submitbutton" value="saveAddTeams" {{ ($tournament->formation == 1) ? '' : 'disabled' }}>Ajouter une équipe</button>
+                        <button type="submit" id="add-players" class="btn btn-default {{ ($tournament->formation == 0) ? '' : 'disabled' }}" name="submitbutton" value="saveManagePlayers" {{ ($tournament->formation == 0) ? '' : 'disabled' }}>Gérer les participants</button>
+                    </div>
+
                     <div id="teams" {!! ($tournament->formation == 1) ? '' : 'style="display: none;"'!!}>
                         <table class="table table-bordered table-hover sortingTable">
                             <thead>
@@ -194,6 +199,21 @@
                         </label>
                     </div>
 
+                    <!-- radio -->
+                    <div class="form-group">
+                        <label for="is_ranking">Podium ?</label>
+                        <div class="radio radiobutton">
+                            <label>
+                                <input type="radio" name="is_ranking" value="0" {{ (!isset($tournament->podium) || (isset($tournament->podium) && $tournament->podium->is_ranking == 0)) ? 'checked' : '' }}>
+                                Non
+                            </label>
+                            <label class="margin-right-15">
+                                <input type="radio" name="is_ranking" value="1" {{ (isset($tournament->podium) && $tournament->podium->is_ranking == 1) ? 'checked' : '' }}>
+                                Oui
+                            </label>
+                        </div>
+                    </div>
+
                     <div class="finished" {!! ($tournament->is_finished) ? 'style="display: block;"' : 'style="display: none;"' !!}>
                         <div class="form-group after_end">
                             <label for="lexer_url">Résultats sous Lexer</label>
@@ -209,29 +229,12 @@
                             <label for="report">Compte rendu</label>
                             <textarea class="ckeditor form-control" name="report" rows="20" placeholder="Entrer votre compte rendu...">{{ $tournament->report or '' }}</textarea>
                         </div>
-
-                        <!-- radio -->
-                        <div class="form-group">
-                            <label for="is_ranking">Podium ?</label>
-                            <div class="radio radiobutton">
-                                <label>
-                                    <input type="radio" name="is_ranking" value="0" {{ (!isset($tournament->podium) || (isset($tournament->podium) && $tournament->podium->is_ranking == 0)) ? 'checked' : '' }}>
-                                    Non
-                                </label>
-                                <label class="margin-right-15">
-                                    <input type="radio" name="is_ranking" value="1" {{ (isset($tournament->podium) && $tournament->podium->is_ranking == 1) ? 'checked' : '' }}>
-                                    Oui
-                                </label>
-                            </div>
-                        </div>
                     </div>
 
                     @include('partials._form-error')
 
                     <div class="box-footer col-xs-8">
                         <button type="submit" class="btn btn-primary" name="submitbutton" value="save">Mettre-à-jour</button>
-                        <button type="submit" id="add-teams" class="btn btn-default {{ ($tournament->formation == 1) ? '' : 'disabled' }}" name="submitbutton" value="saveAddTeams" {{ ($tournament->formation == 1) ? '' : 'disabled' }}>Ajouter une équipe</button>
-                        <button type="submit" id="add-players" class="btn btn-default {{ ($tournament->formation == 0) ? '' : 'disabled' }}" name="submitbutton" value="saveManagePlayers" {{ ($tournament->formation == 0) ? '' : 'disabled' }}>Gérer les participants</button>
                     </div>
                 </form>
                 <div class="box-footer col-xs-4 pull-right">

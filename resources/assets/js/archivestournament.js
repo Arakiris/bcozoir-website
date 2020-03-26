@@ -171,12 +171,14 @@ window.createTournamentArchives = function(lenghtlast, previousYear, url, url_ho
         markup += rendercolumnURL(tournament.listing, `${url_home}/tournoi/${tournament.slug}/listing`, `${url_image}/tournament/Listing.jpg`);
         markup += rendercolumnURL(tournament.report, `${url_home}/tournoi/${tournament.slug}/resultat`, `${url_image}/tournament/Report.jpg`);
 
-        if(typeof tournament.pictures !== "undefined" && tournament.pictures.length>0)
+        if(typeof tournament.pictures !== "undefined" && tournament.pictures > 0){
             markup += activeURL(`${url_home}/tournoi/${tournament.slug}/photos`, `${url_image}/tournament/tournament-pictures.png`);
+            
+        }
         else 
             markup += inactiveURL(`${url_image}/tournament/tournament-pictures.png`);
 
-        if(typeof tournament.videos !== "undefined" && tournament.videos.length>0)
+        if(typeof tournament.videos !== "undefined" && tournament.videos > 0)
             markup += activeURL(`${url_home}/tournoi/${tournament.slug}/videos`, `${url_image}/tournament/Tournament-videos.jpg`);
         else 
             markup += inactiveURL(`${url_image}/tournament/Tournament-videos.jpg`);

@@ -78,6 +78,7 @@ class TournamentsController extends Controller
                                 'teams.members.club' => function($query){ $query->select(['id','name']); },
                                 'teams.members.category' => function($query){ $query->select(['id','title']);},
                                 ])
+                            ->withCount(['pictures', 'videos'])
                             ->tournamentsyear($type, $year)->get();
     }
 
@@ -97,18 +98,6 @@ class TournamentsController extends Controller
     public function privateYear(Request $request){
         $validatedYear = $request->validate(['id' => 'required|numeric']);
         $year = $validatedYear['id'];
-
-        $TournamentsYear = Tournament::with(['members' => function($query){ $query->orderBy('last_name', 'asc')->orderBy('first_name', 'asc');},
-                                             'members.picture',
-                                             'members.club' => function($query){ $query->select(['id','name']); },
-                                             'members.category' => function($query){ $query->select(['id','title']);},
-                                             'teams' => function($query){ $query->orderBy("name", 'asc');},
-                                             'teams.members' => function($query){ $query->orderBy('last_name', 'asc')->orderBy('first_name', 'asc');},
-                                             'teams.members.picture',
-                                             'teams.members.club' => function($query){ $query->select(['id','name']); },
-                                             'teams.members.category' => function($query){ $query->select(['id','title']);},
-                                             ])
-                                        ->tournamentsyear(2, $year)->get();
 
         return $this->tournamentYear(2, $year)->toJson();
     }
@@ -413,6 +402,7 @@ class TournamentsController extends Controller
                                         'tournament.teams.members' => function($query){ $query->orderBy('last_name', 'asc')->orderBy('first_name', 'asc');},
                                         'tournament.members' => function($query){ $query->orderBy('last_name', 'asc')->orderBy('first_name', 'asc');}
                                     ])->previousseason()->get();
+                $lastYear = $lastYear - 1;
             }
             else{
                 $podia = Podium::with(['tournament',

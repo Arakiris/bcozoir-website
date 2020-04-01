@@ -37,9 +37,10 @@
                 <div class="event__single-members">
                     @if((isset($tournament->members) && $tournament->members->count()>0) || isset($tournament->teams) && $tournament->teams->count()>0)
                         @if ($tournament->formation == 0 && isset($tournament->members) && $tournament->members->count()>0)
-                            <div class="event__noteam no-team">
+                            <div class="event__team-title"><p class="event__team-text">Individuel</p></div>
+                            <div class="event__team-content">
                                 @foreach($tournament->members as $member)
-                                    <div class="event__noteam-line">
+                                    <div class="event__team-line">
                                         <div class="event__tooltip {{ ($member->is_licensee == 'Licencié') ?  'event__tooltip-licensee' : 'event__tooltip-adherent' }}">
                                             <p class="event__noteam-paragraph {{ ($member->club_id != 1) ? 'otherClub' : '' }}">{{ $member->last_name }} {{ $member->first_name }}</p>
                                             <div class="event__tooltip-event {{ ($member->is_licensee == 'Licencié') ?  'event__tooltip-event-licensee' : 'event__tooltip-event-adherent' }}">

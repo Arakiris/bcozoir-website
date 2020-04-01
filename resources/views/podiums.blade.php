@@ -6,7 +6,7 @@
 
 @section('content')
 <div class="content__title">
-    <h1 class="heading-1">Podiums</h1>
+    <h1 class="heading-1">PHOTOS PODIUMS</h1>
 </div>
 <div class="event event__podiums">
         @if(isset($podiums) && $podiums->count()>0)

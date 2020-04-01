@@ -27,7 +27,7 @@ class MembersController extends Controller
 
     public function tournamentAndPrize($id){
         $member = Member::findOrFail($id);
-        $yearsBefore = Carbon::now()->subYears(3);
+        $yearsBefore = Carbon::now()->subYears(5);
 
         $tournaments1 = Tournament::join('member_tournament', 'tournaments.id', '=', 'member_tournament.tournament_id')
                                     ->join('members', 'member_tournament.member_id', '=', 'members.id')

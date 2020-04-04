@@ -116,11 +116,11 @@ window.createTournamentArchives = function(lenghtlast, previousYear, url, url_ho
                 <div class="event__single-information">
         `;
 
-        if( ((typeof tournament.rules_pdf == "undefined" || tournament.rules_pdf == null) && (tournament.rules_url == 0))
-            || ((typeof tournament.rules_url == "undefined" || tournament.rules_url == null) && (tournament.is_rules_pdf == 1)) ){
+        if( ((typeof tournament.rules_url != "undefined" && tournament.rules_url != null) && (tournament.is_rules_pdf == 0))
+            || ((typeof tournament.rules_pdf != "undefined" && tournament.rules_pdf != null) && (tournament.is_rules_pdf == 1)) ){
 
             markup +=  `
-                <a class="event__single-link" class="occasion-link" href="${ tournament.is_rules_pdf ? storage + '/' + tournament.rules_pdf : tournament.rules_url }" target="_blank">
+                <a class="event__single-link" class="occasion-link" href="${ (tournament.is_rules_pdf == 1) ? storage + '/' + tournament.rules_pdf : tournament.rules_url }" target="_blank">
                     <h2 class="heading-2--event-title">${dateFormat}</h2>
                     <p class="event__single-paragraphe">${ tournament.title }</p>
                     <p class="event__single-paragraphe">${ (tournament.is_accredited == 1) ? 'Homologué' : 'Non homologué' }</p>

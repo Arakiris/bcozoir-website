@@ -93,9 +93,13 @@
                                     <input type="radio" name="is_rules_pdf" id="is_rules_pdf" value="0" checked>
                                     URL
                                 </label>
-                                <label>
+                                <label class="margin-right-15">
                                     <input type="radio" name="is_rules_pdf" id="is_rules_pdf" value="1">
                                     PDF
+                                </label>
+                                <label>
+                                <input type="radio" name="is_rules_pdf" id="is_rules_pdf" value="2">
+                                    Auncun
                                 </label>
                             </div>
                         </div>

@@ -27,14 +27,20 @@ $(function(){
     $('input:radio[name=is_rules_pdf]').on('change', function() {
         var isURL = $('#rules_url');
         var isPDF = $('#rules_pdf');
+        var value = $(this).val();
         // 0 = URL, 1 = PDF
-        if($(this).val() == 0){
+        if(value == 0){
             isURL.val('').prop("disabled", false);
             isPDF.val('').prop("disabled", true);
             return;
         }
+        else if(value == 1) {
+            isPDF.val('').prop("disabled", false);
+            isURL.val('').prop("disabled", true);
+            return;
+        }
         isPDF.val('').prop("disabled", false);
-        isURL.val('').prop("disabled", true);
+        isURL.val('').prop("disabled", false);
         
     });
 });

@@ -114,13 +114,13 @@ window.createRankingArchives = function(lenghtlast, previousYear, url, url_image
         `;
 
         // Render first column
-        if( ((typeof podium.tournament.rules_url == "undefined" || podium.tournament.rules_url == null) && (podium.tournament.rules_url == 0))
-                || ((typeof podium.tournament.rules_url == "undefined" || podium.tournament.rules_url == null) && (podium.tournament.is_rules_pdf == 1)) ){
+        if( ((typeof podium.tournament.rules_url != "undefined" && podium.tournament.rules_url != null) && (podium.tournament.is_rules_pdf == 0))
+                || ((typeof podium.tournament.rules_pdf != "undefined" && podium.tournament.rules_pdf != null) && (podium.tournament.is_rules_pdf == 1)) ){
             markup +=  `
-                <a class="event__single-link" class="occasion-link" href="${ podium.tournament.is_rules_pdf ? storage + '/' + podium.tournament.rules_pdf : podium.tournament.rules_url }" target="_blank">
+                <a class="event__single-link" class="occasion-link" href="${ (podium.tournament.is_rules_pdf == 1) ? storage + '/' + podium.tournament.rules_pdf : podium.tournament.rules_url }" target="_blank">
                     <h2 class="heading-2--event-title">${dateFormat}</h2>
                     <p class="event__single-paragraphe">${ podium.tournament.title }</p>
-                    <p class="event__single-paragraphe">${ podium.tournament.is_accredited ? 'Homologué' : 'Non homologué' }</p>
+                    <p class="event__single-paragraphe">${ (podium.tournament.is_accredited == 1) ? 'Homologué' : 'Non homologué' }</p>
                     <p class="event__single-paragraphe">${ podium.tournament.place }</p>
                 </a>
             `;
@@ -129,7 +129,7 @@ window.createRankingArchives = function(lenghtlast, previousYear, url, url_image
             markup +=  `
                 <h2 class="heading-2--event-title">${dateFormat}</h2>
                 <p class="event__single-paragraphe">${ podium.tournament.title }</p>
-                <p class="event__single-paragraphe">${ podium.tournament.is_accredited ? 'Homologué' : 'Non homologué' }</p>
+                <p class="event__single-paragraphe">${ (podium.tournament.is_accredited == 1) ? 'Homologué' : 'Non homologué' }</p>
                 <p class="event__single-paragraphe">${ podium.tournament.place }</p>
             `
         }

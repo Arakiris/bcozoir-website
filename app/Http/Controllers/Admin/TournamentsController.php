@@ -57,16 +57,16 @@ class TournamentsController extends Controller
     public function store(Request $request)
     {
         $validatedTournament = request()->validate([
-            'type_id' => 'required|numeric',
-            'start_season' => 'required|numeric|min:2000',
-            'date' => 'required|date',
-            'title' => 'required',
-            'is_accredited' => 'required|boolean',
-            'is_rules_pdf' => 'required|boolean',
-            'rules_url' => 'nullable|url',
-            'place' => 'required',
-            'lexer_url' => 'nullable|url',
-            'report' => '',
+            'type_id' => 'bail|required|numeric',
+            'start_season' => 'bail|required|numeric|min:2000',
+            'date' => 'bail|required|date',
+            'title' => 'bail|required',
+            'is_accredited' => 'bail|required|boolean',
+            'is_rules_pdf' => 'bail|required|numeric',
+            'rules_url' => 'bail|nullable|url',
+            'place' => 'bail|required',
+            'lexer_url' => 'bail|nullable|url',
+            'report' => 'bail|nullable',
             'formation' => 'required|boolean'
         ]);
 
@@ -75,8 +75,8 @@ class TournamentsController extends Controller
         ]);
 
         $validatedPDF = request()->validate([
-            'is_finished' => 'nullable',
-            "listing" => 'nullable|image',
+            'is_finished' => 'bail|nullable',
+            "listing" => 'bail|nullable|image',
             'rules_pdf' => 'nullable|mimes:pdf|max:10000'
         ]);
 
@@ -104,9 +104,11 @@ class TournamentsController extends Controller
             $tournament->podium()->save($podium);
         }
 
-        if($file = $request->file('rules_pdf')){
-            $path = request()->file('rules_pdf')->store('public/upload/images/tournaments/' . $tournament->id );
-            $tournament->rules_pdf = substr($path, 6);
+        if($validatedTournament['is_rules_pdf'] == 1){        
+            if($file = $request->file('rules_pdf')){
+                $path = request()->file('rules_pdf')->store('public/upload/images/tournaments/' . $tournament->id );
+                $tournament->rules_pdf = substr($path, 6);
+            }
         }
 
         if($request->hasFile('listing')){
@@ -169,26 +171,26 @@ class TournamentsController extends Controller
     public function update(Request $request, $id)
     {
         $validatedTournament = request()->validate([
-            'type_id' => 'required|numeric',
-            'start_season' => 'required|numeric|min:2000',
-            'date' => 'required|date',
-            'title' => 'required',
-            'is_accredited' => 'required|boolean',
-            'is_rules_pdf' => 'required|boolean',
-            'rules_url' => 'nullable|url',
-            'place' => 'required',
-            'lexer_url' => 'nullable|url',
-            'report' => '',
+            'type_id' => 'bail|required|numeric',
+            'start_season' => 'bail|required|numeric|min:2000',
+            'date' => 'bail|required|date',
+            'title' => 'bail|required',
+            'is_accredited' => 'bail|required|boolean',
+            'is_rules_pdf' => 'bail|required|numeric',
+            'rules_url' => 'bail|nullable|url',
+            'place' => 'bail|required',
+            'lexer_url' => 'bail|nullable|url',
+            'report' => 'bail|nullable',
             'formation' => 'required|boolean'
         ]);
 
         $validatedPodium = request()->validate([
-            'is_ranking' => 'required|boolean'
+            'is_ranking' => 'bail|required|boolean'
         ]);
 
         $validatedImagePDF = request()->validate([
-            'is_finished' => 'nullable',
-            "listing" => 'nullable|image',
+            'is_finished' => 'bail|nullable',
+            "listing" => 'bail|nullable|image',
             'rules_pdf' => 'nullable|mimes:pdf|max:10000'
         ]);
         
@@ -210,7 +212,6 @@ class TournamentsController extends Controller
         $tournament->update($validatedTournament);
 
         if(isset($validatedImagePDF['is_finished']) ){
-
             if(!isset($tournament->podium)){
                 $podium = Podium::create(['tournament_id' => $tournament->id, 'date' => $tournament->date]);
             }
@@ -224,13 +225,19 @@ class TournamentsController extends Controller
             $podium->save();
         }
 
-
-        if($request->hasFile('rules_pdf')){
+        if($validatedTournament['is_rules_pdf'] == 0 || $validatedTournament['is_rules_pdf'] == 2){    
             if(!is_null($tournament->rules_pdf)){
                 unlink(storage_path('app/public' . $tournament->rules_pdf));
             }
-            $path = request()->file('rules_pdf')->store('public/upload/medias/tournaments/' . $tournament->id );
-            $tournament->rules_pdf = substr($path, 6);
+        }
+        elseif($validatedTournament['is_rules_pdf'] == 1){    
+            if($request->hasFile('rules_pdf')){
+                if(!is_null($tournament->rules_pdf)){
+                    unlink(storage_path('app/public' . $tournament->rules_pdf));
+                }
+                $path = request()->file('rules_pdf')->store('public/upload/medias/tournaments/' . $tournament->id );
+                $tournament->rules_pdf = substr($path, 6);
+            }
         }
 
         if($request->hasFile('listing')){

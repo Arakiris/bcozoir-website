@@ -228,6 +228,7 @@ class TournamentsController extends Controller
         if($validatedTournament['is_rules_pdf'] == 0 || $validatedTournament['is_rules_pdf'] == 2){    
             if(!is_null($tournament->rules_pdf)){
                 unlink(storage_path('app/public' . $tournament->rules_pdf));
+                $tournament->rules_pdf = null;
             }
         }
         elseif($validatedTournament['is_rules_pdf'] == 1){    

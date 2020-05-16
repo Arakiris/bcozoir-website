@@ -124,13 +124,13 @@
                     @if(isset($tournament->listing))
                         <div class="event__single-image event__top-border">
                             <a class="event__single-link" href="{{ route('tournoiListing', $tournament->slug) }}">
-                                <img class="event__single-logo occasion-image-logo" src="{{ asset('images/tournament/Listing.jpg') }}" alt="Listing du tournoi {{ $tournament->title }}">
+                                <img class="event__single-logo occasion-image-logo" src="{{ asset('images/tournament/Listing.jpng') }}" alt="Listing du tournoi {{ $tournament->title }}">
                             </a>
                         </div>
                     @else
                         <div class="event__single-image--disable event__top-border">
                             <div class="event__cell--disable">
-                                <img class="event__single-logo occasion-image-logo" src="{{ asset('images/tournament/Listing.jpg') }}" alt="Listing du tournoi {{ $tournament->title }}">
+                                <img class="event__single-logo occasion-image-logo" src="{{ asset('images/tournament/Listing.jpng') }}" alt="Listing du tournoi {{ $tournament->title }}">
                             </div>
                         </div>
                     @endif
@@ -138,13 +138,13 @@
                     @if(isset($tournament->report))
                         <div class="event__single-image event__top-border">
                             <a class="event__single-link" href="{{ route('tournoiResultat', $tournament->slug) }}">
-                                <img class="event__single-logo occasion-image-logo" src="{{ asset('images/tournament/Report.jpg') }}" alt="Image du résultat">
+                                <img class="event__single-logo occasion-image-logo" src="{{ asset('images/tournament/Report.png') }}" alt="Image du résultat">
                             </a>
                         </div>
                     @else
                         <div class="event__single-image--disable event__top-border">
                             <div class="event__cell--disable">
-                                <img class="occasion-image-logo" src="{{ asset('images/tournament/Report.jpg') }}" alt="Image du résultat">
+                                <img class="occasion-image-logo" src="{{ asset('images/tournament/Report.png') }}" alt="Image du résultat">
                             </div>
                         </div>
                     @endif
@@ -166,13 +166,13 @@
                     @if(isset($tournament->videos) && $tournament->videos->count()>0)
                         <div class="event__single-image event__top-border">
                             <a class="event__single-link" href="{{ route('tournoiVideos', $tournament->slug) }}">
-                                <img class="event__single-logo occasion-image-logo" src="{{ asset('images/tournament/Tournament-videos.jpg') }}" alt="Image de présentation afin de montrer les vidéos du tournois">
+                                <img class="event__single-logo occasion-image-logo" src="{{ asset('images/tournament/Tournament-videos.png') }}" alt="Image de présentation afin de montrer les vidéos du tournois">
                             </a>
                         </div>
                     @else
                         <div class="event__single-image--disable event__top-border">
                             <div class="event__cell--disable">
-                                <img class="event__single-logo occasion-image-logo" src="{{ asset('images/tournament/Tournament-videos.jpg') }}" alt="Image de présentation afin de montrer les vidéos du tournois">
+                                <img class="event__single-logo occasion-image-logo" src="{{ asset('images/tournament/Tournament-videos.png') }}" alt="Image de présentation afin de montrer les vidéos du tournois">
                             </div>
                         </div>
                     @endif

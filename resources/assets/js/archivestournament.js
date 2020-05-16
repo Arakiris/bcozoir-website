@@ -170,8 +170,8 @@ window.createTournamentArchives = function(lenghtlast, previousYear, url, url_ho
 
         // Render the  rest
         markup += rendercolumnURL(tournament.lexer_url, tournament.lexer_url, `${url_image}/tournament/Lexer.jpg`, true);
-        markup += rendercolumnURL(tournament.listing, `${url_home}/tournoi/${tournament.slug}/listing`, `${url_image}/tournament/Listing.jpg`, false);
-        markup += rendercolumnURL(tournament.report, `${url_home}/tournoi/${tournament.slug}/resultat`, `${url_image}/tournament/Report.jpg`, false);
+        markup += rendercolumnURL(tournament.listing, `${url_home}/tournoi/${tournament.slug}/listing`, `${url_image}/tournament/Listing.png`, false);
+        markup += rendercolumnURL(tournament.report, `${url_home}/tournoi/${tournament.slug}/resultat`, `${url_image}/tournament/Report.png`, false);
 
         if(typeof tournament.pictures_count !== "undefined" && tournament.pictures_count > 0)
             markup += activeURL(`${url_home}/tournoi/${tournament.slug}/photos`, `${url_image}/tournament/tournament-pictures.png`, false);
@@ -180,9 +180,9 @@ window.createTournamentArchives = function(lenghtlast, previousYear, url, url_ho
             markup += inactiveURL(`${url_image}/tournament/tournament-pictures.png`);
 
         if(typeof tournament.videos_count !== "undefined" && tournament.videos_count > 0)
-            markup += activeURL(`${url_home}/tournoi/${tournament.slug}/videos`, `${url_image}/tournament/Tournament-videos.jpg`, false);
+            markup += activeURL(`${url_home}/tournoi/${tournament.slug}/videos`, `${url_image}/tournament/Tournament-videos.png`, false);
         else 
-            markup += inactiveURL(`${url_image}/tournament/Tournament-videos.jpg`);
+            markup += inactiveURL(`${url_image}/tournament/Tournament-videos.png`);
 
         markup += `
             </div>

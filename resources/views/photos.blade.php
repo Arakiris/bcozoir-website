@@ -13,17 +13,17 @@
         <h1 class="heading-1">{{ $title }}</h1>
         @if(isset($tournament))   
             <div class="photos__heading">
-                <div class="photos__heading-title"> <b><?php setlocale(LC_TIME, 'fr'); echo utf8_encode(strftime("%d-%B-%Y", $tournament->date->timestamp)); ?></b> &nbsp;&nbsp; {{ $tournament->title }} </div>
+                <div class="photos__heading-title"> <b><?php setlocale(LC_TIME, 'fr'); echo utf8_encode(strftime("%d-%B-%Y", $tournament->date->timestamp)); ?></b> <br> {{ $tournament->title }} </div>
                 <div class="photos__heading-place"> {{ $tournament->place }}</div>
             </div>
         @elseif(isset($event))
             <div class="photos__heading">
-                <div class="photos__heading-title"> <b>{{ $event->date->format('d-m-Y') }}</b> &nbsp;&nbsp; {{ $event->name }} </div>
+                <div class="photos__heading-title"> <b>{{ $event->date->format('d-m-Y') }}</b> <br> {{ $event->name }} </div>
                 <div class="photos__heading-place"> {{ $event->place }}</div>
             </div>
         @elseif(isset($news))
             <div class="photos__heading">
-                <div class="photos__heading-title"> <b>{{ $news->date->format('d-m-Y') }}</b> &nbsp;&nbsp; {{ $news->title }} </div>
+                <div class="photos__heading-title"> <b>{{ $news->date->format('d-m-Y') }}</b> <br> {{ $news->title }} </div>
             </div>
         @endif
     </div>

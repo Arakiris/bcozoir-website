@@ -124,13 +124,13 @@
                     @if(isset($tournament->listing))
                         <div class="event__single-image event__top-border">
                             <a class="event__single-link" href="{{ route('tournoiListing', $tournament->slug) }}">
-                                <img class="event__single-logo occasion-image-logo" src="{{ asset('images/tournament/Listing.jpng') }}" alt="Listing du tournoi {{ $tournament->title }}">
+                                <img class="event__single-logo occasion-image-logo" src="{{ asset('images/tournament/Listing.png') }}" alt="Listing du tournoi {{ $tournament->title }}">
                             </a>
                         </div>
                     @else
                         <div class="event__single-image--disable event__top-border">
                             <div class="event__cell--disable">
-                                <img class="event__single-logo occasion-image-logo" src="{{ asset('images/tournament/Listing.jpng') }}" alt="Listing du tournoi {{ $tournament->title }}">
+                                <img class="event__single-logo occasion-image-logo" src="{{ asset('images/tournament/Listing.png') }}" alt="Listing du tournoi {{ $tournament->title }}">
                             </div>
                         </div>
                     @endif

@@ -73,13 +73,13 @@
         }
     }
 
-    &-player {
-        grid-column: sidebar-left-start / sidebar-left-end;
+    // &-player {
+    //     grid-column: sidebar-left-start / sidebar-left-end;
 
-        &__audio {
-            width: 100%;
-        }
-    }
+    //     &__audio {
+    //         width: 100%;
+    //     }
+    // }
 
     &-calendar {
         grid-column: sidebar-left-start / sidebar-left-end;

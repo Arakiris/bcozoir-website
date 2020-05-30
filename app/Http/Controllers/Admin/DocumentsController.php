@@ -119,7 +119,8 @@ class DocumentsController extends Controller
             if(!is_null($document->file_path)){
                 unlink(storage_path('app/public' . $document->file_path));
             }
-            $path = request()->file('file_path')->store('public/upload/documents/' . $document->id );
+            $originalname = $file->getClientOriginalName();
+            $path = $file->storeAs('public/upload/documents', $originalname);
             $document->file_path = substr($path, 6);
         }
 

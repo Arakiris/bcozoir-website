@@ -42,12 +42,12 @@
     </ul>
 </nav>
 
-<div class="aside-left-player">
+{{-- <div class="aside-left-player">
     <audio class="aside-left-player__audio" id="audio" controls loop >
         <source src="{{ isset($music_link->path) ? asset('storage' . $music_link->path) : asset('music/music.mp3') }}" type="audio/mpeg">
             <p>Votre navigateur ne prend pas en charge l'audio HTML.</p>
     </audio>
-</div>
+</div> --}}
 
 <div class="aside-left-calendar">
     <div class="aside-left-calendar__title agendaTitle"><span>Agenda</span></div>

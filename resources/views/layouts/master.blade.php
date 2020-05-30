@@ -64,22 +64,22 @@
                 });
             });
 
-            let audioState = JSON.parse(localStorage.getItem('audioState'));
-            let audio_player = document.getElementById('audio');
+            // let audioState = JSON.parse(localStorage.getItem('audioState'));
+            // let audio_player = document.getElementById('audio');
             
-            let volume = {!! isset($music_volume->description) ? json_encode($music_volume->description, JSON_HEX_TAG)  : json_encode('0', JSON_HEX_TAG) !!};
-            document.getElementById("audio").volume = volume;
+            // let volume = {!! isset($music_volume->description) ? json_encode($music_volume->description, JSON_HEX_TAG)  : json_encode('0', JSON_HEX_TAG) !!};
+            // document.getElementById("audio").volume = volume;
 
-            if (audioState != null && audioState == true) {
-                audio_player.play();
-            }
+            // if (audioState != null && audioState == true) {
+            //     audio_player.play();
+            // }
 
-            audio_player.addEventListener("play", () => {
-                localStorage.setItem('audioState', JSON.stringify(true));
-            });
+            // audio_player.addEventListener("play", () => {
+            //     localStorage.setItem('audioState', JSON.stringify(true));
+            // });
 
-            audio_player.addEventListener("pause", () => {
-                localStorage.setItem('audioState', JSON.stringify(false));
+            // audio_player.addEventListener("pause", () => {
+            //     localStorage.setItem('audioState', JSON.stringify(false));
             });
         </script>
         @yield('scripts')

@@ -69,10 +69,12 @@
             });
 
             // let audioState = JSON.parse(localStorage.getItem('audioState'));
-            // let audio_player = document.getElementById('audio');
+            let audio_player = document.getElementById('audio');
             
             let volume = {!! isset($music_volume->description) ? json_encode($music_volume->description, JSON_HEX_TAG)  : json_encode('0', JSON_HEX_TAG) !!};
             document.getElementById("audio").volume = volume;
+            
+            audio_player.play();
 
             // if (audioState != null && audioState == true) {
             //     audio_player.play();

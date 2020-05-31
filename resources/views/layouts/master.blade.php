@@ -35,6 +35,10 @@
     <title>Bowling Club - Ozoir</title>
 </head>
 <body>
+    <audio class="content__audio" id="audio" autoplay loop >
+        <source src="{{ isset($music_link->path) ? asset('storage' . $music_link->path) : asset('music/music.mp3') }}" type="audio/mpeg">
+            <p>Votre navigateur ne prend pas en charge l'audio HTML.</p>
+    </audio>
     <div class="container">
         @include('layouts.partials._header')
         @include('layouts.partials._main')
@@ -67,8 +71,8 @@
             // let audioState = JSON.parse(localStorage.getItem('audioState'));
             // let audio_player = document.getElementById('audio');
             
-            // let volume = {!! isset($music_volume->description) ? json_encode($music_volume->description, JSON_HEX_TAG)  : json_encode('0', JSON_HEX_TAG) !!};
-            // document.getElementById("audio").volume = volume;
+            let volume = {!! isset($music_volume->description) ? json_encode($music_volume->description, JSON_HEX_TAG)  : json_encode('0', JSON_HEX_TAG) !!};
+            document.getElementById("audio").volume = volume;
 
             // if (audioState != null && audioState == true) {
             //     audio_player.play();
@@ -80,7 +84,7 @@
 
             // audio_player.addEventListener("pause", () => {
             //     localStorage.setItem('audioState', JSON.stringify(false));
-            });
+            // });
         </script>
         @yield('scripts')
     </div>

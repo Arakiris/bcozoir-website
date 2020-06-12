@@ -99,7 +99,7 @@
                                 </label>
                                 <label>
                                 <input type="radio" name="is_rules_pdf" id="is_rules_pdf" value="2">
-                                    Auncun
+                                    Aucun
                                 </label>
                             </div>
                         </div>

@@ -42,8 +42,8 @@ class NewsController extends Controller
     public function store(Request $request)
     {
         $validatedNews = request()->validate([
-            'title' => 'required',
-            'body' => 'required',
+            'title' => 'bail|required',
+            'body' => 'bail|required',
             'date' => 'required|date'
         ]);
         
@@ -89,8 +89,8 @@ class NewsController extends Controller
     public function update(Request $request, $id)
     {
         $validatedNews = request()->validate([
-            'title' => 'required',
-            'body' => 'required',
+            'title' => 'bail|required',
+            'body' => 'bail|required',
             'date' => 'required|date'
         ]);
         

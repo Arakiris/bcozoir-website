@@ -46,7 +46,7 @@ class DocumentsController extends Controller
     {
         $validatedType = request()->validate(['document_type_id' => 'required|integer']);
         $validatedDocument = request()->validate([
-            'name' => 'nullable|string',
+            'name' => 'bail|nullable|string',
             'file_type' => 'nullable|string|max:5'
         ]);
 
@@ -105,7 +105,7 @@ class DocumentsController extends Controller
     {
         $validatedType = request()->validate(['document_type_id' => 'required|integer']);
         $validatedDocument = request()->validate([
-            'name' => 'nullable|string',
+            'name' => 'bail|nullable|string',
             'file_type' => 'nullable|string|max:5'
         ]);
 

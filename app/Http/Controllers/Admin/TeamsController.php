@@ -43,9 +43,9 @@ class TeamsController extends Controller
     public function store(Request $request, $id)
     {
         $validatedTeam = request()->validate([
-            'name' => 'nullable|string|max:255',
-            'display_rank' => 'boolean',
-            'members.*.id' => 'nullable|numeric',
+            'name' => 'bail|nullable|string|max:255',
+            'display_rank' => 'bail|boolean',
+            'members.*.id' => 'bail|nullable|numeric',
             'members.*.rank' => 'nullable|string'
         ]);
         
@@ -110,9 +110,9 @@ class TeamsController extends Controller
     public function update(Request $request, $idtournament, $idteam)
     {
         $validatedTeam = request()->validate([
-            'name' => 'nullable|string|max:255',
-            'display_rank' => 'boolean',
-            'members.*.id' => 'nullable|numeric',
+            'name' => 'bail|nullable|string|max:255',
+            'display_rank' => 'bail|boolean',
+            'members.*.id' => 'bail|nullable|numeric',
             'members.*.rank' => 'nullable|string'
         ]);
         

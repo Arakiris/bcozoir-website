@@ -54,7 +54,7 @@ class ScoresController extends Controller
     public function store($idMember, Request $request)
     {
         $validatedScore = request()->validate([
-            'average' => 'required|numeric',
+            'average' => 'bail|required|numeric',
             'number_lines' => 'required|numeric'
         ]);
 
@@ -126,7 +126,7 @@ class ScoresController extends Controller
     public function update(Request $request, $idMember, $id)
     {
         $validatedScore = request()->validate([
-            'average' => 'required|numeric',
+            'average' => 'bail|required|numeric',
             'number_lines' => 'required|numeric'
         ]);
 

@@ -185,7 +185,7 @@ class TournamentsController extends Controller
         ]);
 
         $validatedPodium = request()->validate([
-            'is_ranking' => 'bail|required|boolean'
+            'is_ranking' => 'required|boolean'
         ]);
 
         $validatedImagePDF = request()->validate([

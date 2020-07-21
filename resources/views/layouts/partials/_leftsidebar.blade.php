@@ -85,3 +85,17 @@
         <img src="{{ isset($fb_img->path) ? asset('storage' . $fb_img->path) : asset('images/fb-img.png') }}" alt="Image de facebook" class="aside-left-fb__img">
     </a>
 </div>
+
+<div class="aside-left-media_link">
+    @if (isset($medialinks))
+        @foreach ($medialinks as $medialink)
+            @if ($medialink->display)
+                <div class="aside-left-media_link-single">
+                    <a href="{{ isset($medialink->url) ? $medialink->url : '' }}" class="aside-left-media_link-single__link" target="_blank">
+                        <img src="{{ isset($medialink->path) ? asset('storage' . $medialink->path) : asset('images/placeholder-200.png') }}" alt="{{ isset($medialink->description) ? $medialink->description : '' }}" class="aside-left-media_link-single__img">
+                    </a>
+                </div>
+            @endif
+        @endforeach
+    @endif
+</div>

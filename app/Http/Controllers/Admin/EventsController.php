@@ -44,8 +44,8 @@ class EventsController extends Controller
     public function store(Request $request)
     {
         $validatedEvent = request()->validate([
-            'name' => 'required',
-            'place' => 'required',
+            'name' => 'bail|required',
+            'place' => 'bail|required',
             'date' => 'required|date'
         ]);
         

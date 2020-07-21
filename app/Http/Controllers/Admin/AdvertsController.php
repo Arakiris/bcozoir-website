@@ -43,7 +43,7 @@ class AdvertsController extends Controller
     public function store(Request $request)
     {
         $validatedAd = request()->validate([
-            'start_display' => 'required|date',
+            'start_display' => 'bail|required|date',
             'end_display' => 'required|date',
         ]);
 
@@ -98,7 +98,7 @@ class AdvertsController extends Controller
     public function update(Request $request, $id)
     {
         $validatedAd = request()->validate([
-            'start_display' => 'required|date',
+            'start_display' => 'bail|required|date',
             'end_display' => 'required|date',
         ]);
         request()->validate(['image' => 'nullable|image']);

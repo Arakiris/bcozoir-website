@@ -38,15 +38,15 @@ class ContactsController extends Controller
     public function update(Request $request) {
         $validatedContact = request()->validate([
             'name1' => '',
-            'email1' => 'nullable|email',
+            'email1' => 'bail|nullable|email',
             'name2' => '',
-            'email2' => 'nullable|email',
+            'email2' => 'bail|nullable|email',
             'name3' => '',
-            'email3' => 'nullable|email',
+            'email3' => 'bail|nullable|email',
             'name4' => '',
-            'email4' => 'nullable|email',
+            'email4' => 'bail|nullable|email',
             'name5' => '',
-            'email5' => 'nullable|email'
+            'email5' => 'bail|nullable|email'
         ]);
         DB::table('contacts')->truncate();
         for( $i=1 ; $i <=5 ; $i++){

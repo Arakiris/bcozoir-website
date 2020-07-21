@@ -88,7 +88,7 @@ class VideosController extends Controller
     public function store($type, $idtype, Request $request)
     {   
         request()->validate([
-            'path_mp4' => 'required',
+            'path_mp4' => 'bail|required',
             'path_webm' =>  'required'
         ]);
 

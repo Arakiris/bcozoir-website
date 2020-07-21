@@ -18,7 +18,7 @@
         <!-- general form elements disabled -->
         <div class="box box-warning">
             <div class="box-header with-border">
-                <h3 class="box-title">Modification des contenus</h3>
+                <h2 class="box-title">Modification des contenus</h2>
             </div>
 
             <!-- /.box-header -->
@@ -90,6 +90,66 @@
                         <label for="fb_url">Facebook url</label>
                         <input type="text" id="fb_url" name="fb_url" class="form-control" placeholder="Veuillez entrer le nom" value="{{ isset($contentInformation["facebook url"]->description) ? $contentInformation["facebook url"]->description : '' }}">
                     </div>
+
+                    <div class="form-group">
+                        <label for="map_title">Titre de la carte</label>
+                        <input type="text" name="map_title" class="form-control" placeholder="Veuillez entrer le nom" value="{{ isset($contentInformation["map"]) ? (isset($contentInformation["map"]->path) ? $contentInformation["map"]->path : '') : '' }}">
+                    </div>
+
+                    <div class="form-group margin-bottom-40">
+                        <label for="map_link">Url de la carte</label>
+                        <input type="text" name="map_link" class="form-control" placeholder="Veuillez entrer le nom" value="{{ isset($contentInformation["map"]) ? (isset($contentInformation["map"]->description) ? $contentInformation["map"]->description : '') : '' }}">
+                    </div>
+
+                    @for ($i = 1; $i < 7; $i++)
+                        @php
+                            $j = $i - 1;
+                        @endphp
+                        <div class="box box-primary box-social-media">
+                            <div class="box-header">
+                                <h3 class="box-title">Lien social media {{ $i }}</h3>
+                            </div>
+
+                            <div class="box-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="socialMedia[{{ $i }}][image]">Image</label>
+                                            <input type="file" name="socialMedia[{{ $i }}][image]" accept="image/*">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="socialMedia[{{ $i }}][display]">Afficher ?</label>
+                                            <div class="radio radiobutton">
+                                                <label class="margin-right-15">
+                                                    <input type="radio" name="socialMedia[{{ $i }}][display]" value="0" {{ isset($socialMedia[$j]) ? (($socialMedia[$j]->display == 0) ? 'checked' : '') : 'checked' }}>
+                                                    Non
+                                                </label>
+                                                <label>
+                                                    <input type="radio" name="socialMedia[{{ $i }}][display]" value="1" {{ isset($socialMedia[$j]) ? (($socialMedia[$j]->display == 1) ? 'checked' : '') : '' }}>
+                                                    Oui
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+            
+                                <div class="form-group">
+                                    <label for="socialMedia[{{ $i }}][url]">Url</label>
+                                    <input type="text" name="socialMedia[{{ $i }}][url]" class="form-control" placeholder="Veuillez entrer l'url" value="{{ isset($socialMedia[$j]) ? $socialMedia[$j]->url : '' }}">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="socialMedia[{{ $i }}][description]">Description</label>
+                                    <input type="text" name="socialMedia[{{ $i }}][description]" class="form-control" placeholder="Veuillez entrer la description" value="{{ isset($socialMedia[$j]) ? $socialMedia[$j]->description : '' }}">
+                                </div>
+                            </div>
+                        </div>
+                        
+                    @endfor
+
 
                     @include('partials._form-error')
 

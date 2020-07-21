@@ -46,12 +46,12 @@ class LeaguesController extends Controller
     public function store(Request $request)
     {
         $validatedLeague = request()->validate([
-            'name' => 'required',
-            'start_season' => 'required|numeric|min:2000',
-            'day_of_week' => 'required',
-            'is_accredited' => 'required|boolean',
-            'place' => 'required',
-            'team_name' => 'required',
+            'name' => 'bail|required',
+            'start_season' => 'bail|required|numeric|min:2000',
+            'day_of_week' => 'bail|required',
+            'is_accredited' => 'bail|required|boolean',
+            'place' => 'bail|required',
+            'team_name' => 'bail|required',
             'result' => 'nullable|url'
         ]);
         
@@ -101,12 +101,12 @@ class LeaguesController extends Controller
     public function update(Request $request, $id)
     {
         $validatedLeague = request()->validate([
-            'name' => 'required',
-            'start_season' => 'required|numeric|min:2000',
-            'day_of_week' => 'required',
-            'is_accredited' => 'required|boolean',
-            'place' => 'required',
-            'team_name' => 'required',
+            'name' => 'bail|required',
+            'start_season' => 'bail|required|numeric|min:2000',
+            'day_of_week' => 'bail|required',
+            'is_accredited' => 'bail|required|boolean',
+            'place' => 'bail|required',
+            'team_name' => 'bail|required',
             'result' => 'nullable|url'
         ]);
         

@@ -8624,6 +8624,10 @@ button.close {
   margin-bottom: 30px;
 }
 
+.margin-bottom-40 {
+  margin-bottom: 40px;
+}
+
 .margin-left-0 {
   margin-left: 0;
 }
@@ -8650,5 +8654,11 @@ button.close {
 
 .margin-left-160 {
   margin-left: 160px;
+}
+
+.box-social-media {
+  margin-right: 4rem;
+  margin-left: 4rem;
+  width: auto;
 }
 

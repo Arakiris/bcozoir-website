@@ -164,6 +164,20 @@
             width: 100%;
         }
     }
+
+    &-media_link {
+        grid-column: sidebar-left-start / sidebar-left-end;
+        display: grid;
+        grid-template-columns: repeat(3, 7rem);
+        grid-auto-rows: 7rem;
+        gap: 2rem;
+
+        &-single {
+            &__img {
+                width: 100%;
+            }
+        }
+    }
 }
 
 #calendar {

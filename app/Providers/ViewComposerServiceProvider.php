@@ -14,6 +14,7 @@ use App\Tournament;
 use App\Picture;
 use App\Contact;
 use App\Guest;
+use App\MediaLink;
 
 use App\Partner;
 use App\ContentInformation;
@@ -35,7 +36,6 @@ class ViewComposerServiceProvider extends ServiceProvider
             $allwarnings = Warning::showwarningbetween()->union($warningbefore)->orderBy('id')->get();
             $year = intval($this->yearSeason());
             $season = $year . "-" . ($year + 1);
-            
 
             $view->with([
                 'onlineguest' => Guest::onlineguest(),
@@ -51,7 +51,9 @@ class ViewComposerServiceProvider extends ServiceProvider
                 'music_link' => ContentInformation::where('name', 'musique de fond')->first(),
                 'music_volume' => ContentInformation::where('name', 'volume musique')->first(),
                 'fb_img' => ContentInformation::where('name', 'facebook image')->first(),
-                'fb_link' => ContentInformation::where('name', 'facebook url')->first()
+                'fb_link' => ContentInformation::where('name', 'facebook url')->first(),
+                'medialinks' => MediaLink::all(),
+                'map' => ContentInformation::where('name', 'map')->first()
             ]);
         });
     }

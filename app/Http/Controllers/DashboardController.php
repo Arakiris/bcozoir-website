@@ -41,7 +41,9 @@ class DashboardController extends Controller
 	}
 
 	public function map(){
-        return view('map');
+        $content = ContentInformation::where('name', 'map')->first();
+
+        return view('map', compact('content'));
     }
 
     public function bcozoir() {

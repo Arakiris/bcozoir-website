@@ -43,7 +43,7 @@ class ClubsController extends Controller
     public function store(Request $request)
     {
         $validatedClub = request()->validate([
-            'name' => 'required|min:4',
+            'name' => 'bail|required|min:4',
             'address' => ''
         ]);
 

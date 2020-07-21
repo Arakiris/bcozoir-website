@@ -58,14 +58,14 @@ class MembersController extends Controller
         Category::findOrFail($request->category_id);
 
         $validatedMember = request()->validate([
-            'club_id' => 'required',
-            'category_id' => 'required',
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'sex' => 'required|min:1|max:1',
-            'birth_date' => 'nullable|date',
-            'is_licensee' => 'required|integer',
-            'id_licensee' => '',
+            'club_id' => 'bail|required',
+            'category_id' => 'bail|required',
+            'first_name' => 'bail|required',
+            'last_name' => 'bail|required',
+            'sex' => 'bail|required|min:1|max:1',
+            'birth_date' => 'bail|nullable|date',
+            'is_licensee' => 'bail|required|integer',
+            'id_licensee' => 'bail|nullable',
             'bonus' => 'nullable|numeric',
             'listing_url' => 'nullable|string'
         ]);
@@ -131,14 +131,14 @@ class MembersController extends Controller
         Category::findOrFail($request->category_id);
 
         $validatedMember = request()->validate([
-            'club_id' => 'required',
-            'category_id' => 'required',
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'sex' => 'required|min:1|max:1',
-            'birth_date' => 'nullable|date',
-            'is_licensee' => 'required|integer',
-            'id_licensee' => '',
+            'club_id' => 'bail|required',
+            'category_id' => 'bail|required',
+            'first_name' => 'bail|required',
+            'last_name' => 'bail|required',
+            'sex' => 'bail|required|min:1|max:1',
+            'birth_date' => 'bail|nullable|date',
+            'is_licensee' => 'bail|required|integer',
+            'id_licensee' => 'bail|nullable',
             'bonus' => 'nullable|numeric',
             'listing_url' => 'nullable|string'
         ]);

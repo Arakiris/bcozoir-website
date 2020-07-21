@@ -42,8 +42,8 @@ class WarningsController extends Controller
     public function store(Request $request)
     {
         $validatedWarning = request()->validate([
-            'body' => 'required',
-            'date_disappear' => 'required|date',
+            'body' => 'bail|required',
+            'date_disappear' => 'bail|required|date',
             'date_begin' => 'nullable|date'
         ]);
         
@@ -89,8 +89,8 @@ class WarningsController extends Controller
     public function update(Request $request, $id)
     {
         $validatedWarning = request()->validate([
-            'body' => 'required',
-            'date_disappear' => 'required|date',
+            'body' => 'bail|required',
+            'date_disappear' => 'bail|required|date',
             'date_begin' => 'nullable|date'
         ]);
         

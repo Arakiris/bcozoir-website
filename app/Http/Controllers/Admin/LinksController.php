@@ -44,7 +44,7 @@ class LinksController extends Controller
     public function store(Request $request)
     {
         $validatedLink = request()->validate([
-            'title' => 'required',
+            'title' => 'bail|required',
             'link' => 'required|url',
         ]);
 
@@ -99,7 +99,7 @@ class LinksController extends Controller
     public function update(Request $request, $id)
     {
         $validatedLink = request()->validate([
-            'title' => 'required',
+            'title' => 'bail|required',
             'link' => 'required|url',
         ]);
 

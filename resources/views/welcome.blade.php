@@ -21,7 +21,7 @@
             
     @else
         <div class="content__title">
-            <h1 class="heading-1">Bienvenue sur le site Bowling Club Ozoir</h1>
+            <h1 class="heading-1">Bienvenue sur le site Amicale Bowling Club I.D.F.</h1>
         </div>
     @endif
 @endsection

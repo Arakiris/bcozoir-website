@@ -11,6 +11,6 @@
     </ul>
 
     <p class="copyright">
-        &copy; Copyright 2017-2020 BC Ozoir. Tous droits réservés.
+        &copy; Copyright 2017-2021 Amicale Bowling Club I.D.F. Tous droits réservés.
     </p>
 </footer>

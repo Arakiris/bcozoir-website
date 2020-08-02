@@ -12,7 +12,7 @@
             <li class="aside-left-bar__item aside-left-bar__item-dropdown">
                 <div class="aside-left-bar__dropdown-btn">Tournois</div>
                 <ul class="aside-left-bar__dropdown">
-                    <li class="aside-left-bar__dropdown-item"><a class="aside-left-bar__link" href="{{ route('tournoisOzoir') }}">Tournois BC Ozoir</a></li>
+                    <li class="aside-left-bar__dropdown-item"><a class="aside-left-bar__link" href="{{ route('tournoisOzoir') }}">Tournois ABC IDF</a></li>
                     <li class="aside-left-bar__dropdown-item"><a class="aside-left-bar__link" href="{{ route('tournoisPrives') }}">Tournois Privés</a></li>
                         <li class="aside-left-bar__dropdown-item"><a class="aside-left-bar__link" href="{{ route('championnats') }}">Championnats fédéraux</a></li>
                 </ul>
@@ -28,7 +28,7 @@
             <li class="aside-left-bar__item aside-left-bar__item-dropdown">
                 <div class="aside-left-bar__dropdown-btn">Tournois</div>
                 <ul class="aside-left-bar__dropdown">
-                    <li class="aside-left-bar__dropdown-item"><a class="aside-left-bar__link" href="{{ route('vieuxtournoisOzoir') }}">Tournois BC Ozoir</a></li>
+                    <li class="aside-left-bar__dropdown-item"><a class="aside-left-bar__link" href="{{ route('vieuxtournoisOzoir') }}">Tournois ABC IDF</a></li>
                     <li class="aside-left-bar__dropdown-item"><a class="aside-left-bar__link" href="{{ route('vieuxtournoisPrives') }}">Tournois Privés</a></li>
                     <li class="aside-left-bar__dropdown-item"><a class="aside-left-bar__link" href="{{ route('vieuxchampionnats') }}">Championnats fédéraux</a></li>
                 </ul>
@@ -41,13 +41,6 @@
         <li class="aside-left-bar__item"><a class="aside-left-bar__link" href="{{ route('documentsDivers') }}">Documents divers</a></li>
     </ul>
 </nav>
-
-{{-- <div class="aside-left-player">
-    <audio class="aside-left-player__audio" id="audio" autoplay loop >
-        <source src="{{ isset($music_link->path) ? asset('storage' . $music_link->path) : asset('music/music.mp3') }}" type="audio/mpeg">
-            <p>Votre navigateur ne prend pas en charge l'audio HTML.</p>
-    </audio>
-</div> --}}
 
 <div class="aside-left-calendar">
     <div class="aside-left-calendar__title agendaTitle"><span>Agenda</span></div>

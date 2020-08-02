@@ -126,7 +126,7 @@ class TournamentsController extends Controller
                                     ->where('slug', $slug)->get();
         switch ($tournaments->first()->type->id) {
             case 1:
-                $title = "Tournois BC Ozoir";
+                $title = "Tournois ABC IDF";
                 break;
             case 2:
                 $title = "Tournois Privés";
@@ -146,7 +146,7 @@ class TournamentsController extends Controller
      * Select tournaments from type ozoir
      */
     public function ozoirTournaments() {
-        $title = "Tournois BC Ozoir";
+        $title = "Tournois ABC IDF";
         $pagination = true;
         $futur = false;
         $tournaments = Tournament::with(['members' => function($query){ $query->orderBy('last_name', 'asc')->orderBy('first_name', 'asc');},
@@ -332,7 +332,7 @@ class TournamentsController extends Controller
      * Old tournament from Ozoir
      */
     public function oldOzoirTournaments() {
-        $title = "Archives Tournois BC Ozoir";
+        $title = "Archives Tournois ABC IDF";
         $type = 1;
 
         $result = $this->oldTournaments($type);

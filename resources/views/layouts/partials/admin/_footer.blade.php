@@ -5,5 +5,5 @@
 		Administration
 	</div>
 	<!-- Default to the left -->
-	<strong>Copyright &copy; 2017 <a href="#">BC Ozoir</a>.</strong> Tous les droits sont réservés.
+	<strong>Copyright &copy; 2017 <a href="#">Amicale Bowling Club I.D.F</a>.</strong> Tous les droits sont réservés.
 </footer>

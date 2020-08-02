@@ -4,8 +4,8 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Administration </br>
-        <small>Vous êtes dans la partie administration du site web du club de bowling d'Ozoir</small>
+        Administration <br>
+        <small>Vous êtes dans la partie administration du site web du club ABC IDF</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Administration</a></li>

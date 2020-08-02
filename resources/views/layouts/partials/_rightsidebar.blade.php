@@ -1,7 +1,7 @@
 <aside class="aside-right">
     <div class="aside-right-tournament">
         <div class="aside-right-tournament__next nextTournament">
-            <div class="aside-right-tournament__title nextTournamentTitle"><h2>PROCHAINS TOURNOIS (BC Ozoir)</h2></div>
+            <div class="aside-right-tournament__title nextTournamentTitle"><h2>PROCHAINS TOURNOIS (ABC IDF)</h2></div>
             <div class="aside-right-tournament__content nextTournamentContent">
             @foreach($ozoirTounaments as $tournament)
                 <div class="aside-right-tournament__content-single">

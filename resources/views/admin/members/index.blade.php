@@ -26,7 +26,7 @@
         <div class="col-xs-12">
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">Données concernant les membres du club d'Ozoir</h3>
+                    <h3 class="box-title">Données concernant les membres du club ABC IDF</h3>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">

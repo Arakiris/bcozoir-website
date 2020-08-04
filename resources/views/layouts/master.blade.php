@@ -32,7 +32,7 @@
     @endif
     @yield('styles')
 
-    <title>Amicale Bowling Club I.D.F</title>
+    <title>Amicale Bowling Club I.D.F.</title>
 </head>
 <body>
     <audio class="content__audio" id="audio" autoplay loop >

@@ -7,7 +7,7 @@
 
 @section('content')
     <div class="content__title">
-        <h1 class="heading-1">BC Ozoir</h1>
+        <h1 class="heading-1">ABC I.D.F.</h1>
     </div>
     <div class="introduction">
 

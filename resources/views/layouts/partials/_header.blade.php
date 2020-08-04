@@ -17,7 +17,7 @@
     <nav class="header-nav">
         <ul class="header-nav__list">
             <li class="header-nav__item"><a class="header-nav__link" href="{{ route('welcome') }}">Accueil</a></li>
-            <li class="header-nav__item"><a class="header-nav__link" href="{{ route('bcozoir') }}">BC Ozoir</a></li>
+            <li class="header-nav__item"><a class="header-nav__link" href="{{ route('bcozoir') }}">ABC I.D.F.</a></li>
             <li class="header-nav__item"><a class="header-nav__link" href="{{ route('office') }}">Bureau</a></li>
             <li class="header-nav__item"><a class="header-nav__link" href="{{ route('members') }}">Membres</a></li>
             <li class="header-nav__item"><a class="header-nav__link" href="{{ route('partners') }}">Partenaires</a></li>

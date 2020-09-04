@@ -43,6 +43,7 @@ class MembersController extends Controller
                                     ->select('tournaments.*', 'members.id as memberID', 'members.first_name', 'members.last_name', 'member_team.rank')
                                     ->union($tournaments1)
                                     ->orderBy('date', 'desc')
+                                    ->with('type')
                                     ->get();
 
         return view('membertournaments', compact('member', 'tournaments'));

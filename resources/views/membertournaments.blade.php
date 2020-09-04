@@ -26,15 +26,7 @@
                         <tr class="table__tr--membertournament {{$now->gt($tournament->date) ? 'table__past-tournament' : 'table__future-tournament'}}">
                             <td class="table__td--membertournament"><?php setlocale(LC_TIME, 'fr'); echo utf8_encode(strftime("%d-%B-%Y", $tournament->date->timestamp)); ?></td>
                             <td class="table__td--membertournament">{{$tournament->title}}</td>
-                            <td class="table__td--membertournament">
-                                @if ($tournament->type_id == 1)
-                                    BC Ozoir
-                                @elseif($tournament->type_id == 2)
-                                    Privé
-                                @elseif($tournament->type_id == 3)
-                                    Fédéral
-                                @endif
-                            </td>
+                            <td class="table__td--membertournament">{{$tournament->type->title}}</td>
                             <td class="table__td--membertournament">{{$tournament->place}}</td>
                             <td class="table__td--membertournament">{{$tournament->is_accredited ? "Oui" : "Non"}}</td>
                             <td class="table__td--membertournament">{{!empty($tournament->rank) ? $tournament->rank : ''}}</td>

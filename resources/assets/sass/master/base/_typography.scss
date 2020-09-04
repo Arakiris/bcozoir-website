@@ -16,6 +16,10 @@
     justify-self: center;
 
     text-transform: uppercase;
+
+    &--welcome {
+        text-transform: none; 
+    }
 }
 
 .heading-2 {

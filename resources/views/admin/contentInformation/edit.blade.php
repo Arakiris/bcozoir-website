@@ -101,7 +101,7 @@
                         <input type="text" name="map_link" class="form-control" placeholder="Veuillez entrer le nom" value="{{ isset($contentInformation["map"]) ? (isset($contentInformation["map"]->description) ? $contentInformation["map"]->description : '') : '' }}">
                     </div>
 
-                    @for ($i = 1; $i < 7; $i++)
+                    @for ($i = 1; $i < 10; $i++)
                         @php
                             $j = $i - 1;
                         @endphp

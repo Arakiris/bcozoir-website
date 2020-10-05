@@ -278,7 +278,7 @@ class TournamentsController extends Controller
     public function destroy($id)
     {
         $tournament = Tournament::findOrFail($id);
-        if($tournament->podium->count()) {
+        if(isset($tournament->podium) && $tournament->podium->count()) {
             if($tournament->podium->pictures->count()) {
                 foreach($tournament->podium->pictures as $picture){
                     unlink(storage_path('app/public' . $picture->path));
@@ -288,14 +288,14 @@ class TournamentsController extends Controller
             $tournament->podium->delete();
         }
 
-        if($tournament->pictures->count()){
+        if(isset($tournament->pictures) && $tournament->pictures->count()){
             foreach($tournament->pictures as $picture){
                 unlink(storage_path('app/public' . $picture->path));
                 $picture->delete();
             }
         }
 
-        if($tournament->videos->count()){
+        if(isset($tournament->videos) && $tournament->videos->count()){
             foreach($tournament->videos as $video){
                 unlink(storage_path('app/public' . $video->path_mp4));
                 unlink(storage_path('app/public' . $video->path_webm));

@@ -163,8 +163,10 @@ class MembersController extends Controller
             $previousPicture = $member->picture->first();
             if(!is_null($previousPicture)){
                 unlink(storage_path('app/public' . $previousPicture->path));
-                unlink(storage_path('app/public' . $previousPicture->thumbnail));
-                unlink(storage_path('app/public' . $previousPicture->medium_size));
+                if(!is_null($previousPicture->thumbnail))
+                    unlink(storage_path('app/public' . $previousPicture->thumbnail));
+                if(!is_null($previousPicture->medium_size))
+                    unlink(storage_path('app/public' . $previousPicture->medium_size));
                 $previousPicture->delete();
             }
 

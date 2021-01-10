@@ -50,7 +50,8 @@
             $('#lightgallery').lightGallery({
                 autoplay: true,
                 pause: 3000,
-                progressBar: true
+                progressBar: true,
+                getCaptionFromTitleOrAlt: false
             }); 
         });
     </script>

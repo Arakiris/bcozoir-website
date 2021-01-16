@@ -14,7 +14,7 @@
             </p>
 
             <div class="form__messsage">
-                <input type="hidden" name="subject" value="Contact">
+                <input type="hidden" name="subject" value="Suggestion">
                 <select class="form__input-civility inputcivility" name="civility" required>
                     <option value="">* Civilité</option>
                     <option value="Monsieur">Mr.</option>

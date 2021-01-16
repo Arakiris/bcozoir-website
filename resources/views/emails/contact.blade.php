@@ -6,17 +6,17 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>BC Ozoir</title>
+        <title>ABCIDF</title>
     </head>
     <body>
         <header>
-            <h1>Site Internet BC Ozoir - <small>{{ $subject }}</small> </h1>
+            <h1>Site Internet ABCIDF - <small>{{ $subject }}</small> </h1>
         </header>
         <section>
             <div>
                 <p>Bonjour,</p> <br>
 
-                <p> {{ $civility }} <b>{{ $last_name }} {{ $first_name }}</b>, vous a laissé(e) un message à partir du site internet BC Ozoir : </p>
+                <p> {{ $civility }} <b>{{ $last_name }} {{ $first_name }}</b>, vous a laissé(e) un message à partir du site internet ABCIDF : </p>
 
                 <p>{!! $messages !!}</p> <br>
 

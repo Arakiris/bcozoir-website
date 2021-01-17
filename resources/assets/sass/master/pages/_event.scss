@@ -21,6 +21,7 @@
     &__table {
         display: grid;
         grid-template-columns: minmax(20rem, 3fr) minmax(12rem, 2fr) repeat(5, 1fr);
+        color: white;
 
         &-future > div:nth-of-type(-n+2) {
             border-top: 2px solid var(--grey-color-light);

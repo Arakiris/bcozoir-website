@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="{{ asset('slick/slick-theme.css') }}">
     <link rel="stylesheet" href="{{ asset('css/lightbox.min.css') }}">
     <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset(mix('css/app.css')) }}">
     @if (isset($banner) && isset($banner->path))
         <style>
             #header__img--personalized {
@@ -51,7 +51,7 @@
         <script src="{{ asset('slick/slick.min.js') }}"></script>
         <script src="{{ asset('js/lightbox.min.js') }}"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
-        <script src="{{ asset('js/master.js') }}"></script>
+        <script src="{{ asset(mix('js/master.js')) }}"></script>
         <script>
             $(document).ready(function() {
                 $('#calendar').fullCalendar({

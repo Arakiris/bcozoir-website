@@ -7,6 +7,7 @@
 @section('content')
     <div class="content__title main-content-title">
         <h1 class="heading-1">Archives classement podiums</h1>
+        <p class="content__paragraph">Cliquer sur le tournoi pour avoir le r&egraveglement</p>
     </div>
 
     @if(isset($podia) && !empty($podia) && $podia->count() > 0)

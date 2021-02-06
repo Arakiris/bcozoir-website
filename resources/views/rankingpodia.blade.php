@@ -7,7 +7,7 @@
 @section('content')
 <div class="content__title">
     <h1 class="heading-1">Classement Podiums</h1>
-    <p class="content__paragraph">Cliquer sur le libellé pour accéder au fichier</p>
+    <p class="content__paragraph">Cliquer sur le tournoi pour avoir le r&egraveglement</p>
 </div>
     <div class="event event__ranking">
         @if(isset($podia) && $podia->count()>0)

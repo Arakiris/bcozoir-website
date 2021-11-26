@@ -41,12 +41,12 @@ class DatabaseSeeder extends Seeder
         $this->call([
             RolesTableSeeder::class,
 
-            // UsersTableSeeder::class,
-            // ClubsTableSeeder::class,
-            // TournamentTypesTableSeeder::class,
-            // ContentInformationsTableSeeder::class,
-            // CategoriesTableSeeder::class,
-            // StatisticsTableSeeder::class
+            UsersTableSeeder::class,
+            ClubsTableSeeder::class,
+            TournamentTypesTableSeeder::class,
+            ContentInformationsTableSeeder::class,
+            CategoriesTableSeeder::class,
+            StatisticsTableSeeder::class
         ]);
 
         /**

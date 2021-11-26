@@ -26,6 +26,8 @@ class ContentInformationsTableSeeder extends Seeder
             ['name' => 'volume musique', 'description' => ''],
             ['name' => 'facebook image', 'description' => ''],
             ['name' => 'facebook url', 'description' => ''],
+            ['name' => 'image tournament 1', 'description' => ''],
+            ['name' => 'image tournament 2', 'description' => ''],
         ]);
     }
 }

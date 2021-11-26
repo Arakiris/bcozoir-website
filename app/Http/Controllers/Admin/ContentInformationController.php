@@ -53,6 +53,8 @@ class ContentInformationController extends Controller
             'logo'=> 'bail|nullable|image',
             'banner'=> 'bail|nullable|image',
             'office'=> 'bail|nullable|image',
+            'tournament_image_1' => 'bail|nullable|image',
+            'tournament_image_2' => 'bail|nullable|image',
             'music'=> 'bail|nullable|mimes:mp3,mp4,mpga,wav',
             'volume' => 'bail|required|numeric||between:0,1',
             'fb_image' => 'bail|nullable|image',
@@ -78,6 +80,7 @@ class ContentInformationController extends Controller
         if($file = $request->file('office'))
             $this->saveContentInfo($file, "bureau image");
 
+
         if($file = $request->file('music'))
             $this->saveContentInfo($file, "musique de fond");
         ContentInformation::updateOrCreate(["name" => "volume musique"], ['description' => $validatedInformation['volume']]);
@@ -98,6 +101,11 @@ class ContentInformationController extends Controller
             MediaLink::updateOrCreate(['id' => $i], ['url' => $validatedInformation['socialMedia'][$i]['url'], 'description' => $validatedInformation['socialMedia'][$i]['description'],
                                                         'display' => $validatedInformation['socialMedia'][$i]['display']]);
         }
+
+        if($file = $request->file('tournament_image_1'))
+            $this->saveContentInfo($file, "image tournament 1");
+        if($file = $request->file('tournament_image_2'))
+            $this->saveContentInfo($file, "image tournament 2");
 
         return redirect()->route('admin.contentinformation.edit');
     }

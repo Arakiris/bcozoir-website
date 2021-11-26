@@ -1,7 +1,11 @@
 <aside class="aside-right">
     <div class="aside-right-tournament">
         <div class="aside-right-tournament__next nextTournament">
-            <div class="aside-right-tournament__title nextTournamentTitle"><h2>PROCHAINS TOURNOIS (ABC IDF)</h2></div>
+            <div class="aside-right-tournament__title nextTournamentTitle">
+                <h2>
+                    <img src="{{ (isset($title_list_tournament_1) && isset($title_list_tournament_1->path)) ? asset('storage' . $title_list_tournament_1->path) : asset('images/Tournois à venir ABC IDF (230x80 pixels).png') }}" alt="PROCHAINS TOURNOIS (ABC IDF)">
+                </h2>
+            </div>
             <div class="aside-right-tournament__content nextTournamentContent">
             @foreach($ozoirTounaments as $tournament)
                 <div class="aside-right-tournament__content-single">
@@ -15,7 +19,11 @@
         </div>
 
         <div class="aside-right-tournament__next nextTournament">
-            <div class="aside-right-tournament__title nextTournamentTitle"><h2>PROCHAINS AUTRES TOURNOIS (privés ou fédéraux)</h2></div>
+            <div class="aside-right-tournament__title nextTournamentTitle">
+                <h2>
+                    <img src="{{ (isset($title_list_tournament_2) && isset($title_list_tournament_2->path)) ? asset('storage' . $title_list_tournament_2->path) : asset('images/Tournois à venir Privés ou Championnats fédéraux (230x80 pixels).png') }}" alt="PROCHAINS AUTRES TOURNOIS (privés ou fédéraux)">
+                </h2>
+            </div>
             <div class="aside-right-tournament__content nextTournamentContent">
             @foreach($otherTournaments as $tournament)
                 <div class="aside-right-tournament__content-single">

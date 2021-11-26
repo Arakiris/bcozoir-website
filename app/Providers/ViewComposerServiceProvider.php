@@ -52,6 +52,8 @@ class ViewComposerServiceProvider extends ServiceProvider
                 'music_volume' => ContentInformation::where('name', 'volume musique')->first(),
                 'fb_img' => ContentInformation::where('name', 'facebook image')->first(),
                 'fb_link' => ContentInformation::where('name', 'facebook url')->first(),
+                'title_list_tournament_1' => ContentInformation::where('name', 'image tournament 1')->first(),
+                'title_list_tournament_2' => ContentInformation::where('name', 'image tournament 2')->first(),
                 'medialinks' => MediaLink::all(),
                 'map' => ContentInformation::where('name', 'map')->first()
             ]);

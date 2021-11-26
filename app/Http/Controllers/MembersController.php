@@ -46,11 +46,17 @@ class MembersController extends Controller
         //                             ->with('type')
         //                             ->get();
 
+        $tournaments1 = Tournament::join('member_tournament', 'tournaments.id', '=', 'member_tournament.tournament_id')
+                                    ->join('members', 'member_tournament.member_id', '=', 'members.id')
+                                    ->where('members.id', '=', $id)
+                                    ->select('tournaments.*', 'members.id as memberID', 'members.first_name', 'members.last_name', 'member_tournament.rank');
+
         $tournaments = Tournament::join('teams', 'tournaments.id', '=', 'teams.tournament_id')
                                     ->join('member_team', 'teams.id', '=', 'member_team.team_id')
                                     ->join('members', 'member_team.member_id', '=', 'members.id')
                                     ->where('members.id', '=', $id)
                                     ->select('tournaments.*', 'members.id as memberID', 'members.first_name', 'members.last_name', 'member_team.rank')
+                                    ->union($tournaments1)
                                     ->orderBy('date', 'desc')
                                     ->with('type')
                                     ->get();

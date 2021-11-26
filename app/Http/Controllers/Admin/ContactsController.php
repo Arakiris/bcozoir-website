@@ -62,6 +62,8 @@ class ContactsController extends Controller
                 $contact->email = $validatedContact['email' . $i];
             $contact->save();
         }
+
+        $request->session()->flash('success', 'Message envoyé!');
         $this->updateStatisticDate();
         return redirect()->back();
     }

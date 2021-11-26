@@ -70,6 +70,16 @@
                         <label for="office">Image du bureau</label>
                         <input type="file" id="office" name="office" accept="image/*">
                     </div>
+
+                    <div class="form-group">
+                        <label for="tournament_image_1">Libellé 1 liste tounois</label>
+                        <input type="file" id="tournament_image_1" name="tournament_image_1" accept="image/*">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tournament_image_2">Libellé 2 liste tounois</label>
+                        <input type="file" id="tournament_image_2" name="tournament_image_2" accept="image/*">
+                    </div>
                     
                     <div class="form-group">
                         <label for="music">Musique</label>

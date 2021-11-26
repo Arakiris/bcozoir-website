@@ -5,6 +5,15 @@
 @endsection
 
 @section('content')
+@if ($request->session()->has('success'))
+    <div id="overlay">
+        <div id="overlay__text">
+            {{ session()->get('success') }}
+        </div>
+    </div>
+@endif
+
+
 <div class="content__title">
     <h1 class="heading-1">Laissez votre message</h1>
 </div>
@@ -51,4 +60,19 @@
         </div> 
     </div>
 </div>
+@endsection
+
+@section('scripts')
+    <script>
+        function overlayNone(element) {
+            element.style.display = "none";
+        }
+
+        var overlay =  document.getElementById('overlay');
+
+        if (typeof(overlay) != 'undefined' && overlay != null)
+        {
+            setTimeout(overlayNone, 2100, overlay); 
+        }
+    </script>
 @endsection

@@ -111,7 +111,12 @@
                                                         </div>
                                                     </td>
                                                     <td class="event__ranking-table-content">
-                                                        <div class="event__rank-display">{{$member->pivot->rank}} &nbsp; </div>
+                                                        <div class="event__rank-display">
+                                                            @if ($team->display_rank)
+                                                                {{$member->pivot->rank}} 
+                                                            @endif
+                                                            &nbsp; 
+                                                        </div>
                                                     </td>
                                                 </tr>
                                             @endforeach

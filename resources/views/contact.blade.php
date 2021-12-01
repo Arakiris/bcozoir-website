@@ -5,10 +5,10 @@
 @endsection
 
 @section('content')
-@if ($request->session()->has('success'))
+@if (Session::has('success'))
     <div id="overlay">
         <div id="overlay__text">
-            {{ session()->get('success') }}
+            {{ Session::get('success') }}
         </div>
     </div>
 @endif

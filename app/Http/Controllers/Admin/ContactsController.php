@@ -63,7 +63,6 @@ class ContactsController extends Controller
             $contact->save();
         }
 
-        $request->session()->flash('success', 'Message envoyé!');
         $this->updateStatisticDate();
         return redirect()->back();
     }

@@ -83,6 +83,6 @@ class DashboardController extends Controller
         foreach($contacts as $contact){
             \Mail::to($contact->email)->send(new \App\Mail\Contact($validatedMail));
         }
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Message envoyé!');
     }
 }

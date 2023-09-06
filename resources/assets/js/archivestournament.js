@@ -110,6 +110,16 @@ window.createTournamentArchives = function(lenghtlast, previousYear, url, url_ho
 
         let storage = url_storage;
 
+        let additional_information = '';
+
+        if (typeof tournament.additional_information != "undefined" && tournament.additional_information != null && tournament.additional_information != ''){
+            additional_information = `
+                <div class="event__additional-information">
+                    ${ tournament.additional_information }
+                </div>
+            `;
+        }
+
         // Render first column
         let markup = `
             <div class="archives__row">
@@ -120,20 +130,26 @@ window.createTournamentArchives = function(lenghtlast, previousYear, url, url_ho
             || ((typeof tournament.rules_pdf != "undefined" && tournament.rules_pdf != null) && (tournament.is_rules_pdf == 1)) ){
 
             markup +=  `
-                <a class="event__single-link" class="occasion-link" href="${ (tournament.is_rules_pdf == 1) ? storage + '/' + tournament.rules_pdf : tournament.rules_url }" target="_blank">
-                    <h2 class="heading-2--event-title">${dateFormat}</h2>
-                    <p class="event__single-paragraphe">${ tournament.title }</p>
-                    <p class="event__single-paragraphe">${ (tournament.is_accredited == 1) ? 'Homologué' : 'Non homologué' }</p>
-                    <p class="event__single-paragraphe">${ tournament.place }</p>
-                </a>
+                <div class="event__single-information__wrapper">
+                    <a class="event__single-link" class="occasion-link" href="${ (tournament.is_rules_pdf == 1) ? storage + '/' + tournament.rules_pdf : tournament.rules_url }" target="_blank">
+                        <h2 class="heading-2--event-title">${dateFormat}</h2>
+                        <p class="event__single-paragraphe">${ tournament.title }</p>
+                        <p class="event__single-paragraphe">${ (tournament.is_accredited == 1) ? 'Homologué' : 'Non homologué' }</p>
+                        <p class="event__single-paragraphe">${ tournament.place }</p>
+                        ${ additional_information }
+                    </a>
+                </div>
             `;
         }
         else {
             markup +=  `
-                <h2 class="heading-2--event-title">${dateFormat}</h2>
-                <p class="event__single-paragraphe">${ tournament.title }</p>
-                <p class="event__single-paragraphe">${ (tournament.is_accredited == 1) ? 'Homologué' : 'Non homologué' }</p>
-                <p class="event__single-paragraphe">${ tournament.place }</p>
+                <div class="event__single-information__wrapper">
+                    <h2 class="heading-2--event-title">${dateFormat}</h2>
+                    <p class="event__single-paragraphe">${ tournament.title }</p>
+                    <p class="event__single-paragraphe">${ (tournament.is_accredited == 1) ? 'Homologué' : 'Non homologué' }</p>
+                    <p class="event__single-paragraphe">${ tournament.place }</p>
+                    ${ additional_information }
+                </div>
             `
         }
 

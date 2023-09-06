@@ -1,13 +1,13 @@
 {
-    "/js/app.js": "/js/app.js?id=1f2430f1850fa08cfa64",
-    "/css/admin.css": "/css/admin.css?id=1b0c4e07eac1b327d7d8",
-    "/css/app.css": "/css/app.css?id=99fa5e853713e28de417",
-    "/js/archivestournament.js": "/js/archivestournament.js?id=01709e17f8583e1f0fa8",
-    "/js/archivesranking.js": "/js/archivesranking.js?id=45676972de032bfbffd3",
-    "/js/archivesleague.js": "/js/archivesleague.js?id=5a8701e7c846af761689",
-    "/js/admin.js": "/js/admin.js?id=28ab73ccc18453283006",
-    "/js/news.js": "/js/news.js?id=32c5ff9e3edc9449f243",
-    "/js/master.js": "/js/master.js?id=73d265ef305b6d898795",
-    "/js/archivespaginate.js": "/js/archivespaginate.js?id=070d8eeaf8a0d867af6b",
-    "/js/adminformation.js": "/js/adminformation.js?id=3e9eb0b716ba5b99d36e"
+    "/js/app.js": "/js/app.js",
+    "/css/admin.css": "/css/admin.css",
+    "/css/app.css": "/css/app.css",
+    "/js/archivestournament.js": "/js/archivestournament.js",
+    "/js/archivesranking.js": "/js/archivesranking.js",
+    "/js/archivesleague.js": "/js/archivesleague.js",
+    "/js/admin.js": "/js/admin.js",
+    "/js/news.js": "/js/news.js",
+    "/js/master.js": "/js/master.js",
+    "/js/archivespaginate.js": "/js/archivespaginate.js",
+    "/js/adminformation.js": "/js/adminformation.js"
 }

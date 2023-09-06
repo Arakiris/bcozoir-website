@@ -82,15 +82,29 @@
         border-left: 2px solid var(--grey-color-light);
         padding: 1rem;
 
-        display: grid;
+        // display: grid;
         align-content: center;
         justify-content: center;
 
         transition: all .2s;
 
+        &__wrapper {
+            width: 100%;
+        }
+
         &:hover {
             filter: brightness(120%);
         }
+
+
+    }
+
+    &__additional-information {
+        background-color: var(--table-odd-color);
+        padding: 0.8rem 0.8rem 0.6rem 0.8rem;
+        width: 100%;
+        text-align: center;
+        margin-top: 3rem;
     }
 
     &__ranking {

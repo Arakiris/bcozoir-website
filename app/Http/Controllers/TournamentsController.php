@@ -295,7 +295,7 @@ class TournamentsController extends Controller
                                 ->where('type_id', '=', $type)
                                 ->where('start_season', '<', Carbon::create($this->yearSeason(), 9, 1, 0, 0, 0))
                                 ->distinct()
-                                ->orderBy('date', 'desc')->get();
+                                ->orderBy('year', 'desc')->get();
 
         if(!$years->isEmpty()){
             $lastYear = $years->shift()->year;

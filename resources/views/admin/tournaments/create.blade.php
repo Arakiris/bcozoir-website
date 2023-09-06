@@ -9,7 +9,7 @@
 
 <!-- Content Header (Page header) -->
 <section class="content-header">
-    <h1> Gestion des clubs du site internet </h1>
+    <h1> Gestion des tournois du site internet </h1>
 
     <ol class="breadcrumb">
         <li><i class="fa fa-dashboard"></i> Tournois</li>
@@ -115,6 +115,11 @@
                     <div class="form-group">
                         <label for="rules_pdf">Fichier PDF</label>
                         <input type="file" id="rules_pdf" name="rules_pdf" accept="application/pdf" disabled>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="additional_information">Informations complémentaires concernant le tournoi</label>
+                        <textarea class="ckeditor form-control" name="additional_information" rows="20" placeholder="Entrer vos informations complémentaires..."></textarea>
                     </div>
 
                     <!-- radio -->

@@ -2,7 +2,7 @@
 @section('content')
 <!-- Content Header (Page header) -->
 <section class="content-header">
-    <h1> Gestion des clubs du site internet </h1>
+    <h1> Gestion des informations du site internet </h1>
 
     <ol class="breadcrumb">
         <li><i class="fa fa-dashboard"></i> Contenu général</li>
@@ -111,7 +111,7 @@
                         <input type="text" name="map_link" class="form-control" placeholder="Veuillez entrer le nom" value="{{ isset($contentInformation["map"]) ? (isset($contentInformation["map"]->description) ? $contentInformation["map"]->description : '') : '' }}">
                     </div>
 
-                    @for ($i = 1; $i < 10; $i++)
+                    @for ($i = 1; $i < 19; $i++)
                         @php
                             $j = $i - 1;
                         @endphp

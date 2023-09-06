@@ -32,18 +32,32 @@
                             @foreach($tournaments as $tournament)
                                 <div class="archives__row">
                                     <div class="event__single-information">
-                                        @if((isset($tournament->rules_url) && ($tournament->is_rules_pdf == 0)) || (isset($tournament->rules_pdf) && ($tournament->is_rules_pdf == 1)))
-                                        <a class="event__single-link" href="{{ $tournament->is_rules_pdf ? asset('storage' . $tournament->rules_pdf) : $tournament->rules_url }}" target="_blank">
-                                            <h2 class="heading-2--event-title"><?php setlocale(LC_TIME, 'fr'); echo utf8_encode(strftime("%d-%B-%Y", $tournament->date->timestamp)); ?></h2>
-                                            <p class="event__single-paragraphe">{{ $tournament->title }}</p>
-                                            <p class="event__single-paragraphe">{{ $tournament->is_accredited ? 'Homologué' : 'Non homologué' }}</p>
-                                            <p class="event__single-paragraphe">{{ $tournament->place }}</p>
+                                        <div class="event__single-information__wrapper">
+                                            @if((isset($tournament->rules_url) && ($tournament->is_rules_pdf == 0)) || (isset($tournament->rules_pdf) && ($tournament->is_rules_pdf == 1)))
+                                            <a class="event__single-link" href="{{ $tournament->is_rules_pdf ? asset('storage' . $tournament->rules_pdf) : $tournament->rules_url }}" target="_blank">
+                                                <h2 class="heading-2--event-title"><?php setlocale(LC_TIME, 'fr'); echo utf8_encode(strftime("%d-%B-%Y", $tournament->date->timestamp)); ?></h2>
+                                                <p class="event__single-paragraphe">{{ $tournament->title }}</p>
+                                                <p class="event__single-paragraphe">{{ $tournament->is_accredited ? 'Homologué' : 'Non homologué' }}</p>
+                                                <p class="event__single-paragraphe">{{ $tournament->place }}</p>
+                                                @if (isset($tournament->additional_information) && !is_null($tournament->additional_information))
+                                                    <div class="event__additional-information">
+                                                        {!! $tournament->additional_information !!}
+                                                    </div>
+                                                @endif
+                                            </div>
                                         </a>
                                         @else
-                                            <h2 class="heading-2--event-title"><?php setlocale(LC_TIME, 'fr'); echo utf8_encode(strftime("%d-%B-%Y", $tournament->date->timestamp)); ?></h2>
-                                            <p class="event__single-paragraphe">{{ $tournament->title }}</p>
-                                            <p class="event__single-paragraphe">{{ $tournament->is_accredited ? 'Homologué' : 'Non homologué' }}</p>
-                                            <p class="event__single-paragraphe">{{ $tournament->place }}</p>
+                                            <div class="event__single-information__wrapper">
+                                                <h2 class="heading-2--event-title"><?php setlocale(LC_TIME, 'fr'); echo utf8_encode(strftime("%d-%B-%Y", $tournament->date->timestamp)); ?></h2>
+                                                <p class="event__single-paragraphe">{{ $tournament->title }}</p>
+                                                <p class="event__single-paragraphe">{{ $tournament->is_accredited ? 'Homologué' : 'Non homologué' }}</p>
+                                                <p class="event__single-paragraphe">{{ $tournament->place }}</p>
+                                                @if (isset($tournament->additional_information) && !is_null($tournament->additional_information))
+                                                    <div class="event__additional-information">
+                                                        {!! $tournament->additional_information !!}
+                                                    </div>
+                                                @endif
+                                            </div>
                                         @endif
                                     </div>
                                     <div class="event__single-members">

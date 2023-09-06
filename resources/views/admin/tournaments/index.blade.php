@@ -10,7 +10,7 @@
 
 <!-- Content Header (Page header) -->
 <section class="content-header">
-    <h1> Gestion des tounois du club </h1>
+    <h1> Gestion des tournois du club </h1>
 
     <ol class="breadcrumb">
         <li><i class="fa fa-dashboard"></i> Tournois</li>

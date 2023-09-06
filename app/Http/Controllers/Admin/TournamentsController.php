@@ -67,6 +67,7 @@ class TournamentsController extends Controller
             'place' => 'bail|required',
             'lexer_url' => 'bail|nullable|url',
             'report' => 'bail|nullable',
+            'additional_information' => 'bail|nullable',
             'formation' => 'required|boolean'
         ]);
 
@@ -181,6 +182,7 @@ class TournamentsController extends Controller
             'place' => 'bail|required',
             'lexer_url' => 'bail|nullable|url',
             'report' => 'bail|nullable',
+            'additional_information' => 'bail|nullable',
             'formation' => 'required|boolean'
         ]);
 

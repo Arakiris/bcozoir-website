@@ -22,15 +22,14 @@ class EventsController extends Controller
     public function eventpictures($slug) {
         $title = "Photos de l'évènement";
 
-        $event = Event::with('pictures')->where('slug', $slug)->first();
+        $event = Event::with(['pictures' => function($query) { $query->orderby('created_at', 'asc'); }])->where('slug', $slug)->first();
         if(!$event){
             abort(404);
         }
 
-        $pictures = $event->pictures()->orderBy('id', 'desc')->paginate(42);
-        $allpictures = $event->pictures;
+        $pictures = $event->pictures()->get();
 
-        return view('photos', compact('title', 'event', 'allpictures','pictures'));
+        return view('photos', compact('title', 'event', 'pictures'));
     }
 
     public function eventVideos($slug) {
@@ -41,7 +40,8 @@ class EventsController extends Controller
             abort(404);
         }
 
-        $videos = $event->videos()->paginate(4);
+        // $videos = $event->videos()->paginate(4);
+        $videos = $event->videos()->get();
 
         return view('videos', compact('title', 'event', 'videos'));
     }

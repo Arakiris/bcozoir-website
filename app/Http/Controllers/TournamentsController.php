@@ -221,7 +221,7 @@ class TournamentsController extends Controller
     public function tournamentpictures($slug) {
         $title = "Photos tournoi";
 
-        $tournament = Tournament::with(['pictures' => function($query) { $query->orderby('created_at', 'asc'); }])->where('slug', $slug)->first();
+        $tournament = Tournament::with(['pictures' => function($query) { $query->orderby('id', 'desc'); }])->where('slug', $slug)->first();
 
         if(!$tournament){
             abort(404);

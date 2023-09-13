@@ -22,12 +22,12 @@ class EventsController extends Controller
     public function eventpictures($slug) {
         $title = "Photos de l'évènement";
 
-        $event = Event::with(['pictures' => function($query) { $query->orderby('id', 'asc'); }])->where('slug', $slug)->first();
+        $event = Event::with(['pictures'])->where('slug', $slug)->first();
         if(!$event){
             abort(404);
         }
 
-        $pictures = $event->pictures()->get();
+        $pictures = $event->pictures()->get()->sortBy('id');
 
         return view('photos', compact('title', 'event', 'pictures'));
     }

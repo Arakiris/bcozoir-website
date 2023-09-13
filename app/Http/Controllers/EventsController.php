@@ -22,7 +22,7 @@ class EventsController extends Controller
     public function eventpictures($slug) {
         $title = "Photos de l'évènement";
 
-        $event = Event::with(['pictures' => function($query) { $query->orderby('id', 'desc'); }])->where('slug', $slug)->first();
+        $event = Event::with(['pictures' => function($query) { $query->orderby('id', 'asc'); }])->where('slug', $slug)->first();
         if(!$event){
             abort(404);
         }

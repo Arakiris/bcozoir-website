@@ -160,6 +160,12 @@
                         
                     @endfor
 
+                    <!-- textarea -->
+                    <div class="form-group">
+                        <label for="courrier_postal">Courrier postal :</label>
+                        <textarea name="courrier_postal" class="ckeditor form-control" rows="3" placeholder="Veuillez entrer le courrier postal">{{ isset($contentInformation["courrier_postal"]->description) ? $contentInformation["courrier_postal"]->description : '' }}</textarea>
+                    </div>
+
 
                     @include('partials._form-error')
 

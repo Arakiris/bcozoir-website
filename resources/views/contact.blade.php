@@ -48,14 +48,18 @@
         </form>
 
         <div class="form__by-tel">
-            <p><span class="form__special-p">Par téléphone</span> au: 06.58.00.51.08 (Alain ROUSSEAU), Patrick STUBBE (06.72.27.02.51), Blaise NGUYEN (06.62.58.18.72)</p>
+            <p><span class="form__special-p">Par téléphone</span> au: Patrick STUBBE (06.72.27.02.51), Blaise NGUYEN (06.62.58.18.72)</p>
         </div>
         <div class="form__by-mail">
             <p class="form__paragraph"><span class="form__special-p">Par courrier</span> en écrivant à: </p>
             <div class="form__address">
-                Alain ROUSSEAU <br>
-                4 Rue Charles Dullin <br>
-                77330 Ozoir-la-Ferrière
+                @if ( isset($contentInformation["courrier_postal"])  && isset($contentInformation["courrier_postal"]->description) )
+                    
+                @else
+                    Didier JANOT <br>
+                    10 Rue des Pervenches <br>
+                    93460 Gournay sur Marne
+                @endif
             </div>
         </div> 
     </div>

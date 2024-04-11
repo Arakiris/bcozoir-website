@@ -59,18 +59,18 @@ class Tournament extends Model
     }
 
     public function scopeOzoirfuturetournament($query) {
-        return $query->where([['type_id', '=', 1], ['date', '>', Carbon::now()]])->orderBy('date', 'ASC');
+        return $query->where([['type_id', '=', 1], ['date', '>', Carbon::now()->subDay()]])->orderBy('date', 'ASC');
     }
 
     public function scopeOtherfuturetournament($query) {
-        return $query->where([['type_id', '<>', 1], ['date', '>', Carbon::now()]])->orderBy('date', 'ASC');
+        return $query->where([['type_id', '<>', 1], ['date', '>', Carbon::now()->subDay()]])->orderBy('date', 'ASC');
     }
 
     /**
      * BC Ozoir
      */
     public function scopeOzoirtournament($query) {
-        return $query->where([['type_id', '=', 1], ['date', '>=', Carbon::create($this->yearSeason(), 9, 1, 0, 0, 0)], ['date', '<=', Carbon::now()]])->orderBy('date', 'desc');
+        return $query->where([['type_id', '=', 1], ['date', '>=', Carbon::create($this->yearSeason(), 9, 1, 0, 0, 0)], ['date', '<=', Carbon::now()->subDay()]])->orderBy('date', 'desc');
     }
 
     public function scopeOldozoirtournament($query) {
@@ -81,7 +81,7 @@ class Tournament extends Model
      * Private tournament
      */
     public function scopePrivatetournament($query) {
-        return $query->where([['type_id', '=', 2], ['date', '>=', Carbon::create($this->yearSeason(), 9, 1, 0, 0, 0)], ['date', '<=', Carbon::now()]])->orderBy('date', 'desc');
+        return $query->where([['type_id', '=', 2], ['date', '>=', Carbon::create($this->yearSeason(), 9, 1, 0, 0, 0)], ['date', '<=', Carbon::now()->subDay()]])->orderBy('date', 'desc');
     }
 
     public function scopeOldprivatetournament($query) {
@@ -92,7 +92,7 @@ class Tournament extends Model
      * Championship
      */
     public function scopeChampionship($query) {
-        return $query->where([['type_id', '=', 3], ['date', '>=', Carbon::create($this->yearSeason(), 9, 1, 0, 0, 0)], ['date', '<=', Carbon::now()]])->orderBy('date', 'desc');
+        return $query->where([['type_id', '=', 3], ['date', '>=', Carbon::create($this->yearSeason(), 9, 1, 0, 0, 0)], ['date', '<=', Carbon::now()->subDay()]])->orderBy('date', 'desc');
     }
 
     public function scopeOldchampionship($query) {

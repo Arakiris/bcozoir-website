@@ -162,6 +162,12 @@
 
                     <!-- textarea -->
                     <div class="form-group">
+                        <label for="contact_telephone">Telephones dans la partie contact :</label>
+                        <textarea name="contact_telephone" class="ckeditor form-control" rows="3" placeholder="Veuillez entrer le texte pour la partie contact du téléphone">{{ isset($contentInformation["contact_telephone"]->description) ? $contentInformation["contact_telephone"]->description : '' }}</textarea>
+                    </div>
+
+                    <!-- textarea -->
+                    <div class="form-group">
                         <label for="courrier_postal">Courrier postal :</label>
                         <textarea name="courrier_postal" class="ckeditor form-control" rows="3" placeholder="Veuillez entrer le courrier postal">{{ isset($contentInformation["courrier_postal"]->description) ? $contentInformation["courrier_postal"]->description : '' }}</textarea>
                     </div>

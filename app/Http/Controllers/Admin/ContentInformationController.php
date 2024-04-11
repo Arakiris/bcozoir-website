@@ -65,6 +65,7 @@ class ContentInformationController extends Controller
             'socialMedia.*.display' => 'bail|nullable|string',
             'map_title' => 'bail|string|nullable',
             'map_link' => 'bail|nullable|string',
+            'contact_telephone' => 'bail|nullable|string',
             'courrier_postal' => 'nullable|string'
         ]);
 
@@ -108,6 +109,7 @@ class ContentInformationController extends Controller
         if($file = $request->file('tournament_image_2'))
             $this->saveContentInfo($file, "image tournament 2");
 
+        ContentInformation::updateOrCreate(["name" => "contact_telephone"], ['description' => $validatedInformation['contact_telephone']]);
         ContentInformation::updateOrCreate(["name" => "courrier_postal"], ['description' => $validatedInformation['courrier_postal']]);
 
         return redirect()->route('admin.contentinformation.edit');

@@ -65,7 +65,10 @@ class DashboardController extends Controller
     }
 
     public function contact() {
-        return view('contact');
+        $contactTelephone = ContentInformation::where('name', 'contact_telephone')->first();
+        $courrierPostal = ContentInformation::where('name', 'courrier_postal')->first();
+
+        return view('contact', compact('contactTelephone', 'courrierPostal'));
     }
 
     public function sendmail(request $request) {

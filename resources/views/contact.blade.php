@@ -48,13 +48,20 @@
         </form>
 
         <div class="form__by-tel">
-            <p><span class="form__special-p">Par téléphone</span> au: Patrick STUBBE (06.72.27.02.51), Blaise NGUYEN (06.62.58.18.72)</p>
+            <p>
+                <span class="form__special-p">Par téléphone</span> 
+                @if (isset($contactTelephone)  && isset($contactTelephone->description) )
+                    {!! $contactTelephone->description !!}
+                @else
+                    au: Didier JANOT (06.74.67.45.07), Patrick STUBBE (06.72.27.02.51), Blaise NGUYEN (06.62.58.18.72)
+                @endif
+            </p>
         </div>
         <div class="form__by-mail">
             <p class="form__paragraph"><span class="form__special-p">Par courrier</span> en écrivant à: </p>
             <div class="form__address">
-                @if ( isset($contentInformation["courrier_postal"])  && isset($contentInformation["courrier_postal"]->description) )
-                    
+                @if ( isset($courrierPostal)  && isset($courrierPostal->description) )
+                    {!! $courrierPostal->description !!}
                 @else
                     Didier JANOT <br>
                     10 Rue des Pervenches <br>

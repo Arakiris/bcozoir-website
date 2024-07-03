@@ -17,7 +17,7 @@
             <div class="event__table event__table-future">
         @else
             <div class="event__table event__table-tournament">
-        @endif                 
+        @endif 
             @foreach($tournaments as $tournament)
                 <div class="event__single-information">
                     @if((isset($tournament->rules_url) && ($tournament->is_rules_pdf == 0)) || (isset($tournament->rules_pdf) && ($tournament->is_rules_pdf == 1)))
@@ -121,22 +121,22 @@
                         @endif
                     @endif
                 </div>
+
+                @if(isset($tournament->lexer_url))
+                    <div class="event__single-image">
+                        <a class="event__single-link" href="{{ $tournament->lexer_url }}" target="_blank">
+                            <img class="event__single-logo occasion-image-logo" src="{{ asset('images/tournament/Lexer.jpg') }}" alt="Lien lexer du résultat">
+                        </a>
+                    </div>
+                @else
+                    <div class="event__single-image--disable">
+                        <div class="event__cell--disable">
+                            <img class="event__single-logo occasion-image-logo" src="{{ asset('images/tournament/Lexer.jpg') }}" alt="Lien lexer du résultat">
+                        </div>
+                    </div>
+                @endif
                 
                 @if(isset($futur) && ($futur == false))
-                    @if(isset($tournament->lexer_url))
-                        <div class="event__single-image">
-                            <a class="event__single-link" href="{{ $tournament->lexer_url }}" target="_blank">
-                                <img class="event__single-logo occasion-image-logo" src="{{ asset('images/tournament/Lexer.jpg') }}" alt="Lien lexer du résultat">
-                            </a>
-                        </div>
-                    @else
-                        <div class="event__single-image--disable">
-                            <div class="event__cell--disable">
-                                <img class="event__single-logo occasion-image-logo" src="{{ asset('images/tournament/Lexer.jpg') }}" alt="Lien lexer du résultat">
-                            </div>
-                        </div>
-                    @endif
-
                     @if(isset($tournament->listing))
                         <div class="event__single-image event__top-border">
                             <a class="event__single-link" href="{{ route('tournoiListing', $tournament->slug) }}">
@@ -194,6 +194,7 @@
                     @endif
                 @endif
             @endforeach
+
         </div>
         <div class="event__bottom bottom-tournament-league">
             @if($pagination)

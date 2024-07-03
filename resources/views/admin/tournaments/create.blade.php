@@ -185,6 +185,11 @@
                         </table>
                     </div>
 
+                    <div class="form-group after_end">
+                        <label for="lexer_url">Résultats sous Lexer</label>
+                        <input type="url" name="lexer_url" class="form-control" placeholder="Veuillez entrer l'URL">
+                    </div>
+
                     <div class="checkbox">
                         <label>
                             <input type="checkbox" id="is_finished" name="is_finished"> Terminé ?
@@ -207,11 +212,6 @@
                     </div>
 
                     <div class="finished">
-                        <div class="form-group after_end">
-                            <label for="lexer_url">Résultats sous Lexer</label>
-                            <input type="url" name="lexer_url" class="form-control" placeholder="Veuillez entrer l'URL">
-                        </div>
-
                         <div class="form-group after_end">
                             <label for="listing">Résultats sous forme de listing</label>
                             <input type="file" name="listing" accept="image/*">

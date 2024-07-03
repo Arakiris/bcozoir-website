@@ -202,6 +202,11 @@
                         </table>
                     </div>
 
+                    <div class="form-group after_end">
+                        <label for="lexer_url">Résultats sous Lexer</label>
+                        <input type="url" name="lexer_url" class="form-control" value="{{ $tournament->lexer_url }}" placeholder="Veuillez entrer l'URL">
+                    </div>
+
                     <div class="checkbox">
                         <label>
                             <input type="checkbox" id="is_finished" name="is_finished" {{ ($tournament->is_finished) ? 'checked' : '' }}> Terminé ?
@@ -224,11 +229,6 @@
                     </div>
 
                     <div class="finished" {!! ($tournament->is_finished) ? 'style="display: block;"' : 'style="display: none;"' !!}>
-                        <div class="form-group after_end">
-                            <label for="lexer_url">Résultats sous Lexer</label>
-                            <input type="url" name="lexer_url" class="form-control" value="{{ $tournament->lexer_url }}" placeholder="Veuillez entrer l'URL">
-                        </div>
-
                         <div class="form-group after_end">
                             <label for="listing">Résultats sous forme de listing</label>
                             <input type="file" name="listing" accept="image/*">

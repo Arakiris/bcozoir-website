@@ -13,6 +13,7 @@ window.createRankingArchives = function(lenghtlast, previousYear, url, url_image
                 let tab_id = event.target.getAttribute('data-tab');
                 let parentToAddElement = document.getElementById(tab_id);
                 let id = tab_id.substring(4);
+                console.log(id);
 
                 document.querySelector('li.tabs__link-current').classList.remove('tabs__link-current');
                 document.querySelector('div.tabs__content-current').classList.remove('tabs__content-current');

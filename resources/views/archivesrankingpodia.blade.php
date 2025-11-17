@@ -18,6 +18,9 @@
                 
                 @if (isset($years) && $years->count()>0)
                     @foreach($years as $year)
+                        @if ($loop->first)
+                            @continue
+                        @endif
                         <li class="tabs__link tab-link" data-tab="tab-{{ $year->year }}">{{ $year->year }}</li>
                     @endforeach
                 @endif

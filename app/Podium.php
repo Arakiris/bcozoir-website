@@ -66,7 +66,8 @@ class Podium extends Model
      * Get podium by year
      */
     public function scopePreviousseason($query){
-        return $query->where([['is_ranking', '=', '1'],  ['date', '>=', Carbon::create($this->yearSeason(), 9, 1, 0, 0, 0)], ['date', '<', intval(Carbon::create($this->yearSeason()) + 1, 8, 31, 0, 0, 0)]])->orderBy('date', 'desc');
+        $previousYear = intval($this->yearSeason()) - 1;
+        return $query->where([['is_ranking', '=', '1'],  ['date', '>=', Carbon::create($previousYear, 9, 1, 0, 0, 0)], ['date', '<', Carbon::create($previousYear + 1, 8, 31, 0, 0, 0)]])->orderBy('date', 'desc');
     }
 
     /**
